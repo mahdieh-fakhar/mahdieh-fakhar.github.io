@@ -79,16 +79,18 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-  safelist: [
-    "dark",
-    "retro",
-    "cyberpunk",
-    "paper",
-    "aurora",
-    "synthwave",
-    {
-      pattern:
-        /^(.*?)(dark|retro|cyberpunk|paper|aurora|synthwave)([:.])(.*?)$/,
-    },
-  ],
+
+  // ⚠️ حذف یا غیرفعال‌سازی Safelist برای حذف هشدار
+  // safelist: [
+  //   "dark",
+  //   "retro",
+  //   "cyberpunk",
+  //   "paper",
+  //   "aurora",
+  //   "synthwave",
+  //   {
+  //     pattern:
+  //       /^(.*?)(dark|retro|cyberpunk|paper|aurora|synthwave)([:.])(.*?)$/,
+  //   },
+  // ],
 };

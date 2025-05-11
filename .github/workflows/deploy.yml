@@ -18,14 +18,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install dependencies in client/
         run: npm install
+        working-directory: ./client
 
-      - name: Build Vite site
+      - name: Build the site
         run: npm run build
+        working-directory: ./client
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./client/dist  # 👈 این مسیر باید دقیقاً همونی باشه که Vite خروجی میده
+          publish_dir: ./client/dist

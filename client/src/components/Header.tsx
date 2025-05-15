@@ -7,7 +7,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
 
 const Header: React.FC = () => {
-  const { شlanguage } = useLanguage();
+  const { language } = useLanguage();
   const { theme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

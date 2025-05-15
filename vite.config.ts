@@ -4,7 +4,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig(async () => ({
-  base: '/', // اضافه شده برای GitHub Pages
+  base: '/', // مناسب برای GitHub Pages در ریشه یا تنظیم خاص در gh-pages
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -21,9 +21,9 @@ export default defineConfig(async () => ({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  root: path.resolve(__dirname, "client"),
+  root: path.resolve(__dirname, "client"), // مسیر اصلی پروژه React
   build: {
-    outDir: path.resolve(__dirname, "client/dist"),
+    outDir: path.resolve(__dirname, "client", "dist"), // ✅ مسیر صحیح بیلد در داخل client/dist
     emptyOutDir: true,
   },
 }));

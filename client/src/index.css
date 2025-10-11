@@ -60,9 +60,13 @@
 
   --muted-foreground: 220 15% 40%;
 
-  --accent: 200 18% 92%;
+  --accent: 200 70% 45%;
 
-  --accent-foreground: 200 70% 25%;
+  --accent-foreground: 200 70% 98%;
+
+  /* AI Purple accent for AI-powered features */
+  --ai-accent: 280 60% 50%;
+  --ai-accent-foreground: 280 60% 98%;
 
   --destructive: 0 72% 35%;
 
@@ -76,9 +80,9 @@
   --chart-4: 190 65% 30%;
   --chart-5: 270 55% 32%;
 
-  --font-sans: Inter, Open Sans, sans-serif;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: Georgia, serif;
-  --font-mono: JetBrains Mono, Menlo, monospace;
+  --font-mono: JetBrains Mono, "Fira Code", Menlo, monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 1px 2px 0px hsl(220 20% 15% / 0.04);
   --shadow-xs: 0px 1px 2px 0px hsl(220 20% 15% / 0.06);
@@ -120,6 +124,10 @@
   /* Fallback for older browsers */
   --destructive-border: hsl(var(--destructive));
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* AI accent border */
+  --ai-accent-border: hsl(var(--ai-accent));
+  --ai-accent-border: hsl(from hsl(var(--ai-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
 .dark {
@@ -166,9 +174,9 @@
 
   --popover-border: 220 16% 18%;
 
-  --primary: 220 80% 35%;
+  --primary: 220 80% 65%;
 
-  --primary-foreground: 220 80% 98%;
+  --primary-foreground: 220 80% 15%;
 
   --secondary: 220 16% 18%;
 
@@ -178,9 +186,13 @@
 
   --muted-foreground: 210 15% 70%;
 
-  --accent: 200 14% 16%;
+  --accent: 200 60% 60%;
 
-  --accent-foreground: 200 60% 88%;
+  --accent-foreground: 200 60% 15%;
+
+  /* AI Purple accent for dark mode */
+  --ai-accent: 280 55% 65%;
+  --ai-accent-foreground: 280 55% 15%;
 
   --destructive: 0 62% 32%;
 
@@ -232,6 +244,10 @@
   /* Fallback for older browsers */
   --destructive-border: hsl(var(--destructive));
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* AI accent border */
+  --ai-accent-border: hsl(var(--ai-accent));
+  --ai-accent-border: hsl(from hsl(var(--ai-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
 @layer base {
@@ -241,6 +257,11 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -353,5 +374,51 @@
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
+  }
+
+  /* AI Sparkle animation for AI features */
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+  }
+
+  .ai-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  /* Pulse animation for analyzing state */
+  @keyframes analyzing-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .analyzing {
+    animation: analyzing-pulse 1.5s ease-in-out infinite;
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fade-in 0.5s ease-out;
   }
 }

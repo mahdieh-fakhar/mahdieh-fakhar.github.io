@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Presentation } from "lucide-react";
 
-type ConferenceCatalogItem = {
+type ConferenceCertificate = {
   id: string;
   conferenceName: string;
   certificateTitle: string;
@@ -17,180 +17,321 @@ type ConferenceCatalogItem = {
   location: string;
   sponsors: string[];
   imageUrl: string;
-  summary: string;
-  conferenceTheme: string;
+  aiInsights: string;
 };
 
-const conferenceCatalog: ConferenceCatalogItem[] = [
+const certificates: ConferenceCertificate[] = [
   {
-    id: "inorms-2025",
-    conferenceName: "INORMS Global Congress 2025",
+    id: "tellsi-2015-critical-pedagogy",
+    conferenceName: "13th International TELLSI Conference",
     certificateTitle: "Certificate of Attendance",
-    certificateSubject: "Global Research Management and Institutional Collaboration",
-    certificateType: "Attendance",
-    holderName: "Mahdieh Fakhar",
+    certificateSubject: "Revisiting and Implementing Critical Pedagogy in Second Language Learning",
+    certificateType: "Workshop Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Attendee",
     roleDescription:
-      "Participated in plenary sessions on international research governance and strategic partnerships.",
-    eventDate: "2025-05-15",
-    location: "Madrid, Spain",
-    sponsors: ["INORMS", "UNED"],
-    imageUrl: "https://placehold.co/640x360/1d4ed8/ffffff?text=INORMS+2025",
-    summary:
-      "AI-extracted insights confirm full participation across networking forums that focused on aligning institutional policies with global research priorities.",
-    conferenceTheme: "Global Networking & Research Strategy",
+      "Participated in the TELLSI 13 workshop facilitated by Dr. Goudarz Alibakhshi and Dr. Mola Miri from Allameh Tabataba’i University.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.01.jpg",
+    aiInsights:
+      "AI extraction confirms workshop completion focused on embedding critical pedagogy techniques into second-language curricula.",
   },
   {
-    id: "atlas-agora-2025",
-    conferenceName:
-      "II ATLAS-ÁGORA Conference on Language Teaching in Rural Schools",
-    certificateTitle: "Presenter Recognition",
-    certificateSubject: "Innovative Language Pedagogies for Rural Classrooms",
-    certificateType: "Presentation",
-    holderName: "Mahdieh Fakhar",
+    id: "tellsi-2015-instructional-pragmatics",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject: "Instructional Pragmatics: Teaching Students to Use Language Appropriately",
+    certificateType: "Workshop Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Attendee",
+    roleDescription:
+      "Attended a TELLSI 13 workshop led by Dr. Zohreh Eslami Rasekh and Dr. Noriko Ishihara on pragmatic competence.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.02.jpg",
+    aiInsights:
+      "AI detected emphasis on authentic discourse strategies and classroom pragmatics for EFL learners.",
+  },
+  {
+    id: "tellsi-2015-innovation-ict",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Innovative Practices in English Language Learning and Research: Use of ICT Tools for the Preparation of Pre-Service English Teachers",
+    certificateType: "Workshop Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Attendee",
+    roleDescription:
+      "Completed a TELLSI 13 workshop guided by Dr. Mary Ellis from the National Institute of Education in Singapore.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.03.jpg",
+    aiInsights:
+      "AI highlights focus on ICT integration for pre-service teacher preparation and blended learning ecosystems.",
+  },
+  {
+    id: "tellsi-2015-professional-change",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Professional Change, Professional Development, and Professional Identity of Iranian EFL Beginner vs. Experienced Teachers",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Delivered a peer-reviewed presentation on AI-assisted curriculum design for multilingual learners.",
-    eventDate: "2025-05-28",
-    location: "Zamora, Spain",
-    sponsors: ["ATLAS-ÁGORA", "Consejería de Educación de Castilla y León"],
-    imageUrl:
-      "https://placehold.co/640x360/9333ea/ffffff?text=ATLAS-%C3%81GORA+2025",
-    summary:
-      "AI detected highlighted sections demonstrating expertise in language technology adoption and community-based pedagogy for rural education systems.",
-    conferenceTheme: "Language Education & Rural Innovation",
+      "Presented comparative research on Iranian EFL teacher identity development during TELLSI 13.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.04.jpg",
+    aiInsights:
+      "AI summary captures key findings on professional identity trajectories between novice and experienced educators.",
   },
   {
-    id: "uned-seminar-2024",
-    conferenceName: "UNED Faculty of Philology Research Seminar Series",
-    certificateTitle: "Certificate of Participation",
-    certificateSubject: "Applied Linguistics and Digital Humanities",
-    certificateType: "Participation",
-    holderName: "Mahdieh Fakhar",
-    holderRole: "Participant",
+    id: "kurdistan-2016-poster",
+    conferenceName:
+      "First English-French Conference on Applied Linguistics and Literature",
+    certificateTitle: "Certificate",
+    certificateSubject:
+      "Language Learning through WhatsApp or Telegram: Which Court Is the Ball In?",
+    certificateType: "Poster Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
     roleDescription:
-      "Contributed to roundtable discussions on corpus linguistics and multilingual content analysis.",
-    eventDate: "2024-02-10",
-    location: "Madrid, Spain",
-    sponsors: ["UNED Faculty of Philology"],
-    imageUrl: "https://placehold.co/640x360/0f172a/ffffff?text=UNED+Seminar+2024",
-    summary:
-      "AI confirmed attendance across the full seminar series and extracted keynote highlights related to bibliometric tracking and narrative inquiry.",
-    conferenceTheme: "Applied Linguistics & Digital Research",
+      "Delivered a joint poster presentation with Mohammad Aliakbari exploring messaging platforms in language learning.",
+    eventDate: "2016-05-13",
+    location: "University of Kurdistan, Sanandaj, Iran",
+    sponsors: ["TELLSI Kurdistan", "AILF"],
+    imageUrl: "/images/conferences/Conference/2016.05.12-13.jpg",
+    aiInsights:
+      "AI extracted focus on comparative analysis of WhatsApp and Telegram in supporting collaborative EFL tasks.",
   },
   {
-    id: "rural-education-2022",
-    conferenceName: "UNED Teruel Summer School on Rural Education",
-    certificateTitle: "Certificate of Completion",
-    certificateSubject: "Rural Education Policy and Learning Design",
-    certificateType: "Completion",
-    holderName: "Mahdieh Fakhar",
-    holderRole: "Participant",
-    roleDescription:
-      "Completed an intensive summer program focused on inclusive rural pedagogy and policy evaluation.",
-    eventDate: "2022-07-20",
-    location: "Teruel, Spain",
-    sponsors: ["UNED", "Diputación de Teruel"],
-    imageUrl:
-      "https://placehold.co/640x360/15803d/ffffff?text=Rural+Education+2022",
-    summary:
-      "AI-derived notes emphasize collaborative workshops on community engagement models and the deployment of digital learning ecosystems.",
-    conferenceTheme: "Rural Education & Community Engagement",
-  },
-  {
-    id: "international-seminars-2021",
-    conferenceName: "International Seminars on Applied Linguistics",
+    id: "tellsi-2016-kerman",
+    conferenceName: "14th International TELLSI Conference",
     certificateTitle: "Certificate of Presentation",
     certificateSubject:
-      "Cross-Border Language Technology and Cognitive Assessment",
-    certificateType: "Presentation",
-    holderName: "Mahdieh Fakhar",
+      "Paper presentation at the 14th International TELLSI Conference",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Presented research findings on AI-driven language proficiency analytics across European and Middle Eastern cohorts.",
-    eventDate: "2021-09-18",
-    location: "Hybrid — Tehran, Iran & Madrid, Spain",
-    sponsors: ["Applied Linguistics Society", "UNED Language Lab"],
-    imageUrl:
-      "https://placehold.co/640x360/f97316/ffffff?text=Applied+Linguistics",
-    summary:
-      "AI summary highlights the focus on multimodal assessment metrics and their influence on long-term learner profiling.",
-    conferenceTheme: "Language Technology & Assessment",
+      "Presented peer-reviewed research during the TELLSI 14 conference in Kerman, Iran.",
+    eventDate: "2016-11-18",
+    location: "Islamic Azad University, Kerman, Iran",
+    sponsors: ["TELLSI", "Islamic Azad University"],
+    imageUrl: "/images/conferences/Conference/2016.11.16-18.jpg",
+    aiInsights:
+      "AI notes document validation of presentation credits and conference stewardship signatures.",
   },
   {
-    id: "eurokd-2019",
-    conferenceName: "EUROKD Learning Analytics Conference 2019",
-    certificateTitle: "Workshop Participation Certificate",
-    certificateSubject: "Learning Analytics for Higher Education",
-    certificateType: "Workshop",
-    holderName: "Mahdieh Fakhar",
+    id: "ldp-2017-pragmatics",
+    conferenceName:
+      "4th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Paralogism, Ambiguity and Circumlocution: Do Compensation Strategies Help?",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Showcased empirical findings on discourse-level compensation strategies at Shahid Chamran University of Ahvaz.",
+    eventDate: "2017-01-27",
+    location: "Ahvaz, Iran",
+    sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
+    imageUrl: "/images/conferences/Conference/2017.01.25-27.jpg",
+    aiInsights:
+      "AI transcription highlights exploration of pragmatic ambiguity and strategy repertoires in multilingual contexts.",
+  },
+  {
+    id: "dust-2018-committee",
+    conferenceName: "2nd International Conference on Dust",
+    certificateTitle: "Executive Committee Appointment",
+    certificateSubject:
+      "Executive Committee service for the 2nd International Conference on Dust",
+    certificateType: "Organizing Committee Service",
+    holderName: "Mahdiyeh Fakhar",
+    holderRole: "Executive Committee Member",
+    roleDescription:
+      "Appointed to the executive committee overseeing conference logistics at Ilam University.",
+    eventDate: "2018-04-27",
+    location: "Ilam University, Ilam, Iran",
+    sponsors: ["Ilam University"],
+    imageUrl: "/images/conferences/Conference/2018.04.25-27.jpg",
+    aiInsights:
+      "AI detection confirms official executive mandate and coordination responsibilities for the Dust conference.",
+  },
+  {
+    id: "ntelt-2018-self-leadership",
+    conferenceName:
+      "3rd Conference on New Trends in English Language Teaching and Testing",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Investigating the Effect of EFL Teachers’ Self-Leadership on Their Processional Development and Change",
+    certificateType: "Conference Presentation",
+    holderName: "Reza Khany & Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Co-presented research on self-leadership’s impact on professional growth among Iranian EFL teachers.",
+    eventDate: "2018-09-05",
+    location: "Tehran, Iran",
+    sponsors: ["CIVILICA", "Victoria University of Wellington", "NTELT"],
+    imageUrl: "/images/conferences/Conference/2018.09.04-05.jpg",
+    aiInsights:
+      "AI summary emphasizes collaborative authorship and empirical evaluation of leadership-driven teacher development.",
+  },
+  {
+    id: "tellsi-2018-futurology",
+    conferenceName: "16th International TELLSI Conference",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "An Ecological Exploration of Iranian EFL Students’ Self-Change, Self-Construal, and Change Management",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakher Shareza & Reza Khany",
+    holderRole: "Presenter",
+    roleDescription:
+      "Presented findings on classroom communication tasks and change management at Shiraz University.",
+    eventDate: "2018-11-16",
+    location: "Shiraz University, Shiraz, Iran",
+    sponsors: ["TELLSI", "Shiraz University"],
+    imageUrl: "/images/conferences/Conference/2018.11.14-16.jpg",
+    aiInsights:
+      "AI confirms thematic alignment with TELLSI’s futurology track and validates co-author credentials.",
+  },
+  {
+    id: "ldp-2019-planning-research",
+    conferenceName:
+      "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Workshop Presentation",
+    certificateSubject: "Planning Research in Applied Linguistics",
+    certificateType: "Workshop Participation",
+    holderName: "Mahdie Fakhar Shahreza",
     holderRole: "Workshop Participant",
     roleDescription:
-      "Engaged in hands-on analytics labs targeting student success modeling and retention forecasting.",
-    eventDate: "2019-09-05",
-    location: "Istanbul, Turkey",
-    sponsors: ["EUROKD", "Istanbul Technical University"],
-    imageUrl: "https://placehold.co/640x360/047857/ffffff?text=EUROKD+2019",
-    summary:
-      "AI interpretation underscores applied skills in dashboard prototyping and real-time predictive analytics pipelines.",
-    conferenceTheme: "Learning Analytics & Data Science",
+      "Joined applied linguistics workshop activities during LDP 2019 in Ahvaz, Iran.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.01.jpg",
+    aiInsights:
+      "AI extraction highlights methodological planning guidance for applied linguistics research pipelines.",
   },
   {
-    id: "tradit23-2024",
-    conferenceName: "TRADIT23 International Conference",
-    certificateTitle: "Organizer Acknowledgement",
-    certificateSubject: "Digital Transformation in Translation Studies",
-    certificateType: "Organization",
-    holderName: "Mahdieh Fakhar",
-    holderRole: "Organizer",
-    roleDescription:
-      "Coordinated program logistics, speaker curation, and digital engagement for international delegates.",
-    eventDate: "2024-03-22",
-    location: "Madrid, Spain",
-    sponsors: ["TRADIT Network", "UNED"],
-    imageUrl: "https://placehold.co/640x360/d946ef/ffffff?text=TRADIT23",
-    summary:
-      "AI extracted organizer credentials verifying leadership of hybrid conference operations and stakeholder communication flows.",
-    conferenceTheme: "Translation & Digital Transformation",
-  },
-  {
-    id: "eccoe-2022",
-    conferenceName: "ECCOE Multiplier Event 2022",
-    certificateTitle: "Organizer Certification",
-    certificateSubject: "Open Online Education Ecosystems",
-    certificateType: "Organization",
-    holderName: "Mahdieh Fakhar",
-    holderRole: "Organizer",
-    roleDescription:
-      "Led partner outreach and managed collaborative workshops on credential transparency across Europe.",
-    eventDate: "2022-05-12",
-    location: "Madrid, Spain",
-    sponsors: ["ECCOE Consortium", "Erasmus+"],
-    imageUrl: "https://placehold.co/640x360/0ea5e9/ffffff?text=ECCOE+2022",
-    summary:
-      "AI-derived highlights verify responsibilities in orchestrating open badge pilots and stakeholder training labs.",
-    conferenceTheme: "Open Education & Credentialing",
-  },
-  {
-    id: "atlas-agora-committee",
+    id: "ldp-2019-pragmatics-research",
     conferenceName:
-      "II Jornadas ATLAS-ÁGORA de Formación de Profesorado de Lenguas",
-    certificateTitle: "Scientific Committee Appointment",
+      "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Workshop Presentation",
     certificateSubject:
-      "Quality Assurance and Academic Review for Language Education",
-    certificateType: "Committee Service",
-    holderName: "Mahdieh Fakhar",
-    holderRole: "Committee Member",
+      "How to Do a Valid Pragmatics Research: Dealing with Theory and Data",
+    certificateType: "Workshop Participation",
+    holderName: "Mahdie Fakhar Shahreza",
+    holderRole: "Workshop Participant",
     roleDescription:
-      "Served on the scientific committee evaluating submissions and guiding academic integrity standards.",
-    eventDate: "2024-11-04",
-    location: "Madrid, Spain",
-    sponsors: ["ATLAS-ÁGORA", "UNED"],
-    imageUrl:
-      "https://placehold.co/640x360/7c3aed/ffffff?text=ATLAS-%C3%81GORA+Committee",
-    summary:
-      "AI-detected evidence shows rigorous peer-review activity and coordination of multidisciplinary evaluation criteria.",
-    conferenceTheme: "Academic Quality Assurance",
+      "Engaged in pragmatic research methodology sessions during the 2019 LDP conference.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.02.jpg",
+    aiInsights:
+      "AI summary notes advanced guidance on aligning theoretical frameworks with empirical pragmatic datasets.",
+  },
+  {
+    id: "ldp-2019-subjectivity",
+    conferenceName:
+      "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Subjectivity and Objectivity in Discussion Sections of Iranian M.A. Theses and Ph.D. Dissertations",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdie Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Shared comparative findings across soft and hard science discourse during LDP 2019.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.03.jpg",
+    aiInsights:
+      "AI highlights contrastive discourse analysis that informs academic writing guidelines across disciplines.",
+  },
+  {
+    id: "eurokd-2019-psychology",
+    conferenceName:
+      "International Conference on Education, Psychology, and Behavioral Science",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Developmental Psychology without Positivistic Pretentions",
+    certificateType: "Workshop Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Workshop Participant",
+    roleDescription:
+      "Attended EUROKD workshop led by Professor Willem Koops focusing on developmental psychology perspectives.",
+    eventDate: "2019-10-25",
+    location: "Istanbul, Turkey",
+    sponsors: ["EUROKD", "University of Leeds"],
+    imageUrl: "/images/conferences/Conference/2019.10.25.01.jpg",
+    aiInsights:
+      "AI verifies workshop participation and highlights key insights on non-positivist developmental frameworks.",
+  },
+  {
+    id: "eurokd-2019-learning-analytics",
+    conferenceName:
+      "International Conference on Education, Psychology, and Behavioral Science",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Implementing Learning Analytics in a Higher Education Institution: Issues and Considerations",
+    certificateType: "Workshop Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Workshop Participant",
+    roleDescription:
+      "Joined EUROKD workshop delivered by Dr. Bronwen Swinnerton on institutional learning analytics deployments.",
+    eventDate: "2019-10-25",
+    location: "Istanbul, Turkey",
+    sponsors: ["EUROKD", "University of Leeds"],
+    imageUrl: "/images/conferences/Conference/2019.10.25.02.jpg",
+    aiInsights:
+      "AI summary records strategic considerations for analytics adoption, including data governance and stakeholder training.",
+  },
+  {
+    id: "tellsi-2019-new-horizons",
+    conferenceName: "17th International TELLSI Conference",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "An Exploration of Iranian EFL Stakeholders’ Attitudes and Knowledge of Different Educational Management Systems",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Presented research on educational management system adoption at Islamic Azad University of Tabriz.",
+    eventDate: "2019-11-21",
+    location: "Tabriz, Iran",
+    sponsors: ["TELLSI", "Islamic Azad University of Tabriz"],
+    imageUrl: "/images/conferences/Conference/2019.11.20-21.jpg",
+    aiInsights:
+      "AI verifies emphasis on stakeholder perception analytics within blended learning management environments.",
+  },
+  {
+    id: "icctme-2021-covid-impacts",
+    conferenceName:
+      "Current Trends in the Middle East: Virtual International Joint Conference on COVID-19 Global Impacts",
+    certificateTitle: "Certificate of Participation",
+    certificateSubject:
+      "Presenter contribution on COVID-19 global impacts across the Middle East",
+    certificateType: "Conference Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Served as presenter discussing pandemic-driven educational and socio-economic insights.",
+    eventDate: "2021-03-10",
+    location: "Universiti Teknologi Malaysia (Virtual)",
+    sponsors: ["UTM", "Ilam University"],
+    imageUrl: "/images/conferences/Conference/2021.03.09-10.jpg",
+    aiInsights:
+      "AI extraction underscores cross-institution collaboration on pandemic response and regional resilience planning.",
   },
 ];
 
@@ -204,22 +345,22 @@ const formatDate = (value: string) => {
   return new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(parsed);
 };
 
-const holderRoles = Array.from(
-  new Set(conferenceCatalog.map((item) => item.holderRole)),
-).sort((a, b) => a.localeCompare(b));
+const roles = Array.from(new Set(certificates.map((item) => item.holderRole))).sort(
+  (a, b) => a.localeCompare(b),
+);
 
-const tabValues = ["All", ...holderRoles];
+const tabs = ["All", ...roles];
 
-const getFilteredItems = (role: string) =>
+const filterByRole = (role: string) =>
   role === "All"
-    ? conferenceCatalog
-    : conferenceCatalog.filter((item) => item.holderRole === role);
+    ? certificates
+    : certificates.filter((item) => item.holderRole === role);
 
 export default function Conferences() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="space-y-10"
@@ -230,22 +371,21 @@ export default function Conferences() {
             <h1 className="text-4xl font-bold">Conferences</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Explore AI-curated certificates organised by role and enriched with
-            detailed insights extracted from each document.
+            Browse AI-enriched certificates with equal-focus previews and catalogued insights for every role.
           </p>
         </div>
 
         <Tabs defaultValue="All" className="space-y-6">
           <TabsList>
-            {tabValues.map((role) => (
+            {tabs.map((role) => (
               <TabsTrigger key={role} value={role}>
                 {role}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          {tabValues.map((role) => {
-            const filteredItems = getFilteredItems(role);
+          {tabs.map((role) => {
+            const items = filterByRole(role);
 
             return (
               <TabsContent
@@ -254,126 +394,87 @@ export default function Conferences() {
                 className="space-y-6"
                 data-testid={`tab-content-${role.toLowerCase().replace(/\s+/g, "-")}`}
               >
-                {filteredItems.length > 0 ? (
-                  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    {filteredItems.map((item, index) => (
+                {items.length > 0 ? (
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6">
+                    {items.map((item, index) => (
                       <motion.div
                         key={item.id}
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 32 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        transition={{ duration: 0.4, delay: index * 0.04 }}
                       >
                         <Card
-                          className="flex h-full flex-col overflow-hidden border-border/80 shadow-sm"
+                          className="flex h-full flex-col overflow-hidden border border-border/70 shadow-sm"
                           data-testid={`card-certificate-${item.id}`}
                         >
-                          <div className="aspect-video w-full overflow-hidden bg-muted">
+                          <div className="relative flex-1 min-h-0 bg-muted">
                             <img
                               src={item.imageUrl}
-                              alt={`${item.certificateTitle} certificate preview`}
+                              alt={`${item.certificateTitle} - ${item.conferenceName}`}
                               className="h-full w-full object-cover"
                               loading="lazy"
                             />
                           </div>
-
-                          <CardContent className="flex h-full flex-col gap-6 p-6">
+                          <CardContent className="flex flex-1 flex-col gap-4 p-5">
                             <div className="space-y-3">
-                              <div className="flex flex-wrap items-start justify-between gap-3">
-                                <div className="space-y-1">
-                                  <p className="text-xs font-medium uppercase tracking-wide text-ai-accent">
-                                    AI-Extracted Certificate
-                                  </p>
-                                  <h2 className="text-lg font-semibold leading-tight">
-                                    {item.certificateTitle}
-                                  </h2>
-                                  <p className="text-sm text-muted-foreground">
-                                    {item.conferenceName}
-                                  </p>
-                                </div>
-                                <div className="flex flex-col items-end gap-2">
-                                  <Badge variant="secondary">
-                                    {item.certificateType}
-                                  </Badge>
-                                  <Badge variant="outline">
-                                    {item.holderRole}
-                                  </Badge>
-                                </div>
+                              <div className="flex flex-col gap-2">
+                                <p className="text-xs font-semibold uppercase tracking-wide text-ai-accent">
+                                  AI Extracted Catalog
+                                </p>
+                                <h2 className="text-lg font-semibold leading-tight text-foreground">
+                                  {item.certificateTitle}
+                                </h2>
+                                <p className="text-sm text-muted-foreground">
+                                  {item.conferenceName}
+                                </p>
                               </div>
-                              <Badge variant="outline" className="w-fit">
-                                {item.conferenceTheme}
-                              </Badge>
+                              <div className="flex flex-wrap items-center gap-2">
+                                <Badge variant="secondary">{item.certificateType}</Badge>
+                                <Badge variant="outline">{item.holderRole}</Badge>
+                              </div>
                             </div>
 
-                            <div className="space-y-4">
-                              <p className="text-sm leading-relaxed text-muted-foreground">
-                                {item.summary}
-                              </p>
+                            <p className="text-sm leading-relaxed text-muted-foreground">
+                              {item.aiInsights}
+                            </p>
 
-                              <dl className="grid gap-4 text-sm">
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Certificate Subject
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {item.certificateSubject}
-                                  </dd>
-                                </div>
-
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Certificate Holder
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {item.holderName}
-                                  </dd>
-                                </div>
-
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Role &amp; Contribution
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {item.roleDescription ?? item.holderRole}
-                                  </dd>
-                                </div>
-
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Event Date
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {formatDate(item.eventDate)}
-                                  </dd>
-                                </div>
-
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Venue
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {item.location}
-                                  </dd>
-                                </div>
-
-                                <div className="grid gap-1">
-                                  <dt className="font-medium text-foreground">
-                                    Sponsors
-                                  </dt>
-                                  <dd className="text-muted-foreground">
-                                    {item.sponsors.length > 0
-                                      ? item.sponsors.join(", ")
-                                      : "Independent"}
-                                  </dd>
-                                </div>
-                              </dl>
-                            </div>
+                            <dl className="grid gap-3 text-sm">
+                              <div>
+                                <dt className="font-medium text-foreground">Certificate Subject</dt>
+                                <dd className="text-muted-foreground">{item.certificateSubject}</dd>
+                              </div>
+                              <div>
+                                <dt className="font-medium text-foreground">Certificate Holder</dt>
+                                <dd className="text-muted-foreground">{item.holderName}</dd>
+                              </div>
+                              <div>
+                                <dt className="font-medium text-foreground">Role Details</dt>
+                                <dd className="text-muted-foreground">
+                                  {item.roleDescription ?? item.holderRole}
+                                </dd>
+                              </div>
+                              <div>
+                                <dt className="font-medium text-foreground">Event Date</dt>
+                                <dd className="text-muted-foreground">{formatDate(item.eventDate)}</dd>
+                              </div>
+                              <div>
+                                <dt className="font-medium text-foreground">Venue</dt>
+                                <dd className="text-muted-foreground">{item.location}</dd>
+                              </div>
+                              <div>
+                                <dt className="font-medium text-foreground">Sponsors</dt>
+                                <dd className="text-muted-foreground">
+                                  {item.sponsors.length > 0 ? item.sponsors.join(", ") : "Independent"}
+                                </dd>
+                              </div>
+                            </dl>
                           </CardContent>
                         </Card>
                       </motion.div>
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-lg border border-dashed border-border/70 bg-muted/30 p-10 text-center text-sm text-muted-foreground">
+                  <div className="rounded-lg border border-dashed border-border/70 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
                     No certificates found for this role yet.
                   </div>
                 )}

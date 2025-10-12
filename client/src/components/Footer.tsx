@@ -13,8 +13,12 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t bg-card mt-auto">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <footer
+      role="contentinfo"
+      aria-label="Site footer"
+      className="fixed bottom-0 left-0 w-full border-t bg-card/95 backdrop-blur-sm z-50"
+    >
+      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* About/Bio Section */}
           <div className="space-y-4">
@@ -97,7 +101,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-6 border-t pt-6 text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Mahdieh Fakhar. All rights reserved.</p>
           <p className="mt-2">Madrid, Spain</p>
         </div>

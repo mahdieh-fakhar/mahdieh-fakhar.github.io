@@ -4,8 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Presentation, ChevronDown, ChevronUp, Download } from "lucide-react";
+import { Presentation, ChevronDown, ChevronUp, Download, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
 
 type CertificateOrientation = "portrait" | "landscape";
 
@@ -382,51 +383,35 @@ const filterByRole = (role: string) =>
 type CertificateCardProps = {
   item: ConferenceCertificate;
   index: number;
+  onImageClick: (item: ConferenceCertificate, index: number) => void;
 };
 
-function CertificateCard({ item, index }: CertificateCardProps) {
+function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
   const [showDetails, setShowDetails] = useState(false);
   const downloadName = useMemo(
     () => `Mahdieh Fakhar-Conferences-${String(index + 1).padStart(3, "0")}.jpg`,
     [index],
   );
 
-  const orientationClass =
-    item.orientation === "portrait"
-      ? "basis-full sm:basis-1/2 xl:basis-1/5"
-      : "basis-full sm:basis-1/2 xl:basis-1/3";
-
   return (
     <Card
       className={cn(
         "group relative flex w-full flex-col overflow-hidden rounded-2xl border-2 border-primary/40 bg-card/95 shadow-lg shadow-primary/20 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/25",
-        orientationClass,
       )}
       data-testid={`card-certificate-${item.id}`}
     >
-      <div className="relative flex flex-1 items-center justify-center bg-gradient-to-br from-background via-muted to-background px-4 py-6">
+      <button
+        type="button"
+        onClick={() => onImageClick(item, index)}
+        className="relative flex flex-1 cursor-zoom-in items-center justify-center bg-gradient-to-br from-background via-muted to-background px-4 py-6 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
         <img
           src={item.imageUrl}
           alt={`${item.certificateTitle} - ${item.conferenceName}`}
           loading="lazy"
           className="max-h-[330px] w-full object-contain transition duration-300 group-hover:scale-[1.02]"
         />
-        <a
-          href={item.imageUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${item.certificateTitle}`}
-          className="absolute inset-0 z-10"
-        />
-        <a
-          href={item.imageUrl}
-          download={downloadName}
-          className="absolute bottom-4 right-4 z-20 inline-flex items-center gap-1 rounded-full border border-primary/40 bg-background/90 px-3 py-1 text-xs font-semibold text-primary shadow-sm transition hover:bg-primary hover:text-primary-foreground"
-        >
-          <Download className="h-3.5 w-3.5" />
-          {downloadName}
-        </a>
-      </div>
+      </button>
 
       <CardContent className="flex min-h-[220px] flex-col gap-4 border-t-2 border-primary/20 bg-gradient-to-b from-card to-card/70 p-5">
         <div className="flex flex-col gap-3">
@@ -524,11 +509,26 @@ function CertificateCard({ item, index }: CertificateCardProps) {
 }
 
 export default function Conferences() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [activeCertificate, setActiveCertificate] = useState<ConferenceCertificate | null>(null);
+
   const indexLookup = useMemo(() => {
     const map = new Map<string, number>();
     certificates.forEach((item, idx) => map.set(item.id, idx));
     return map;
   }, []);
+
+  const handleImageClick = (item: ConferenceCertificate, index: number) => {
+    setActiveCertificate(item);
+    setDialogOpen(true);
+  };
+
+  const handleDialogChange = (open: boolean) => {
+    setDialogOpen(open);
+    if (!open) {
+      setActiveCertificate(null);
+    }
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -573,10 +573,47 @@ export default function Conferences() {
                 data-testid={`tab-content-${role.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {items.length > 0 ? (
-                  <div className="flex flex-wrap justify-center gap-6">
-                    {items.map((item, idx) => {
-                      const originalIndex = indexLookup.get(item.id) ?? idx;
-                      return <CertificateCard key={item.id} item={item} index={originalIndex} />;
+                  <div className="space-y-12">
+                    {(["portrait", "landscape"] as CertificateOrientation[]).map((orientation) => {
+                      const orientationItems = items.filter(
+                        (certificate) => certificate.orientation === orientation,
+                      );
+
+                      if (orientationItems.length === 0) {
+                        return null;
+                      }
+
+                      const gridClass =
+                        orientation === "portrait"
+                          ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+                          : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+
+                      return (
+                        <div key={orientation} className="space-y-6">
+                          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+                            {orientation === "portrait" ? "Portrait Format" : "Landscape Format"}
+                          </div>
+                          <div className={gridClass}>
+                            {orientationItems.map((item) => {
+                              const originalIndex = indexLookup.get(item.id) ?? 0;
+                              return (
+                                <motion.div
+                                  key={item.id}
+                                  initial={{ opacity: 0, y: 32 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ duration: 0.4, delay: originalIndex * 0.02 }}
+                                >
+                                  <CertificateCard
+                                    item={item}
+                                    index={originalIndex}
+                                    onImageClick={handleImageClick}
+                                  />
+                                </motion.div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
                     })}
                   </div>
                 ) : (
@@ -589,6 +626,44 @@ export default function Conferences() {
           })}
         </Tabs>
       </motion.div>
+
+      <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
+        <DialogContent className="w-[92vw] max-w-4xl border border-primary/30 bg-background/95 p-6 shadow-2xl">
+          {activeCertificate && (
+            <div className="space-y-6">
+              <DialogTitle className="text-xl font-semibold text-foreground">
+                {activeCertificate.certificateTitle}
+              </DialogTitle>
+              <div className="flex flex-col items-center gap-4">
+                <img
+                  src={activeCertificate.imageUrl}
+                  alt={activeCertificate.certificateTitle}
+                  className="max-h-[70vh] w-full max-w-3xl rounded-xl border border-primary/30 bg-muted object-contain p-4 shadow-inner"
+                />
+              </div>
+              <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <Button variant="outline" className="inline-flex items-center gap-2" asChild>
+                  <a
+                    href={activeCertificate.imageUrl}
+                    download={`Mahdieh Fakhar-Conferences-${String(
+                      (indexLookup.get(activeCertificate.id) ?? 0) + 1,
+                    ).padStart(3, "0")}.jpg`}
+                  >
+                    <Download className="h-4 w-4" />
+                    Download
+                  </a>
+                </Button>
+                <DialogClose asChild>
+                  <Button variant="default" className="inline-flex items-center gap-2">
+                    <X className="h-4 w-4" />
+                    Close
+                  </Button>
+                </DialogClose>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

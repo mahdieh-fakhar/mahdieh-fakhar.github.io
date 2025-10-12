@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Presentation, Calendar, MapPin, Users, Sparkles } from "lucide-react";
-import { DocumentUpload } from "@/components/DocumentUpload";
-import { Separator } from "@/components/ui/separator";
+import { Presentation, Calendar, MapPin, Users } from "lucide-react";
 
 const conferences = [
   {
@@ -101,20 +99,6 @@ export default function Conferences() {
             Academic conferences, presentations, and event organization
           </p>
         </div>
-
-        {/* AI Document Upload Section */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-ai-accent" />
-            <h2 className="text-2xl font-semibold">Upload Conference Certificate</h2>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            Upload your conference certificates and let AI extract the information automatically
-          </p>
-          <DocumentUpload category="conference" />
-        </section>
-
-        <Separator />
 
         {/* Conference Attendance */}
         <section className="space-y-6">

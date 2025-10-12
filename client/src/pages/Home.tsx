@@ -62,7 +62,7 @@ export default function Home() {
                 <img
                   src="/images/profile.jpg"
                   alt="Mahdieh Fakhar"
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover object-[50%_28%]"
                 />
               </div>
             </motion.div>

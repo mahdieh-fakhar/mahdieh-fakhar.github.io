@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { TranslationProvider } from "@/providers/TranslationProvider";
 
 // Pages
 import Home from "@/pages/Home";
@@ -25,7 +26,7 @@ function Router() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-  <main className="flex-1 pb-24">
+      <main className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
@@ -51,8 +52,10 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <TranslationProvider>
+            <Toaster />
+            <Router />
+          </TranslationProvider>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

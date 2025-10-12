@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { LanguageSelector } from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +71,8 @@ export function Header() {
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <LanguageSelector />
           <Button
             variant="ghost"
             size="icon"
@@ -115,6 +117,9 @@ export function Header() {
             className="lg:hidden border-t"
           >
             <div className="space-y-1 px-4 py-4">
+              <div className="pb-3">
+                <LanguageSelector />
+              </div>
               {navigation.map((item) => (
                 <Link 
                   key={item.name} 

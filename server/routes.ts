@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
 import { storage } from "./storage";
-import { analyzeDocumentImage, type DocumentAnalysisResult } from "./openai";
+import { analyzeDocumentImage, type DocumentAnalysisResult, translateTexts } from "./openai";
 
 // Configure multer for memory storage
 const upload = multer({
@@ -110,6 +110,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         success: false,
         error: error instanceof Error ? error.message : 'Internal server error',
+      });
+    }
+  });
+
+  app.post('/api/translate', async (req, res) => {
+    try {
+      const { texts, targetLanguage } = req.body ?? {};
+
+      if (!Array.isArray(texts) || texts.length === 0) {
+        return res.status(400).json({ error: 'texts must be a non-empty array' });
+      }
+
+      if (typeof targetLanguage !== 'string' || !targetLanguage.trim()) {
+        return res.status(400).json({ error: 'targetLanguage must be a non-empty string' });
+      }
+
+      const translations = await translateTexts(texts, targetLanguage);
+      res.json({ translations });
+    } catch (error) {
+      console.error('Translation error:', error);
+      res.status(500).json({
+        error: error instanceof Error ? error.message : 'Failed to translate text',
       });
     }
   });

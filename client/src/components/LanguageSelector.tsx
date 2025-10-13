@@ -26,7 +26,11 @@ export function LanguageSelector() {
     if (code === language.code) {
       return;
     }
-    await setLanguage(code);
+    try {
+      await setLanguage(code);
+    } catch (error) {
+      console.error("Failed to change language", error);
+    }
   };
 
   return (

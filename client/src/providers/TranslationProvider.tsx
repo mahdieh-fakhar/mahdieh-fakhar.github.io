@@ -39,6 +39,22 @@ const IGNORED_TAGS = new Set([
 const MAX_TEXT_LENGTH = 1200;
 const TRANSLATION_CHUNK = 40;
 
+const DEFAULT_TRANSLATION_ENDPOINT = "/api/translate";
+const CUSTOM_TRANSLATION_ENDPOINT =
+  typeof import.meta !== "undefined" &&
+  typeof import.meta.env !== "undefined" &&
+  typeof import.meta.env.VITE_TRANSLATION_ENDPOINT === "string"
+    ? import.meta.env.VITE_TRANSLATION_ENDPOINT.trim()
+    : "";
+const TRANSLATION_ENDPOINT =
+  CUSTOM_TRANSLATION_ENDPOINT.length > 0
+    ? CUSTOM_TRANSLATION_ENDPOINT
+    : DEFAULT_TRANSLATION_ENDPOINT;
+const SHOULD_USE_FALLBACK_TRANSLATOR =
+  TRANSLATION_ENDPOINT === DEFAULT_TRANSLATION_ENDPOINT;
+const GOOGLE_TRANSLATE_ENDPOINT =
+  "https://translate.googleapis.com/translate_a/single";
+
 function collectTextNodes(root: Node): Text[] {
   const nodes: Text[] = [];
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -74,7 +90,7 @@ function collectTextNodes(root: Node): Text[] {
   return nodes;
 }
 
-async function requestTranslations(
+async function requestServerTranslations(
   texts: string[],
   targetLanguage: string,
   signal?: AbortSignal,
@@ -83,7 +99,7 @@ async function requestTranslations(
     throw new DOMException("Translation aborted", "AbortError");
   }
 
-  const response = await fetch("/api/translate", {
+  const response = await fetch(TRANSLATION_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ texts, targetLanguage }),
@@ -102,6 +118,88 @@ async function requestTranslations(
     throw new Error("Invalid translation payload");
   }
   return payload.translations;
+}
+
+async function requestFallbackTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
+  const results: string[] = [];
+
+  for (const text of texts) {
+    if (signal?.aborted) {
+      throw new DOMException("Translation aborted", "AbortError");
+    }
+
+    const params = new URLSearchParams({
+      client: "gtx",
+      sl: "auto",
+      tl: targetLanguage,
+      dt: "t",
+      q: text,
+    });
+
+    const response = await fetch(
+      `${GOOGLE_TRANSLATE_ENDPOINT}?${params.toString()}`,
+      {
+        method: "GET",
+        signal,
+        headers: {
+          Accept: "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Fallback translation failed with ${response.status}`,
+      );
+    }
+
+    const data = await response.json();
+    const segments = Array.isArray(data?.[0]) ? data[0] : [];
+    const translated = Array.isArray(segments)
+      ? segments
+          .map((segment) =>
+            Array.isArray(segment) && typeof segment[0] === "string"
+              ? segment[0]
+              : "",
+          )
+          .join("")
+      : "";
+
+    results.push(translated || text);
+  }
+
+  return results;
+}
+
+async function requestTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
+  try {
+    return await requestServerTranslations(texts, targetLanguage, signal);
+  } catch (error) {
+    if (
+      signal?.aborted ||
+      !SHOULD_USE_FALLBACK_TRANSLATOR ||
+      (error instanceof DOMException && error.name === "AbortError")
+    ) {
+      throw error;
+    }
+
+    if (typeof console !== "undefined") {
+      console.warn(
+        "Primary translation endpoint failed, attempting fallback translator.",
+        error,
+      );
+    }
+
+    return await requestFallbackTranslations(texts, targetLanguage, signal);
+  }
 }
 
 export function TranslationProvider({ children }: PropsWithChildren) {

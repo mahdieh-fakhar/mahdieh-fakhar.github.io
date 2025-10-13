@@ -58,6 +58,29 @@ const GOOGLE_JOIN_DELIMITER = "\uE000";
 const FALLBACK_BATCH_SIZE = 15;
 const FALLBACK_MAX_QUERY_LENGTH = 1500;
 
+type TranslationProviderProps = PropsWithChildren<{
+  activeLanguageCode?: string;
+  onLanguageChange?: (code: string) => void;
+}>;
+
+function resolveLanguageByCode(
+  code: string | null | undefined,
+): LanguageOption | null {
+  if (!code) {
+    return null;
+  }
+  if (languagesByCode.has(code)) {
+    return languagesByCode.get(code) ?? null;
+  }
+  const lower = code.toLowerCase();
+  for (const [key, value] of Array.from(languagesByCode.entries())) {
+    if (key.toLowerCase() === lower) {
+      return value;
+    }
+  }
+  return null;
+}
+
 function collectTextNodes(root: Node): Text[] {
   const nodes: Text[] = [];
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -270,7 +293,11 @@ async function requestTranslations(
   }
 }
 
-export function TranslationProvider({ children }: PropsWithChildren) {
+export function TranslationProvider({
+  children,
+  activeLanguageCode,
+  onLanguageChange,
+}: TranslationProviderProps) {
   const defaultLanguage = useMemo(
     () => languagesByCode.get("en") ?? languageOptions[0],
     [],
@@ -293,6 +320,9 @@ export function TranslationProvider({ children }: PropsWithChildren) {
     resolve: () => void;
     reject: (error: unknown) => void;
   } | null>(null);
+  const nextRouteRef = useRef<{ code: string; skipCallback: boolean } | null>(
+    null,
+  );
 
   const settlePending = useCallback(
     (action: "resolve" | "reject", value?: unknown) => {
@@ -321,6 +351,12 @@ export function TranslationProvider({ children }: PropsWithChildren) {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = language.code;
+    }
+  }, [language.code]);
 
   const applyTranslationsToDocument = useCallback(
     async (targetLanguage: LanguageOption, signal: AbortSignal) => {
@@ -425,6 +461,13 @@ export function TranslationProvider({ children }: PropsWithChildren) {
         if (language.code === "en") {
           restoreOriginalText();
           settlePending("resolve");
+          const pendingRoute = nextRouteRef.current;
+          if (pendingRoute?.code === language.code) {
+            if (!pendingRoute.skipCallback) {
+              onLanguageChange?.(language.code);
+            }
+            nextRouteRef.current = null;
+          }
           return;
         }
 
@@ -434,6 +477,13 @@ export function TranslationProvider({ children }: PropsWithChildren) {
         }
 
         settlePending("resolve");
+        const pendingRoute = nextRouteRef.current;
+        if (pendingRoute?.code === language.code) {
+          if (!pendingRoute.skipCallback) {
+            onLanguageChange?.(language.code);
+          }
+          nextRouteRef.current = null;
+        }
       } catch (error) {
         if (controller.signal.aborted) {
           return;
@@ -451,6 +501,11 @@ export function TranslationProvider({ children }: PropsWithChildren) {
           variant: "destructive",
         });
         setLanguageState(fallback);
+        const pendingRoute = nextRouteRef.current;
+        if (pendingRoute) {
+          onLanguageChange?.(fallback.code);
+        }
+        nextRouteRef.current = null;
       } finally {
         if (!controller.signal.aborted) {
           setIsTranslating(false);
@@ -465,15 +520,24 @@ export function TranslationProvider({ children }: PropsWithChildren) {
     };
   }, [
     language,
+    onLanguageChange,
     applyTranslationsToDocument,
     restoreOriginalText,
     settlePending,
   ]);
 
   const handleLanguageChange = useCallback(
-    (code: string) => {
+    (
+      code: string,
+      options?: {
+        skipCallback?: boolean;
+      },
+    ) => {
       const target =
-        languagesByCode.get(code) ?? languagesByCode.get("en") ?? defaultLanguage;
+        resolveLanguageByCode(code) ??
+        resolveLanguageByCode(code?.toLowerCase()) ??
+        languagesByCode.get("en") ??
+        defaultLanguage;
 
       if (target.code === language.code) {
         return Promise.resolve();
@@ -486,13 +550,17 @@ export function TranslationProvider({ children }: PropsWithChildren) {
       }
 
       setIsTranslating(true);
+      nextRouteRef.current = {
+        code: target.code,
+        skipCallback: Boolean(options?.skipCallback),
+      };
 
       return new Promise<void>((resolve, reject) => {
         pendingPromiseRef.current = { resolve, reject };
         setLanguageState(target);
       });
     },
-    [defaultLanguage, language.code],
+    [defaultLanguage, language.code, onLanguageChange],
   );
 
   const value = useMemo<TranslationContextValue>(
@@ -504,6 +572,17 @@ export function TranslationProvider({ children }: PropsWithChildren) {
     }),
     [language, handleLanguageChange, isTranslating, sortedLanguages],
   );
+
+  useEffect(() => {
+    const target = resolveLanguageByCode(activeLanguageCode);
+    if (!target) {
+      return;
+    }
+    if (target.code === language.code) {
+      return;
+    }
+    void handleLanguageChange(target.code, { skipCallback: true });
+  }, [activeLanguageCode, handleLanguageChange, language.code]);
 
   return (
     <TranslationContext.Provider value={value}>

@@ -1,4 +1,5 @@
 import { Switch, Route } from "wouter";
+import { type ComponentType } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { TranslationProvider } from "@/providers/TranslationProvider";
+import { LocaleProvider, useLocale } from "@/providers/LocaleProvider";
 
 // Pages
 import Home from "@/pages/Home";
@@ -22,25 +24,51 @@ import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
-function Router() {
+type RouteDefinition = {
+  path: string;
+  component: ComponentType;
+  key: string;
+};
+
+const ROUTES: RouteDefinition[] = [
+  { path: "", component: Home, key: "home" },
+  { path: "/about", component: About, key: "about" },
+  { path: "/education", component: Education, key: "education" },
+  { path: "/articles", component: Articles, key: "articles" },
+  { path: "/conferences", component: Conferences, key: "conferences" },
+  { path: "/memberships", component: Memberships, key: "memberships" },
+  { path: "/career", component: Career, key: "career" },
+  { path: "/skills", component: Skills, key: "skills" },
+  { path: "/projects", component: Projects, key: "projects" },
+  { path: "/resume", component: Resume, key: "resume" },
+  { path: "/contact", component: Contact, key: "contact" },
+];
+
+function wrapComponent(Component: ComponentType) {
+  return () => <Component />;
+}
+
+function LocaleSwitch() {
+  return (
+    <Switch>
+      {ROUTES.map(({ path, component, key }) => (
+        <Route
+          key={key}
+          path={`/:locale${path}`}
+          component={wrapComponent(component)}
+        />
+      ))}
+      <Route component={wrapComponent(NotFound)} />
+    </Switch>
+  );
+}
+
+function AppShell() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/education" component={Education} />
-          <Route path="/articles" component={Articles} />
-          <Route path="/conferences" component={Conferences} />
-          <Route path="/memberships" component={Memberships} />
-          <Route path="/career" component={Career} />
-          <Route path="/skills" component={Skills} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/resume" component={Resume} />
-          <Route path="/contact" component={Contact} />
-          <Route component={NotFound} />
-        </Switch>
+        <LocaleSwitch />
       </main>
       <Footer />
     </div>
@@ -52,12 +80,25 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <TranslationProvider>
-            <Toaster />
-            <Router />
-          </TranslationProvider>
+          <LocaleProvider>
+            <LocalizedApp />
+          </LocaleProvider>
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
+  );
+}
+
+function LocalizedApp() {
+  const { locale, setLocale } = useLocale();
+
+  return (
+    <TranslationProvider
+      activeLanguageCode={locale}
+      onLanguageChange={(code) => setLocale(code)}
+    >
+      <Toaster />
+      <AppShell />
+    </TranslationProvider>
   );
 }

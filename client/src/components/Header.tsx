@@ -27,9 +27,13 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:gap-8 lg:px-10">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 rounded-md px-2 py-1 -ml-2" data-testid="link-home-logo">
+        <Link
+          href="/"
+          className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2"
+          data-testid="link-home-logo"
+        >
           <img 
             src="/images/logo.png" 
             alt="MF Logo" 
@@ -41,7 +45,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:gap-1">
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-2">
           {navigation.map((item) => (
             <Link 
               key={item.name} 
@@ -71,7 +75,7 @@ export function Header() {
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 lg:flex-none">
           <LanguageSelector />
           <Button
             variant="ghost"

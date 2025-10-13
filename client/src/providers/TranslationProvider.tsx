@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -12,6 +13,7 @@ import {
   languagesByCode,
   type LanguageOption,
 } from "@/data/languages";
+import { toast } from "@/hooks/use-toast";
 
 type TranslationContextValue = {
   language: LanguageOption;
@@ -72,11 +74,20 @@ function collectTextNodes(root: Node): Text[] {
   return nodes;
 }
 
-async function requestTranslations(texts: string[], targetLanguage: string) {
+async function requestTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
+  if (signal?.aborted) {
+    throw new DOMException("Translation aborted", "AbortError");
+  }
+
   const response = await fetch("/api/translate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ texts, targetLanguage }),
+    signal,
   });
 
   if (!response.ok) {
@@ -94,31 +105,75 @@ async function requestTranslations(texts: string[], targetLanguage: string) {
 }
 
 export function TranslationProvider({ children }: PropsWithChildren) {
-  const [language, setLanguageState] = useState<LanguageOption>(
+  const defaultLanguage = useMemo(
     () => languagesByCode.get("en") ?? languageOptions[0],
+    [],
   );
+  const [language, setLanguageState] =
+    useState<LanguageOption>(defaultLanguage);
   const [isTranslating, setIsTranslating] = useState(false);
   const originalTextMap = useRef(new Map<Text, string>());
   const translationCache = useRef<Map<string, Map<string, string>>>(new Map());
-  const sortedLanguages = useMemo(() => [...languageOptions].sort((a, b) => a.englishName.localeCompare(b.englishName)), []);
+  const sortedLanguages = useMemo(
+    () =>
+      [...languageOptions].sort((a, b) =>
+        a.englishName.localeCompare(b.englishName),
+      ),
+    [],
+  );
+  const hasMountedRef = useRef(false);
+  const controllerRef = useRef<AbortController | null>(null);
+  const pendingPromiseRef = useRef<{
+    resolve: () => void;
+    reject: (error: unknown) => void;
+  } | null>(null);
 
-  const translateDocument = useCallback(
-    async (targetCode: string) => {
-      const targetLanguage = languagesByCode.get(targetCode) ?? languageOptions[0];
-      if (targetLanguage.code === "en") {
-        originalTextMap.current.forEach((value, node) => {
-          node.nodeValue = value;
-        });
-        setLanguageState(targetLanguage);
+  const settlePending = useCallback(
+    (action: "resolve" | "reject", value?: unknown) => {
+      const pending = pendingPromiseRef.current;
+      if (!pending) {
         return;
       }
+      pendingPromiseRef.current = null;
+      if (action === "resolve") {
+        pending.resolve();
+      } else {
+        pending.reject(value);
+      }
+    },
+    [],
+  );
+
+  const restoreOriginalText = useCallback(() => {
+    originalTextMap.current.forEach((value, node) => {
+      if (!node.isConnected) {
+        originalTextMap.current.delete(node);
+        return;
+      }
+      if (node.nodeValue !== value) {
+        node.nodeValue = value;
+      }
+    });
+  }, []);
+
+  const applyTranslationsToDocument = useCallback(
+    async (targetLanguage: LanguageOption, signal: AbortSignal) => {
+      originalTextMap.current.forEach((_value, node) => {
+        if (!node.isConnected) {
+          originalTextMap.current.delete(node);
+        }
+      });
 
       const nodes = collectTextNodes(document.body);
-
       const textToNodes = new Map<string, Text[]>();
 
       nodes.forEach((node) => {
-        const baseOriginal = originalTextMap.current.get(node) ?? node.nodeValue ?? "";
+        if (signal.aborted) {
+          return;
+        }
+        const baseOriginal =
+          originalTextMap.current.get(node) ?? node.nodeValue ?? "";
+
         if (!originalTextMap.current.has(node)) {
           originalTextMap.current.set(node, baseOriginal);
         }
@@ -133,7 +188,6 @@ export function TranslationProvider({ children }: PropsWithChildren) {
       });
 
       if (textToNodes.size === 0) {
-        setLanguageState(targetLanguage);
         return;
       }
 
@@ -155,9 +209,13 @@ export function TranslationProvider({ children }: PropsWithChildren) {
         }
 
         for (const chunk of chunks) {
+          if (signal.aborted) {
+            return;
+          }
           const translations = await requestTranslations(
             chunk,
             targetLanguage.code,
+            signal,
           );
 
           translations.forEach((translation, index) => {
@@ -170,28 +228,105 @@ export function TranslationProvider({ children }: PropsWithChildren) {
       }
 
       textToNodes.forEach((nodesForText, text) => {
+        if (signal.aborted) {
+          return;
+        }
         const translated = cache.get(text);
         if (typeof translated !== "string") return;
         nodesForText.forEach((node) => {
-          node.nodeValue = translated;
+          if (!signal.aborted) {
+            node.nodeValue = translated;
+          }
         });
       });
-
-      setLanguageState(targetLanguage);
     },
     [],
   );
 
-  const handleLanguageChange = useCallback(
-    async (code: string) => {
+  useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
+
+    controllerRef.current?.abort();
+    const controller = new AbortController();
+    controllerRef.current = controller;
+
+    const execute = async () => {
       setIsTranslating(true);
       try {
-        await translateDocument(code);
+        if (language.code === "en") {
+          restoreOriginalText();
+          settlePending("resolve");
+          return;
+        }
+
+        await applyTranslationsToDocument(language, controller.signal);
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        settlePending("resolve");
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+        console.error("Translation error:", error);
+        restoreOriginalText();
+        const fallback = languagesByCode.get("en") ?? languageOptions[0];
+        settlePending("reject", error);
+        toast({
+          title: "Translation unavailable",
+          description:
+            error instanceof Error
+              ? error.message
+              : "Unable to translate content right now.",
+          variant: "destructive",
+        });
+        setLanguageState(fallback);
       } finally {
-        setIsTranslating(false);
+        if (!controller.signal.aborted) {
+          setIsTranslating(false);
+        }
       }
+    };
+
+    void execute();
+
+    return () => {
+      controller.abort();
+    };
+  }, [
+    language,
+    applyTranslationsToDocument,
+    restoreOriginalText,
+    settlePending,
+  ]);
+
+  const handleLanguageChange = useCallback(
+    (code: string) => {
+      const target =
+        languagesByCode.get(code) ?? languagesByCode.get("en") ?? defaultLanguage;
+
+      if (target.code === language.code) {
+        return Promise.resolve();
+      }
+
+      controllerRef.current?.abort();
+      if (pendingPromiseRef.current) {
+        pendingPromiseRef.current.reject(new Error("Translation interrupted"));
+        pendingPromiseRef.current = null;
+      }
+
+      setIsTranslating(true);
+
+      return new Promise<void>((resolve, reject) => {
+        pendingPromiseRef.current = { resolve, reject };
+        setLanguageState(target);
+      });
     },
-    [translateDocument],
+    [defaultLanguage, language.code],
   );
 
   const value = useMemo<TranslationContextValue>(

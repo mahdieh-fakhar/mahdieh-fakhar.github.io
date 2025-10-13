@@ -2,9 +2,135 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, BookOpen, Briefcase, GraduationCap, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Briefcase,
+  GraduationCap,
+  Sparkles,
+  Home as HomeIcon,
+  UserRound,
+  FileText,
+  Microscope,
+  BadgeCheck,
+  Puzzle,
+  ScrollText,
+  Send,
+} from "lucide-react";
 
 export default function Home() {
+  const pageHighlights = [
+    {
+      title: "Home",
+      href: "/",
+      summary:
+        "An AI-orchestrated landing experience that introduces Mahdieh’s brand voice, portfolio pillars, and calls-to-action.",
+      icon: HomeIcon,
+      accent: "from-primary/25 via-primary/5 to-transparent",
+    },
+    {
+      title: "About",
+      href: "/about",
+      summary:
+        "Get a human and data-driven snapshot of Mahdieh’s academic journey, passions, and current initiatives.",
+      icon: UserRound,
+      accent: "from-secondary/30 via-background to-transparent",
+    },
+    {
+      title: "Education",
+      href: "/education",
+      summary:
+        "Explore a curated catalogue of degrees and certifications with insights on how each fuels data and pedagogy expertise.",
+      icon: GraduationCap,
+      accent: "from-primary/20 via-background to-secondary/20",
+    },
+    {
+      title: "Articles",
+      href: "/articles",
+      summary:
+        "Survey peer-reviewed publications and AI-assisted summaries that spotlight Mahdieh’s scholarly contributions.",
+      icon: FileText,
+      accent: "from-primary/15 via-background to-primary/5",
+    },
+    {
+      title: "Conferences",
+      href: "/conferences",
+      summary:
+        "Follow keynote sessions and workshops delivered across the globe, enhanced with intelligent tagging and takeaways.",
+      icon: Microscope,
+      accent: "from-secondary/25 via-background to-transparent",
+    },
+    {
+      title: "Memberships",
+      href: "/memberships",
+      summary:
+        "Review professional communities and networks that amplify Mahdieh’s voice in education, AI, and research.",
+      icon: BadgeCheck,
+      accent: "from-primary/15 via-transparent to-secondary/15",
+    },
+    {
+      title: "Career",
+      href: "/career",
+      summary:
+        "Trace a data-informed career timeline featuring roles, impact metrics, and AI-powered reflections on leadership.",
+      icon: Briefcase,
+      accent: "from-primary/25 via-background to-transparent",
+    },
+    {
+      title: "Skills",
+      href: "/skills",
+      summary:
+        "Digest a competency matrix that balances technical stacks, teaching methodologies, and strategic soft skills.",
+      icon: Puzzle,
+      accent: "from-secondary/25 via-primary/5 to-transparent",
+    },
+    {
+      title: "Projects",
+      href: "/projects",
+      summary:
+        "Dive into living case studies with visuals, datasets, and AI narrative summaries detailing innovation outcomes.",
+      icon: BookOpen,
+      accent: "from-primary/20 via-background to-secondary/20",
+    },
+    {
+      title: "Resume",
+      href: "/resume",
+      summary:
+        "Access an executive-ready dossier featuring downloadable CV assets and recruiter-friendly highlights.",
+      icon: ScrollText,
+      accent: "from-secondary/20 via-transparent to-primary/20",
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+      summary:
+        "Connect directly for collaborations, consultations, or speaking engagements with context-aware routing.",
+      icon: Send,
+      accent: "from-primary/20 via-background to-transparent",
+    },
+  ];
+
+  const summaryContainer = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const summaryItem = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 120, damping: 16 },
+    },
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -67,6 +193,75 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* AI Navigation Summary */}
+      <section className="relative overflow-hidden py-16">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/12 via-transparent to-secondary/20" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
+                <Sparkles className="h-4 w-4" />
+                AI Navigation Briefing
+              </div>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                Your guided tour across the portfolio
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
+                An intelligent highlight reel prioritising the most relevant insights from each section.
+                Hover to reveal subtle gradients and jump straight to the knowledge you need.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-primary/30 bg-background/70 px-4 py-3 text-sm font-medium text-primary shadow-sm backdrop-blur">
+              <span className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                Continuously refined with AI heuristics for optimal storytelling.
+              </span>
+            </div>
+          </div>
+          <motion.ul
+            className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={summaryContainer}
+          >
+            {pageHighlights.map((highlight, index) => {
+              const Icon = highlight.icon;
+              return (
+                <motion.li key={highlight.title} variants={summaryItem}>
+                  <Link
+                    href={highlight.href}
+                    className="group relative block overflow-hidden rounded-2xl border border-primary/25 bg-background/80 p-6 shadow-lg transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div
+                      className={`pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 bg-gradient-to-br ${highlight.accent}`}
+                    />
+                    <div className="relative flex items-start justify-between">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary transition duration-300 group-hover:scale-105">
+                        <Icon className="h-6 w-6" />
+                      </span>
+                      <span className="rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <h3 className="relative mt-6 text-xl font-bold text-foreground">
+                      {highlight.title}
+                    </h3>
+                    <p className="relative mt-3 text-sm text-muted-foreground">
+                      {highlight.summary}
+                    </p>
+                    <div className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3">
+                      Explore {highlight.title}
+                      <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
         </div>
       </section>
 

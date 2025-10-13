@@ -12,10 +12,9 @@ const footerLinks = [
 ];
 
 export function Footer() {
-
   return (
-    <footer className="border-t bg-card mt-auto" aria-label="Site footer">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <footer className="border-t-4 border-primary/70 bg-sidebar shadow-[0_-8px_24px_-14px_hsl(44_100%_48%/0.45)] mt-auto" aria-label="Site footer">
+      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-4">
             <div className="flex items-center gap-2">

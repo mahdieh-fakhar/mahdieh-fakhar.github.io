@@ -25,8 +25,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-4 px-6 py-4 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
+    <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_8px_20px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-4 px-6 py-5 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
         {/* Logo */}
         <Link
           href="/"

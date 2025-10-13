@@ -54,6 +54,9 @@ const SHOULD_USE_FALLBACK_TRANSLATOR =
   TRANSLATION_ENDPOINT === DEFAULT_TRANSLATION_ENDPOINT;
 const GOOGLE_TRANSLATE_ENDPOINT =
   "https://translate.googleapis.com/translate_a/single";
+const GOOGLE_JOIN_DELIMITER = "\uE000";
+const FALLBACK_BATCH_SIZE = 15;
+const FALLBACK_MAX_QUERY_LENGTH = 1500;
 
 function collectTextNodes(root: Node): Text[] {
   const nodes: Text[] = [];
@@ -125,19 +128,34 @@ async function requestFallbackTranslations(
   targetLanguage: string,
   signal?: AbortSignal,
 ) {
-  const results: string[] = [];
+  if (signal?.aborted) {
+    throw new DOMException("Translation aborted", "AbortError");
+  }
 
-  for (const text of texts) {
+  const sanitizedTexts = texts.map((entry) =>
+    entry.split(GOOGLE_JOIN_DELIMITER).join(""),
+  );
+  const translated = new Array<string>(texts.length);
+
+  const flushBatch = async (
+    batch: string[],
+    positions: number[],
+  ): Promise<void> => {
+    if (batch.length === 0) {
+      return;
+    }
+
     if (signal?.aborted) {
       throw new DOMException("Translation aborted", "AbortError");
     }
 
+    const query = batch.join(GOOGLE_JOIN_DELIMITER);
     const params = new URLSearchParams({
       client: "gtx",
       sl: "auto",
       tl: targetLanguage,
       dt: "t",
-      q: text,
+      q: query,
     });
 
     const response = await fetch(
@@ -157,22 +175,72 @@ async function requestFallbackTranslations(
       );
     }
 
-    const data = await response.json();
-    const segments = Array.isArray(data?.[0]) ? data[0] : [];
-    const translated = Array.isArray(segments)
-      ? segments
-          .map((segment) =>
-            Array.isArray(segment) && typeof segment[0] === "string"
-              ? segment[0]
-              : "",
-          )
-          .join("")
-      : "";
+    const payload = await response.json();
+    const sentences = Array.isArray(payload?.[0]) ? payload[0] : [];
+    const combined = sentences
+      .map((sentence) =>
+        Array.isArray(sentence) && typeof sentence[0] === "string"
+          ? sentence[0]
+          : "",
+      )
+      .join("");
 
-    results.push(translated || text);
+    const parts = combined.split(GOOGLE_JOIN_DELIMITER);
+
+    positions.forEach((originalIndex, idx) => {
+      const translatedValue =
+        parts[idx] && typeof parts[idx] === "string"
+          ? parts[idx]
+          : batch[idx] ?? sanitizedTexts[originalIndex] ?? texts[originalIndex];
+
+      translated[originalIndex] =
+        translatedValue?.trim().length > 0
+          ? translatedValue
+          : sanitizedTexts[originalIndex] ?? texts[originalIndex];
+    });
+  };
+
+  let batch: string[] = [];
+  let positions: number[] = [];
+  let currentLength = 0;
+
+  const pushAndMaybeFlush = async (value: string, originalIndex: number) => {
+    const sanitized = value.length > 0 ? value : " ";
+    const candidateLength =
+      batch.length === 0
+        ? sanitized.length
+        : currentLength + GOOGLE_JOIN_DELIMITER.length + sanitized.length;
+
+    if (
+      batch.length >= FALLBACK_BATCH_SIZE ||
+      candidateLength > FALLBACK_MAX_QUERY_LENGTH
+    ) {
+      await flushBatch(batch, positions);
+      batch = [];
+      positions = [];
+      currentLength = 0;
+    }
+
+    batch.push(sanitized);
+    positions.push(originalIndex);
+    currentLength =
+      batch.length === 1
+        ? sanitized.length
+        : currentLength + GOOGLE_JOIN_DELIMITER.length + sanitized.length;
+  };
+
+  for (let index = 0; index < sanitizedTexts.length; index += 1) {
+    if (signal?.aborted) {
+      throw new DOMException("Translation aborted", "AbortError");
+    }
+    await pushAndMaybeFlush(sanitizedTexts[index], index);
   }
 
-  return results;
+  await flushBatch(batch, positions);
+
+  return translated.map(
+    (value, index) => value ?? sanitizedTexts[index] ?? texts[index] ?? "",
+  );
 }
 
 async function requestTranslations(

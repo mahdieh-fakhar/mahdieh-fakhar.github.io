@@ -38,18 +38,19 @@ export function Header() {
             alt="MF Logo" 
             className="h-10 w-10 object-contain"
           />
-          <span className="text-xl font-bold text-foreground hidden sm:inline">
-            MAHDIEH FAKHAR
+          <span className="hidden flex-col leading-tight sm:flex">
+            <span className="text-xl font-bold text-foreground tracking-wide">MAHDIEH</span>
+            <span className="text-base font-semibold text-foreground tracking-wide">FAKHAR</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-6 lg:gap-y-2 lg:px-6">
+        <div className="hidden lg:flex lg:flex-1 lg:min-w-0 lg:items-center lg:justify-center lg:gap-6 lg:px-6">
           {navigation.map((item) => (
             <Link 
               key={item.name} 
               href={item.href}
-              className={`relative px-3 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md ${
+              className={`relative px-3 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
                 location === item.href
                   ? "text-foreground"
                   : "text-muted-foreground"

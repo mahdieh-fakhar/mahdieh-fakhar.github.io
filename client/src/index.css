@@ -4,81 +4,67 @@
 
 /* LIGHT MODE */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(0, 0, 0, 0.1);
+  --badge-outline: rgba(0, 0, 0, 0.05);
 
   /* Automatic computation of border around primary / danger buttons */
   --opaque-button-border-intensity: -8; /* In terms of percentages */
 
   /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  --elevate-1: rgba(170, 21, 27, 0.06); /* translucent Spanish red */
+  --elevate-2: rgba(241, 191, 0, 0.15); /* translucent Spanish gold */
 
-  --background: 210 20% 98%;
+  /* Core neutrals */
+  --background: 45 100% 97%; /* warm off-white inspired by flag's yellow */
+  --foreground: 0 0% 12%; /* near-black for strong legibility */
 
-  --foreground: 220 20% 15%;
-
-  --border: 210 15% 88%;
+  --border: 44 50% 85%;
 
   --card: 0 0% 100%;
+  --card-foreground: 0 0% 14%;
+  --card-border: 44 45% 88%;
 
-  --card-foreground: 220 18% 18%;
+  --sidebar: 44 90% 94%;
+  --sidebar-foreground: 0 0% 14%;
+  --sidebar-border: 44 45% 88%;
+  --sidebar-primary: 356 78% 37%; /* Spanish flag red */
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 44 100% 48%; /* Spanish gold */
+  --sidebar-accent-foreground: 0 0% 16%;
+  --sidebar-ring: 356 78% 37%;
 
-  --card-border: 0 0% 94%;
+  --popover: 44 100% 99%;
+  --popover-foreground: 0 0% 16%;
+  --popover-border: 44 35% 88%;
 
-  --sidebar: 210 18% 96%;
+  --primary: 356 78% 37%; /* main red */
+  --primary-foreground: 0 0% 98%;
 
-  --sidebar-foreground: 220 20% 18%;
+  --secondary: 44 100% 48%; /* rich yellow */
+  --secondary-foreground: 0 0% 15%;
 
-  --sidebar-border: 210 15% 90%;
+  --muted: 44 60% 90%;
+  --muted-foreground: 23 45% 30%;
 
-  --sidebar-primary: 220 85% 35%;
+  --accent: 12 80% 52%; /* warm orange accent between red & yellow */
+  --accent-foreground: 0 0% 98%;
 
-  --sidebar-primary-foreground: 220 85% 98%;
+  /* AI-highlight accent tuned to gold for continuity */
+  --ai-accent: 44 100% 50%;
+  --ai-accent-foreground: 0 0% 15%;
 
-  --sidebar-accent: 210 16% 92%;
+  --destructive: 356 70% 32%;
+  --destructive-foreground: 0 0% 98%;
 
-  --sidebar-accent-foreground: 220 20% 20%;
+  --input: 44 35% 80%;
+  --ring: 356 78% 37%;
 
-  --sidebar-ring: 220 85% 35%;
-
-  --popover: 0 0% 99%;
-
-  --popover-foreground: 220 18% 20%;
-
-  --popover-border: 0 0% 92%;
-
-  --primary: 220 85% 35%;
-
-  --primary-foreground: 220 85% 98%;
-
-  --secondary: 210 12% 94%;
-
-  --secondary-foreground: 220 18% 22%;
-
-  --muted: 210 16% 95%;
-
-  --muted-foreground: 220 15% 40%;
-
-  --accent: 200 70% 45%;
-
-  --accent-foreground: 200 70% 98%;
-
-  /* AI Purple accent for AI-powered features */
-  --ai-accent: 280 60% 50%;
-  --ai-accent-foreground: 280 60% 98%;
-
-  --destructive: 0 72% 35%;
-
-  --destructive-foreground: 0 72% 98%;
-
-  --input: 210 18% 82%;
-  --ring: 220 85% 35%;
-  --chart-1: 220 85% 35%;
-  --chart-2: 200 70% 35%;
-  --chart-3: 280 60% 35%;
-  --chart-4: 190 65% 30%;
-  --chart-5: 270 55% 32%;
+  /* Chart palette leaning on flag hues with depth variations */
+  --chart-1: 356 78% 37%;
+  --chart-2: 44 100% 48%;
+  --chart-3: 12 80% 50%;
+  --chart-4: 0 55% 28%;
+  --chart-5: 44 70% 35%;
 
   --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: Georgia, serif;
@@ -131,72 +117,63 @@
 }
 
 .dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
+  --button-outline: rgba(255, 255, 255, 0.12);
+  --badge-outline: rgba(255, 255, 255, 0.08);
 
-  --opaque-button-border-intensity: 9;  /* In terms of percentages */
+  --opaque-button-border-intensity: 9; /* In terms of percentages */
 
   /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
+  --elevate-1: rgba(241, 191, 0, 0.12);
+  --elevate-2: rgba(170, 21, 27, 0.25);
 
-  --background: 220 25% 8%;
+  --background: 356 40% 10%;
+  --foreground: 0 0% 96%;
 
-  --foreground: 210 20% 95%;
+  --border: 356 35% 18%;
 
-  --border: 220 20% 18%;
+  --card: 356 32% 14%;
+  --card-foreground: 0 0% 95%;
+  --card-border: 356 32% 20%;
 
-  --card: 220 20% 12%;
+  --sidebar: 356 35% 12%;
+  --sidebar-foreground: 0 0% 95%;
+  --sidebar-border: 356 35% 20%;
+  --sidebar-primary: 44 100% 48%;
+  --sidebar-primary-foreground: 0 0% 12%;
+  --sidebar-accent: 356 70% 40%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-ring: 44 100% 48%;
 
-  --card-foreground: 210 18% 92%;
+  --popover: 356 30% 16%;
+  --popover-foreground: 0 0% 92%;
+  --popover-border: 356 30% 22%;
 
-  --card-border: 220 18% 16%;
+  --primary: 44 100% 48%;
+  --primary-foreground: 0 0% 12%;
 
-  --sidebar: 220 22% 10%;
+  --secondary: 356 78% 37%;
+  --secondary-foreground: 0 0% 98%;
 
-  --sidebar-foreground: 210 18% 90%;
+  --muted: 356 30% 20%;
+  --muted-foreground: 44 60% 80%;
 
-  --sidebar-border: 220 20% 14%;
+  --accent: 12 70% 52%;
+  --accent-foreground: 0 0% 12%;
 
-  --sidebar-primary: 220 80% 65%;
+  --ai-accent: 44 90% 60%;
+  --ai-accent-foreground: 0 0% 12%;
 
-  --sidebar-primary-foreground: 220 80% 15%;
+  --destructive: 0 68% 38%;
+  --destructive-foreground: 0 0% 96%;
 
-  --sidebar-accent: 220 18% 16%;
+  --input: 356 35% 26%;
+  --ring: 44 100% 48%;
 
-  --sidebar-accent-foreground: 210 16% 88%;
-
-  --sidebar-ring: 220 80% 65%;
-
-  --popover: 220 18% 14%;
-
-  --popover-foreground: 210 16% 88%;
-
-  --popover-border: 220 16% 18%;
-
-  --primary: 220 80% 65%;
-
-  --primary-foreground: 220 80% 15%;
-
-  --secondary: 220 16% 18%;
-
-  --secondary-foreground: 210 16% 88%;
-
-  --muted: 220 16% 15%;
-
-  --muted-foreground: 210 15% 70%;
-
-  --accent: 200 60% 60%;
-
-  --accent-foreground: 200 60% 15%;
-
-  /* AI Purple accent for dark mode */
-  --ai-accent: 280 55% 65%;
-  --ai-accent-foreground: 280 55% 15%;
-
-  --destructive: 0 62% 32%;
-
-  --destructive-foreground: 0 62% 96%;
+  --chart-1: 44 100% 48%;
+  --chart-2: 356 78% 37%;
+  --chart-3: 12 70% 52%;
+  --chart-4: 44 70% 35%;
+  --chart-5: 356 55% 28%;
 
   --input: 220 18% 28%;
   --ring: 220 80% 65%;

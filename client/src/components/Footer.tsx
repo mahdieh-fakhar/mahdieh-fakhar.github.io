@@ -1,19 +1,17 @@
 import { Link } from "wouter";
 import { Mail, Linkedin, Github, Sparkles } from "lucide-react";
-import { useLocale } from "@/providers/LocaleProvider";
 
 const footerLinks = [
-  { name: "Home", path: "" },
-  { name: "About", path: "/about" },
-  { name: "Education", path: "/education" },
-  { name: "Articles", path: "/articles" },
-  { name: "Conferences", path: "/conferences" },
-  { name: "Resume", path: "/resume" },
-  { name: "Contact", path: "/contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Education", href: "/education" },
+  { name: "Articles", href: "/articles" },
+  { name: "Conferences", href: "/conferences" },
+  { name: "Resume", href: "/resume" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Footer() {
-  const { buildPath } = useLocale();
 
   return (
     <footer className="border-t bg-card mt-auto" aria-label="Site footer">
@@ -45,7 +43,7 @@ export function Footer() {
               {footerLinks.map((link) => (
                 <li key={link.name}>
                   <Link
-                    href={buildPath(link.path)}
+                    href={link.href}
                     className="text-muted-foreground hover:text-foreground transition-colors hover-elevate rounded px-1 py-0.5"
                     data-testid={`link-footer-${link.name.toLowerCase()}`}
                   >

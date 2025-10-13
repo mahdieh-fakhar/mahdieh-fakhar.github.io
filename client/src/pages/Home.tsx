@@ -3,11 +3,8 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, BookOpen, Briefcase, GraduationCap, Sparkles } from "lucide-react";
-import { useLocale } from "@/providers/LocaleProvider";
 
 export default function Home() {
-  const { buildPath } = useLocale();
-
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -41,13 +38,13 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <Link href={buildPath("/resume")}>
+                <Link href="/resume">
                   <Button size="lg" data-testid="button-view-resume" className="gap-2">
                     View Resume
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href={buildPath("/contact")}>
+                <Link href="/contact">
                   <Button size="lg" variant="outline" data-testid="button-contact">
                     Contact Me
                   </Button>

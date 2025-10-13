@@ -1,38 +1,35 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-import { LanguageSelector } from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocale } from "@/providers/LocaleProvider";
 
 const navigation = [
-  { name: "Home", path: "" },
-  { name: "About", path: "/about" },
-  { name: "Education", path: "/education" },
-  { name: "Articles", path: "/articles" },
-  { name: "Conferences", path: "/conferences" },
-  { name: "Memberships", path: "/memberships" },
-  { name: "Career", path: "/career" },
-  { name: "Skills", path: "/skills" },
-  { name: "Projects", path: "/projects" },
-  { name: "Resume", path: "/resume" },
-  { name: "Contact", path: "/contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Education", href: "/education" },
+  { name: "Articles", href: "/articles" },
+  { name: "Conferences", href: "/conferences" },
+  { name: "Memberships", href: "/memberships" },
+  { name: "Career", href: "/career" },
+  { name: "Skills", href: "/skills" },
+  { name: "Projects", href: "/projects" },
+  { name: "Resume", href: "/resume" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Header() {
-  const { restPath, buildPath } = useLocale();
+  const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const currentPath = restPath || "";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
         {/* Logo */}
         <Link
-          href={buildPath("")}
+          href="/"
           className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 lg:justify-self-start"
           data-testid="link-home-logo"
         >
@@ -51,16 +48,16 @@ export function Header() {
           {navigation.map((item) => (
             <Link 
               key={item.name} 
-              href={buildPath(item.path)}
+              href={item.href}
               className={`relative px-3 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md ${
-                currentPath === (item.path || "")
+                location === item.href
                   ? "text-foreground"
                   : "text-muted-foreground"
               }`}
               data-testid={`link-nav-${item.name.toLowerCase()}`}
             >
               {item.name}
-              {currentPath === (item.path || "") && (
+              {location === item.href && (
                 <motion.div
                   layoutId="navbar-indicator"
                   className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-primary"
@@ -78,7 +75,6 @@ export function Header() {
 
         {/* Theme Toggle & Mobile Menu Button */}
         <div className="flex items-center gap-3 lg:flex-none lg:justify-self-end lg:pl-6">
-          <LanguageSelector />
           <Button
             variant="ghost"
             size="icon"
@@ -123,15 +119,12 @@ export function Header() {
             className="lg:hidden border-t"
           >
             <div className="space-y-1 px-4 py-4">
-              <div className="pb-3">
-                <LanguageSelector />
-              </div>
               {navigation.map((item) => (
                 <Link 
                   key={item.name} 
-                  href={buildPath(item.path)}
+                  href={item.href}
                   className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
-                    currentPath === (item.path || "")
+                    location === item.href
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground"
                   }`}

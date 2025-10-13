@@ -57,6 +57,24 @@ const GOOGLE_TRANSLATE_ENDPOINT =
 const GOOGLE_JOIN_DELIMITER = "\uE000";
 const FALLBACK_BATCH_SIZE = 15;
 const FALLBACK_MAX_QUERY_LENGTH = 1500;
+const MY_MEMORY_ENDPOINT = "https://api.mymemory.translated.net/get";
+const RTL_LANG_CODES = new Set([
+  "ar",
+  "fa",
+  "he",
+  "ur",
+  "ps",
+  "ku",
+  "ug",
+  "yi",
+  "dv",
+]);
+
+function sleep(duration: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, duration);
+  });
+}
 
 type TranslationProviderProps = PropsWithChildren<{
   activeLanguageCode?: string;
@@ -151,13 +169,41 @@ async function requestFallbackTranslations(
   targetLanguage: string,
   signal?: AbortSignal,
 ) {
+  const sanitizedTexts = texts.map((entry) =>
+    entry.split(GOOGLE_JOIN_DELIMITER).join(""),
+  );
+
+  try {
+    return await requestGoogleTranslations(
+      sanitizedTexts,
+      targetLanguage,
+      signal,
+    );
+  } catch (error) {
+    if (signal?.aborted) {
+      throw new DOMException("Translation aborted", "AbortError");
+    }
+    console.warn(
+      "Google Translate fallback unavailable, using MyMemory translation.",
+      error,
+    );
+    return await requestMyMemoryTranslations(
+      sanitizedTexts,
+      targetLanguage,
+      signal,
+    );
+  }
+}
+
+async function requestGoogleTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
   if (signal?.aborted) {
     throw new DOMException("Translation aborted", "AbortError");
   }
 
-  const sanitizedTexts = texts.map((entry) =>
-    entry.split(GOOGLE_JOIN_DELIMITER).join(""),
-  );
   const translated = new Array<string>(texts.length);
 
   const flushBatch = async (
@@ -214,12 +260,12 @@ async function requestFallbackTranslations(
       const translatedValue =
         parts[idx] && typeof parts[idx] === "string"
           ? parts[idx]
-          : batch[idx] ?? sanitizedTexts[originalIndex] ?? texts[originalIndex];
+          : batch[idx] ?? texts[originalIndex];
 
       translated[originalIndex] =
         translatedValue?.trim().length > 0
           ? translatedValue
-          : sanitizedTexts[originalIndex] ?? texts[originalIndex];
+          : texts[originalIndex];
     });
   };
 
@@ -252,18 +298,125 @@ async function requestFallbackTranslations(
         : currentLength + GOOGLE_JOIN_DELIMITER.length + sanitized.length;
   };
 
-  for (let index = 0; index < sanitizedTexts.length; index += 1) {
+  for (let index = 0; index < texts.length; index += 1) {
     if (signal?.aborted) {
       throw new DOMException("Translation aborted", "AbortError");
     }
-    await pushAndMaybeFlush(sanitizedTexts[index], index);
+    await pushAndMaybeFlush(texts[index], index);
   }
 
   await flushBatch(batch, positions);
 
-  return translated.map(
-    (value, index) => value ?? sanitizedTexts[index] ?? texts[index] ?? "",
-  );
+  return translated.map((value, index) => value ?? texts[index] ?? "");
+}
+
+async function requestMyMemoryTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
+  if (signal?.aborted) {
+    throw new DOMException("Translation aborted", "AbortError");
+  }
+
+  const translated = new Array<string>(texts.length);
+  const normalizedTarget = targetLanguage.toLowerCase().split("-")[0] ?? "en";
+  const langPair = `en|${normalizedTarget}`;
+
+  const flushBatch = async (
+    batch: string[],
+    positions: number[],
+  ): Promise<void> => {
+    if (batch.length === 0) {
+      return;
+    }
+
+    if (signal?.aborted) {
+      throw new DOMException("Translation aborted", "AbortError");
+    }
+
+    const query = batch.join(GOOGLE_JOIN_DELIMITER);
+    const params = new URLSearchParams({
+      q: query,
+      langpair: langPair,
+    });
+
+    const response = await fetch(
+      `${MY_MEMORY_ENDPOINT}?${params.toString()}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+        signal,
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`MyMemory translation failed with ${response.status}`);
+    }
+
+    const payload = await response.json();
+    const rawTranslation =
+      payload?.responseData?.translatedText &&
+      typeof payload.responseData.translatedText === "string"
+        ? payload.responseData.translatedText
+        : query;
+
+    const normalizedOutput = rawTranslation
+      .replace(/\\\s*uE000/gi, GOOGLE_JOIN_DELIMITER)
+      .split(GOOGLE_JOIN_DELIMITER);
+
+    positions.forEach((originalIndex, idx) => {
+      const candidate =
+        normalizedOutput[idx]?.trim().length
+          ? normalizedOutput[idx]
+          : batch[idx] ?? texts[originalIndex];
+      translated[originalIndex] = candidate ?? texts[originalIndex];
+    });
+
+    await sleep(150);
+  };
+
+  let batch: string[] = [];
+  let positions: number[] = [];
+  let currentLength = 0;
+
+  const pushAndMaybeFlush = async (value: string, originalIndex: number) => {
+    const sanitized = value.length > 0 ? value : " ";
+    const candidateLength =
+      batch.length === 0
+        ? sanitized.length
+        : currentLength + GOOGLE_JOIN_DELIMITER.length + sanitized.length;
+
+    if (
+      batch.length >= FALLBACK_BATCH_SIZE ||
+      candidateLength > FALLBACK_MAX_QUERY_LENGTH
+    ) {
+      await flushBatch(batch, positions);
+      batch = [];
+      positions = [];
+      currentLength = 0;
+    }
+
+    batch.push(sanitized);
+    positions.push(originalIndex);
+    currentLength =
+      batch.length === 1
+        ? sanitized.length
+        : currentLength + GOOGLE_JOIN_DELIMITER.length + sanitized.length;
+  };
+
+  for (let index = 0; index < texts.length; index += 1) {
+    if (signal?.aborted) {
+      throw new DOMException("Translation aborted", "AbortError");
+    }
+    await pushAndMaybeFlush(texts[index], index);
+  }
+
+  await flushBatch(batch, positions);
+
+  return translated.map((value, index) => value ?? texts[index] ?? "");
 }
 
 async function requestTranslations(
@@ -320,7 +473,10 @@ export function TranslationProvider({
     resolve: () => void;
     reject: (error: unknown) => void;
   } | null>(null);
-  const nextRouteRef = useRef<{ code: string; skipCallback: boolean } | null>(
+  const nextRouteRef = useRef<{
+    code: string;
+    notifyAfterTranslation: boolean;
+  } | null>(
     null,
   );
 
@@ -355,6 +511,8 @@ export function TranslationProvider({
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.documentElement.lang = language.code;
+      const base = language.code.toLowerCase().split("-")[0] ?? language.code;
+      document.documentElement.dir = RTL_LANG_CODES.has(base) ? "rtl" : "ltr";
     }
   }, [language.code]);
 
@@ -463,7 +621,7 @@ export function TranslationProvider({
           settlePending("resolve");
           const pendingRoute = nextRouteRef.current;
           if (pendingRoute?.code === language.code) {
-            if (!pendingRoute.skipCallback) {
+            if (pendingRoute.notifyAfterTranslation) {
               onLanguageChange?.(language.code);
             }
             nextRouteRef.current = null;
@@ -479,7 +637,7 @@ export function TranslationProvider({
         settlePending("resolve");
         const pendingRoute = nextRouteRef.current;
         if (pendingRoute?.code === language.code) {
-          if (!pendingRoute.skipCallback) {
+          if (pendingRoute.notifyAfterTranslation) {
             onLanguageChange?.(language.code);
           }
           nextRouteRef.current = null;
@@ -550,10 +708,18 @@ export function TranslationProvider({
       }
 
       setIsTranslating(true);
+      const shouldNotifyImmediately =
+        !options?.skipCallback && typeof onLanguageChange === "function";
+
       nextRouteRef.current = {
         code: target.code,
-        skipCallback: Boolean(options?.skipCallback),
+        notifyAfterTranslation:
+          !shouldNotifyImmediately && typeof onLanguageChange === "function",
       };
+
+      if (shouldNotifyImmediately) {
+        onLanguageChange?.(target.code);
+      }
 
       return new Promise<void>((resolve, reject) => {
         pendingPromiseRef.current = { resolve, reject };

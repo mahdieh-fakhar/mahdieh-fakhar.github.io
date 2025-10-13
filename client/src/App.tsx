@@ -48,17 +48,21 @@ function wrapComponent(Component: ComponentType) {
   return () => <Component />;
 }
 
+const LOCALIZED_ROUTES = ROUTES.map(({ path, component, key }) => ({
+  key,
+  path: `/:locale${path}`,
+  component: wrapComponent(component),
+}));
+
+const NotFoundRoute = wrapComponent(NotFound);
+
 function LocaleSwitch() {
   return (
     <Switch>
-      {ROUTES.map(({ path, component, key }) => (
-        <Route
-          key={key}
-          path={`/:locale${path}`}
-          component={wrapComponent(component)}
-        />
+      {LOCALIZED_ROUTES.map(({ key, path, component }) => (
+        <Route key={key} path={path} component={component} />
       ))}
-      <Route component={wrapComponent(NotFound)} />
+      <Route component={NotFoundRoute} />
     </Switch>
   );
 }

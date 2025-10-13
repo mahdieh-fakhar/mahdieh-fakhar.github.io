@@ -32,7 +32,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
         {/* Logo */}
         <Link
-          href={buildPath("/")}
+          href={buildPath("")}
           className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 lg:justify-self-start"
           data-testid="link-home-logo"
         >
@@ -47,7 +47,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:min-w-0 lg:flex-nowrap lg:items-center lg:justify-center lg:gap-6">
+        <div className="hidden lg:flex lg:min-w-0 lg:flex-nowrap lg:items-center lg:justify-center lg:gap-6 lg:px-6 lg:justify-self-center">
           {navigation.map((item) => (
             <Link 
               key={item.name} 

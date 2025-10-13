@@ -4,109 +4,219 @@ export type LanguageOption = {
   nativeName: string;
 };
 
-export const languages: LanguageOption[] = [
-  { code: "en", englishName: "English", nativeName: "English" },
-  { code: "es", englishName: "Spanish", nativeName: "Español" },
-  { code: "ar", englishName: "Arabic", nativeName: "العربية" },
-  { code: "zh", englishName: "Chinese (Mandarin)", nativeName: "中文" },
-  { code: "fr", englishName: "French", nativeName: "Français" },
-  { code: "ru", englishName: "Russian", nativeName: "Русский" },
-  { code: "de", englishName: "German", nativeName: "Deutsch" },
-  { code: "pt", englishName: "Portuguese", nativeName: "Português" },
-  { code: "hi", englishName: "Hindi", nativeName: "हिन्दी" },
-  { code: "bn", englishName: "Bengali", nativeName: "বাংলা" },
-  { code: "ja", englishName: "Japanese", nativeName: "日本語" },
-  { code: "ko", englishName: "Korean", nativeName: "한국어" },
-  { code: "it", englishName: "Italian", nativeName: "Italiano" },
-  { code: "nl", englishName: "Dutch", nativeName: "Nederlands" },
-  { code: "sv", englishName: "Swedish", nativeName: "Svenska" },
-  { code: "no", englishName: "Norwegian", nativeName: "Norsk" },
-  { code: "da", englishName: "Danish", nativeName: "Dansk" },
-  { code: "fi", englishName: "Finnish", nativeName: "Suomi" },
-  { code: "el", englishName: "Greek", nativeName: "Ελληνικά" },
-  { code: "tr", englishName: "Turkish", nativeName: "Türkçe" },
-  { code: "pl", englishName: "Polish", nativeName: "Polski" },
-  { code: "cs", englishName: "Czech", nativeName: "Čeština" },
-  { code: "sk", englishName: "Slovak", nativeName: "Slovenčina" },
-  { code: "hu", englishName: "Hungarian", nativeName: "Magyar" },
-  { code: "ro", englishName: "Romanian", nativeName: "Română" },
-  { code: "bg", englishName: "Bulgarian", nativeName: "Български" },
-  { code: "sr", englishName: "Serbian", nativeName: "Српски" },
-  { code: "hr", englishName: "Croatian", nativeName: "Hrvatski" },
-  { code: "bs", englishName: "Bosnian", nativeName: "Bosanski" },
-  { code: "sl", englishName: "Slovenian", nativeName: "Slovenščina" },
-  { code: "uk", englishName: "Ukrainian", nativeName: "Українська" },
-  { code: "be", englishName: "Belarusian", nativeName: "Беларуская" },
-  { code: "lt", englishName: "Lithuanian", nativeName: "Lietuvių" },
-  { code: "lv", englishName: "Latvian", nativeName: "Latviešu" },
-  { code: "et", englishName: "Estonian", nativeName: "Eesti" },
-  { code: "ga", englishName: "Irish", nativeName: "Gaeilge" },
-  { code: "cy", englishName: "Welsh", nativeName: "Cymraeg" },
-  { code: "gd", englishName: "Scottish Gaelic", nativeName: "Gàidhlig" },
-  { code: "mt", englishName: "Maltese", nativeName: "Malti" },
-  { code: "he", englishName: "Hebrew", nativeName: "עברית" },
-  { code: "fa", englishName: "Persian", nativeName: "فارسی" },
-  { code: "ur", englishName: "Urdu", nativeName: "اردو" },
-  { code: "ps", englishName: "Pashto", nativeName: "پښتو" },
-  { code: "pa", englishName: "Punjabi", nativeName: "ਪੰਜਾਬੀ" },
-  { code: "gu", englishName: "Gujarati", nativeName: "ગુજરાતી" },
-  { code: "ta", englishName: "Tamil", nativeName: "தமிழ்" },
-  { code: "te", englishName: "Telugu", nativeName: "తెలుగు" },
-  { code: "ml", englishName: "Malayalam", nativeName: "മലയാളം" },
-  { code: "mr", englishName: "Marathi", nativeName: "मराठी" },
-  { code: "kn", englishName: "Kannada", nativeName: "ಕನ್ನಡ" },
-  { code: "si", englishName: "Sinhala", nativeName: "සිංහල" },
-  { code: "th", englishName: "Thai", nativeName: "ไทย" },
-  { code: "vi", englishName: "Vietnamese", nativeName: "Tiếng Việt" },
-  { code: "id", englishName: "Indonesian", nativeName: "Bahasa Indonesia" },
-  { code: "ms", englishName: "Malay", nativeName: "Bahasa Melayu" },
-  { code: "tl", englishName: "Filipino", nativeName: "Filipino" },
-  { code: "my", englishName: "Burmese", nativeName: "မြန်မာစာ" },
-  { code: "km", englishName: "Khmer", nativeName: "ភាសាខ្មែរ" },
-  { code: "lo", englishName: "Lao", nativeName: "ພາສາລາວ" },
-  { code: "mn", englishName: "Mongolian", nativeName: "Монгол" },
-  { code: "kk", englishName: "Kazakh", nativeName: "Қазақ" },
-  { code: "uz", englishName: "Uzbek", nativeName: "Oʻzbek" },
-  { code: "az", englishName: "Azerbaijani", nativeName: "Azərbaycan dili" },
-  { code: "hy", englishName: "Armenian", nativeName: "Հայերեն" },
-  { code: "ka", englishName: "Georgian", nativeName: "ქართული" },
-  { code: "am", englishName: "Amharic", nativeName: "አማርኛ" },
-  { code: "ti", englishName: "Tigrinya", nativeName: "ትግርኛ" },
-  { code: "sw", englishName: "Swahili", nativeName: "Kiswahili" },
-  { code: "af", englishName: "Afrikaans", nativeName: "Afrikaans" },
-  { code: "zu", englishName: "Zulu", nativeName: "IsiZulu" },
-  { code: "xh", englishName: "Xhosa", nativeName: "IsiXhosa" },
-  { code: "st", englishName: "Sotho", nativeName: "Sesotho" },
-  { code: "tn", englishName: "Tswana", nativeName: "Setswana" },
-  { code: "yo", englishName: "Yoruba", nativeName: "Yorùbá" },
-  { code: "ig", englishName: "Igbo", nativeName: "Asụsụ Igbo" },
-  { code: "ha", englishName: "Hausa", nativeName: "Hausa" },
-  { code: "so", englishName: "Somali", nativeName: "Af-Soomaali" },
-  { code: "rw", englishName: "Kinyarwanda", nativeName: "Ikinyarwanda" },
-  { code: "ln", englishName: "Lingala", nativeName: "Lingála" },
-  { code: "mg", englishName: "Malagasy", nativeName: "Malagasy" },
-  { code: "qu", englishName: "Quechua", nativeName: "Runasimi" },
-  { code: "ay", englishName: "Aymara", nativeName: "Aymar aru" },
-  { code: "gn", englishName: "Guarani", nativeName: "Avañe'ẽ" },
-  { code: "es-419", englishName: "Spanish (Latin America)", nativeName: "Español (Latinoamérica)" },
-  { code: "pt-BR", englishName: "Portuguese (Brazilian)", nativeName: "Português (Brasil)" },
-  { code: "pt-PT", englishName: "Portuguese (European)", nativeName: "Português (Portugal)" },
-  { code: "es-ES", englishName: "Spanish (European)", nativeName: "Español (España)" },
-  { code: "zh-TW", englishName: "Chinese (Traditional)", nativeName: "繁體中文" },
-  { code: "zh-CN", englishName: "Chinese (Simplified)", nativeName: "简体中文" },
-  { code: "ne", englishName: "Nepali", nativeName: "नेपाली" },
-  { code: "dz", englishName: "Dzongkha", nativeName: "རྫོང་ཁ" },
-  { code: "bo", englishName: "Tibetan", nativeName: "བོད་ཡིག" },
-  { code: "is", englishName: "Icelandic", nativeName: "Íslenska" },
-  { code: "sq", englishName: "Albanian", nativeName: "Shqip" },
-  { code: "mk", englishName: "Macedonian", nativeName: "Македонски" },
-  { code: "ku", englishName: "Kurdish", nativeName: "Kurdî" },
-  { code: "kmr", englishName: "Kurdish (Kurmanji)", nativeName: "Kurmancî" },
-  { code: "ug", englishName: "Uyghur", nativeName: "ئۇيغۇرچە" },
-  { code: "kkj", englishName: "Kako", nativeName: "Kako" },
-  { code: "vi-VN", englishName: "Vietnamese (Vietnam)", nativeName: "Tiếng Việt (Việt Nam)" },
-  { code: "fr-CA", englishName: "French (Canada)", nativeName: "Français (Canada)" },
-];
+const LANGUAGE_CODES = [
+  "en",
+  "es",
+  "ar",
+  "zh",
+  "fr",
+  "ru",
+  "de",
+  "pt",
+  "hi",
+  "bn",
+  "ja",
+  "ko",
+  "it",
+  "nl",
+  "sv",
+  "no",
+  "da",
+  "fi",
+  "el",
+  "tr",
+  "pl",
+  "cs",
+  "sk",
+  "hu",
+  "ro",
+  "bg",
+  "sr",
+  "hr",
+  "bs",
+  "sl",
+  "uk",
+  "be",
+  "lt",
+  "lv",
+  "et",
+  "ga",
+  "cy",
+  "gd",
+  "mt",
+  "he",
+  "fa",
+  "ur",
+  "ps",
+  "pa",
+  "gu",
+  "ta",
+  "te",
+  "ml",
+  "mr",
+  "kn",
+  "si",
+  "th",
+  "vi",
+  "id",
+  "ms",
+  "tl",
+  "my",
+  "km",
+  "lo",
+  "mn",
+  "kk",
+  "uz",
+  "az",
+  "hy",
+  "ka",
+  "am",
+  "ti",
+  "sw",
+  "af",
+  "zu",
+  "xh",
+  "st",
+  "tn",
+  "yo",
+  "ig",
+  "ha",
+  "so",
+  "rw",
+  "ln",
+  "mg",
+  "qu",
+  "ay",
+  "gn",
+  "es-419",
+  "pt-BR",
+  "pt-PT",
+  "es-ES",
+  "zh-TW",
+  "zh-CN",
+  "ne",
+  "dz",
+  "bo",
+  "is",
+  "sq",
+  "mk",
+  "ku",
+  "kmr",
+  "ug",
+  "kkj",
+  "vi-VN",
+  "fr-CA",
+] as const;
+
+const hasDisplayNames =
+  typeof Intl !== "undefined" && typeof Intl.DisplayNames === "function";
+
+const englishDisplay = hasDisplayNames
+  ? new Intl.DisplayNames(["en"], { type: "language" })
+  : null;
+
+const displayCache = new Map<string, Intl.DisplayNames | null>();
+
+function canonicalize(tag: string): string {
+  try {
+    const [canonical] = Intl.getCanonicalLocales(tag);
+    return canonical ?? tag;
+  } catch {
+    return tag;
+  }
+}
+
+function getDisplayNames(locale: string): Intl.DisplayNames | null {
+  if (!hasDisplayNames) {
+    return null;
+  }
+
+  const canonicalLocale = canonicalize(locale);
+  if (displayCache.has(canonicalLocale)) {
+    return displayCache.get(canonicalLocale) ?? null;
+  }
+  try {
+    const display = new Intl.DisplayNames([canonicalLocale], {
+      type: "language",
+    });
+    displayCache.set(canonicalLocale, display);
+    return display;
+  } catch {
+    displayCache.set(canonicalLocale, null);
+    return null;
+  }
+}
+
+function resolveLanguageName(code: string, locale: string): string | null {
+  const display = getDisplayNames(locale);
+  if (!display) {
+    return null;
+  }
+
+  const canonicalCode = canonicalize(code);
+  const direct = display.of(canonicalCode);
+  if (typeof direct === "string") {
+    return direct;
+  }
+
+  const base = canonicalCode.split("-")[0];
+  if (base !== canonicalCode) {
+    const fallback = display.of(base);
+    if (typeof fallback === "string") {
+      return fallback;
+    }
+  }
+
+  return null;
+}
+
+function getEnglishName(code: string): string {
+  const canonicalCode = canonicalize(code);
+  const direct = englishDisplay?.of(canonicalCode);
+  if (typeof direct === "string") {
+    return direct;
+  }
+
+  const base = canonicalCode.split("-")[0];
+  if (base !== canonicalCode) {
+    const fallback = englishDisplay?.of(base);
+    if (typeof fallback === "string") {
+      return fallback;
+    }
+  }
+
+  return canonicalCode;
+}
+
+function getNativeName(code: string): string {
+  const canonicalCode = canonicalize(code);
+  const direct = resolveLanguageName(canonicalCode, canonicalCode);
+  if (typeof direct === "string") {
+    return direct;
+  }
+
+  const base = canonicalCode.split("-")[0];
+  if (base !== canonicalCode) {
+    const baseResult = resolveLanguageName(canonicalCode, base);
+    if (typeof baseResult === "string") {
+      return baseResult;
+    }
+  }
+
+  const english = getEnglishName(code);
+  const fallback = resolveLanguageName(canonicalCode, "en");
+  return fallback ?? english;
+}
+
+export const languages: LanguageOption[] = LANGUAGE_CODES.map((code) => {
+  const englishName = getEnglishName(code);
+  const nativeName = getNativeName(code);
+  return {
+    code,
+    englishName,
+    nativeName,
+  };
+});
 
 export const languagesByCode = new Map<string, LanguageOption>(
   languages.map((lang) => [lang.code, lang]),

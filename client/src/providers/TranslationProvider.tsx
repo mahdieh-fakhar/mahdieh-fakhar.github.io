@@ -57,6 +57,7 @@ const GOOGLE_TRANSLATE_ENDPOINT =
 const GOOGLE_JOIN_DELIMITER = "\uE000";
 const FALLBACK_BATCH_SIZE = 15;
 const FALLBACK_MAX_QUERY_LENGTH = 1500;
+const LINGVA_ENDPOINT = "https://lingva.ml/api/v1";
 const MY_MEMORY_ENDPOINT = "https://api.mymemory.translated.net/get";
 const RTL_LANG_CODES = new Set([
   "ar",
@@ -173,26 +174,74 @@ async function requestFallbackTranslations(
     entry.split(GOOGLE_JOIN_DELIMITER).join(""),
   );
 
-  try {
-    return await requestGoogleTranslations(
-      sanitizedTexts,
-      targetLanguage,
-      signal,
-    );
-  } catch (error) {
+  const attempts: Array<() => Promise<string[]>> = [
+    () => requestLingvaTranslations(sanitizedTexts, targetLanguage, signal),
+    () => requestGoogleTranslations(sanitizedTexts, targetLanguage, signal),
+    () => requestMyMemoryTranslations(sanitizedTexts, targetLanguage, signal),
+  ];
+
+  let lastError: unknown;
+  for (const attempt of attempts) {
+    try {
+      return await attempt();
+    } catch (error) {
+      if (signal?.aborted) {
+        throw new DOMException("Translation aborted", "AbortError");
+      }
+      lastError = error;
+    }
+  }
+
+  if (lastError instanceof Error) {
+    throw lastError;
+  }
+  throw new Error("All translation fallbacks failed");
+}
+
+async function requestLingvaTranslations(
+  texts: string[],
+  targetLanguage: string,
+  signal?: AbortSignal,
+) {
+  const normalizedTarget = targetLanguage.toLowerCase().split("-")[0] ?? "en";
+  const results: string[] = [];
+
+  for (const text of texts) {
     if (signal?.aborted) {
       throw new DOMException("Translation aborted", "AbortError");
     }
-    console.warn(
-      "Google Translate fallback unavailable, using MyMemory translation.",
-      error,
-    );
-    return await requestMyMemoryTranslations(
-      sanitizedTexts,
-      targetLanguage,
+
+    if (!text.trim()) {
+      results.push(text);
+      continue;
+    }
+
+    const url = `${LINGVA_ENDPOINT}/auto/${encodeURIComponent(
+      normalizedTarget,
+    )}/${encodeURIComponent(text)}`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
       signal,
-    );
+    });
+
+    if (!response.ok) {
+      throw new Error(`Lingva translation failed with ${response.status}`);
+    }
+
+    const payload = await response.json();
+    const translated =
+      typeof payload?.translation === "string" && payload.translation.trim()
+        ? payload.translation
+        : text;
+
+    results.push(translated);
   }
+
+  return results;
 }
 
 async function requestGoogleTranslations(
@@ -364,7 +413,8 @@ async function requestMyMemoryTranslations(
         : query;
 
     const normalizedOutput = rawTranslation
-      .replace(/\\\s*uE000/gi, GOOGLE_JOIN_DELIMITER)
+      .replace(/\\uE000/gi, GOOGLE_JOIN_DELIMITER)
+      .replace(/\uE000/g, GOOGLE_JOIN_DELIMITER)
       .split(GOOGLE_JOIN_DELIMITER);
 
     positions.forEach((originalIndex, idx) => {
@@ -473,13 +523,6 @@ export function TranslationProvider({
     resolve: () => void;
     reject: (error: unknown) => void;
   } | null>(null);
-  const nextRouteRef = useRef<{
-    code: string;
-    notifyAfterTranslation: boolean;
-  } | null>(
-    null,
-  );
-
   const settlePending = useCallback(
     (action: "resolve" | "reject", value?: unknown) => {
       const pending = pendingPromiseRef.current;
@@ -619,13 +662,6 @@ export function TranslationProvider({
         if (language.code === "en") {
           restoreOriginalText();
           settlePending("resolve");
-          const pendingRoute = nextRouteRef.current;
-          if (pendingRoute?.code === language.code) {
-            if (pendingRoute.notifyAfterTranslation) {
-              onLanguageChange?.(language.code);
-            }
-            nextRouteRef.current = null;
-          }
           return;
         }
 
@@ -635,13 +671,6 @@ export function TranslationProvider({
         }
 
         settlePending("resolve");
-        const pendingRoute = nextRouteRef.current;
-        if (pendingRoute?.code === language.code) {
-          if (pendingRoute.notifyAfterTranslation) {
-            onLanguageChange?.(language.code);
-          }
-          nextRouteRef.current = null;
-        }
       } catch (error) {
         if (controller.signal.aborted) {
           return;
@@ -659,11 +688,7 @@ export function TranslationProvider({
           variant: "destructive",
         });
         setLanguageState(fallback);
-        const pendingRoute = nextRouteRef.current;
-        if (pendingRoute) {
-          onLanguageChange?.(fallback.code);
-        }
-        nextRouteRef.current = null;
+        onLanguageChange?.(fallback.code);
       } finally {
         if (!controller.signal.aborted) {
           setIsTranslating(false);
@@ -708,16 +733,8 @@ export function TranslationProvider({
       }
 
       setIsTranslating(true);
-      const shouldNotifyImmediately =
-        !options?.skipCallback && typeof onLanguageChange === "function";
 
-      nextRouteRef.current = {
-        code: target.code,
-        notifyAfterTranslation:
-          !shouldNotifyImmediately && typeof onLanguageChange === "function",
-      };
-
-      if (shouldNotifyImmediately) {
+      if (!options?.skipCallback) {
         onLanguageChange?.(target.code);
       }
 

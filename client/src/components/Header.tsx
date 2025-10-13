@@ -29,7 +29,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
         {/* Logo */}
         <Link
           href={buildPath("")}
@@ -77,7 +77,7 @@ export function Header() {
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="flex items-center gap-3 lg:flex-none lg:justify-self-end">
+        <div className="flex items-center gap-3 lg:flex-none lg:justify-self-end lg:pl-6">
           <LanguageSelector />
           <Button
             variant="ghost"

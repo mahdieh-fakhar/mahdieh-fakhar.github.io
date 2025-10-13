@@ -201,83 +201,49 @@ export default function Home() {
       </section>
 
       {/* AI Navigation Summary */}
-      <section className="relative overflow-hidden py-16">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/12 via-transparent to-secondary/20" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
-                <Sparkles className="h-4 w-4" />
-                AI Navigation Briefing
-              </div>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Your guided tour across the portfolio
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
-                An intelligent highlight reel prioritising the most relevant insights from each section.
-                Hover to reveal subtle gradients and jump straight to the knowledge you need.
-              </p>
+      <section className="bg-secondary/10 py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col gap-4 text-left">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-1 text-sm font-semibold text-primary">
+              <Sparkles className="h-4 w-4" />
+              Intelligent Overview
             </div>
-            <div className="rounded-2xl border border-primary/30 bg-background/70 px-4 py-3 text-sm font-medium text-primary shadow-sm backdrop-blur">
-              <span className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4" />
-                Continuously refined with AI heuristics for optimal storytelling.
-              </span>
-            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Preview every section at a glance
+            </h2>
+            <p className="max-w-3xl text-sm text-muted-foreground md:text-base">
+              از طریق این معرفی کوتاه، مسیر موردنظر خود را انتخاب کنید؛ هر بخش خلاصه‌ای حرفه‌ای با طراحی الهام‌گرفته از برند اسپانیا دارد.
+            </p>
           </div>
           <motion.div
-            className="mt-12 space-y-10"
+            className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={summaryContainer}
           >
-            {pageHighlights.map((highlight, index) => {
+            {pageHighlights.map((highlight) => {
               const Icon = highlight.icon;
               return (
                 <motion.section
                   key={highlight.title}
                   variants={summaryItem}
-                  className="relative overflow-hidden rounded-3xl border-l-8 border-primary/40 bg-background shadow-xl shadow-primary/10"
+                  className="rounded-3xl border border-primary/30 bg-background p-8 shadow-lg shadow-primary/10 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <div
-                    className={`pointer-events-none absolute inset-y-0 right-0 w-full max-w-xl translate-x-1/2 bg-gradient-to-l opacity-70 blur-3xl ${highlight.accent}`}
-                  />
-                  <div className="relative flex flex-col gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:px-10">
-                    <div className="flex flex-1 flex-col gap-4">
-                      <div className="flex items-center gap-4 text-primary">
-                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15">
-                          <Icon className="h-6 w-6" />
-                        </span>
-                        <span className="text-sm font-semibold uppercase tracking-[0.35em] text-muted-foreground">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <div className="space-y-3">
-                        <Link
-                          href={highlight.href}
-                          className="text-2xl font-bold tracking-tight text-foreground transition hover:text-primary md:text-3xl"
-                        >
-                          {highlight.title}
-                        </Link>
-                        <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
-                          {highlight.summary}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex w-full items-center justify-start md:w-auto md:justify-end">
-                      <Link href={highlight.href}>
-                        <Button
-                          variant="secondary"
-                          size="lg"
-                          className="group gap-2 bg-secondary/40 text-secondary-foreground hover:bg-secondary/60"
-                        >
-                          See more
-                          <ArrowRight className="h-5 w-5 transition duration-300 group-hover:translate-x-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
+                  <Icon className="h-10 w-10 text-primary" />
+                  <h3 className="mt-4 text-2xl font-bold text-foreground">
+                    {highlight.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground md:text-base">
+                    {highlight.summary}
+                  </p>
+                  <Link
+                    href={highlight.href}
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
+                  >
+                    See more
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </motion.section>
               );
             })}

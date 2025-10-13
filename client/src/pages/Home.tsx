@@ -111,23 +111,27 @@ export default function Home() {
   ];
 
   const summaryContainer = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 32 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.25,
       },
     },
   };
 
   const summaryItem = {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 28 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 120, damping: 16 },
+      transition: {
+        type: "spring",
+        stiffness: 110,
+        damping: 18,
+      },
     },
   };
 
@@ -221,8 +225,8 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <motion.ul
-            className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3"
+          <motion.div
+            className="mt-12 space-y-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -231,37 +235,53 @@ export default function Home() {
             {pageHighlights.map((highlight, index) => {
               const Icon = highlight.icon;
               return (
-                <motion.li key={highlight.title} variants={summaryItem}>
-                  <Link
-                    href={highlight.href}
-                    className="group relative block overflow-hidden rounded-2xl border border-primary/25 bg-background/80 p-6 shadow-lg transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <div
-                      className={`pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 bg-gradient-to-br ${highlight.accent}`}
-                    />
-                    <div className="relative flex items-start justify-between">
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary transition duration-300 group-hover:scale-105">
-                        <Icon className="h-6 w-6" />
-                      </span>
-                      <span className="rounded-full bg-secondary/20 px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                <motion.section
+                  key={highlight.title}
+                  variants={summaryItem}
+                  className="relative overflow-hidden rounded-3xl border-l-8 border-primary/40 bg-background shadow-xl shadow-primary/10"
+                >
+                  <div
+                    className={`pointer-events-none absolute inset-y-0 right-0 w-full max-w-xl translate-x-1/2 bg-gradient-to-l opacity-70 blur-3xl ${highlight.accent}`}
+                  />
+                  <div className="relative flex flex-col gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:px-10">
+                    <div className="flex flex-1 flex-col gap-4">
+                      <div className="flex items-center gap-4 text-primary">
+                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15">
+                          <Icon className="h-6 w-6" />
+                        </span>
+                        <span className="text-sm font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <div className="space-y-3">
+                        <Link
+                          href={highlight.href}
+                          className="text-2xl font-bold tracking-tight text-foreground transition hover:text-primary md:text-3xl"
+                        >
+                          {highlight.title}
+                        </Link>
+                        <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
+                          {highlight.summary}
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="relative mt-6 text-xl font-bold text-foreground">
-                      {highlight.title}
-                    </h3>
-                    <p className="relative mt-3 text-sm text-muted-foreground">
-                      {highlight.summary}
-                    </p>
-                    <div className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3">
-                      Explore {highlight.title}
-                      <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
+                    <div className="flex w-full items-center justify-start md:w-auto md:justify-end">
+                      <Link href={highlight.href}>
+                        <Button
+                          variant="secondary"
+                          size="lg"
+                          className="group gap-2 bg-secondary/40 text-secondary-foreground hover:bg-secondary/60"
+                        >
+                          See more
+                          <ArrowRight className="h-5 w-5 transition duration-300 group-hover:translate-x-1" />
+                        </Button>
+                      </Link>
                     </div>
-                  </Link>
-                </motion.li>
+                  </div>
+                </motion.section>
               );
             })}
-          </motion.ul>
+          </motion.div>
         </div>
       </section>
 

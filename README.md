@@ -1,232 +1,193 @@
-# Mahdieh Fakhar - AI-Powered Digital Portfolio
+# Mahdieh Fakhar · AI-Powered Digital Portfolio
 
-A professional, AI-powered digital portfolio showcasing academic achievements, research publications, and professional experience in data science and research.
+[![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://mahdieh-fakhar.github.io/mf1/) [![Stars](https://img.shields.io/github/stars/mahdieh-fakhar/mf1?style=flat-square)](https://github.com/mahdieh-fakhar/mf1/stargazers) [![Forks](https://img.shields.io/github/forks/mahdieh-fakhar/mf1?style=flat-square)](https://github.com/mahdieh-fakhar/mf1/network/members) [![License](https://img.shields.io/badge/license-MIT-success?style=flat-square)](LICENSE)
 
-[![Deploy to GitHub Pages](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/workflows/Deploy/badge.svg)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/actions)
+An academic-grade personal website highlighting Mahdieh Fakhar’s research, publications, and AI-driven portfolio. The experience blends modern front-end craft with intelligent document analysis so visitors can explore achievements, download materials, and initiate collaborations in seconds.
 
-## ✨ Features
+> 🔗 **Live Demo:** https://mahdieh-fakhar.github.io/mf1/
 
-### 🎯 Core Features
-- **Multi-Page Architecture**: 11 separate pages with individual URLs
-- **AI-Powered Document Analysis**: Upload certificates and documents for intelligent text extraction using OpenAI Vision
-- **Dark/Light Theme**: Persistent theme preference with smooth transitions
-- **Responsive Design**: Mobile-first approach optimized for all devices
-- **SEO Optimized**: Complete meta tags, Open Graph, and semantic HTML
-- **Accessibility**: WCAG compliant with ARIA labels and keyboard navigation
+---
 
-### 📄 Pages
-1. **Home** - Hero section with introduction and featured work
-2. **About** - Professional summary, languages, and research interests
-3. **Education** - Academic timeline with degrees and achievements
-4. **Articles** - Published research and journal articles
-5. **Conferences** - Conference attendance, presentations, and AI certificate upload
-6. **Memberships** - Professional affiliations and review experience
-7. **Career** - Work history timeline with teaching and management roles
-8. **Skills** - Technical skills matrix with proficiency levels
-9. **Projects** - Research projects and web development work
-10. **Resume** - Comprehensive CV with download option
-11. **Contact** - Contact form and professional links
+## Table of Contents
 
-### 🤖 AI Integration
-- **OpenAI GPT-5 Vision**: Analyzes document images to extract text and identify key information
-- **Smart Document Processing**: Automatically detects document type, dates, institutions, and other relevant details
-- **Retry Functionality**: Re-analyze documents if initial results aren't satisfactory
-- **Catalog Display**: Extracted information displayed in an organized, readable format
+1. [Highlights](#highlights)
+2. [Experience Journey](#experience-journey)
+3. [Technology Stack](#technology-stack)
+4. [Getting Started](#getting-started)
+5. [Customization Guide](#customization-guide)
+6. [Project Structure](#project-structure)
+7. [Performance & SEO](#performance--seo)
+8. [Roadmap](#roadmap)
+9. [Contributing](#contributing)
+10. [License](#license)
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
-- Node.js 20+ 
-- OpenAI API Key ([Get one here](https://platform.openai.com/api-keys))
+## Highlights
 
-### Installation
+- **Immersive storytelling** across 11 fully designed routes: Home, About, Education, Articles, Conferences, Memberships, Career, Skills, Projects, Resume, and Contact.
+- **AI-assisted certificate analysis** with OpenAI Vision for automatic text extraction and insight tagging.
+- **Motion-crafted UI** using Framer Motion, scroll-triggered animations, and persistent light/dark themes.
+- **Accessible & responsive** build (WCAG-conscious, semantic HTML, keyboard support).
+- **GitHub Pages ready** deployment with base-path handling (`/mf1/`) and automated workflow.
+- **Zero-backend contact delivery** using FormSubmit to route messages straight to email.
 
-1. **Use this template** (Click the green "Use this template" button above) or clone:
+---
+
+## Experience Journey
+
+| Chapter | What visitors can do |
+| --- | --- |
+| **Home** | Explore the “Portfolio Atlas”, signature campaign cards, and innovation pipeline. |
+| **About** | Review research focus, teaching philosophy, languages, and personal narrative. |
+| **Education** | Browse degrees, certifications, and academic highlights. |
+| **Articles & Conferences** | Dive into peer-reviewed work, keynote appearances, and AI-curated certificates. |
+| **Memberships & Career** | Understand governance roles, teaching leadership, and collaborative networks. |
+| **Skills & Projects** | Assess technical fluency, methodologies, and live innovation labs. |
+| **Resume** | Download the CV plus recruiter-ready highlights. |
+| **Contact** | Message directly via FormSubmit or connect on LinkedIn/GitHub. |
+
+---
+
+## Technology Stack
+
+**Frontend**
+
+- React 18 (TypeScript)
+- Vite 6
+- Tailwind CSS + Shadcn UI
+- Wouter (lightweight routing)
+- Framer Motion animations
+- TanStack Query, React Hook Form, Zod
+
+**Backend / Automation**
+
+- Express.js scaffold (optional hosting)
+- Multer for file uploads
+- OpenAI Vision endpoints (document intelligence)
+
+**Tooling & Deployment**
+
+- GitHub Actions → GitHub Pages
+- ESLint + TypeScript configs
+- FormSubmit for contact delivery
+
+---
+
+## Getting Started
+
+1. **Clone or template**
+
    ```bash
-   git clone https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io.git
-   cd mahdieh-fakhar.github.io
+   git clone https://github.com/mahdieh-fakhar/mf1.git
+   cd mf1
    ```
 
-2. **Install dependencies**:
+2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
-3. **Set up environment variables**:
-   Create a `.env` file in the root directory:
+3. **Environment variables**
+
    ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   SESSION_SECRET=your_session_secret_here
+   OPENAI_API_KEY=your_openai_api_key
+   SESSION_SECRET=your_session_secret
    ```
 
-4. **Run development server**:
+4. **Development**
+
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**:
-   Navigate to `http://localhost:5000`
+   Visit `http://localhost:5173` for the client and `http://localhost:5000` if you boot the Express server.
 
-## 🎨 Customization Guide
+5. **Production build**
 
-### 1. Personal Information
-
-Update your information in these files:
-
-**`client/index.html`** - Update meta tags:
-```html
-<title>Your Name - Data Scientist | Researcher</title>
-<meta name="description" content="Your description here" />
-<meta property="og:title" content="Your Name - Your Title" />
-```
-
-**`shared/schema.ts`** - No changes needed unless adding new data types
-
-**Component Files** - Update content in:
-- `client/src/pages/Home.tsx` - Hero section, introduction
-- `client/src/pages/About.tsx` - Professional summary
-- `client/src/pages/Education.tsx` - Academic degrees
-- `client/src/pages/Articles.tsx` - Publications
-- `client/src/pages/Conferences.tsx` - Conference participation
-- `client/src/pages/Memberships.tsx` - Professional affiliations
-- `client/src/pages/Career.tsx` - Work experience
-- `client/src/pages/Skills.tsx` - Technical skills
-- `client/src/pages/Projects.tsx` - Research and development projects
-- `client/src/pages/Contact.tsx` - Contact information
-
-### 2. Images
-
-Replace these images in `client/public/images/`:
-- `logo.png` - Your logo (transparent background recommended)
-- `profile.jpg` - Your professional photo
-
-### 3. Colors and Theme
-
-Modify `client/src/index.css` to change color scheme:
-
-```css
-:root {
-  --primary: 220 85% 35%;        /* Your primary color */
-  --accent: 200 70% 45%;          /* Your accent color */
-  --ai-accent: 280 60% 50%;       /* AI features accent */
-}
-
-.dark {
-  --primary: 220 80% 65%;
-  --accent: 200 60% 60%;
-  --ai-accent: 280 55% 65%;
-}
-```
-
-### 4. Social Links
-
-Update in `client/src/components/Footer.tsx` and `client/src/pages/Contact.tsx`:
-- Email address
-- LinkedIn profile URL
-- GitHub profile URL
-
-## 📦 Tech Stack
-
-### Frontend
-- **React** with TypeScript
-- **Tailwind CSS** + Shadcn UI components
-- **Wouter** for routing
-- **Framer Motion** for animations
-- **TanStack Query** for data fetching
-- **React Hook Form** + Zod for forms
-
-### Backend
-- **Express.js**
-- **OpenAI GPT-5 Vision** for document analysis
-- **Multer** for file uploads
-- **In-memory storage** (easily replaceable with database)
-
-## 🚢 Deployment
-
-### GitHub Pages (Recommended)
-
-1. **Enable GitHub Pages**:
-   - Go to your repository Settings → Pages
-   - Source: Deploy from a branch
-   - Branch: `main` → `/` (root)
-   - Save
-
-2. **Update the deploy workflow**:
-   The `.github/workflows/deploy.yml` is already configured for GitHub Pages
-
-3. **Push to GitHub**:
    ```bash
-   git add .
-   git commit -m "Deploy portfolio"
-   git push origin main
+   npm run build
+   npm run preview
    ```
-
-4. **Wait for deployment**:
-   Check the Actions tab for deployment status
-
-5. **Access your site**:
-   `https://your-username.github.io/`
-
-### Custom Domain
-
-To use a custom domain:
-
-1. Add a `CNAME` file in `client/public/`:
-   ```
-   yourdomain.com
-   ```
-
-2. Configure DNS:
-   - Add CNAME record pointing to `your-username.github.io`
-   - Or A records pointing to GitHub Pages IPs
-
-3. Update in repository Settings → Pages → Custom domain
-
-## 🔧 Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-### Project Structure
-
-```
-├── client/                    # Frontend React app
-│   ├── public/               # Static assets
-│   │   └── images/          # Logo and photos
-│   ├── src/
-│   │   ├── components/      # Reusable components
-│   │   ├── pages/           # Page components
-│   │   └── lib/             # Utilities
-├── server/                   # Backend Express app
-│   ├── openai.ts            # OpenAI integration
-│   ├── routes.ts            # API routes
-│   └── storage.ts           # Data storage
-├── shared/                   # Shared types and schemas
-│   └── schema.ts
-└── .github/
-    └── workflows/
-        └── deploy.yml       # GitHub Actions deployment
-```
-
-## 🤝 Contributing
-
-This is a personal portfolio template. Feel free to fork and customize for your own use!
-
-## 📝 License
-
-MIT License - feel free to use this template for your own portfolio.
-
-## 💬 Support
-
-For questions or issues:
-- Open an issue on GitHub
-- Email: mfsh.intl@gmail.com
 
 ---
 
-**Built with ❤️ using React, TypeScript, and AI**
+## Customization Guide
 
-*Powered by OpenAI GPT-5 Vision for intelligent document analysis*
+| What | Where to edit |
+| --- | --- |
+| Meta data, JSON-LD, favicon | `client/index.html` |
+| Home hero & campaigns | `client/src/pages/Home.tsx` |
+| About narrative | `client/src/pages/About.tsx` |
+| Education timeline | `client/src/pages/Education.tsx` |
+| Publications catalogue | `client/src/pages/Articles.tsx` |
+| Conferences & certificates | `client/src/pages/Conferences.tsx` |
+| Memberships / Career / Skills / Projects | Corresponding page components |
+| Contact information & social links | `client/src/pages/Contact.tsx`, `client/src/components/Footer.tsx` |
+| Theme tokens | `client/src/index.css`, `tailwind.config.ts` |
+| Imagery | Replace files under `client/public/images/` |
+
+---
+
+## Project Structure
+
+```
+.
+├── client/               # React + Vite SPA
+│   ├── public/           # Static assets (robots.txt, sitemap.xml, favicon, manifest)
+│   └── src/
+│       ├── components/   # UI building blocks
+│       ├── pages/        # Route-driven screens
+│       ├── hooks/        # Custom hooks
+│       ├── lib/          # Utilities & helpers
+│       └── index.css     # Tailwind layers & design tokens
+├── server/               # Optional Express API (OpenAI integration)
+├── shared/               # Shared schemas & types
+├── docs/                 # Production build (published by GitHub Pages)
+└── .github/              # Workflows, issue templates, community health files
+```
+
+---
+
+## Performance & SEO
+
+- Static pre-render in `docs/` optimized for GitHub Pages.
+- Comprehensive metadata: Open Graph, Twitter cards, canonical URLs.
+- JSON-LD structured data describing Mahdieh as a `Person` and `Researcher`.
+- `robots.txt` and `sitemap.xml` ready for search engines.
+- Optional analytics integration (e.g., Plausible or Google Analytics) by adding your script tag to `client/index.html`.
+
+---
+
+## Roadmap
+
+- [ ] Publish additional research spotlights and datasets.
+- [ ] Add MDX-powered blog/insights section.
+- [ ] Localize core pages (Spanish, Persian).
+- [ ] Integrate newsletter or updates subscription workflow.
+
+Track progress through [issues](https://github.com/mahdieh-fakhar/mf1/issues) and [GitHub Projects](https://github.com/users/mahdieh-fakhar/projects).
+
+---
+
+## Contributing
+
+We welcome forks, stars, and pull requests! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and follow the [Code of Conduct](CODE_OF_CONDUCT.md) before submitting changes.
+
+Ways to help:
+
+- ⭐ Star to support the project.
+- 🍴 Fork and adapt for your own academic portfolio.
+- 🐞 Report bugs via issue templates.
+- 💡 Share enhancement ideas or new modules.
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE). You are free to use, adapt, and share with attribution.
+
+---
+
+Crafted with React, TypeScript, and a passion for data-driven storytelling. If you build something inspired by this project, let us know – we love to feature community work!

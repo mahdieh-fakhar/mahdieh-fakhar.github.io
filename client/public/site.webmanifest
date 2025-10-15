@@ -1,0 +1,16 @@
+{
+  "name": "Mahdieh Fakhar · AI-Powered Portfolio",
+  "short_name": "MF Portfolio",
+  "start_url": "/mf1/",
+  "display": "standalone",
+  "background_color": "#faf5f0",
+  "theme_color": "#b91c1c",
+  "description": "Academic and research portfolio highlighting Mahdieh Fakhar's data science work.",
+  "icons": [
+    {
+      "src": "/mf1/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

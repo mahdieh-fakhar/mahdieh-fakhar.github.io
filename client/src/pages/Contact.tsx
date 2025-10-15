@@ -8,8 +8,17 @@ import { Mail, Linkedin, Github, MapPin, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactForm } from "@shared/schema";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/mfsh.intl@gmail.com";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -25,15 +34,42 @@ export default function Contact() {
   });
 
   const onSubmit = async (data: ContactForm) => {
-    // In a real implementation, this would send to a backend endpoint
-    console.log("Form data:", data);
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
-    
-    form.reset();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("subject", data.subject);
+    formData.append("message", data.message);
+    formData.append("_captcha", "false");
+    formData.append("_template", "box");
+
+    try {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send message");
+      }
+
+      toast({
+        title: "Message Sent!",
+        description:
+          "Thank you for your message. Please check your inbox for a confirmation email from FormSubmit (only required once).",
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast({
+        title: "Something went wrong",
+        description:
+          "We couldn't send your message. Please try again in a moment or email mfsh.intl@gmail.com directly.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

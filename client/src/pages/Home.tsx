@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { assetPath } from "@/lib/basePath";
 import {
   ArrowRight,
   BookOpen,
@@ -18,154 +17,246 @@ import {
   ScrollText,
   Send,
 } from "lucide-react";
+import { assetPath } from "@/lib/basePath";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
+
+const staggerChildren = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 export default function Home() {
-  const pageHighlights = [
+  const signatureSignals = [
     {
-      title: "Home",
-      href: "/",
-      summary:
-        "An AI-orchestrated landing experience that introduces Mahdieh’s brand voice, portfolio pillars, and calls-to-action.",
-      icon: HomeIcon,
-      accent: "from-primary/25 via-primary/5 to-transparent",
-    },
-    {
-      title: "About",
-      href: "/about",
-      summary:
-        "Get a human and data-driven snapshot of Mahdieh’s academic journey, passions, and current initiatives.",
-      icon: UserRound,
-      accent: "from-secondary/30 via-background to-transparent",
-    },
-    {
-      title: "Education",
-      href: "/education",
-      summary:
-        "Explore a curated catalogue of degrees and certifications with insights on how each fuels data and pedagogy expertise.",
+      title: "Academic Identity & Leadership",
+      description:
+        "Discover global teaching experience, advanced degrees, and strategic roles across About, Education, and Resume chapters.",
       icon: GraduationCap,
-      accent: "from-primary/20 via-background to-secondary/20",
     },
     {
-      title: "Articles",
-      href: "/articles",
-      summary:
-        "Survey peer-reviewed publications and AI-assisted summaries that spotlight Mahdieh’s scholarly contributions.",
-      icon: FileText,
-      accent: "from-primary/15 via-background to-primary/5",
-    },
-    {
-      title: "Conferences",
-      href: "/conferences",
-      summary:
-        "Follow keynote sessions and workshops delivered across the globe, enhanced with intelligent tagging and takeaways.",
+      title: "Research & Publication Engines",
+      description:
+        "Navigate the Articles and Conferences hubs to review peer-reviewed papers, data stories, and keynote contributions.",
       icon: Microscope,
-      accent: "from-secondary/25 via-background to-transparent",
     },
     {
-      title: "Memberships",
-      href: "/memberships",
-      summary:
-        "Review professional communities and networks that amplify Mahdieh’s voice in education, AI, and research.",
-      icon: BadgeCheck,
-      accent: "from-primary/15 via-transparent to-secondary/15",
-    },
-    {
-      title: "Career",
-      href: "/career",
-      summary:
-        "Trace a data-informed career timeline featuring roles, impact metrics, and AI-powered reflections on leadership.",
+      title: "Innovation & Project Delivery",
+      description:
+        "Projects and Skills sections unveil living labs, AI transformations, and the technical fluency behind each engagement.",
       icon: Briefcase,
-      accent: "from-primary/25 via-background to-transparent",
     },
     {
-      title: "Skills",
-      href: "/skills",
-      summary:
-        "Digest a competency matrix that balances technical stacks, teaching methodologies, and strategic soft skills.",
-      icon: Puzzle,
-      accent: "from-secondary/25 via-primary/5 to-transparent",
-    },
-    {
-      title: "Projects",
-      href: "/projects",
-      summary:
-        "Dive into living case studies with visuals, datasets, and AI narrative summaries detailing innovation outcomes.",
-      icon: BookOpen,
-      accent: "from-primary/20 via-background to-secondary/20",
-    },
-    {
-      title: "Resume",
-      href: "/resume",
-      summary:
-        "Access an executive-ready dossier featuring downloadable CV assets and recruiter-friendly highlights.",
-      icon: ScrollText,
-      accent: "from-secondary/20 via-transparent to-primary/20",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-      summary:
-        "Connect directly for collaborations, consultations, or speaking engagements with context-aware routing.",
-      icon: Send,
-      accent: "from-primary/20 via-background to-transparent",
+      title: "Networks & Opportunities",
+      description:
+        "Memberships, Career, and Contact routes open collaboration channels, governance roles, and partnership pathways.",
+      icon: BadgeCheck,
     },
   ];
 
-  const summaryContainer = {
-    hidden: { opacity: 0, y: 32 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.25,
-      },
+  const knowledgeClusters = [
+    {
+      title: "Scholarship & Identity",
+      strapline: "Craft an executive snapshot of Mahdieh's academic brand.",
+      accent: "from-primary/40 via-primary/10 to-transparent",
+      items: [
+        {
+          name: "Home",
+          summary:
+            "Immersive hero narrative, media assets, and instant calls-to-action for stakeholders.",
+          href: "/",
+          icon: HomeIcon,
+        },
+        {
+          name: "About",
+          summary:
+            "Human-centered biography covering research passions, pedagogy, and purpose.",
+          href: "/about",
+          icon: UserRound,
+        },
+        {
+          name: "Education",
+          summary:
+            "Three master's programs plus certifications powering data science and teaching excellence.",
+          href: "/education",
+          icon: GraduationCap,
+        },
+        {
+          name: "Resume",
+          summary:
+            "Downloadable CV, recruiter highlights, and a board-ready qualifications digest.",
+          href: "/resume",
+          icon: ScrollText,
+        },
+      ],
     },
-  };
+    {
+      title: "Research & Innovation",
+      strapline: "Track publications, keynotes, and applied experimentation.",
+      accent: "from-ai-accent/30 via-primary/10 to-background",
+      items: [
+        {
+          name: "Articles",
+          summary:
+            "Peer-reviewed outputs with bibliometric context and AI-generated abstracts.",
+          href: "/articles",
+          icon: FileText,
+        },
+        {
+          name: "Conferences",
+          summary:
+            "Global workshop leadership, keynote storytelling, and certificate vault.",
+          href: "/conferences",
+          icon: Microscope,
+        },
+        {
+          name: "Projects",
+          summary:
+            "Spotlight on innovation labs, cross-institution pilots, and impact narratives.",
+          href: "/projects",
+          icon: BookOpen,
+        },
+      ],
+    },
+    {
+      title: "Engagement & Experience",
+      strapline: "Showcase networks, competencies, and collaboration routes.",
+      accent: "from-secondary/40 via-secondary/10 to-transparent",
+      items: [
+        {
+          name: "Memberships",
+          summary:
+            "Professional bodies and communities amplifying research reach and advocacy.",
+          href: "/memberships",
+          icon: BadgeCheck,
+        },
+        {
+          name: "Career",
+          summary:
+            "Experience timeline with leadership metrics, teaching missions, and innovation outputs.",
+          href: "/career",
+          icon: Briefcase,
+        },
+        {
+          name: "Skills",
+          summary:
+            "Competency matrix covering data science, pedagogy, and strategic soft skills.",
+          href: "/skills",
+          icon: Puzzle,
+        },
+        {
+          name: "Contact",
+          summary:
+            "Direct line for collaborations, consultations, and speaking engagements.",
+          href: "/contact",
+          icon: Send,
+        },
+      ],
+    },
+  ];
 
-  const summaryItem = {
-    hidden: { opacity: 0, y: 28 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 110,
-        damping: 18,
-      },
+  const campaignSpotlights = [
+    {
+      title: "Digital Scholarship Showcase",
+      description:
+        "Dive into evidence-based publications and conference storytelling augmented with AI curation and bibliometric dashboards.",
+      icon: Microscope,
+      href: "/articles",
+      cta: "Review publications",
+      accent: "from-primary/20 via-primary/5 to-ai-accent/10",
     },
-  };
+    {
+      title: "Global Engagement Studio",
+      description:
+        "Map institutional partnerships, memberships, and collaboration frameworks ready for universities, NGOs, and private sector alliances.",
+      icon: Send,
+      href: "/memberships",
+      cta: "Explore partnerships",
+      accent: "from-secondary/20 via-background to-primary/10",
+    },
+    {
+      title: "Capability & Talent Index",
+      description:
+        "Assess the skills architecture, teaching innovations, and project leadership powering data-driven transformation.",
+      icon: Puzzle,
+      href: "/skills",
+      cta: "See competencies",
+      accent: "from-ai-accent/20 via-secondary/10 to-primary/5",
+    },
+  ];
+
+  const innovationTracks = [
+    {
+      title: "Learning Sprints",
+      icon: BookOpen,
+      emphasis: "Ongoing mastery & certification",
+      bullets: [
+        "Advanced analytics with Python, R, and AI-assisted pipelines.",
+        "Machine learning methodologies tailored to academic research.",
+        "Immersive visual analytics to communicate insight with clarity.",
+      ],
+    },
+    {
+      title: "Impact Missions",
+      icon: Briefcase,
+      emphasis: "Live engagements & delivery",
+      bullets: [
+        "Digitising institutional databases for evidence-based policy.",
+        "Bibliometric and scientometric intelligence for research strategy.",
+        "Innovation studies in language acquisition and edtech ecosystems.",
+      ],
+    },
+  ];
 
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-ai-accent/5"></div>
-        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 w-full">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+      <section className="relative flex min-h-[80vh] items-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-ai-accent/5" />
+        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm" data-testid="badge-ai-powered">
+              <div
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm"
+                data-testid="badge-ai-powered"
+              >
                 <Sparkles className="h-4 w-4 text-ai-accent" />
                 <span className="text-muted-foreground">AI-Powered Portfolio</span>
               </div>
-              
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl" data-testid="heading-name">
+
+              <h1
+                className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+                data-testid="heading-name"
+              >
                 MAHDIEH FAKHAR
               </h1>
-              
-              <p className="text-xl text-muted-foreground font-medium" data-testid="text-title">
-                Data Scientist | Researcher | AI Enthusiast
+
+              <p className="text-xl font-medium text-muted-foreground" data-testid="text-title">
+                Data Scientist · Researcher · Academic Strategist
               </p>
-              
-              <p className="text-base text-muted-foreground max-w-2xl" data-testid="text-bio">
-                I'm currently a Momentum master student studying data science and big data at UNIR, Spain. 
-                I am passionate about analyzing data, doing scientometric and bibliometric analysis, and learning 
-                new software and applications employed in data analysis.
+
+              <p className="text-base text-muted-foreground/90 md:text-lg" data-testid="text-bio">
+                Strategic data scientist and researcher shaping multilingual learning and digital
+                transformation agendas through AI-driven analytics, bibliometrics, and evidence-based
+                storytelling. Currently completing a Data Science & Big Data master’s at UNIR (Spain)
+                while leading cross-border collaborations across Europe and the Middle East.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
@@ -189,159 +280,279 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="aspect-square rounded-lg overflow-hidden border shadow-lg">
+              <div className="aspect-square overflow-hidden rounded-3xl border border-primary/20 shadow-xl shadow-primary/20">
                 <img
                   src={assetPath("/images/profile.jpg")}
                   alt="Mahdieh Fakhar"
                   className="h-full w-full object-cover object-[50%_28%]"
                 />
               </div>
+              <div className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-primary/20 blur-3xl" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* AI Navigation Summary */}
-      <section className="bg-secondary/10 py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col gap-4 text-left">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-1 text-sm font-semibold text-primary">
+      {/* Portfolio Atlas */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-background via-secondary/20 to-background py-24">
+        <div className="absolute -left-32 top-1/3 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -right-24 bottom-16 h-64 w-64 rounded-full bg-ai-accent/30 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4 text-left md:max-w-3xl"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
               <Sparkles className="h-4 w-4" />
-              Intelligent Overview
+              Portfolio Atlas
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Preview every section at a glance
+              Navigate the full academic and innovation spectrum at a glance
             </h2>
-            <p className="max-w-3xl text-sm text-muted-foreground md:text-base">
-              از طریق این معرفی کوتاه، مسیر موردنظر خود را انتخاب کنید؛ هر بخش خلاصه‌ای حرفه‌ای با طراحی الهام‌گرفته از برند اسپانیا دارد.
+            <p className="text-base text-muted-foreground md:text-lg">
+              Every page is architected as a campaign touchpoint—blending narrative, data, and design.
+              Use this dynamic map to drop into the stories, dashboards, and assets most relevant to
+              your collaboration goals.
             </p>
-          </div>
-          <motion.div
-            className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={summaryContainer}
-          >
-            {pageHighlights.map((highlight) => {
-              const Icon = highlight.icon;
-              return (
-                <motion.section
-                  key={highlight.title}
-                  variants={summaryItem}
-                  className="rounded-3xl border border-primary/30 bg-background p-8 shadow-lg shadow-primary/10 transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <Icon className="h-10 w-10 text-primary" />
-                  <h3 className="mt-4 text-2xl font-bold text-foreground">
-                    {highlight.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground md:text-base">
-                    {highlight.summary}
-                  </p>
-                  <Link
-                    href={highlight.href}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
+          </motion.div>
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-[0.75fr,1.25fr]">
+            <motion.div
+              variants={staggerChildren}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col gap-6 rounded-3xl border border-primary/20 bg-background/80 p-8 shadow-lg shadow-primary/10 backdrop-blur"
+            >
+              {signatureSignals.map((signal) => {
+                const Icon = signal.icon;
+                return (
+                  <motion.div
+                    key={signal.title}
+                    variants={fadeInUp}
+                    className="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition hover:border-primary/30 hover:bg-primary/5"
                   >
-                    See more
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </motion.section>
+                    <span className="rounded-xl bg-primary/10 p-3 text-primary transition group-hover:bg-primary/15 group-hover:text-primary/90">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <div className="space-y-1.5">
+                      <h3 className="text-lg font-semibold text-foreground">{signal.title}</h3>
+                      <p className="text-sm text-muted-foreground">{signal.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+
+            <div className="space-y-8">
+              {knowledgeClusters.map((cluster, clusterIndex) => (
+                <motion.div
+                  key={cluster.title}
+                  variants={fadeInUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ delay: clusterIndex * 0.08 }}
+                  className="relative overflow-hidden rounded-3xl border border-primary/20 bg-background/70 p-6 shadow-xl shadow-primary/10 backdrop-blur"
+                >
+                  <div
+                    className={`absolute -right-12 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-gradient-to-br ${cluster.accent} opacity-60 blur-3xl`}
+                  />
+                  <div className="relative space-y-6">
+                    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                      <div>
+                        <h3 className="text-2xl font-semibold text-foreground">{cluster.title}</h3>
+                        <p className="text-sm text-muted-foreground">{cluster.strapline}</p>
+                      </div>
+                      <span className="inline-flex h-10 items-center justify-center rounded-full border border-primary/30 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
+                        Core Chapters
+                      </span>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {cluster.items.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className="group block rounded-2xl border border-transparent bg-background/60 p-4 shadow-sm shadow-primary/5 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/20"
+                            data-testid={`link-cluster-${item.name.toLowerCase()}`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <span className="rounded-lg bg-primary/10 p-2 text-primary transition group-hover:bg-primary/15 group-hover:text-primary/90">
+                                <Icon className="h-5 w-5" />
+                              </span>
+                              <div className="space-y-1">
+                                <div className="flex items-center gap-2">
+                                  <p className="text-base font-semibold text-foreground">
+                                    {item.name}
+                                  </p>
+                                  <ArrowRight className="h-4 w-4 text-primary transition group-hover:translate-x-1" />
+                                </div>
+                                <p className="text-sm text-muted-foreground">{item.summary}</p>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Campaign Spotlights */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="text-left md:max-w-3xl"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full bg-ai-accent/20 px-4 py-1 text-sm font-semibold text-ai-accent">
+            Signature Campaigns
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Elevate the stories that matter to your audience
+          </h2>
+          <p className="mt-3 text-base text-muted-foreground md:text-lg">
+            Each spotlight is built for investors, universities, and innovation partners seeking
+            rapid insight into Mahdieh’s portfolio. Activate the module that aligns with your goals
+            and dive in.
+          </p>
+        </motion.div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {campaignSpotlights.map((card, index) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.55, delay: index * 0.07 }}
+              >
+                <Link href={card.href}>
+                  <Card className="group relative h-full overflow-hidden border border-primary/25 bg-background/80 shadow-lg shadow-primary/15 transition hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl">
+                    <div
+                      className={`absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br ${card.accent} opacity-70 blur-3xl transition group-hover:scale-110`}
+                    />
+                    <CardContent className="relative flex h-full flex-col gap-4 p-6">
+                      <span className="inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
+                        <Icon className="h-4 w-4" />
+                        Spotlight
+                      </span>
+                      <h3 className="text-xl font-semibold text-foreground">{card.title}</h3>
+                      <p className="text-sm text-muted-foreground">{card.description}</p>
+                      <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3">
+                        {card.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Innovation Pipeline */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+        <div className="absolute inset-y-0 left-0 w-full bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.25),_transparent_55%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-left md:max-w-3xl"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
+              Innovation Pipeline
+            </div>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              Where the next chapter of research and impact is being built
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground md:text-lg">
+              Continuous upskilling meets live delivery. These parallel tracks keep the portfolio
+              future-ready for strategic partners, policymakers, and learners worldwide.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {innovationTracks.map((track, index) => {
+              const Icon = track.icon;
+              return (
+                <motion.div
+                  key={track.title}
+                  initial={{ opacity: 0, y: 26 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                >
+                  <Card className="h-full border border-primary/25 bg-background/80 shadow-lg shadow-primary/15 transition hover:-translate-y-1.5 hover:shadow-xl">
+                    <CardContent className="flex h-full flex-col gap-5 p-6">
+                      <div className="flex items-center gap-3">
+                        <span className="rounded-xl bg-primary/10 p-3 text-primary">
+                          <Icon className="h-6 w-6" />
+                        </span>
+                        <div>
+                          <h3 className="text-xl font-semibold text-foreground">{track.title}</h3>
+                          <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary/70">
+                            {track.emphasis}
+                          </p>
+                        </div>
+                      </div>
+                      <ul className="space-y-3 text-sm text-muted-foreground">
+                        {track.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-2">
+                            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
-          </motion.div>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-3 text-sm font-semibold text-muted-foreground">
+            <span className="rounded-full border border-primary/30 px-4 py-1 text-primary">
+              Key Resources
+            </span>
+            <Link
+              href="/education"
+              className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
+            >
+              Education dossier
+            </Link>
+            <Link
+              href="/projects"
+              className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
+            >
+              Innovation projects
+            </Link>
+            <Link
+              href="/articles"
+              className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
+            >
+              Research publications
+            </Link>
+          </div>
         </div>
-      </section>
-
-      {/* Featured Sections */}
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Link href="/education">
-              <Card className="hover-elevate active-elevate-2 transition-shadow cursor-pointer h-full" data-testid="card-education">
-                <CardContent className="p-6">
-                  <GraduationCap className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Education</h3>
-                  <p className="text-muted-foreground text-sm">
-                    3 Master's degrees including ongoing Big Data & Data Science at UNIR, Spain
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Link href="/articles">
-              <Card className="hover-elevate active-elevate-2 transition-shadow cursor-pointer h-full" data-testid="card-publications">
-                <CardContent className="p-6">
-                  <BookOpen className="h-10 w-10 text-accent mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Publications</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Published research on machine translation, digital competence, and language learning
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <Link href="/projects">
-              <Card className="hover-elevate active-elevate-2 transition-shadow cursor-pointer h-full" data-testid="card-projects">
-                <CardContent className="p-6">
-                  <Briefcase className="h-10 w-10 text-ai-accent mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Projects</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Research projects at IHUPA and AGORA focusing on language teaching innovation
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Current Focus */}
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-bold mb-6" data-testid="heading-current-work">Currently Working On</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-lg" data-testid="heading-current-learning">🎓 Learning</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li data-testid="text-learning-0">• Data analysis with R, Python and AI</li>
-                    <li data-testid="text-learning-1">• Machine learning for scientific research</li>
-                    <li data-testid="text-learning-2">• Advanced data visualization techniques</li>
-                  </ul>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-semibold text-lg" data-testid="heading-current-working">💼 Working</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li data-testid="text-working-0">• Data analysis and digitalization of databases</li>
-                    <li data-testid="text-working-1">• Bibliometric and scientometric analysis</li>
-                    <li data-testid="text-working-2">• Research on language teaching innovations</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
       </section>
     </div>
   );

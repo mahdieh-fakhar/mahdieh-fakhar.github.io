@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { assetPath } from "@/lib/basePath";
 import {
   ArrowRight,
   BookOpen,
@@ -190,7 +191,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-lg overflow-hidden border shadow-lg">
                 <img
-                  src="/images/profile.jpg"
+                  src={assetPath("/images/profile.jpg")}
                   alt="Mahdieh Fakhar"
                   className="h-full w-full object-cover object-[50%_28%]"
                 />

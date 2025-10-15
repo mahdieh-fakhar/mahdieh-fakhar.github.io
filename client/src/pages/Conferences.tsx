@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Presentation, ChevronDown, ChevronUp, Download, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { assetPath } from "@/lib/basePath";
 
 type CertificateOrientation = "portrait" | "landscape";
 
@@ -27,7 +28,7 @@ type ConferenceCertificate = {
   orientation: CertificateOrientation;
 };
 
-const certificates: ConferenceCertificate[] = [
+const certificateData: ConferenceCertificate[] = [
   {
     id: "tellsi-2015-critical-pedagogy",
     conferenceName: "13th International TELLSI Conference",
@@ -360,6 +361,11 @@ const certificates: ConferenceCertificate[] = [
     orientation: "portrait",
   },
 ];
+
+const certificates: ConferenceCertificate[] = certificateData.map((certificate) => ({
+  ...certificate,
+  imageUrl: assetPath(certificate.imageUrl),
+}));
 
 const formatDate = (value: string) => {
   const parsed = new Date(value);

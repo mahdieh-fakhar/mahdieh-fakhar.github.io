@@ -9,25 +9,29 @@ const sharedRoot = path.resolve(currentDir, "shared");
 const assetsRoot = path.resolve(currentDir, "attached_assets");
 const docsDir = path.resolve(currentDir, "docs");
 
-export default defineConfig({
-  plugins: [react()],
-  base: "./",
-  resolve: {
-    alias: {
-      "@": path.resolve(clientRoot, "src"),
-      "@shared": sharedRoot,
-      "@assets": assetsRoot,
+export default defineConfig(({ mode }) => {
+  const isDev = mode === "development";
+
+  return {
+    plugins: [react()],
+    base: isDev ? "/" : "/mf1/",
+    resolve: {
+      alias: {
+        "@": path.resolve(clientRoot, "src"),
+        "@shared": sharedRoot,
+        "@assets": assetsRoot,
+      },
     },
-  },
-  root: clientRoot,
-  build: {
-    outDir: docsDir,
-    emptyOutDir: true,
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    root: clientRoot,
+    build: {
+      outDir: docsDir,
+      emptyOutDir: true,
     },
-  },
+    server: {
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
 });

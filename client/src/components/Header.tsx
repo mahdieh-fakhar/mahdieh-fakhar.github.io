@@ -4,6 +4,7 @@ import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { assetPath } from "@/lib/basePath";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -33,9 +34,9 @@ export function Header() {
           className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 lg:justify-self-start"
           data-testid="link-home-logo"
         >
-          <img 
-            src="/images/logo.png" 
-            alt="MF Logo" 
+          <img
+            src={assetPath("/images/logo.png")}
+            alt="MF Logo"
             className="h-10 w-10 object-contain"
           />
           <span className="hidden flex-col leading-tight sm:flex">

@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Mail, Linkedin, Github, Sparkles } from "lucide-react";
+import { assetPath } from "@/lib/basePath";
 
 const footerLinks = [
   { name: "Home", href: "/" },
@@ -19,7 +20,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img
-                src="/images/logo.png"
+                src={assetPath("/images/logo.png")}
                 alt="MF Logo"
                 className="h-12 w-12 object-contain"
               />

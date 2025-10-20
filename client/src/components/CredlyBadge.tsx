@@ -8,7 +8,21 @@ const DEFAULT_IMAGE = "images/credly-cloud-practitioner.png";
 // Embedded PNG fallback (base64) so the badge displays even if network/CSP blocks external images.
 // This value was generated from docs/images/credly-cloud-practitioner.png and embedded here.
 const INLINE_SVG_FALLBACK =
-  'data:image/png;base64,PGJpbmFyeSBpbWFnZSBjb250ZW50Pg==';
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+      <defs>
+        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1f2937"/>
+          <stop offset="100%" stop-color="#2563eb"/>
+        </linearGradient>
+      </defs>
+      <rect width="150" height="150" rx="16" fill="url(#grad)"/>
+      <text x="50%" y="50%" text-anchor="middle" dy="0.35em" fill="white" font-family="Inter, Arial, sans-serif" font-size="18">
+        Credly Badge
+      </text>
+    </svg>`,
+  );
 
 declare global {
   interface Window {

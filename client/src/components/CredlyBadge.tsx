@@ -50,7 +50,7 @@ export function CredlyBadge({ className }: CredlyBadgeProps = {}) {
   return (
     <div
       ref={containerRef}
-      className={cn("flex justify-center", className)}
+      className={cn("credly-badge flex justify-center", className)}
       data-iframe-width="150"
       data-iframe-height="270"
       data-share-badge-id={BADGE_ID}

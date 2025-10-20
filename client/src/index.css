@@ -398,4 +398,37 @@
   .fade-in {
     animation: fade-in 0.5s ease-out;
   }
+
+  /* ===== Credly badge minimal styles (added) ===== */
+  .credly-badge {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* HERO layout fallback when using plain HTML (React layout already responsive) */
+  #hero {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  #hero .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (max-width: 640px) {
+    #hero {
+      align-items: flex-start;
+    }
+  }
+
+  /* Certifications grid if a separate section is used */
+  #certifications .badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
 }

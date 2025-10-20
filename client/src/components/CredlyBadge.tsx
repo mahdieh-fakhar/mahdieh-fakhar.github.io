@@ -5,6 +5,13 @@ import { assetPath } from "@/lib/basePath";
 const CREDLY_SCRIPT_ID = "credly-embed-script";
 const DEFAULT_BADGE_ID = "298b5e29-2f62-456b-b2f9-69419b0aa29d";
 const DEFAULT_IMAGE = "images/credly-cloud-practitioner.png";
+// Minimal inline SVG data-uri used as last-resort fallback to guarantee a visible badge
+const INLINE_SVG_FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24">' +
+    '<rect width="24" height="24" rx="3" fill="#f3f4f6"/>' +
+    '<path d="M12 3v6l4 2-4 2v6" stroke="#9ca3af" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+  '</svg>'
+);
 
 declare global {
   interface Window {
@@ -87,8 +94,12 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
                   setImageHidden(true);
                 }
               } else {
-                // second failure: show inline SVG placeholder instead
-                setImageHidden(true);
+                // second failure: switch to embedded SVG data-uri fallback so image is always visible
+                try {
+                  img.src = INLINE_SVG_FALLBACK;
+                } catch {
+                  setImageHidden(true);
+                }
               }
             }}
           />

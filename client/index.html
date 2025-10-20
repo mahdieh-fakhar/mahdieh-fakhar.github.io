@@ -96,21 +96,24 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Vite entry: keep module entry so Vite includes the app during build -->
+    <script type="module" src="/src/main.tsx" data-vite-entry></script>
+
     <!-- App bootloader: try multiple candidate JS/CSS assets so older cached HTML
-         that references different hashed filenames can still find a working bundle.
-         This makes refresh/resiliency better for GitHub Pages deployments. -->
+      that references different hashed filenames can still find a working bundle.
+      This makes refresh/resiliency better for GitHub Pages deployments. -->
     <script>
       (function () {
         var base = '/mf1';
         var jsCandidates = [
-          base + '/assets/index-CCuZzUcT.js',
+          base + '/assets/index-ClveqC3n.js',
           base + '/assets/index-CLZrhGIp.js',
-          base + '/assets/index-XXX.js'
+          base + '/assets/index-CCuZzUcT.js'
         ];
         var cssCandidates = [
+          base + '/assets/index-CSTIc2Dc.css',
           base + '/assets/index-Dd8krhSz.css',
-          base + '/assets/index-BFJ1nuMv.css',
-          base + '/assets/index-YYY.css'
+          base + '/assets/index-BFJ1nuMv.css'
         ];
 
         function fetchOk(url) {

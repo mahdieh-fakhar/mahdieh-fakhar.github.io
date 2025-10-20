@@ -88,7 +88,7 @@ export default function Projects() {
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2">
                 {projectBadges.map((badge) => (
-                  <BadgePanel key={badge.id} badge={badge} layout="grid" showSummary={false} />
+                  <BadgePanel key={badge.id} badge={badge} layout="grid" />
                 ))}
               </div>
             </CardContent>

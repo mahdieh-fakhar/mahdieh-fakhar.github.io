@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { assetPath } from "@/lib/basePath";
 
 const CREDLY_SCRIPT_ID = "credly-embed-script";
 const DEFAULT_BADGE_ID = "298b5e29-2f62-456b-b2f9-69419b0aa29d";
-const DEFAULT_IMAGE = "/images/credly-cloud-practitioner.png";
+const DEFAULT_IMAGE = "images/credly-cloud-practitioner.png";
 
 declare global {
   interface Window {
@@ -68,9 +69,10 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
         aria-label="Open Credly badge in new tab"
       >
         <img
-          src={imageSrc ?? DEFAULT_IMAGE}
+          src={assetPath(imageSrc ?? DEFAULT_IMAGE)}
           alt="Credly certification badge"
           style={{ width: 150, height: 150, objectFit: "contain" }}
+          loading="lazy"
         />
       </a>
     </div>

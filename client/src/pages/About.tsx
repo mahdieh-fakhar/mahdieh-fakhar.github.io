@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Languages, MapPin, Sparkles, Target } from "lucide-react";
+import { CredlyBadge } from "@/components/CredlyBadge";
+import { Languages, MapPin, Sparkles, Target, Award } from "lucide-react";
 
 export default function About() {
   const languages = [
@@ -97,6 +98,23 @@ export default function About() {
                 </Badge>
               ))}
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Credly Certification */}
+        <Card className="bg-gradient-to-br from-secondary/10 via-background to-primary/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Award className="h-5 w-5 text-primary" />
+              Verified Credentials
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <p className="text-muted-foreground">
+              Credly hosts my authenticated certifications, highlighting continued professional growth
+              across data science and analytics.
+            </p>
+            <CredlyBadge />
           </CardContent>
         </Card>
 

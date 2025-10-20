@@ -74,87 +74,178 @@
       This makes refresh/resiliency better for GitHub Pages deployments. -->
     <script>
       (function () {
-        var base = '/mf1';
-        var jsCandidates = [
-          base + '/assets/index-D0opiNsC.js',
-          base + '/assets/index-ClveqC3n.js',
-          base + '/assets/index-CLZrhGIp.js'
+        var baseEl = document.querySelector("base");
+        var baseHref = baseEl ? baseEl.getAttribute("href") || "/" : "/";
+        var base = baseHref.endsWith("/") ? baseHref.slice(0, -1) : baseHref;
+        var manifestUrl = base + "/manifest.json";
+        var legacyJs = [
+          "/assets/index-ClveqC3n.js",
+          "/assets/index-CLZrhGIp.js",
+          "/assets/index-D0opiNsC.js"
         ];
-        var cssCandidates = [
-          base + '/assets/index-CbJJ0kmH.css',
-          base + '/assets/index-CSTIc2Dc.css',
-          base + '/assets/index-Dd8krhSz.css'
+        var legacyCss = [
+          "/assets/index-Dd2ccE3D.css",
+          "/assets/index-CbJJ0kmH.css",
+          "/assets/index-CSTIc2Dc.css",
+          "/assets/index-Dd8krhSz.css"
         ];
+        var fallbackTriggered = false;
+
+        function normalize(path) {
+          if (!path) return null;
+          var cleaned = path.startsWith("/") ? path : "/" + path;
+          return base + cleaned;
+        }
+
+        function unique(list) {
+          return list.filter(function (value, index, arr) {
+            return value && arr.indexOf(value) === index;
+          });
+        }
 
         function fetchOk(url) {
-          return fetch(url, { method: 'HEAD', cache: 'no-store' }).then(function (r) {
-            return r.ok;
-          }).catch(function () { return false; });
+          return fetch(url, { method: "HEAD", cache: "no-store" })
+            .then(function (r) {
+              return r.ok;
+            })
+            .catch(function () {
+              return false;
+            });
         }
 
         function loadCss(url) {
-          var l = document.createElement('link');
-          l.rel = 'stylesheet';
+          var existing = document.querySelector('link[rel="stylesheet"][href="' + url + '"]');
+          if (existing) return;
+          var l = document.createElement("link");
+          l.rel = "stylesheet";
           l.href = url;
-          l.crossOrigin = 'anonymous';
+          l.crossOrigin = "anonymous";
           document.head.appendChild(l);
         }
 
         function loadModule(url) {
-          var s = document.createElement('script');
-          s.type = 'module';
+          if (document.querySelector('script[type="module"][src="' + url + '"]')) {
+            return;
+          }
+          var s = document.createElement("script");
+          s.type = "module";
           s.src = url;
-          s.crossOrigin = 'anonymous';
+          s.crossOrigin = "anonymous";
           s.async = true;
-          s.onload = function () { /* loaded */ };
-          s.onerror = function () { /* handled below by trying next candidate */ };
+          s.onload = function () {
+            /* loaded */
+          };
+          s.onerror = function () {
+            /* handled by fallback loop */
+          };
           document.body.appendChild(s);
         }
 
         function showBootstrapError() {
           try {
-            var overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
+            var overlay = document.createElement("div");
+            overlay.style.position = "fixed";
             overlay.style.left = 0;
             overlay.style.top = 0;
             overlay.style.right = 0;
             overlay.style.bottom = 0;
-            overlay.style.background = 'rgba(0,0,0,0.6)';
-            overlay.style.color = 'white';
+            overlay.style.background = "rgba(0,0,0,0.6)";
+            overlay.style.color = "white";
             overlay.style.zIndex = 999999;
-            overlay.style.display = 'flex';
-            overlay.style.alignItems = 'center';
-            overlay.style.justifyContent = 'center';
-            overlay.style.fontFamily = 'sans-serif';
-            overlay.innerText = 'Application failed to load. Please try a hard refresh (Ctrl+F5) or open in a private window.';
+            overlay.style.display = "flex";
+            overlay.style.alignItems = "center";
+            overlay.style.justifyContent = "center";
+            overlay.style.fontFamily = "sans-serif";
+            overlay.innerText =
+              "Application failed to load. Please try a hard refresh (Ctrl+F5) or open in a private window.";
             document.body.appendChild(overlay);
-          } catch (e) { /* ignore */ }
+          } catch (e) {
+            /* ignore */
+          }
         }
 
-        // Try CSS candidates (first one that exists)
-        (function tryCss(i) {
-          if (i >= cssCandidates.length) return;
-          fetchOk(cssCandidates[i]).then(function (ok) {
-            if (ok) loadCss(cssCandidates[i]);
-            else tryCss(i + 1);
-          });
-        })(0);
-
-        // Try JS candidates sequentially until one loads successfully by checking HEAD first
-        (function tryJs(i) {
-          if (i >= jsCandidates.length) {
-            // nothing found - show error after short delay
-            setTimeout(showBootstrapError, 500);
-            return;
+        function extractManifestCandidates(manifest) {
+          if (!manifest || typeof manifest !== "object") {
+            return { js: [], css: [] };
           }
-          fetchOk(jsCandidates[i]).then(function (ok) {
-            if (ok) {
-              loadModule(jsCandidates[i]);
-            } else {
-              tryJs(i + 1);
-            }
-          }).catch(function () { tryJs(i + 1); });
-        })(0);
+          var entry = manifest["src/main.tsx"];
+          if (!entry) {
+            var entryKey = Object.keys(manifest).find(function (key) {
+              return manifest[key] && manifest[key].isEntry;
+            });
+            entry = entryKey ? manifest[entryKey] : null;
+          }
+          if (!entry) return { js: [], css: [] };
+          var js = entry.file ? [normalize("/" + entry.file.replace(/^\//, ""))] : [];
+          var css =
+            Array.isArray(entry.css) && entry.css.length
+              ? entry.css.map(function (file) {
+                  return normalize("/" + file.replace(/^\//, ""));
+                })
+              : [];
+          return { js: js, css: css };
+        }
+
+        function startFallback() {
+          if (fallbackTriggered) return;
+          fallbackTriggered = true;
+
+          fetch(manifestUrl, { cache: "no-store" })
+            .then(function (response) {
+              if (!response.ok) return null;
+              return response.json();
+            })
+            .catch(function () {
+              return null;
+            })
+            .then(function (manifest) {
+              var manifestCandidates = extractManifestCandidates(manifest);
+              var jsCandidates = unique(
+                manifestCandidates.js.concat(legacyJs.map(normalize))
+              );
+              var cssCandidates = unique(
+                manifestCandidates.css.concat(legacyCss.map(normalize))
+              );
+
+              (function tryCss(i) {
+                if (i >= cssCandidates.length) return;
+                fetchOk(cssCandidates[i]).then(function (ok) {
+                  if (ok) loadCss(cssCandidates[i]);
+                  else tryCss(i + 1);
+                });
+              })(0);
+
+              (function tryJs(i) {
+                if (i >= jsCandidates.length) {
+                  setTimeout(showBootstrapError, 500);
+                  return;
+                }
+                fetchOk(jsCandidates[i])
+                  .then(function (ok) {
+                    if (ok) {
+                      loadModule(jsCandidates[i]);
+                    } else {
+                      tryJs(i + 1);
+                    }
+                  })
+                  .catch(function () {
+                    tryJs(i + 1);
+                  });
+              })(0);
+            });
+        }
+
+        var primaryScript = document.querySelector('script[type="module"][src*="/assets/"]');
+        if (primaryScript) {
+          primaryScript.addEventListener("error", startFallback);
+        } else {
+          startFallback();
+        }
+
+        var primaryStylesheet = document.querySelector('link[rel="stylesheet"][href*="/assets/"]');
+        if (primaryStylesheet) {
+          primaryStylesheet.addEventListener("error", startFallback);
+        }
       })();
     </script>
 

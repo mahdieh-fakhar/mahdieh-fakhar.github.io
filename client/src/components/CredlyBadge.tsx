@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { assetPath } from "@/lib/basePath";
+import type { BadgeRecord } from "@/types/badge";
 
 const CREDLY_SCRIPT_ID = "credly-embed-script";
 const DEFAULT_BADGE_ID = "298b5e29-2f62-456b-b2f9-69419b0aa29d";
@@ -38,6 +39,7 @@ type CredlyBadgeProps = {
   className?: string;
   badgeId?: string;
   imageSrc?: string;
+  badge?: BadgeRecord;
 };
 
 const triggerCredly = () => {
@@ -50,10 +52,16 @@ const triggerCredly = () => {
   }
 };
 
-export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps = {}) {
+export function CredlyBadge({ className, badgeId, imageSrc, badge }: CredlyBadgeProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [imgError, setImgError] = useState(false);
   const [imageHidden, setImageHidden] = useState(false);
+  const resolvedBadgeId = badge?.id ?? badgeId ?? DEFAULT_BADGE_ID;
+  const resolvedImage = badge?.image ?? imageSrc ?? DEFAULT_IMAGE;
+  const resolvedAlt = badge?.imageAlt ?? "Credly certification badge";
+  const resolvedUrl =
+    badge?.url ??
+    `https://www.credly.com/badges/${resolvedBadgeId}/public_url`;
 
   useEffect(() => {
     const script = document.getElementById(
@@ -77,21 +85,21 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
       className={cn("credly-badge flex justify-center", className)}
       data-iframe-width="150"
       data-iframe-height="270"
-        data-share-badge-id={badgeId ?? DEFAULT_BADGE_ID}
+      data-share-badge-id={resolvedBadgeId}
       data-share-badge-host="https://www.credly.com"
       aria-label="Professional certification badge"
     >
       {/* Fallback clickable image linking to Credly public URL */}
       <a
-        href={`https://www.credly.com/badges/${badgeId ?? DEFAULT_BADGE_ID}/public_url`}
+        href={resolvedUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Open Credly badge in new tab"
       >
         {!imageHidden ? (
           <img
-            src={assetPath(imageSrc ?? DEFAULT_IMAGE)}
-            alt="Credly certification badge"
+            src={assetPath(resolvedImage)}
+            alt={resolvedAlt}
             style={{ width: 150, height: 150, objectFit: "contain" }}
             loading="lazy"
             onError={(e) => {
@@ -100,7 +108,7 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
                 // first failure: retry with origin-prefixed absolute URL
                 setImgError(true);
                 try {
-                  img.src = `${window.location.origin}${assetPath(imageSrc ?? DEFAULT_IMAGE)}`;
+                  img.src = `${window.location.origin}${assetPath(resolvedImage)}`;
                 } catch {
                   setImageHidden(true);
                 }

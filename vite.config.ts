@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: docsDir,
       emptyOutDir: true,
+      manifest: "manifest.json",
     },
     server: {
       fs: {

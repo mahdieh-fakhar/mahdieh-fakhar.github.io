@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, FileText, Mail, Linkedin, Github, MapPin } from "lucide-react";
+import { BadgePanel } from "@/components/badges/BadgePanel";
+import { getBadges } from "@/lib/badgeUtils";
 
 export default function Resume() {
+  const resumeBadges = getBadges({ page: "resume" }).filter((badge) => badge.placements.includes("resume"));
   const handleDownload = () => {
     // This will trigger download of a CV file
     // In a real implementation, you would have a PDF file hosted

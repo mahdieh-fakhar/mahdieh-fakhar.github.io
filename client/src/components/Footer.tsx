@@ -1,6 +1,9 @@
+import { useMemo } from "react";
 import { Link } from "wouter";
 import { Mail, Linkedin, Github, Sparkles } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
+import { getBadges } from "@/lib/badgeUtils";
+import { BadgePill } from "@/components/badges/BadgePill";
 
 const footerLinks = [
   { name: "Home", href: "/" },
@@ -13,10 +16,15 @@ const footerLinks = [
 ];
 
 export function Footer() {
+  const footerBadges = useMemo(
+    () => getBadges({ placement: "footer", limit: 6 }),
+    [],
+  );
+
   return (
     <footer className="border-t-4 border-primary/70 bg-sidebar shadow-[0_-8px_24px_-14px_hsl(44_100%_48%/0.45)] mt-auto" aria-label="Site footer">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr,1.2fr,1.2fr,1.4fr]">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img
@@ -34,6 +42,30 @@ export function Footer() {
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Sparkles className="h-3 w-3 text-ai-accent" />
               <span>Built with AI-Powered Analysis</span>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Certifications</h3>
+            <div className="flex flex-col gap-3 text-sm">
+              {footerBadges.length > 0 ? (
+                footerBadges.map((badge) => (
+                  <BadgePill
+                    key={badge.id}
+                    badge={badge}
+                    compact
+                    className="min-w-0 border-primary/20 bg-background/85"
+                  />
+                ))
+              ) : (
+                <p className="text-muted-foreground">
+                  Badge catalogue is maintained via{" "}
+                  <code className="rounded bg-primary/10 px-2 py-0.5">
+                    client/src/data/badges.json
+                  </code>
+                  .
+                </p>
+              )}
             </div>
           </div>
 

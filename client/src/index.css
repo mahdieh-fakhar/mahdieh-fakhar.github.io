@@ -399,6 +399,23 @@
     animation: fade-in 0.5s ease-out;
   }
 
+  /* Credly badge styling: ensure fallback img/SVG is centered and sized */
+  .credly-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 160px;
+  }
+
+  .credly-badge img,
+  .credly-badge svg {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
   /* ===== Credly badge minimal styles (added) ===== */
   .credly-badge {
     display: flex;

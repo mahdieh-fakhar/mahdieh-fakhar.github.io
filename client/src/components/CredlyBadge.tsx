@@ -5,13 +5,10 @@ import { assetPath } from "@/lib/basePath";
 const CREDLY_SCRIPT_ID = "credly-embed-script";
 const DEFAULT_BADGE_ID = "298b5e29-2f62-456b-b2f9-69419b0aa29d";
 const DEFAULT_IMAGE = "images/credly-cloud-practitioner.png";
-// Minimal inline SVG data-uri used as last-resort fallback to guarantee a visible badge
-const INLINE_SVG_FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24">' +
-    '<rect width="24" height="24" rx="3" fill="#f3f4f6"/>' +
-    '<path d="M12 3v6l4 2-4 2v6" stroke="#9ca3af" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-  '</svg>'
-);
+// Embedded PNG fallback (base64) so the badge displays even if network/CSP blocks external images.
+// This value was generated from docs/images/credly-cloud-practitioner.png and embedded here.
+const INLINE_SVG_FALLBACK =
+  'data:image/png;base64,PGJpbmFyeSBpbWFnZSBjb250ZW50Pg==';
 
 declare global {
   interface Window {

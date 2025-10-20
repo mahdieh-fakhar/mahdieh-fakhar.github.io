@@ -45,11 +45,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_8px_20px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="flex w-full items-center justify-between gap-4 px-6 py-5 lg:grid lg:grid-cols-[auto,minmax(0,1fr),auto] lg:items-center lg:gap-16 lg:px-12">
-        {/* Logo */}
+      <div className="grid w-full grid-cols-[auto,minmax(0,1fr),auto] items-center gap-4 px-6 py-4 lg:px-12">
+        {/* Logo + Name */}
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 lg:justify-self-start"
+          className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2"
           data-testid="link-home-logo"
         >
           <img
@@ -57,44 +57,22 @@ export function Header() {
             alt="MF Logo"
             className="h-10 w-10 object-contain"
           />
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="text-xl font-bold text-foreground tracking-wide">MAHDIEH</span>
-            <span className="text-base font-semibold text-foreground tracking-wide">FAKHAR</span>
+          <span className="text-lg font-semibold tracking-wide text-foreground">
+            MAHDIEH FAKHAR
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:flex-1 lg:min-w-0 lg:items-center lg:justify-center lg:gap-6 lg:px-6">
-          {navigation.map((item) => (
-            <Link 
-              key={item.name} 
-              href={item.href}
-              className={`relative px-3 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
-                location === item.href
-                  ? "text-foreground"
-                  : "text-muted-foreground"
-              }`}
-              data-testid={`link-nav-${item.name.toLowerCase()}`}
-            >
-              {item.name}
-              {location === item.href && (
-                <motion.div
-                  layoutId="navbar-indicator"
-                  className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-primary"
-                  initial={false}
-                  transition={{
-                    type: "spring",
-                    stiffness: 380,
-                    damping: 30,
-                  }}
-                />
-              )}
-            </Link>
-          ))}
+        {/* Badge strip */}
+        <div className="flex items-center justify-center">
+          <div className="flex max-w-full snap-x snap-mandatory items-center justify-center gap-3 overflow-x-auto px-2">
+            {headerBadges.map((badge) => (
+              <BadgePill key={badge.id} badge={badge} size="sm" />
+            ))}
+          </div>
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="flex items-center gap-3 lg:flex-none lg:justify-self-end lg:pl-6">
+        <div className="flex items-center justify-end gap-2">
           <Button
             variant="ghost"
             size="icon"
@@ -110,7 +88,6 @@ export function Header() {
             <span className="sr-only">Toggle theme</span>
           </Button>
 
-          {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="icon"
@@ -126,22 +103,37 @@ export function Header() {
             <span className="sr-only">Toggle menu</span>
           </Button>
         </div>
-      </nav>
+      </div>
 
-      {headerBadges.length > 0 && (
-        <div className="border-t border-primary/15 bg-background/85">
-          <div className="flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-3 lg:px-12">
-            {headerBadges.map((badge) => (
-              <BadgePill
-                key={badge.id}
-                badge={badge}
-                size="sm"
-                className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70"
-              />
-            ))}
-          </div>
+      {/* Desktop Navigation */}
+      <div className="border-t border-primary/20 bg-background/90">
+        <div className="hidden lg:flex w-full items-center justify-center gap-6 px-6 py-3">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`relative px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
+                location === item.href ? "text-foreground" : "text-muted-foreground"
+              }`}
+              data-testid={`link-nav-${item.name.toLowerCase()}`}
+            >
+              {item.name}
+              {location === item.href && (
+                <motion.div
+                  layoutId="navbar-indicator"
+                  className="absolute -bottom-[17px] left-4 right-4 h-0.5 bg-primary"
+                  initial={false}
+                  transition={{
+                    type: "spring",
+                    stiffness: 380,
+                    damping: 30,
+                  }}
+                />
+              )}
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* Mobile Navigation */}
       <AnimatePresence>

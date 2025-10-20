@@ -30,6 +30,10 @@
     <!-- GitHub Pages SPA Redirect Handler -->
     <!-- Ensure relative URLs resolve correctly when site is served under /mf1/ -->
     <base href="/mf1/">
+  <!-- Prefer always revalidating index.html to avoid stale HTML referencing old asset filenames -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
     <script>
       (function (l) {
         if (l.search[1] === "/") {

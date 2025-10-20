@@ -18,6 +18,7 @@ import {
   Send,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
+import { CredlyBadge } from "@/components/CredlyBadge";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
@@ -241,12 +242,15 @@ export default function Home() {
                 <span className="text-muted-foreground">AI-Powered Portfolio</span>
               </div>
 
-              <h1
-                className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
-                data-testid="heading-name"
-              >
-                MAHDIEH FAKHAR
-              </h1>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <h1
+                  className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+                  data-testid="heading-name"
+                >
+                  MAHDIEH FAKHAR
+                </h1>
+                <CredlyBadge className="mt-2 sm:mt-0 sm:min-w-[150px]" />
+              </div>
 
               <p className="text-xl font-medium text-muted-foreground" data-testid="text-title">
                 Data Scientist · Researcher · Academic Strategist

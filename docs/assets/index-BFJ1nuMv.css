@@ -1,4 +1,2 @@
-/* Fallback stylesheet for cached index.html expecting this filename.
-   Intentionally minimal: ensures the browser can load a CSS resource and continue.
-*/
-html,body{height:100%;}
+/* Fallback CSS for cached old filename — minimal no-op to avoid 404 */
+:root{}

@@ -28,6 +28,14 @@
     <meta name="theme-color" content="#b91c1c" />
 
     <!-- GitHub Pages SPA Redirect Handler -->
+    <!-- Ensure relative URLs resolve correctly when site is served under /mf1/ -->
+    <base href="/mf1/">
+  <!-- Prefer always revalidating index.html to avoid stale HTML referencing old asset filenames -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <!-- Content Security Policy: allow Credly embed and common external sources -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.credly.com https://www.credly.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://images.credly.com data:; frame-src https://www.credly.com; font-src https://fonts.gstatic.com data:; connect-src 'self' https:;">
     <script>
       (function (l) {
         if (l.search[1] === "/") {
@@ -85,8 +93,8 @@
     <link rel="preconnect" href="https://cdn.credly.com" crossorigin>
     <link rel="preconnect" href="https://www.credly.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/mf1/assets/index-CNQXMN6A.js"></script>
-    <link rel="stylesheet" crossorigin href="/mf1/assets/index-DI5BxbO_.css">
+    <script type="module" crossorigin src="/mf1/assets/index-CCuZzUcT.js"></script>
+    <link rel="stylesheet" crossorigin href="/mf1/assets/index-Dd8krhSz.css">
   </head>
   <body>
     <div id="root"></div>

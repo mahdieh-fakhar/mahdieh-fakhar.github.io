@@ -35,6 +35,7 @@ const triggerCredly = () => {
 export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [imgError, setImgError] = useState(false);
+  const [imageHidden, setImageHidden] = useState(false);
 
   useEffect(() => {
     const script = document.getElementById(
@@ -69,28 +70,43 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
         rel="noopener noreferrer"
         aria-label="Open Credly badge in new tab"
       >
-        <img
-          src={assetPath(imageSrc ?? DEFAULT_IMAGE)}
-          alt="Credly certification badge"
-          style={{ width: 150, height: 150, objectFit: "contain" }}
-          loading="lazy"
-          onError={(e) => {
-            // If the relative asset fails (possible base/path mismatch), retry with an absolute origin-prefixed URL once.
-            const img = e.currentTarget as HTMLImageElement;
-            if (!imgError) {
-              setImgError(true);
-              try {
-                img.src = `${window.location.origin}${assetPath(imageSrc ?? DEFAULT_IMAGE)}`;
-              } catch {
-                // fallback: hide broken image
-                img.style.display = "none";
+        {!imageHidden ? (
+          <img
+            src={assetPath(imageSrc ?? DEFAULT_IMAGE)}
+            alt="Credly certification badge"
+            style={{ width: 150, height: 150, objectFit: "contain" }}
+            loading="lazy"
+            onError={(e) => {
+              const img = e.currentTarget as HTMLImageElement;
+              if (!imgError) {
+                // first failure: retry with origin-prefixed absolute URL
+                setImgError(true);
+                try {
+                  img.src = `${window.location.origin}${assetPath(imageSrc ?? DEFAULT_IMAGE)}`;
+                } catch {
+                  setImageHidden(true);
+                }
+              } else {
+                // second failure: show inline SVG placeholder instead
+                setImageHidden(true);
               }
-            } else {
-              // second failure — hide the broken image so users see the link text instead
-              img.style.display = "none";
-            }
-          }}
-        />
+            }}
+          />
+        ) : (
+          // Inline SVG placeholder so user doesn't see broken image icon
+          <svg
+            width="150"
+            height="150"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Credly badge placeholder"
+            style={{ display: "block", margin: "0 auto" }}
+          >
+            <rect width="24" height="24" rx="3" fill="#f3f4f6" />
+            <path d="M12 3v6l4 2-4 2v6" stroke="#9ca3af" strokeWidth="1.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
       </a>
     </div>
   );

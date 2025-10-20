@@ -38,7 +38,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdn.credly.com https://www.credly.com https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://images.credly.com data:; frame-src https://www.credly.com; font-src https://fonts.gstatic.com data:; connect-src 'self' https:;">
     <script>
       (function (l) {
-        if (l.search[1] === "/") {
+        if (l.search.length > 1 && l.search[1] === "/") {
           var decoded = l.search
             .slice(1)
             .split("&")
@@ -46,7 +46,10 @@
               return s.replace(/~and~/g, "&");
             })
             .join("?");
-          window.history.replaceState(null, null, decoded + l.hash);
+          var baseHref = document.querySelector("base")?.getAttribute("href") || "/";
+          var basePath = baseHref.endsWith("/") ? baseHref.slice(0, -1) : baseHref;
+          var newUrl = basePath + (decoded.startsWith("/") ? decoded : "/" + decoded);
+          window.history.replaceState(null, null, newUrl + l.hash);
         }
       })(window.location);
     </script>

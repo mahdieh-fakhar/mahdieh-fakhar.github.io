@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { BadgeStructuredData } from "@/components/BadgeStructuredData";
 
 // Pages
 import Home from "@/pages/Home";
@@ -19,6 +20,7 @@ import Skills from "@/pages/Skills";
 import Projects from "@/pages/Projects";
 import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
+import Certifications from "@/pages/Certifications";
 import NotFound from "@/pages/not-found";
 
 export default function App() {
@@ -37,6 +39,7 @@ export default function App() {
 function AppShell() {
   return (
     <div className="flex min-h-screen flex-col">
+      <BadgeStructuredData />
       <Header />
       <main className="flex-1">
         <Switch>
@@ -51,6 +54,7 @@ function AppShell() {
           <Route path="/projects" component={Projects} />
           <Route path="/resume" component={Resume} />
           <Route path="/contact" component={Contact} />
+          <Route path="/certifications" component={Certifications} />
           <Route component={NotFound} />
         </Switch>
       </main>

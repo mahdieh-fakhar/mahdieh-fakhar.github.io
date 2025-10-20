@@ -33,4 +33,9 @@
   <url>
     <loc>https://mahdieh-fakhar.github.io/mf1/contact</loc>
   </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/mf1/certifications</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

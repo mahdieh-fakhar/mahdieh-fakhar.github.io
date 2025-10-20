@@ -1,0 +1,39 @@
+[
+  {
+    "id": "298b5e29-2f62-456b-b2f9-69419b0aa29d",
+    "slug": "aws-cloud-quest-cloud-practitioner",
+    "provider": "credly",
+    "title": "AWS Cloud Quest: Cloud Practitioner",
+    "issuer": "Amazon Web Services (AWS)",
+    "issueDate": "2024-08-01",
+    "skills": [
+      "AWS Cloud",
+      "Cloud Architecture",
+      "Cloud Practitioner",
+      "Infrastructure",
+      "Security"
+    ],
+    "summary": "Validated cloud fluency in AWS services, architecture patterns, and governance best practices for enterprise delivery.",
+    "url": "https://www.credly.com/badges/298b5e29-2f62-456b-b2f9-69419b0aa29d/public_url",
+    "image": "/images/credly-cloud-practitioner.png",
+    "imageAlt": "AWS Cloud Quest Cloud Practitioner credential badge",
+    "pages": [
+      "home",
+      "about",
+      "projects",
+      "resume",
+      "contact"
+    ],
+    "placements": [
+      "header",
+      "hero",
+      "about",
+      "projects",
+      "resume",
+      "contact",
+      "footer"
+    ],
+    "priority": 100,
+    "visibility": "published"
+  }
+]

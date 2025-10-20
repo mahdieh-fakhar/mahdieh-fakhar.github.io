@@ -2,9 +2,11 @@ import { Link, useLocation } from "wouter";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { assetPath } from "@/lib/basePath";
+import { getBadges, deriveBadgePageFromPath } from "@/lib/badgeUtils";
+import { BadgePill } from "@/components/badges/BadgePill";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -16,6 +18,7 @@ const navigation = [
   { name: "Career", href: "/career" },
   { name: "Skills", href: "/skills" },
   { name: "Projects", href: "/projects" },
+  { name: "Certifications", href: "/certifications" },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];
@@ -24,6 +27,21 @@ export function Header() {
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pageKey = deriveBadgePageFromPath(location ?? "/");
+
+  const headerBadges = useMemo(() => {
+    const contextual = getBadges({
+      placement: "header",
+      page: pageKey,
+      limit: 3,
+    });
+
+    if (contextual.length > 0) {
+      return contextual;
+    }
+
+    return getBadges({ placement: "header", limit: 3 });
+  }, [pageKey]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_8px_20px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -109,6 +127,21 @@ export function Header() {
           </Button>
         </div>
       </nav>
+
+      {headerBadges.length > 0 && (
+        <div className="border-t border-primary/15 bg-background/85">
+          <div className="mx-auto flex w-full max-w-screen-2xl snap-x snap-mandatory gap-3 overflow-x-auto px-4 py-3 lg:px-12">
+            {headerBadges.map((badge) => (
+              <BadgePill
+                key={badge.id}
+                badge={badge}
+                compact
+                className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70"
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Mobile Navigation */}
       <AnimatePresence>

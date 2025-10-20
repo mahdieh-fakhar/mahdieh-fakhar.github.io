@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CredlyBadge } from "@/components/CredlyBadge";
+import { BadgePanel } from "@/components/badges/BadgePanel";
+import { getBadges } from "@/lib/badgeUtils";
 import { Languages, MapPin, Sparkles, Target, Award } from "lucide-react";
 
 export default function About() {
@@ -19,6 +20,8 @@ export default function About() {
     "Machine learning applications in research",
     "Database automatization and digitalization",
   ];
+
+  const aboutBadges = getBadges({ page: "about" }).filter((badge) => badge.placements.includes("about"));
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -114,7 +117,17 @@ export default function About() {
               Credly hosts my authenticated certifications, highlighting continued professional growth
               across data science and analytics.
             </p>
-            <CredlyBadge />
+            {aboutBadges.length > 0 ? (
+              <div className="space-y-4">
+                {aboutBadges.map((badge) => (
+                  <BadgePanel key={badge.id} badge={badge} layout="grid" />
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                Add credentials via <code>client/src/data/badges.json</code> to surface them automatically here.
+              </p>
+            )}
           </CardContent>
         </Card>
 

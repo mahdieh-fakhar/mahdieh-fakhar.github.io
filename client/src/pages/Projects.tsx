@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Rocket, ExternalLink, Users, Calendar } from "lucide-react";
+import { BadgePanel } from "@/components/badges/BadgePanel";
+import { getBadges } from "@/lib/badgeUtils";
 
 const projects = [
   {
@@ -53,6 +55,9 @@ const projects = [
 ];
 
 export default function Projects() {
+  const projectBadges = getBadges({ page: "projects" }).filter((badge) =>
+    badge.placements.includes("projects") || badge.placements.includes("project-card"),
+  );
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
       <motion.div
@@ -71,6 +76,24 @@ export default function Projects() {
             Research projects and web development work
           </p>
         </div>
+
+        {projectBadges.length > 0 && (
+          <Card className="border-primary/25 bg-background/80 shadow-sm">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Rocket className="h-5 w-5 text-primary" />
+                Certifications informing delivery
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-2">
+                {projectBadges.map((badge) => (
+                  <BadgePanel key={badge.id} badge={badge} layout="grid" showSummary={false} />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Projects Grid */}
         <div className="grid gap-6">

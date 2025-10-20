@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Linkedin, Github, MapPin, Send } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Send, Sparkles } from "lucide-react";
+import { BadgePanel } from "@/components/badges/BadgePanel";
+import { getBadges } from "@/lib/badgeUtils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactForm } from "@shared/schema";
@@ -22,6 +24,7 @@ const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/mfsh.intl@gmail.com";
 
 export default function Contact() {
   const { toast } = useToast();
+  const contactBadges = getBadges({ page: "contact" }).filter((badge) => badge.placements.includes("contact"));
 
   const form = useForm<ContactForm>({
     resolver: zodResolver(contactFormSchema),

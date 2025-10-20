@@ -18,7 +18,8 @@ import {
   Send,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
-import { CredlyBadge } from "@/components/CredlyBadge";
+import { getBadges, getPrimaryBadgeForPage } from "@/lib/badgeUtils";
+import { BadgePanel } from "@/components/badges/BadgePanel";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
@@ -168,6 +169,13 @@ export default function Home() {
     },
   ];
 
+  const pageBadges = getBadges({ page: "home" });
+  const heroBadge = getPrimaryBadgeForPage("home");
+  const supportingBadges = pageBadges.filter(
+    (badge) => badge.id !== heroBadge?.id && !badge.placements.includes("header"),
+  );
+  const totalBadgeCount = (heroBadge ? 1 : 0) + supportingBadges.length;
+
   const campaignSpotlights = [
     {
       title: "Digital Scholarship Showcase",
@@ -249,7 +257,15 @@ export default function Home() {
                 >
                   MAHDIEH FAKHAR
                 </h1>
-                <CredlyBadge className="mt-2 sm:mt-0 sm:min-w-[150px]" />
+                {totalBadgeCount > 0 && (
+                  <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary shadow-sm">
+                    <Sparkles className="h-4 w-4" />
+                    <span>
+                      {totalBadgeCount}{" "}
+                      {totalBadgeCount === 1 ? "credential" : "certifications"} verified via Credly
+                    </span>
+                  </div>
+                )}
               </div>
 
               <p className="text-xl font-medium text-muted-foreground" data-testid="text-title">
@@ -276,6 +292,16 @@ export default function Home() {
                   </Button>
                 </Link>
               </div>
+
+              {heroBadge && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <BadgePanel badge={heroBadge} layout="hero" />
+                </motion.div>
+              )}
             </motion.div>
 
             <motion.div
@@ -296,6 +322,47 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {supportingBadges.length > 0 && (
+        <section id="certifications" className="py-20">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="max-w-3xl space-y-2"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
+                <Sparkles className="h-4 w-4" />
+                Certifications Spotlight
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                Credentials reinforcing trust for strategic collaborations
+              </h2>
+              <p className="text-base text-muted-foreground md:text-lg">
+                Each badge is curated from the data layer, so future credentials only require updating
+                <code className="mx-2 rounded bg-primary/10 px-2 py-0.5 text-sm">badges.json</code>
+                to appear across the site.
+              </p>
+            </motion.div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {supportingBadges.map((badge) => (
+                <motion.div
+                  key={badge.id}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45 }}
+                >
+                  <BadgePanel badge={badge} layout="grid" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Portfolio Atlas */}
       <section className="relative overflow-hidden bg-gradient-to-b from-background via-secondary/20 to-background py-24">

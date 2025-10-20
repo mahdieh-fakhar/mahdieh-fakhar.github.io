@@ -125,7 +125,8 @@ An academic-grade personal website highlighting Mahdieh Fakhar’s research, pub
 | Conferences & certificates | `client/src/pages/Conferences.tsx` |
 | Memberships / Career / Skills / Projects | Corresponding page components |
 | Contact information & social links | `client/src/pages/Contact.tsx`, `client/src/components/Footer.tsx` |
-| Theme tokens | `client/src/index.css`, `tailwind.config.ts` |
+| Theme tokens | client/src/index.css, 	ailwind.config.ts |
+| Badge data & placements | `handbook/badge-governance.md` |
 | Imagery | Replace files under `client/public/images/` |
 
 ---

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { assetPath } from "@/lib/basePath";
 
@@ -34,6 +34,7 @@ const triggerCredly = () => {
 
 export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const script = document.getElementById(
@@ -73,6 +74,22 @@ export function CredlyBadge({ className, badgeId, imageSrc }: CredlyBadgeProps =
           alt="Credly certification badge"
           style={{ width: 150, height: 150, objectFit: "contain" }}
           loading="lazy"
+          onError={(e) => {
+            // If the relative asset fails (possible base/path mismatch), retry with an absolute origin-prefixed URL once.
+            const img = e.currentTarget as HTMLImageElement;
+            if (!imgError) {
+              setImgError(true);
+              try {
+                img.src = `${window.location.origin}${assetPath(imageSrc ?? DEFAULT_IMAGE)}`;
+              } catch {
+                // fallback: hide broken image
+                img.style.display = "none";
+              }
+            } else {
+              // second failure — hide the broken image so users see the link text instead
+              img.style.display = "none";
+            }
+          }}
         />
       </a>
     </div>

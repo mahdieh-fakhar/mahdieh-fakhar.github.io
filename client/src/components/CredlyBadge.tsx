@@ -56,6 +56,20 @@ export function CredlyBadge({ className }: CredlyBadgeProps = {}) {
       data-share-badge-id={BADGE_ID}
       data-share-badge-host="https://www.credly.com"
       aria-label="Professional certification badge"
-    />
+    >
+      {/* Fallback clickable image linking to Credly public URL */}
+      <a
+        href="https://www.credly.com/badges/298b5e29-2f62-456b-b2f9-69419b0aa29d/public_url"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Credly badge in new tab"
+      >
+        <img
+          src="/images/credly-cloud-practitioner.png"
+          alt="AWS Cloud Quest - Cloud Practitioner badge"
+          style={{ width: 150, height: 150, objectFit: "contain" }}
+        />
+      </a>
+    </div>
   );
 }

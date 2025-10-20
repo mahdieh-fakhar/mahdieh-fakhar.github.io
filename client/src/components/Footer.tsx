@@ -23,8 +23,8 @@ export function Footer() {
 
   return (
     <footer className="border-t-4 border-primary/70 bg-sidebar shadow-[0_-8px_24px_-14px_hsl(44_100%_48%/0.45)] mt-auto" aria-label="Site footer">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr,1.2fr,1.2fr,1.4fr]">
+      <div className="w-full px-6 py-14 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr,1.2fr,1.4fr,1.2fr]">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img
@@ -45,7 +45,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 lg:order-last">
             <h3 className="text-lg font-semibold">Certifications</h3>
             <div className="flex flex-col gap-3 text-sm">
               {footerBadges.length > 0 ? (
@@ -53,7 +53,7 @@ export function Footer() {
                   <BadgePill
                     key={badge.id}
                     badge={badge}
-                    compact
+                    size="sm"
                     className="min-w-0 border-primary/20 bg-background/85"
                   />
                 ))

@@ -6,91 +6,92 @@ import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 const experiences = [
   {
     id: 1,
-    title: "English Teacher",
+    title: "Senior English Facilitator",
     organization: "Madrid Language Institute",
     location: "Madrid, Spain",
-    period: "2022–Present",
+    period: "2022-Present",
     type: "teaching",
     responsibilities: [
-      "Teaching Business English, Legal English, and General English",
-      "Instructing students of all ages and proficiency levels",
-      "Developing customized curriculum for professional development",
+      "Deliver business, legal, and general English programmes for adult learners and corporate teams",
+      "Design bespoke micro-curricula for multilingual professionals relocating across Europe",
+      "Mentor instructors on exam-preparation strategies and AI-assisted classroom tooling",
     ],
   },
   {
     id: 2,
-    title: "University Lecturer",
+    title: "Adjunct Lecturer, English Language & Literature",
     organization: "University of Ilam",
     location: "Ilam, Iran",
-    period: "2017–2022",
+    period: "2017-2019",
     type: "teaching",
     responsibilities: [
-      "ESP: Legal English, English for Philosophy and Engineering",
-      "EGP: Mathematics, Mechanical Engineering, Law, Physical Education",
-      "Curriculum development and assessment",
+      "Invited lecturer for bachelor cohorts across humanities and engineering faculties (per Ilam University teaching forms)",
+      "Delivered general English and ESP modules such as Legal English and English for Mechanical Engineering",
+      "Coordinated assessment rubrics and supervised undergraduate research projects for departmental boards",
     ],
   },
   {
     id: 3,
-    title: "Director, Language Academy",
-    organization: "Ilam Language Academy",
+    title: "Lead IELTS & TOEFL Instructor",
+    organization: "Iran Language Institute (ILI) – Ilam Centers",
     location: "Ilam, Iran",
-    period: "2019–2021",
-    type: "management",
+    period: "2014-2019",
+    type: "teaching",
     responsibilities: [
-      "Oversight of course quality and academic standards",
-      "Teacher collaboration and professional development",
-      "Material development and curriculum innovation",
+      "Ran upper-intermediate, advanced, TOEFL, and IELTS courses verified by Iranian Language Institute attestations",
+      "Balanced multi-branch timetables (Ilam Sister and Baradar centres) with up to five concurrent classes per semester",
+      "Implemented exam-readiness diagnostics and personalised progress reviews for adult and youth cohorts",
     ],
   },
   {
     id: 4,
-    title: "Academic Director",
-    organization: "Safir Danesh Language Institute",
+    title: "Academic Director & Branch Coordinator",
+    organization: "Ilam Language Academy & Safir Danesh Language Institute",
     location: "Ilam, Iran",
-    period: "2018–2019",
+    period: "2018-2021",
     type: "management",
     responsibilities: [
-      "Academic scheduling and program management",
-      "Teacher evaluation and mentoring",
-      "Curriculum design and quality assurance",
+      "Led academic scheduling, teacher onboarding, and quality assurance across two private institutes",
+      "Piloted curriculum refresh projects emphasising communicative methodology and digital literacy",
+      "Facilitated continuous professional development and peer observations for more than 15 instructors",
     ],
   },
   {
     id: 5,
-    title: "English Instructor",
-    organization: "Iran Language Institute (ILI), Ilam Branch",
-    location: "Ilam, Iran",
-    period: "2019–2020",
+    title: "Head Teacher & Course Designer",
+    organization: "Shokoh Pouyan (Longman) Language Academy",
+    location: "Shahreza, Iran",
+    period: "2012-2014",
     type: "teaching",
     responsibilities: [
-      "General and specialized English instruction",
-      "Student assessment and progress tracking",
+      "Delivered elementary to upper-intermediate programmes documented in Shokoh Pouyan certification letters",
+      "Produced placement pathways aligned with Longman curricular updates and learner feedback",
+      "Maintained academic performance dossiers for submission to partner higher-education centres",
     ],
   },
   {
     id: 6,
-    title: "English Teacher",
-    organization: "Private Language Schools",
-    location: "Iran",
-    period: "2009–2022",
+    title: "Part-time Instructor",
+    organization: "Marefat Novin Language Academy",
+    location: "Shahreza, Iran",
+    period: "2010-2012",
     type: "teaching",
     responsibilities: [
-      "Shokoh Pouyan, Marafet Novin, Ambassador, Iran Language Academy",
-      "Teaching various levels from beginners to advanced",
-      "Exam preparation (IELTS, TOEFL, etc.)",
+      "Taught communicative English classes since October 2010 with consistently positive quality reports",
+      "Collaborated with the Isfahan Provincial Education Organisation on compliance and reporting",
+      "Launched personalised learning plans for adolescents preparing for high-stakes examinations",
     ],
   },
   {
     id: 7,
-    title: "Simultaneous Interpreter",
-    organization: "II International Conference on Desertification",
+    title: "Conference Simultaneous Interpreter",
+    organization: "2nd International Conference on Desertification",
     location: "University of Ilam",
     period: "April 2018",
     type: "professional",
     responsibilities: [
-      "Persian–English simultaneous interpretation",
-      "Technical translation for environmental science presentations",
+      "Provided Persian-English simultaneous interpreting for scientific panels and visiting delegations",
+      "Curated terminology briefs for keynote researchers across environmental science disciplines",
     ],
   },
 ];
@@ -125,18 +126,18 @@ export default function Career() {
             <h1 className="text-4xl font-bold">Career History</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Professional experience in teaching, management, and research
+            Professional experience anchored in classroom excellence, academic leadership, and conference engagement
           </p>
         </div>
 
         {/* Timeline */}
         <div className="relative space-y-8">
           {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
+          <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
 
           {experiences.map((exp, index) => {
             const Icon = typeIcons[exp.type as keyof typeof typeIcons];
-            
+
             return (
               <motion.div
                 key={exp.id}
@@ -147,17 +148,28 @@ export default function Career() {
               >
                 <Card className="md:ml-20" data-testid={`card-experience-${index}`}>
                   {/* Timeline dot */}
-                  <div className="absolute -left-12 top-6 h-8 w-8 rounded-full bg-primary border-4 border-background hidden md:flex items-center justify-center">
+                  <div className="absolute -left-12 top-6 hidden h-8 w-8 items-center justify-center rounded-full border-4 border-background bg-primary md:flex">
                     <Icon className="h-4 w-4 text-primary-foreground" />
                   </div>
 
                   <CardHeader>
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="space-y-1">
-                        <CardTitle className="text-xl" data-testid={`text-title-${index}`}>{exp.title}</CardTitle>
-                        <p className="text-base font-medium text-primary" data-testid={`text-organization-${index}`}>{exp.organization}</p>
+                        <CardTitle className="text-xl" data-testid={`text-title-${index}`}>
+                          {exp.title}
+                        </CardTitle>
+                        <p
+                          className="text-base font-medium text-primary"
+                          data-testid={`text-organization-${index}`}
+                        >
+                          {exp.organization}
+                        </p>
                       </div>
-                      <Badge variant={typeColors[exp.type as keyof typeof typeColors]} className="w-fit" data-testid={`badge-type-${index}`}>
+                      <Badge
+                        variant={typeColors[exp.type as keyof typeof typeColors]}
+                        className="w-fit"
+                        data-testid={`badge-type-${index}`}
+                      >
                         {exp.type}
                       </Badge>
                     </div>
@@ -171,8 +183,12 @@ export default function Career() {
                   <CardContent>
                     <ul className="space-y-2">
                       {exp.responsibilities.map((resp, idx) => (
-                        <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2" data-testid={`text-responsibility-${index}-${idx}`}>
-                          <span className="text-primary mt-1">•</span>
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          data-testid={`text-responsibility-${index}-${idx}`}
+                        >
+                          <span className="mt-1 text-primary">•</span>
                           <span>{resp}</span>
                         </li>
                       ))}
@@ -185,28 +201,36 @@ export default function Career() {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <Card data-testid="card-stat-years">
             <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-primary" data-testid="text-stat-years">13+</p>
+              <p className="text-3xl font-bold text-primary" data-testid="text-stat-years">
+                14+
+              </p>
               <p className="text-sm text-muted-foreground">Years Teaching</p>
             </CardContent>
           </Card>
           <Card data-testid="card-stat-institutions">
             <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-accent" data-testid="text-stat-institutions">5+</p>
+              <p className="text-3xl font-bold text-accent" data-testid="text-stat-institutions">
+                7+
+              </p>
               <p className="text-sm text-muted-foreground">Institutions</p>
             </CardContent>
           </Card>
           <Card data-testid="card-stat-leadership">
             <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-ai-accent" data-testid="text-stat-leadership">2</p>
+              <p className="text-3xl font-bold text-ai-accent" data-testid="text-stat-leadership">
+                2
+              </p>
               <p className="text-sm text-muted-foreground">Leadership Roles</p>
             </CardContent>
           </Card>
           <Card data-testid="card-stat-countries">
             <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-primary" data-testid="text-stat-countries">3</p>
+              <p className="text-3xl font-bold text-primary" data-testid="text-stat-countries">
+                2
+              </p>
               <p className="text-sm text-muted-foreground">Countries</p>
             </CardContent>
           </Card>

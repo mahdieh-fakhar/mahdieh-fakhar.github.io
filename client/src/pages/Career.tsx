@@ -5,6 +5,20 @@ import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 
 const experiences = [
   {
+    id: 0,
+    title: "Scientific Translation & Research Operations Specialist",
+    organization: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    location: "Madrid, Spain",
+    period: "2025-2029",
+    type: "professional",
+    responsibilities: [
+      "Appointed under the NextGenerationEU funded Plan de Recuperación to support digital transformation of research management",
+      "Provide high-level translation and interpretation services for scientific committees and Vice-presidencia de Investigación Científica y Técnica",
+      "Develop data flows, expert databases, and analytic dashboards for the Program Momentum foresight initiative",
+      "Coordinate compliance, reporting, and confidentiality requirements for EU-funded innovation programmes",
+    ],
+  },
+  {
     id: 1,
     title: "Senior English Facilitator",
     organization: "Madrid Language Institute",
@@ -205,7 +219,7 @@ export default function Career() {
           <Card data-testid="card-stat-years">
             <CardContent className="p-6 text-center">
               <p className="text-3xl font-bold text-primary" data-testid="text-stat-years">
-                14+
+                15+
               </p>
               <p className="text-sm text-muted-foreground">Years Teaching</p>
             </CardContent>
@@ -213,7 +227,7 @@ export default function Career() {
           <Card data-testid="card-stat-institutions">
             <CardContent className="p-6 text-center">
               <p className="text-3xl font-bold text-accent" data-testid="text-stat-institutions">
-                7+
+                8+
               </p>
               <p className="text-sm text-muted-foreground">Institutions</p>
             </CardContent>

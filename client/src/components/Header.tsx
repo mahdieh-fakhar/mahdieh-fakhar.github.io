@@ -1,19 +1,47 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { assetPath } from "@/lib/basePath";
 import { getBadges, deriveBadgePageFromPath } from "@/lib/badgeUtils";
 import { BadgePill } from "@/components/badges/BadgePill";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navigation = [
+type NavChild = {
+  name: string;
+  href: string;
+  slug: string;
+};
+
+type NavigationItem = {
+  name: string;
+  href: string;
+  children?: NavChild[];
+};
+
+const eventPages: NavChild[] = [
+  { name: "All Events", href: "/events/all", slug: "all" },
+  { name: "Conferences", href: "/events/conferences", slug: "conferences" },
+  { name: "Seminars", href: "/events/seminars", slug: "seminars" },
+  { name: "Webinars", href: "/events/webinars", slug: "webinars" },
+  { name: "Congresses", href: "/events/congresses", slug: "congresses" },
+  { name: "Symposia", href: "/events/symposia", slug: "symposia" },
+];
+
+const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education" },
   { name: "Articles", href: "/articles" },
-  { name: "Events", href: "/events/all" },
+  { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },
   { name: "Career", href: "/career" },
   { name: "Skills", href: "/skills" },
@@ -27,15 +55,26 @@ export function Header() {
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+
   const pageKey = deriveBadgePageFromPath(location ?? "/");
   const normalizedLocation = (location ?? "/").replace(/\/+$/, "") || "/";
 
-  const isNavActive = (href: string) => {
-    if (href === "/events/all") {
-      return normalizedLocation === "/events/all" || normalizedLocation.startsWith("/events/");
+  const isChildActive = (href: string) => normalizedLocation === href;
+
+  const isNavActive = (item: NavigationItem) => {
+    if (item.children?.length) {
+      return item.children.some((child) => isChildActive(child.href));
     }
-    return normalizedLocation === href;
+
+    return normalizedLocation === item.href;
   };
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setMobileSubmenu(null);
+    }
+  }, [mobileMenuOpen]);
 
   const headerBadges = useMemo(() => {
     const contextual = getBadges({
@@ -100,7 +139,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             className="lg:hidden hover-elevate active-elevate-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen((open) => !open)}
             data-testid="button-mobile-menu"
           >
             {mobileMenuOpen ? (
@@ -116,30 +155,73 @@ export function Header() {
       {/* Desktop Navigation */}
       <div className="border-t border-primary/20 bg-background/90">
         <div className="hidden lg:flex w-full items-center justify-center gap-6 px-6 py-3">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`relative px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
-                isNavActive(item.href) ? "text-foreground" : "text-muted-foreground"
-              }`}
-              data-testid={`link-nav-${item.name.toLowerCase()}`}
-            >
-              {item.name}
-              {isNavActive(item.href) && (
-                <motion.div
-                  layoutId="navbar-indicator"
-                  className="absolute -bottom-[17px] left-4 right-4 h-0.5 bg-primary"
-                  initial={false}
-                  transition={{
-                    type: "spring",
-                    stiffness: 380,
-                    damping: 30,
-                  }}
-                />
-              )}
-            </Link>
-          ))}
+          {navigation.map((item) =>
+            item.children ? (
+              <DropdownMenu key={item.name}>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    className={cn(
+                      "group relative flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 whitespace-nowrap",
+                      isNavActive(item) ? "text-foreground" : "text-muted-foreground",
+                    )}
+                    data-testid={`link-nav-${item.name.toLowerCase()}`}
+                  >
+                    <span>{item.name}</span>
+                    <ChevronDown className="ml-1 h-4 w-4 opacity-70 transition-transform group-data-[state=open]:rotate-180" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  sideOffset={8}
+                  className="w-56 rounded-xl border border-primary/20 bg-background/95 p-1 shadow-xl backdrop-blur"
+                >
+                  {item.children.map((child) => {
+                    const childActive = isChildActive(child.href);
+                    return (
+                      <DropdownMenuItem key={child.slug} asChild className="p-0">
+                        <Link
+                          href={child.href}
+                          className={cn(
+                            "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors",
+                            childActive
+                              ? "bg-primary/10 text-primary"
+                              : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+                          )}
+                          data-testid={`link-nav-events-${child.slug}`}
+                        >
+                          {child.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
+                  isNavActive(item) ? "text-foreground" : "text-muted-foreground"
+                }`}
+                data-testid={`link-nav-${item.name.toLowerCase()}`}
+              >
+                {item.name}
+                {isNavActive(item) && (
+                  <motion.div
+                    layoutId="navbar-indicator"
+                    className="absolute -bottom-[17px] left-4 right-4 h-0.5 bg-primary"
+                    initial={false}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
+                  />
+                )}
+              </Link>
+            ),
+          )}
         </div>
       </div>
 
@@ -154,21 +236,75 @@ export function Header() {
             className="lg:hidden border-t"
           >
             <div className="space-y-1 px-4 py-4">
-              {navigation.map((item) => (
-                <Link 
-              key={item.name} 
-              href={item.href}
-              className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
-                isNavActive(item.href)
-                  ? "bg-accent text-accent-foreground"
-                  : "text-muted-foreground"
-              }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-testid={`link-mobile-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) =>
+                item.children ? (
+                  <div key={item.name} className="space-y-1">
+                    <button
+                      type="button"
+                      className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium hover-elevate active-elevate-2 ${
+                        isNavActive(item)
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground"
+                      }`}
+                      onClick={() =>
+                        setMobileSubmenu((prev) => (prev === item.name ? null : item.name))
+                      }
+                      data-testid={`link-mobile-${item.name.toLowerCase()}`}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${
+                          mobileSubmenu === item.name ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {mobileSubmenu === item.name && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="space-y-1 pl-4"
+                        >
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.slug}
+                              href={child.href}
+                              className={`block rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2 ${
+                                isChildActive(child.href)
+                                  ? "bg-primary/10 text-primary"
+                                  : "text-muted-foreground"
+                              }`}
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                                setMobileSubmenu(null);
+                              }}
+                              data-testid={`link-mobile-events-${child.slug}`}
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
+                      isNavActive(item)
+                        ? "bg-accent text-accent-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid={`link-mobile-${item.name.toLowerCase()}`}
+                  >
+                    {item.name}
+                  </Link>
+                ),
+              )}
             </div>
           </motion.div>
         )}

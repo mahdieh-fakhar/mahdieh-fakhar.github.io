@@ -395,7 +395,7 @@ type CertificateCardProps = {
 function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
   const [showDetails, setShowDetails] = useState(false);
   const downloadName = useMemo(
-    () => `Mahdieh Fakhar-Conferences-${String(index + 1).padStart(3, "0")}.jpg`,
+    () => `Mahdieh Fakhar-Events-${String(index + 1).padStart(3, "0")}.jpg`,
     [index],
   );
 
@@ -514,7 +514,7 @@ function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
   );
 }
 
-export default function Conferences() {
+export default function Events() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeCertificate, setActiveCertificate] = useState<ConferenceCertificate | null>(null);
 
@@ -547,7 +547,7 @@ export default function Conferences() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Presentation className="h-6 w-6 text-accent" />
-            <h1 className="text-4xl font-bold">Conferences</h1>
+            <h1 className="text-4xl font-bold">Events</h1>
           </div>
           <p className="text-xl text-muted-foreground">
             Examine AI-curated certificates with immersive previews, smart role filters, and
@@ -651,7 +651,7 @@ export default function Conferences() {
                 <Button variant="outline" className="inline-flex items-center gap-2" asChild>
                   <a
                     href={activeCertificate.imageUrl}
-                    download={`Mahdieh Fakhar-Conferences-${String(
+                    download={`Mahdieh Fakhar-Events-${String(
                       (indexLookup.get(activeCertificate.id) ?? 0) + 1,
                     ).padStart(3, "0")}.jpg`}
                   >

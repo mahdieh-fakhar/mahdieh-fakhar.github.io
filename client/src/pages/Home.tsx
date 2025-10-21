@@ -51,7 +51,7 @@ export default function Home() {
     {
       title: "Research & Publication Engines",
       description:
-        "Navigate the Articles and Conferences hubs to review peer-reviewed papers, data stories, and keynote contributions.",
+        "Navigate the Articles and Events hubs to review peer-reviewed papers, data stories, and keynote contributions.",
       icon: Microscope,
     },
     {
@@ -117,10 +117,10 @@ export default function Home() {
           icon: FileText,
         },
         {
-          name: "Conferences",
+          name: "Events",
           summary:
             "Global workshop leadership, keynote storytelling, and certificate vault.",
-          href: "/conferences",
+          href: "/events",
           icon: Microscope,
         },
         {

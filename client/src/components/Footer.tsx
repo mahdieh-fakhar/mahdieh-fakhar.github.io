@@ -10,7 +10,7 @@ const footerLinks = [
   { name: "About", href: "/about" },
   { name: "Education", href: "/education" },
   { name: "Articles", href: "/articles" },
-  { name: "Conferences", href: "/conferences" },
+  { name: "Events", href: "/events" },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];

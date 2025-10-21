@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mahdieh-fakhar.github.io/mf1/sitemap.xml
+Sitemap: https://mahdieh-fakhar.github.io/sitemap.xml

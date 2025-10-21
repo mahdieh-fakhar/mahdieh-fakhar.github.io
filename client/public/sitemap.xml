@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/</loc>
+    <loc>https://mahdieh-fakhar.github.io/</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/about</loc>
+    <loc>https://mahdieh-fakhar.github.io/about</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/education/all</loc>
+    <loc>https://mahdieh-fakhar.github.io/education/all</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/articles</loc>
+    <loc>https://mahdieh-fakhar.github.io/investigations/all</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/investigations/all</loc>
+    <loc>https://mahdieh-fakhar.github.io/articles</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/events/all</loc>
+    <loc>https://mahdieh-fakhar.github.io/events/all</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/memberships</loc>
+    <loc>https://mahdieh-fakhar.github.io/memberships</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/career</loc>
+    <loc>https://mahdieh-fakhar.github.io/career</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/skills</loc>
+    <loc>https://mahdieh-fakhar.github.io/skills</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/projects</loc>
+    <loc>https://mahdieh-fakhar.github.io/projects</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/resume</loc>
+    <loc>https://mahdieh-fakhar.github.io/resume</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/contact</loc>
+    <loc>https://mahdieh-fakhar.github.io/contact</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/certifications</loc>
+    <loc>https://mahdieh-fakhar.github.io/certifications</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

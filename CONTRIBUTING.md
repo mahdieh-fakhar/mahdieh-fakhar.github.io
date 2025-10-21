@@ -26,7 +26,7 @@ Thank you for your interest in improving **Mahdieh Fakhar · AI-Powered Digital 
 
 - [ ] Follow the existing TypeScript, Tailwind, and Shadcn conventions.
 - [ ] Keep components accessible (semantic HTML, aria labels where needed).
-- [ ] Ensure pages render under the `base` path `/mf1/`—use `assetPath` helpers for static assets.
+- [ ] Use the `assetPath` helpers so static assets respect the configured base path (default `/`).
 - [ ] If you add environment variables, document them in the README.
 - [ ] Keep copywriting concise and professional; avoid introducing non-ASCII characters unless required.
 

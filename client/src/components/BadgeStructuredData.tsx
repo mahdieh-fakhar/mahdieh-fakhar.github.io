@@ -3,7 +3,7 @@ import { getAllBadges } from "@/lib/badgeUtils";
 export function BadgeStructuredData() {
   const credentials = getAllBadges().map((badge) => ({
     "@type": "EducationalOccupationalCredential",
-    "@id": `https://mahdieh-fakhar.github.io/mf1/#credential-${badge.slug}`,
+    "@id": `https://mahdieh-fakhar.github.io/#credential-${badge.slug}`,
     name: badge.title,
     description: badge.summary,
     url: badge.url,
@@ -17,17 +17,17 @@ export function BadgeStructuredData() {
       "@type": "DefinedTerm",
       name: skill,
     })),
-    image: `https://mahdieh-fakhar.github.io/mf1${badge.image}`,
+    image: `https://mahdieh-fakhar.github.io${badge.image}`,
   }));
 
   const personGraph = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://mahdieh-fakhar.github.io/mf1/#profile",
+    "@id": "https://mahdieh-fakhar.github.io/#profile",
     name: "Mahdieh Fakhar",
     alternateName: ["Mahdieh Fakhar Shahreza"],
-    url: "https://mahdieh-fakhar.github.io/mf1/",
-    image: "https://mahdieh-fakhar.github.io/mf1/images/profile.jpg",
+    url: "https://mahdieh-fakhar.github.io/",
+    image: "https://mahdieh-fakhar.github.io/images/profile.jpg",
     jobTitle: [
       "Data Scientist",
       "Researcher",

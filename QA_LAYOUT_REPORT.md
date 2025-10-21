@@ -14,7 +14,7 @@
 
 | Page/Component | Viewport | Issue Description | Steps to Reproduce | Severity | Decision / Resolution | Status |
 | -------------- | -------- | ----------------- | ------------------ | -------- | ---------------------- | ------ |
-| Global routing (any page) | Desktop ≥1280px | Refreshing deep links shows header/footer only; SPA bundle fails to attach after fallback loader | Open `/mf1/about`, press Ctrl+F5; observe content missing | Critical | Investigate manifest loader + route hydration; ensure hashed assets served and React mounts correctly | Open |
+| Global routing (any page) | Desktop ≥1280px | Refreshing deep links shows header/footer only; SPA bundle fails to attach after fallback loader | Open `/about`, press Ctrl+F5; observe content missing | Critical | Investigate manifest loader + route hydration; ensure hashed assets served and React mounts correctly | Open |
 
 ## Page Map & Responsive Matrix
 

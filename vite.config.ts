@@ -10,11 +10,9 @@ const assetsRoot = path.resolve(currentDir, "attached_assets");
 const docsDir = path.resolve(currentDir, "docs");
 
 export default defineConfig(({ mode }) => {
-  const isDev = mode === "development";
-
   return {
     plugins: [react()],
-    base: isDev ? "/" : "/mf1/",
+    base: "/",
     resolve: {
       alias: {
         "@": path.resolve(clientRoot, "src"),

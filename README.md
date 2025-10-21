@@ -1,10 +1,10 @@
 # Mahdieh Fakhar · AI-Powered Digital Portfolio
 
-[![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://mahdieh-fakhar.github.io/mf1/) [![Stars](https://img.shields.io/github/stars/mahdieh-fakhar/mf1?style=flat-square)](https://github.com/mahdieh-fakhar/mf1/stargazers) [![Forks](https://img.shields.io/github/forks/mahdieh-fakhar/mf1?style=flat-square)](https://github.com/mahdieh-fakhar/mf1/network/members) [![License](https://img.shields.io/badge/license-MIT-success?style=flat-square)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-blue?logo=github)](https://mahdieh-fakhar.github.io/) [![Stars](https://img.shields.io/github/stars/mahdieh-fakhar/mahdieh-fakhar.github.io?style=flat-square)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/stargazers) [![Forks](https://img.shields.io/github/forks/mahdieh-fakhar/mahdieh-fakhar.github.io?style=flat-square)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/network/members) [![License](https://img.shields.io/badge/license-MIT-success?style=flat-square)](LICENSE)
 
 An academic-grade personal website highlighting Mahdieh Fakhar’s research, publications, and AI-driven portfolio. The experience blends modern front-end craft with intelligent document analysis so visitors can explore achievements, download materials, and initiate collaborations in seconds.
 
-> 🔗 **Live Demo:** https://mahdieh-fakhar.github.io/mf1/
+> 🔗 **Live Demo:** https://mahdieh-fakhar.github.io/
 
 ---
 
@@ -29,7 +29,7 @@ An academic-grade personal website highlighting Mahdieh Fakhar’s research, pub
 - **AI-assisted certificate analysis** with OpenAI Vision for automatic text extraction and insight tagging.
 - **Motion-crafted UI** using Framer Motion, scroll-triggered animations, and persistent light/dark themes.
 - **Accessible & responsive** build (WCAG-conscious, semantic HTML, keyboard support).
-- **GitHub Pages ready** deployment with base-path handling (`/mf1/`) and automated workflow.
+- **GitHub Pages ready** deployment with base-path handling (`/`) and automated workflow.
 - **Zero-backend contact delivery** using FormSubmit to route messages straight to email.
 
 ---
@@ -79,8 +79,8 @@ An academic-grade personal website highlighting Mahdieh Fakhar’s research, pub
 1. **Clone or template**
 
    ```bash
-   git clone https://github.com/mahdieh-fakhar/mf1.git
-   cd mf1
+   git clone https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io.git
+   cd mahdieh-fakhar.github.io
    ```
 
 2. **Install dependencies**
@@ -168,7 +168,7 @@ An academic-grade personal website highlighting Mahdieh Fakhar’s research, pub
 - [ ] Localize core pages (Spanish, Persian).
 - [ ] Integrate newsletter or updates subscription workflow.
 
-Track progress through [issues](https://github.com/mahdieh-fakhar/mf1/issues) and [GitHub Projects](https://github.com/users/mahdieh-fakhar/projects).
+Track progress through [issues](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/issues) and [GitHub Projects](https://github.com/users/mahdieh-fakhar/projects).
 
 ---
 

@@ -6,16 +6,17 @@ import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 const experiences = [
   {
     id: 0,
-    title: "Scientific Translation & Research Operations Specialist",
-    organization: "Consejo Superior de Investigaciones Científicas (CSIC)",
-    location: "Madrid, Spain",
-    period: "2025-2029",
+    title: "Graduate in Translation and Interpreting (Titulado/a Superior FCI) - Technical Scientific Research Support",
+    organization: "Consejo Superior de Investigaciones Cientificas (CSIC), Spain",
+    location: "C/ Serrano 117, Madrid, Spain",
+    period: "Feb 2025-Feb 2029",
     type: "professional",
     responsibilities: [
-      "Appointed under the NextGenerationEU funded Plan de Recuperación to support digital transformation of research management",
-      "Provide high-level translation and interpretation services for scientific committees and Vice-presidencia de Investigación Científica y Técnica",
-      "Develop data flows, expert databases, and analytic dashboards for the Program Momentum foresight initiative",
-      "Coordinate compliance, reporting, and confidentiality requirements for EU-funded innovation programmes",
+      "Fixed-term NextGenerationEU contract signed in Madrid on 7 January 2025 with full-time 40 hour weeks, a two month probation, and a project duration capped at four years",
+      "Deliver the MOMENTUM 240 ECTS individualized training program while digitalising research management for Jorge Manana Rodriguez's group",
+      "Integrate internal and external information sources and build expert databases, data flows, and analytic dashboards for foresight initiatives",
+      "Create expert systems to configure panels, support promotion analysis, and identify specialists for strategic research topics",
+      "Coordinate funding analysis and ensure compliance with EU Recovery and Resilience Facility regulations (EU 2020/2094, 2021/241), Spanish labour law (RDL 32/2021, Workers Statute, Law 53/1984, Organic Law 3/2018), and CSIC anti-fraud, conflict-of-interest, exclusivity, publicity, and confidentiality obligations under Secretary General Ignacio Gutierrez Llano",
     ],
   },
   {

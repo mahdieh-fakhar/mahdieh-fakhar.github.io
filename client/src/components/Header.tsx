@@ -13,7 +13,7 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "Education", href: "/education" },
   { name: "Articles", href: "/articles" },
-  { name: "Events", href: "/events" },
+  { name: "Events", href: "/events/all" },
   { name: "Memberships", href: "/memberships" },
   { name: "Career", href: "/career" },
   { name: "Skills", href: "/skills" },
@@ -28,6 +28,14 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pageKey = deriveBadgePageFromPath(location ?? "/");
+  const normalizedLocation = (location ?? "/").replace(/\/+$/, "") || "/";
+
+  const isNavActive = (href: string) => {
+    if (href === "/events/all") {
+      return normalizedLocation === "/events/all" || normalizedLocation.startsWith("/events/");
+    }
+    return normalizedLocation === href;
+  };
 
   const headerBadges = useMemo(() => {
     const contextual = getBadges({
@@ -113,12 +121,12 @@ export function Header() {
               key={item.name}
               href={item.href}
               className={`relative px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
-                location === item.href ? "text-foreground" : "text-muted-foreground"
+                isNavActive(item.href) ? "text-foreground" : "text-muted-foreground"
               }`}
               data-testid={`link-nav-${item.name.toLowerCase()}`}
             >
               {item.name}
-              {location === item.href && (
+              {isNavActive(item.href) && (
                 <motion.div
                   layoutId="navbar-indicator"
                   className="absolute -bottom-[17px] left-4 right-4 h-0.5 bg-primary"
@@ -148,13 +156,13 @@ export function Header() {
             <div className="space-y-1 px-4 py-4">
               {navigation.map((item) => (
                 <Link 
-                  key={item.name} 
-                  href={item.href}
-                  className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
-                    location === item.href
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground"
-                  }`}
+              key={item.name} 
+              href={item.href}
+              className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
+                isNavActive(item.href)
+                  ? "bg-accent text-accent-foreground"
+                  : "text-muted-foreground"
+              }`}
                   onClick={() => setMobileMenuOpen(false)}
                   data-testid={`link-mobile-${item.name.toLowerCase()}`}
                 >

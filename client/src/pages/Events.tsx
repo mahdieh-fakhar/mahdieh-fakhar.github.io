@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Presentation, ChevronDown, ChevronUp, Download, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { assetPath } from "@/lib/basePath";
+import { Link, useLocation } from "wouter";
 
 type CertificateOrientation = "portrait" | "landscape";
 
@@ -30,6 +30,11 @@ type ConferenceCertificate = {
 
 type EventCategory = "Conferences" | "Seminars" | "Webinars" | "Congresses" | "Symposia";
 type CategorizedCertificate = ConferenceCertificate & { category: EventCategory };
+type EventNavItem = {
+  label: string;
+  slug: string;
+  filter: EventCategory | null;
+};
 
 const certificateData: ConferenceCertificate[] = [
   {
@@ -403,10 +408,14 @@ const formatDate = (value: string) => {
   return new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(parsed);
 };
 
-const tabs: EventCategory[] = ["Conferences", "Seminars", "Webinars", "Congresses", "Symposia"];
-
-const filterByCategory = (category: EventCategory) =>
-  certificates.filter((item) => item.category === category);
+const navItems: EventNavItem[] = [
+  { label: "All", slug: "all", filter: null },
+  { label: "Conferences", slug: "conferences", filter: "Conferences" },
+  { label: "Seminars", slug: "seminars", filter: "Seminars" },
+  { label: "Webinars", slug: "webinars", filter: "Webinars" },
+  { label: "Congresses", slug: "congresses", filter: "Congresses" },
+  { label: "Symposia", slug: "symposia", filter: "Symposia" },
+];
 
 type CertificateCardProps = {
   item: CategorizedCertificate;
@@ -536,15 +545,38 @@ function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
   );
 }
 
-export default function Events() {
+type EventsRouteParams = {
+  category?: string;
+};
+
+type EventsProps = {
+  params?: EventsRouteParams;
+};
+
+export default function Events({ params }: EventsProps = {}) {
+  const [location, setLocation] = useLocation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeCertificate, setActiveCertificate] = useState<CategorizedCertificate | null>(null);
+
+  useEffect(() => {
+    const normalizedLocation = location.replace(/\/+$/, "");
+    if (!params?.category && normalizedLocation === "/events") {
+      setLocation("/events/all", { replace: true });
+    }
+  }, [location, params?.category, setLocation]);
 
   const indexLookup = useMemo(() => {
     const map = new Map<string, number>();
     certificates.forEach((item, idx) => map.set(item.id, idx));
     return map;
   }, []);
+
+  const activeSlug = params?.category ? params.category.toLowerCase() : "all";
+  const activeItem = navItems.find((item) => item.slug === activeSlug) ?? navItems[0];
+  const filteredCertificates =
+    activeItem.filter === null
+      ? certificates
+      : certificates.filter((item) => item.category === activeItem.filter);
 
   const handleImageClick = (item: CategorizedCertificate, index: number) => {
     setActiveCertificate(item);
@@ -577,82 +609,85 @@ export default function Events() {
           </p>
         </div>
 
-        <Tabs defaultValue={tabs[0]} className="space-y-6">
-          <TabsList className="flex flex-wrap gap-3 rounded-full bg-transparent p-0">
-            {tabs.map((category) => (
-              <TabsTrigger
-                key={category}
-                value={category}
-                className="rounded-full border-2 border-primary/30 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-primary/80 transition-all focus-visible:ring-0 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:hover:border-primary data-[state=inactive]:hover:text-primary"
-              >
-                {category}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <div className="space-y-6">
+          <div className="flex flex-wrap gap-3">
+            {navItems.map((item) => {
+              const href = item.slug === "all" ? "/events/all" : `/events/${item.slug}`;
+              const isActive = item.slug === activeItem.slug;
 
-          {tabs.map((category) => {
-            const items = filterByCategory(category);
+              return (
+                <Link
+                  key={item.slug}
+                  href={href}
+                  className={cn(
+                    "inline-flex items-center rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+                    isActive
+                      ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
+                      : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary",
+                  )}
+                  data-testid={`link-category-${item.slug}`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
 
-            return (
-              <TabsContent
-                key={category}
-                value={category}
-                className="space-y-6"
-                data-testid={`tab-content-${category.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                {items.length > 0 ? (
-                  <div className="space-y-12">
-                    {(["portrait", "landscape"] as CertificateOrientation[]).map((orientation) => {
-                      const orientationItems = items.filter(
-                        (certificate) => certificate.orientation === orientation,
-                      );
+          <section
+            className="space-y-6"
+            data-testid={`section-category-${activeItem.slug}`}
+          >
+            {filteredCertificates.length > 0 ? (
+              <div className="space-y-12">
+                {(["portrait", "landscape"] as CertificateOrientation[]).map((orientation) => {
+                  const orientationItems = filteredCertificates.filter(
+                    (certificate) => certificate.orientation === orientation,
+                  );
 
-                      if (orientationItems.length === 0) {
-                        return null;
-                      }
+                  if (orientationItems.length === 0) {
+                    return null;
+                  }
 
-                      const gridClass =
-                        orientation === "portrait"
-                          ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
-                          : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+                  const gridClass =
+                    orientation === "portrait"
+                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+                      : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
 
-                      return (
-                        <div key={orientation} className="space-y-6">
-                          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                            {orientation === "portrait" ? "Portrait Format" : "Landscape Format"}
-                          </div>
-                          <div className={gridClass}>
-                            {orientationItems.map((item) => {
-                              const originalIndex = indexLookup.get(item.id) ?? 0;
-                              return (
-                                <motion.div
-                                  key={item.id}
-                                  initial={{ opacity: 0, y: 32 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ duration: 0.4, delay: originalIndex * 0.02 }}
-                                >
-                                  <CertificateCard
-                                    item={item}
-                                    index={originalIndex}
-                                    onImageClick={handleImageClick}
-                                  />
-                                </motion.div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-                    No certificates found for this category yet.
-                  </div>
-                )}
-              </TabsContent>
-            );
-          })}
-        </Tabs>
+                  return (
+                    <div key={orientation} className="space-y-6">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+                        {orientation === "portrait" ? "Portrait Format" : "Landscape Format"}
+                      </div>
+                      <div className={gridClass}>
+                        {orientationItems.map((item) => {
+                          const originalIndex = indexLookup.get(item.id) ?? 0;
+                          return (
+                            <motion.div
+                              key={item.id}
+                              initial={{ opacity: 0, y: 32 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.4, delay: originalIndex * 0.02 }}
+                            >
+                              <CertificateCard
+                                item={item}
+                                index={originalIndex}
+                                onImageClick={handleImageClick}
+                              />
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
+                No certificates found for {activeItem.label.toLowerCase()} yet.
+              </div>
+            )}
+          </section>
+        </div>
       </motion.div>
 
       <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>

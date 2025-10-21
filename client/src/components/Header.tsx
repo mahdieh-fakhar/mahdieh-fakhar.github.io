@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
+import { Moon, Sun, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
@@ -13,12 +13,21 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
+import {
+  investigationsRoot,
+  nodeHref,
+  InvestigationNode,
+} from "@/data/investigationsHierarchy";
 
 type NavChild = {
   name: string;
   href: string;
   slug: string;
+  children?: NavChild[];
 };
 
 type NavigationItem = {
@@ -26,6 +35,13 @@ type NavigationItem = {
   href: string;
   children?: NavChild[];
 };
+
+const mapInvestigationNodeToNav = (node: InvestigationNode): NavChild => ({
+  name: node.label,
+  href: nodeHref(node),
+  slug: node.path.join("-") || "root",
+  children: node.children.map(mapInvestigationNodeToNav),
+});
 
 const eventPages: NavChild[] = [
   { name: "All Events", href: "/events/all", slug: "all" },
@@ -36,13 +52,7 @@ const eventPages: NavChild[] = [
   { name: "Symposia", href: "/events/symposia", slug: "symposia" },
 ];
 
-const investigationPages: NavChild[] = [
-  { name: "All Investigations", href: "/investigations/all", slug: "all" },
-  { name: "Articles", href: "/investigations/articles", slug: "articles" },
-  { name: "Theses & Dissertations", href: "/investigations/theses-dissertations", slug: "theses-dissertations" },
-  { name: "Books", href: "/investigations/books", slug: "books" },
-  { name: "Handbooks", href: "/investigations/handbooks", slug: "handbooks" },
-];
+const investigationPages: NavChild[] = investigationsRoot.children.map(mapInvestigationNodeToNav);
 
 const educationPages: NavChild[] = [
   { name: "All Education", href: "/education/all", slug: "all" },
@@ -71,36 +81,161 @@ export function Header() {
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<Set<string>>(new Set());
 
   const pageKey = deriveBadgePageFromPath(location ?? "/");
   const normalizedLocation = (location ?? "/").replace(/\/+$/, "") || "/";
 
-  const isChildActive = (href: string) => {
-    const target = href.replace(/\/+$/, "") || "/";
+  const normalizeHref = (href: string) => {
+    if (!href || href === "/") {
+      return "/";
+    }
+    const trimmed = href.replace(/\/+$/, "");
+    return trimmed === "" ? "/" : trimmed;
+  };
+
+  const matchesHref = (href: string) => {
+    const target = normalizeHref(href);
     if (target === "/") {
       return normalizedLocation === "/";
     }
-
-    return (
-      normalizedLocation === target ||
-      normalizedLocation.startsWith(`${target}/`)
-    );
+    return normalizedLocation === target || normalizedLocation.startsWith(`${target}/`);
   };
 
-  const isNavActive = (item: NavigationItem) => {
-    if (item.children?.length) {
-      return item.children.some((child) => isChildActive(child.href));
-    }
+  const hasActiveDescendants = (children?: NavChild[]): boolean =>
+    children?.some((child) => matchesHref(child.href) || hasActiveDescendants(child.children)) ??
+    false;
 
-    return isChildActive(item.href);
-  };
+  const isNavActive = (item: NavigationItem) =>
+    matchesHref(item.href) || hasActiveDescendants(item.children);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
-      setMobileSubmenu(null);
+      setMobileExpanded(new Set());
     }
   }, [mobileMenuOpen]);
+
+  const toggleMobileKey = (key: string) => {
+    setMobileExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) {
+        next.delete(key);
+      } else {
+        next.add(key);
+      }
+      return next;
+    });
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileExpanded(new Set());
+  };
+
+  const renderDropdownItems = (items: NavChild[], parentKey: string) =>
+    items.map((child, index) => {
+      const key = `${parentKey}-${child.slug || index}`;
+      const active = matchesHref(child.href) || hasActiveDescendants(child.children);
+
+      if (child.children && child.children.length > 0) {
+        return (
+          <DropdownMenuSub key={key}>
+            <DropdownMenuSubTrigger
+              className={cn(
+                "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
+                active
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+              )}
+            >
+              <span>{child.name}</span>
+              <ChevronRight className="h-4 w-4 opacity-70" />
+            </DropdownMenuSubTrigger>
+            <DropdownMenuSubContent className="w-64 rounded-xl border border-primary/20 bg-background/95 p-1 shadow-lg backdrop-blur">
+              {renderDropdownItems(child.children, key)}
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+        );
+      }
+
+      return (
+        <DropdownMenuItem key={key} asChild className="p-0">
+          <Link
+            href={child.href}
+            className={cn(
+              "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors",
+              active
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+            )}
+            data-testid={`link-nav-${child.slug}`}
+          >
+            {child.name}
+          </Link>
+        </DropdownMenuItem>
+      );
+    });
+
+  const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) => (
+    <div className={cn("space-y-1", depth > 0 && "pl-4")}>
+      {items.map((child, index) => {
+        const key = `${parentKey}-${child.slug || index}`;
+        const expanded = mobileExpanded.has(key);
+        const active = matchesHref(child.href) || hasActiveDescendants(child.children);
+
+        if (child.children && child.children.length > 0) {
+          return (
+            <div key={key} className="space-y-1">
+              <button
+                type="button"
+                className={cn(
+                  "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
+                  active ? "bg-primary/10 text-primary" : "text-muted-foreground",
+                )}
+                onClick={() => toggleMobileKey(key)}
+                data-testid={`link-mobile-${key}`}
+              >
+                <span>{child.name}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    expanded ? "rotate-180" : "",
+                  )}
+                />
+              </button>
+              <AnimatePresence>
+                {expanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {renderMobileNavItems(child.children, key, depth + 1)}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        }
+
+        return (
+          <Link
+            key={key}
+            href={child.href}
+            className={cn(
+              "block rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
+              active ? "bg-primary/10 text-primary" : "text-muted-foreground",
+            )}
+            onClick={closeMobileMenu}
+            data-testid={`link-mobile-${key}`}
+          >
+            {child.name}
+          </Link>
+        );
+      })}
+    </div>
+  );
 
   const headerBadges = useMemo(() => {
     const contextual = getBadges({
@@ -202,25 +337,10 @@ export function Header() {
                   sideOffset={8}
                   className="w-56 rounded-xl border border-primary/20 bg-background/95 p-1 shadow-xl backdrop-blur"
                 >
-                  {item.children.map((child) => {
-                    const childActive = isChildActive(child.href);
-                    return (
-                      <DropdownMenuItem key={child.slug} asChild className="p-0">
-                        <Link
-                          href={child.href}
-                          className={cn(
-                            "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors",
-                            childActive
-                              ? "bg-primary/10 text-primary"
-                              : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
-                          )}
-                          data-testid={`link-nav-${item.name.toLowerCase()}-${child.slug}`}
-                        >
-                          {child.name}
-                        </Link>
-                      </DropdownMenuItem>
-                    );
-                  })}
+                  {renderDropdownItems(
+                    item.children,
+                    item.name.toLowerCase().replace(/\s+/g, "-"),
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
@@ -262,75 +382,65 @@ export function Header() {
             className="lg:hidden border-t"
           >
             <div className="space-y-1 px-4 py-4">
-              {navigation.map((item) =>
-                item.children ? (
-                  <div key={item.name} className="space-y-1">
-                    <button
-                      type="button"
-                      className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium hover-elevate active-elevate-2 ${
-                        isNavActive(item)
-                          ? "bg-accent text-accent-foreground"
-                          : "text-muted-foreground"
-                      }`}
-                      onClick={() =>
-                        setMobileSubmenu((prev) => (prev === item.name ? null : item.name))
-                      }
-                      data-testid={`link-mobile-${item.name.toLowerCase()}`}
-                    >
-                      <span>{item.name}</span>
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform ${
-                          mobileSubmenu === item.name ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {mobileSubmenu === item.name && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="space-y-1 pl-4"
-                        >
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.slug}
-                              href={child.href}
-                              className={`block rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2 ${
-                                isChildActive(child.href)
-                                  ? "bg-primary/10 text-primary"
-                                  : "text-muted-foreground"
-                              }`}
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            setMobileSubmenu(null);
-                          }}
-                          data-testid={`link-mobile-${item.name.toLowerCase()}-${child.slug}`}
-                        >
-                          {child.name}
-                        </Link>
-                      ))}
-                    </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
+              {navigation.map((item) => {
+                const itemKey = `nav-${item.name.toLowerCase().replace(/\s+/g, "-")}`;
+                const expanded = mobileExpanded.has(itemKey);
+
+                if (item.children && item.children.length > 0) {
+                  return (
+                    <div key={item.name} className="space-y-1">
+                      <button
+                        type="button"
+                        className={cn(
+                          "flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-medium hover-elevate active-elevate-2",
+                          isNavActive(item)
+                            ? "bg-accent text-accent-foreground"
+                            : "text-muted-foreground",
+                        )}
+                        onClick={() => toggleMobileKey(itemKey)}
+                        data-testid={`link-mobile-${itemKey}`}
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 transition-transform",
+                            expanded ? "rotate-180" : "",
+                          )}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {expanded && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {renderMobileNavItems(item.children, itemKey, 1)}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                return (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2 ${
+                    className={cn(
+                      "block px-3 py-2 text-base font-medium rounded-md hover-elevate active-elevate-2",
                       isNavActive(item)
                         ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    data-testid={`link-mobile-${item.name.toLowerCase()}`}
+                        : "text-muted-foreground",
+                    )}
+                    onClick={closeMobileMenu}
+                    data-testid={`link-mobile-${itemKey}`}
                   >
                     {item.name}
                   </Link>
-                ),
-              )}
+                );
+              })}
             </div>
           </motion.div>
         )}

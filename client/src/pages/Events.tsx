@@ -28,6 +28,9 @@ type ConferenceCertificate = {
   orientation: CertificateOrientation;
 };
 
+type EventCategory = "Conferences" | "Seminars" | "Webinars" | "Congresses" | "Symposia";
+type CategorizedCertificate = ConferenceCertificate & { category: EventCategory };
+
 const certificateData: ConferenceCertificate[] = [
   {
     id: "tellsi-2015-critical-pedagogy",
@@ -362,9 +365,32 @@ const certificateData: ConferenceCertificate[] = [
   },
 ];
 
-const certificates: ConferenceCertificate[] = certificateData.map((certificate) => ({
+const determineCategory = (certificate: ConferenceCertificate): EventCategory => {
+  const text = `${certificate.conferenceName} ${certificate.certificateTitle} ${certificate.certificateType}`.toLowerCase();
+
+  if (text.includes("webinar")) {
+    return "Webinars";
+  }
+
+  if (text.includes("seminar")) {
+    return "Seminars";
+  }
+
+  if (text.includes("congress")) {
+    return "Congresses";
+  }
+
+  if (text.includes("symposium") || text.includes("symposia")) {
+    return "Symposia";
+  }
+
+  return "Conferences";
+};
+
+const certificates: CategorizedCertificate[] = certificateData.map((certificate) => ({
   ...certificate,
   imageUrl: assetPath(certificate.imageUrl),
+  category: determineCategory(certificate),
 }));
 
 const formatDate = (value: string) => {
@@ -377,19 +403,15 @@ const formatDate = (value: string) => {
   return new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(parsed);
 };
 
-const roles = Array.from(new Set(certificates.map((item) => item.holderRole))).sort(
-  (a, b) => a.localeCompare(b),
-);
+const tabs: EventCategory[] = ["Conferences", "Seminars", "Webinars", "Congresses", "Symposia"];
 
-const tabs = ["All", ...roles];
-
-const filterByRole = (role: string) =>
-  role === "All" ? certificates : certificates.filter((item) => item.holderRole === role);
+const filterByCategory = (category: EventCategory) =>
+  certificates.filter((item) => item.category === category);
 
 type CertificateCardProps = {
-  item: ConferenceCertificate;
+  item: CategorizedCertificate;
   index: number;
-  onImageClick: (item: ConferenceCertificate, index: number) => void;
+  onImageClick: (item: CategorizedCertificate, index: number) => void;
 };
 
 function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
@@ -516,7 +538,7 @@ function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
 
 export default function Events() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [activeCertificate, setActiveCertificate] = useState<ConferenceCertificate | null>(null);
+  const [activeCertificate, setActiveCertificate] = useState<CategorizedCertificate | null>(null);
 
   const indexLookup = useMemo(() => {
     const map = new Map<string, number>();
@@ -524,7 +546,7 @@ export default function Events() {
     return map;
   }, []);
 
-  const handleImageClick = (item: ConferenceCertificate, index: number) => {
+  const handleImageClick = (item: CategorizedCertificate, index: number) => {
     setActiveCertificate(item);
     setDialogOpen(true);
   };
@@ -555,28 +577,28 @@ export default function Events() {
           </p>
         </div>
 
-        <Tabs defaultValue="All" className="space-y-6">
+        <Tabs defaultValue={tabs[0]} className="space-y-6">
           <TabsList className="flex flex-wrap gap-3 rounded-full bg-transparent p-0">
-            {tabs.map((role) => (
+            {tabs.map((category) => (
               <TabsTrigger
-                key={role}
-                value={role}
+                key={category}
+                value={category}
                 className="rounded-full border-2 border-primary/30 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-primary/80 transition-all focus-visible:ring-0 data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=inactive]:hover:border-primary data-[state=inactive]:hover:text-primary"
               >
-                {role}
+                {category}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          {tabs.map((role) => {
-            const items = filterByRole(role);
+          {tabs.map((category) => {
+            const items = filterByCategory(category);
 
             return (
               <TabsContent
-                key={role}
-                value={role}
+                key={category}
+                value={category}
                 className="space-y-6"
-                data-testid={`tab-content-${role.toLowerCase().replace(/\s+/g, "-")}`}
+                data-testid={`tab-content-${category.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {items.length > 0 ? (
                   <div className="space-y-12">
@@ -624,7 +646,7 @@ export default function Events() {
                   </div>
                 ) : (
                   <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-                    No certificates found for this role yet.
+                    No certificates found for this category yet.
                   </div>
                 )}
               </TabsContent>

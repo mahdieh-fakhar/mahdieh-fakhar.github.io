@@ -13,6 +13,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Education from "@/pages/Education";
 import Articles from "@/pages/Articles";
+import Investigations from "@/pages/Investigations";
 import Events from "@/pages/Events";
 import Memberships from "@/pages/Memberships";
 import Career from "@/pages/Career";
@@ -47,6 +48,8 @@ function AppShell() {
           <Route path="/about" component={About} />
           <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
+          <Route path="/investigations/:path*" component={Investigations} />
+          <Route path="/investigations" component={Investigations} />
           <Route path="/articles" component={Articles} />
           <Route path="/events/:category" component={Events} />
           <Route path="/events" component={Events} />

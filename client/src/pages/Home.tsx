@@ -16,6 +16,7 @@ import {
   Puzzle,
   ScrollText,
   Send,
+  Layers,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
 import { getBadges, getPrimaryBadgeForPage } from "@/lib/badgeUtils";
@@ -51,7 +52,7 @@ export default function Home() {
     {
       title: "Research & Publication Engines",
       description:
-        "Navigate the Articles and Events hubs to review peer-reviewed papers, data stories, and keynote contributions.",
+        "Navigate the Investigations and Events hubs to review peer-reviewed papers, data stories, and keynote contributions.",
       icon: Microscope,
     },
     {
@@ -115,6 +116,13 @@ export default function Home() {
             "Peer-reviewed outputs with bibliometric context and AI-generated abstracts.",
           href: "/articles",
           icon: FileText,
+        },
+        {
+          name: "Investigations",
+          summary:
+            "Deep hierarchical index for theses, books, handbooks, and specialized study types.",
+          href: "/investigations/all",
+          icon: Layers,
         },
         {
           name: "Events",

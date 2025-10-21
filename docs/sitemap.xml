@@ -7,13 +7,16 @@
     <loc>https://mahdieh-fakhar.github.io/mf1/about</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/education</loc>
+    <loc>https://mahdieh-fakhar.github.io/mf1/education/all</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/mf1/articles</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/mf1/conferences</loc>
+    <loc>https://mahdieh-fakhar.github.io/mf1/investigations/all</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/mf1/events/all</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/mf1/memberships</loc>

@@ -36,6 +36,14 @@ const eventPages: NavChild[] = [
   { name: "Symposia", href: "/events/symposia", slug: "symposia" },
 ];
 
+const investigationPages: NavChild[] = [
+  { name: "All Investigations", href: "/investigations/all", slug: "all" },
+  { name: "Articles", href: "/investigations/articles", slug: "articles" },
+  { name: "Theses & Dissertations", href: "/investigations/theses-dissertations", slug: "theses-dissertations" },
+  { name: "Books", href: "/investigations/books", slug: "books" },
+  { name: "Handbooks", href: "/investigations/handbooks", slug: "handbooks" },
+];
+
 const educationPages: NavChild[] = [
   { name: "All Education", href: "/education/all", slug: "all" },
   { name: "Academic Pathways", href: "/education/academic", slug: "academic" },
@@ -47,6 +55,7 @@ const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all", children: educationPages },
+  { name: "Investigations", href: "/investigations/all", children: investigationPages },
   { name: "Articles", href: "/articles" },
   { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },
@@ -67,14 +76,24 @@ export function Header() {
   const pageKey = deriveBadgePageFromPath(location ?? "/");
   const normalizedLocation = (location ?? "/").replace(/\/+$/, "") || "/";
 
-  const isChildActive = (href: string) => normalizedLocation === href;
+  const isChildActive = (href: string) => {
+    const target = href.replace(/\/+$/, "") || "/";
+    if (target === "/") {
+      return normalizedLocation === "/";
+    }
+
+    return (
+      normalizedLocation === target ||
+      normalizedLocation.startsWith(`${target}/`)
+    );
+  };
 
   const isNavActive = (item: NavigationItem) => {
     if (item.children?.length) {
       return item.children.some((child) => isChildActive(child.href));
     }
 
-    return normalizedLocation === item.href;
+    return isChildActive(item.href);
   };
 
   useEffect(() => {

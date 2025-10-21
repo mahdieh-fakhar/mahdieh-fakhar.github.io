@@ -9,6 +9,7 @@ const footerLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all" },
+  { name: "Investigations", href: "/investigations/all" },
   { name: "Articles", href: "/articles" },
   { name: "Events", href: "/events/all" },
   { name: "Resume", href: "/resume" },

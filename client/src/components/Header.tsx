@@ -36,10 +36,17 @@ const eventPages: NavChild[] = [
   { name: "Symposia", href: "/events/symposia", slug: "symposia" },
 ];
 
+const educationPages: NavChild[] = [
+  { name: "All Education", href: "/education/all", slug: "all" },
+  { name: "Academic Pathways", href: "/education/academic", slug: "academic" },
+  { name: "Courses", href: "/education/courses", slug: "courses" },
+  { name: "Workshops", href: "/education/workshops", slug: "workshops" },
+];
+
 const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Education", href: "/education" },
+  { name: "Education", href: "/education/all", children: educationPages },
   { name: "Articles", href: "/articles" },
   { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },
@@ -188,7 +195,7 @@ export function Header() {
                               ? "bg-primary/10 text-primary"
                               : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
                           )}
-                          data-testid={`link-nav-events-${child.slug}`}
+                          data-testid={`link-nav-${item.name.toLowerCase()}-${child.slug}`}
                         >
                           {child.name}
                         </Link>
@@ -276,16 +283,16 @@ export function Header() {
                                   ? "bg-primary/10 text-primary"
                                   : "text-muted-foreground"
                               }`}
-                              onClick={() => {
-                                setMobileMenuOpen(false);
-                                setMobileSubmenu(null);
-                              }}
-                              data-testid={`link-mobile-events-${child.slug}`}
-                            >
-                              {child.name}
-                            </Link>
-                          ))}
-                        </motion.div>
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            setMobileSubmenu(null);
+                          }}
+                          data-testid={`link-mobile-${item.name.toLowerCase()}-${child.slug}`}
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </motion.div>
                       )}
                     </AnimatePresence>
                   </div>

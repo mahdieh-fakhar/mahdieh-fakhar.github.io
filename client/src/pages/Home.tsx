@@ -92,7 +92,7 @@ export default function Home() {
           name: "Education",
           summary:
             "Three master's programs plus certifications powering data science and teaching excellence.",
-          href: "/education",
+          href: "/education/all",
           icon: GraduationCap,
         },
         {
@@ -605,7 +605,7 @@ export default function Home() {
               Key Resources
             </span>
             <Link
-              href="/education"
+              href="/education/all"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
               Education dossier

@@ -45,6 +45,7 @@ function AppShell() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
           <Route path="/articles" component={Articles} />
           <Route path="/events/:category" component={Events} />

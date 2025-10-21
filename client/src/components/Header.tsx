@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
@@ -42,6 +42,8 @@ const mapInvestigationNodeToNav = (node: InvestigationNode): NavChild => ({
   slug: node.path.join("-") || "root",
   children: node.children.map(mapInvestigationNodeToNav),
 });
+
+const slugify = (value: string) => value.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
 
 const eventPages: NavChild[] = [
   { name: "All Events", href: "/events/all", slug: "all" },
@@ -132,54 +134,58 @@ export function Header() {
     setMobileExpanded(new Set());
   };
 
-  const renderDropdownItems = (items: NavChild[], parentKey: string) =>
-    items.map((child, index) => {
-      const key = `${parentKey}-${child.slug || index}`;
-      const active = matchesHref(child.href) || hasActiveDescendants(child.children);
+  const renderDropdownItems = (items: NavChild[], parentKey: string) => (
+  items.map((child, index) => {
+    const rawKey = `${parentKey}-${child.slug || index}`;
+    const key = slugify(rawKey);
+    const active = matchesHref(child.href) || hasActiveDescendants(child.children);
 
-      if (child.children && child.children.length > 0) {
-        return (
-          <DropdownMenuSub key={key}>
-            <DropdownMenuSubTrigger
-              className={cn(
-                "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
-                active
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
-              )}
-            >
-              <span>{child.name}</span>
-              <ChevronRight className="h-4 w-4 opacity-70" />
-            </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent className="w-64 rounded-xl border border-primary/20 bg-background/95 p-1 shadow-lg backdrop-blur">
-              {renderDropdownItems(child.children, key)}
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-        );
-      }
-
+    if (child.children && child.children.length > 0) {
       return (
-        <DropdownMenuItem key={key} asChild className="p-0">
-          <Link
-            href={child.href}
+        <DropdownMenuSub key={key}>
+          <DropdownMenuSubTrigger
             className={cn(
-              "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors",
+              "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
               active
                 ? "bg-primary/10 text-primary"
                 : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
             )}
-            data-testid={`link-nav-${child.slug}`}
           >
-            {child.name}
-          </Link>
-        </DropdownMenuItem>
+            <span>{child.name}</span>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-lg backdrop-blur">
+            {renderDropdownItems(child.children, key)}
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
       );
-    });
+    }
 
-  const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) => (
+    const safeSlug = slugify(child.slug || String(index));
+
+    return (
+      <DropdownMenuItem key={key} asChild className="p-0">
+        <Link
+          href={child.href}
+          className={cn(
+            "flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors",
+            active
+              ? "bg-primary/10 text-primary"
+              : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
+          )}
+          data-testid={`link-nav-${safeSlug}`}
+        >
+          {child.name}
+        </Link>
+      </DropdownMenuItem>
+    );
+  })
+)
+
+const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) => (
     <div className={cn("space-y-1", depth > 0 && "pl-4")}>
       {items.map((child, index) => {
-        const key = `${parentKey}-${child.slug || index}`;
+        const rawKey = `${parentKey}-${child.slug || index}`;
+        const key = slugify(rawKey);
         const expanded = mobileExpanded.has(key);
         const active = matchesHref(child.href) || hasActiveDescendants(child.children);
 
@@ -326,7 +332,7 @@ export function Header() {
                       "group relative flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 whitespace-nowrap",
                       isNavActive(item) ? "text-foreground" : "text-muted-foreground",
                     )}
-                    data-testid={`link-nav-${item.name.toLowerCase()}`}
+                    data-testid={`link-nav-${slugify(item.name)}`}
                   >
                     <span>{item.name}</span>
                     <ChevronDown className="ml-1 h-4 w-4 opacity-70 transition-transform group-data-[state=open]:rotate-180" />
@@ -334,12 +340,12 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="start"
-                  sideOffset={8}
-                  className="w-56 rounded-xl border border-primary/20 bg-background/95 p-1 shadow-xl backdrop-blur"
+                  sideOffset={12}
+                  className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-xl backdrop-blur"
                 >
                   {renderDropdownItems(
                     item.children,
-                    item.name.toLowerCase().replace(/\s+/g, "-"),
+                    slugify(item.name),
                   )}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -350,7 +356,7 @@ export function Header() {
                 className={`relative px-4 py-2 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
                   isNavActive(item) ? "text-foreground" : "text-muted-foreground"
                 }`}
-                data-testid={`link-nav-${item.name.toLowerCase()}`}
+                data-testid={`link-nav-${slugify(item.name)}`}
               >
                 {item.name}
                 {isNavActive(item) && (
@@ -383,7 +389,7 @@ export function Header() {
           >
             <div className="space-y-1 px-4 py-4">
               {navigation.map((item) => {
-                const itemKey = `nav-${item.name.toLowerCase().replace(/\s+/g, "-")}`;
+                const itemKey = `nav-${slugify(item.name)}`;
                 const expanded = mobileExpanded.has(itemKey);
 
                 if (item.children && item.children.length > 0) {

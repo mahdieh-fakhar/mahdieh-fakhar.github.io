@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
+import { Moon, Sun, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
@@ -152,13 +152,17 @@ export function Header() {
         <DropdownMenuSub key={key}>
           <DropdownMenuSubTrigger
             className={cn(
-              "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
+              "group flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-sm transition-colors",
               active
                 ? "bg-primary/10 text-primary"
                 : "text-muted-foreground hover:bg-primary/10 hover:text-primary",
             )}
           >
-            <span>{child.name}</span>
+            <span className="truncate">{child.name}</span>
+            <ChevronRight
+              className="h-4 w-4 flex-shrink-0 opacity-70 transition-transform group-data-[state=open]:rotate-90"
+              aria-hidden="true"
+            />
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-lg backdrop-blur">
             {renderDropdownItems(child.children, key)}
@@ -212,11 +216,12 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
               data-testid={`link-mobile-${key}`}
             >
               <span>{child.name}</span>
-              <ChevronDown
+              <ChevronRight
                 className={cn(
                   "h-4 w-4 transition-transform",
-                  expanded ? "rotate-180" : "",
+                  expanded ? "rotate-90" : "",
                 )}
+                aria-hidden="true"
               />
             </button>
             <AnimatePresence>
@@ -432,11 +437,12 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
                         data-testid={`link-mobile-${itemKey}`}
                       >
                         <span>{item.name}</span>
-                        <ChevronDown
+                        <ChevronRight
                           className={cn(
                             "h-4 w-4 transition-transform",
-                            expanded ? "rotate-180" : "",
+                            expanded ? "rotate-90" : "",
                           )}
+                          aria-hidden="true"
                         />
                       </button>
                       <AnimatePresence>

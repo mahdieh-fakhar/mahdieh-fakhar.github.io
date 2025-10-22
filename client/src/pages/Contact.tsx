@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -76,12 +76,12 @@ export default function Contact() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4 text-center">
@@ -94,9 +94,9 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-5">
+        <div className="grid gap-8 lg:[grid-template-columns:minmax(0,1.65fr)_minmax(0,1fr)]">
           {/* Contact Information */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
@@ -167,26 +167,26 @@ export default function Contact() {
 
             <Card className="bg-gradient-to-br from-primary/5 to-accent/5">
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Looking For</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Data analysis and visualization projects</li>
-                  <li>• Research collaborations</li>
-                  <li>• Courses on AI and data science</li>
-                  <li>• Opportunities in database digitalization</li>
+                <h3 className="mb-2 font-semibold">Looking For</h3>
+                <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+                  <li>Data analysis and visualization projects</li>
+                  <li>Research collaborations</li>
+                  <li>Courses on AI and data science</li>
+                  <li>Opportunities in database digitalization</li>
                 </ul>
               </CardContent>
             </Card>
           </div>
 
           {/* Contact Form */}
-          <Card className="lg:col-span-3">
+          <Card>
             <CardHeader>
               <CardTitle>Send a Message</CardTitle>
             </CardHeader>
             <CardContent>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="auto-grid sm:auto-grid-lg">
                     <FormField
                       control={form.control}
                       name="name"

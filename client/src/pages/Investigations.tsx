@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +36,7 @@ const renderCategoryGrid = (categories: InvestigationNode[], activeNode: Investi
   const activePathKey = activeNode.path.join("/");
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="auto-grid md:auto-grid-lg">
       {categories.map((category) => {
         const href = nodeHref(category);
         const isActive = category.path.join("/") === activePathKey;
@@ -114,12 +114,12 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
   const siblingCategories = parentNode ? parentNode.children : [];
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-10"
+        className="stack-gap-md"
       >
         <div className="space-y-4">
           <div className="flex items-center gap-3">

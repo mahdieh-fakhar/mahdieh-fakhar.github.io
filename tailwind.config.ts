@@ -4,6 +4,30 @@ export default {
   darkMode: ["class"],
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1.25rem",
+        sm: "1.5rem",
+        md: "1.75rem",
+        lg: "2rem",
+        xl: "2.5rem",
+      },
+    },
+    screens: {
+      "mobile": { max: "480px" },
+      "mobile-lg": { max: "576px" },
+      "tablet-portrait": { max: "768px" },
+      "tablet-landscape": { max: "992px" },
+      "laptop-max": { max: "1200px" },
+      xs: "480px",
+      sm: "576px",
+      md: "768px",
+      lg: "992px",
+      xl: "1200px",
+      "2xl": "1440px",
+      "3xl": "1920px",
+    },
     extend: {
       borderRadius: {
         lg: ".5625rem", /* 9px */

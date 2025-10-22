@@ -199,7 +199,7 @@ export default function Education({ params }: EducationProps = {}) {
       : allRecords.filter((record) => record.category === activeItem.filter);
 
   const renderCards = (records: EducationRecord[]) => (
-    <div className="space-y-6">
+    <div className="stack-gap-md">
       {records.map((record, index) => {
         const metaParts = [
           record.location,
@@ -360,12 +360,12 @@ export default function Education({ params }: EducationProps = {}) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-10"
+        className="stack-gap-lg"
       >
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -378,7 +378,7 @@ export default function Education({ params }: EducationProps = {}) {
         </div>
 
         <div className="space-y-8">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
             {navItems.map((item) => {
               const href = item.slug === "all" ? "/education/all" : `/education/${item.slug}`;
               const isActive = item.slug === activeItem.slug;

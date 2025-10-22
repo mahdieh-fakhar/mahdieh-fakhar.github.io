@@ -61,12 +61,12 @@ const conferenceProceedings = [
 
 export default function Articles() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -82,7 +82,7 @@ export default function Articles() {
         {/* Journal Publications */}
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold">Indexed Journal Publications</h2>
-          <div className="grid gap-6">
+          <div className="stack-gap-md">
             {publications.map((pub, index) => (
               <motion.div
                 key={pub.id}
@@ -129,7 +129,7 @@ export default function Articles() {
               <p className="text-sm text-muted-foreground mb-4">
                 Full conference paper list available in digital portfolio
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="auto-grid">
                 {conferenceProceedings.map((conf, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm" data-testid={`text-conference-${index}`}>
                     <ExternalLink className="h-4 w-4 text-muted-foreground" />
@@ -147,7 +147,7 @@ export default function Articles() {
             <CardTitle>Research Focus Areas</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
               <Badge variant="secondary" data-testid="badge-focus-machine-translation">Machine Translation</Badge>
               <Badge variant="secondary" data-testid="badge-focus-language-learning-technology">Language Learning Technology</Badge>
               <Badge variant="secondary" data-testid="badge-focus-digital-competence">Digital Competence</Badge>

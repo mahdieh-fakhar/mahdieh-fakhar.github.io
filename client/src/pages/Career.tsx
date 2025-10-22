@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
@@ -33,7 +33,7 @@ const experiences = [
   {
     id: 3,
     title: "Lead IELTS & TOEFL Instructor",
-    organization: "Iran Language Institute (ILI) – Ilam Centers",
+    organization: "Iran Language Institute (ILI) â€“ Ilam Centers",
     location: "Ilam, Iran",
     period: "2014-2019",
     type: "teaching",
@@ -112,12 +112,12 @@ const typeColors = {
 
 export default function Career() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -175,21 +175,16 @@ export default function Career() {
                     </div>
                     <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                       <span data-testid={`text-location-${index}`}>{exp.location}</span>
-                      <span>•</span>
+                      <span aria-hidden="true" className="text-muted-foreground">|</span>
                       <span data-testid={`text-period-${index}`}>{exp.period}</span>
                     </div>
                   </CardHeader>
 
                   <CardContent>
-                    <ul className="space-y-2">
+                    <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
                       {exp.responsibilities.map((resp, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
-                          data-testid={`text-responsibility-${index}-${idx}`}
-                        >
-                          <span className="mt-1 text-primary">•</span>
-                          <span>{resp}</span>
+                        <li key={idx} data-testid={`text-responsibility-${index}-${idx}`}>
+                          {resp}
                         </li>
                       ))}
                     </ul>
@@ -201,7 +196,7 @@ export default function Career() {
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="auto-grid md:auto-grid-lg">
           <Card data-testid="card-stat-years">
             <CardContent className="p-6 text-center">
               <p className="text-3xl font-bold text-primary" data-testid="text-stat-years">

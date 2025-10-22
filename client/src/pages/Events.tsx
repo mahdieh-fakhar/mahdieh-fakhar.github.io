@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -47,7 +47,7 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Attendee",
     roleDescription:
-      "Participated in the TELLSI 13 workshop facilitated by Dr. Goudarz Alibakhshi and Dr. Mola Miri from Allameh Tabataba’i University.",
+      "Participated in the TELLSI 13 workshop facilitated by Dr. Goudarz Alibakhshi and Dr. Mola Miri from Allameh Tabatabaâ€™i University.",
     eventDate: "2015-11-19",
     location: "Lorestan University, Khorramabad, Iran",
     sponsors: ["TELLSI", "Lorestan University"],
@@ -197,12 +197,12 @@ const certificateData: ConferenceCertificate[] = [
       "3rd Conference on New Trends in English Language Teaching and Testing",
     certificateTitle: "Certificate of Presentation",
     certificateSubject:
-      "Investigating the Effect of EFL Teachers’ Self-Leadership on Their Processional Development and Change",
+      "Investigating the Effect of EFL Teachersâ€™ Self-Leadership on Their Processional Development and Change",
     certificateType: "Conference Presentation",
     holderName: "Reza Khany & Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Co-presented research on self-leadership’s impact on professional growth among Iranian EFL teachers.",
+      "Co-presented research on self-leadershipâ€™s impact on professional growth among Iranian EFL teachers.",
     eventDate: "2018-09-05",
     location: "Tehran, Iran",
     sponsors: ["CIVILICA", "Victoria University of Wellington", "NTELT"],
@@ -216,7 +216,7 @@ const certificateData: ConferenceCertificate[] = [
     conferenceName: "16th International TELLSI Conference",
     certificateTitle: "Certificate of Presentation",
     certificateSubject:
-      "An Ecological Exploration of Iranian EFL Students’ Self-Change, Self-Construal, and Change Management",
+      "An Ecological Exploration of Iranian EFL Studentsâ€™ Self-Change, Self-Construal, and Change Management",
     certificateType: "Conference Presentation",
     holderName: "Mahdieh Fakher Shareza & Reza Khany",
     holderRole: "Presenter",
@@ -227,7 +227,7 @@ const certificateData: ConferenceCertificate[] = [
     sponsors: ["TELLSI", "Shiraz University"],
     imageUrl: "/images/conferences/Conference/2018.11.14-16.jpg",
     aiInsights:
-      "AI confirms thematic alignment with TELLSI’s futurology track and validates co-author credentials.",
+      "AI confirms thematic alignment with TELLSIâ€™s futurology track and validates co-author credentials.",
     orientation: "landscape",
   },
   {
@@ -334,7 +334,7 @@ const certificateData: ConferenceCertificate[] = [
     conferenceName: "17th International TELLSI Conference",
     certificateTitle: "Certificate of Presentation",
     certificateSubject:
-      "An Exploration of Iranian EFL Stakeholders’ Attitudes and Knowledge of Different Educational Management Systems",
+      "An Exploration of Iranian EFL Stakeholdersâ€™ Attitudes and Knowledge of Different Educational Management Systems",
     certificateType: "Conference Presentation",
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
@@ -445,7 +445,7 @@ function CertificateCard({ item, index, onImageClick }: CertificateCardProps) {
         <img
           src={item.imageUrl}
           alt={`${item.certificateTitle} - ${item.conferenceName}`}
-          loading="lazy"
+          decoding="async" loading="lazy"
           className="max-h-[330px] w-full object-contain transition duration-300 group-hover:scale-[1.02]"
         />
       </button>
@@ -591,12 +591,12 @@ export default function Events({ params }: EventsProps = {}) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-10"
+        className="stack-gap-lg"
       >
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -610,7 +610,7 @@ export default function Events({ params }: EventsProps = {}) {
         </div>
 
         <div className="space-y-6">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
             {navItems.map((item) => {
               const href = item.slug === "all" ? "/events/all" : `/events/${item.slug}`;
               const isActive = item.slug === activeItem.slug;
@@ -648,17 +648,17 @@ export default function Events({ params }: EventsProps = {}) {
                     return null;
                   }
 
-                  const gridClass =
-                    orientation === "portrait"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
-                      : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+                  const gridStyles: CSSProperties = {
+                    "--auto-grid-item":
+                      orientation === "portrait" ? "min(12rem, 100%)" : "min(16rem, 100%)",
+                  };
 
                   return (
                     <div key={orientation} className="space-y-6">
                       <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                         {orientation === "portrait" ? "Portrait Format" : "Landscape Format"}
                       </div>
-                      <div className={gridClass}>
+                      <div className="auto-grid" style={gridStyles}>
                         {orientationItems.map((item) => {
                           const originalIndex = indexLookup.get(item.id) ?? 0;
                           return (

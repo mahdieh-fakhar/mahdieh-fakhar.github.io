@@ -78,12 +78,12 @@ const languageSkills = [
 
 export default function Skills() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-12"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -99,7 +99,7 @@ export default function Skills() {
         {/* Technical Skills */}
         <div className="space-y-8">
           <h2 className="text-2xl font-semibold">Technical Skills</h2>
-          <div className="grid gap-6">
+          <div className="stack-gap-md">
             {skillCategories.map((category, catIndex) => {
               const Icon = category.icon;
               
@@ -118,7 +118,7 @@ export default function Skills() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="auto-grid sm:auto-grid-lg">
                         {category.skills.map((skill, skillIndex) => (
                           <div key={skillIndex} className="space-y-2" data-testid={`text-skill-${catIndex}-${skillIndex}`}>
                             <div className="flex items-center justify-between">
@@ -152,7 +152,7 @@ export default function Skills() {
             <Languages className="h-6 w-6 text-accent" />
             <h2 className="text-2xl font-semibold">Languages</h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="auto-grid md:auto-grid-lg">
             {languageSkills.map((lang, index) => (
               <motion.div
                 key={index}
@@ -190,7 +190,7 @@ export default function Skills() {
             <CardTitle>Core Competencies</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
               <Badge variant="secondary" data-testid="badge-competency-advanced-statistical-analysis">Advanced Statistical Analysis</Badge>
               <Badge variant="secondary" data-testid="badge-competency-data-visualization">Data Visualization</Badge>
               <Badge variant="secondary" data-testid="badge-competency-machine-learning">Machine Learning</Badge>

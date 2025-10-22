@@ -43,12 +43,12 @@ const memberships = [
 
 export default function Memberships() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -62,7 +62,7 @@ export default function Memberships() {
         </div>
 
         {/* Memberships Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="auto-grid md:auto-grid-lg">
           {memberships.map((membership, index) => (
             <motion.div
               key={membership.id}

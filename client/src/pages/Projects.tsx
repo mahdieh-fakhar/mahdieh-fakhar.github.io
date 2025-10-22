@@ -59,12 +59,12 @@ export default function Projects() {
     badge.placements.includes("projects") || badge.placements.includes("project-card"),
   );
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -86,7 +86,7 @@ export default function Projects() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="auto-grid md:auto-grid-lg">
                 {projectBadges.map((badge) => (
                   <BadgePanel key={badge.id} badge={badge} layout="grid" />
                 ))}
@@ -96,7 +96,7 @@ export default function Projects() {
         )}
 
         {/* Projects Grid */}
-        <div className="grid gap-6">
+        <div className="stack-gap-md">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -142,7 +142,7 @@ export default function Projects() {
                   {project.technologies && project.technologies.length > 0 && (
                     <div className="space-y-2">
                       <p className="text-sm font-medium">Technologies & Methods</p>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
                         {project.technologies.map((tech) => (
                           <Badge key={tech} variant="secondary" className="text-xs" data-testid={`badge-tech-${index}-${tech.toLowerCase().replace(/\s+/g, '-')}`}>
                             {tech}

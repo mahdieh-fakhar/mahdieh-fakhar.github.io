@@ -79,6 +79,8 @@ const navigation: NavigationItem[] = [
   { name: "Contact", href: "/contact" },
 ];
 
+const MOBILE_NAV_ID = "primary-navigation-mobile";
+
 export function Header() {
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
@@ -116,6 +118,11 @@ export function Header() {
       setMobileExpanded(new Set());
     }
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setMobileExpanded(new Set());
+  }, [location]);
 
   const toggleMobileKey = (key: string) => {
     setMobileExpanded((prev) => {
@@ -182,66 +189,71 @@ export function Header() {
 )
 
 const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) => (
-    <div className={cn("space-y-1", depth > 0 && "pl-4")}>
-      {items.map((child, index) => {
-        const rawKey = `${parentKey}-${child.slug || index}`;
-        const key = slugify(rawKey);
-        const expanded = mobileExpanded.has(key);
-        const active = matchesHref(child.href) || hasActiveDescendants(child.children);
+  <div className={cn("space-y-1", depth > 0 && "pl-4")}>
+    {items.map((child, index) => {
+      const rawKey = `${parentKey}-${child.slug || index}`;
+      const key = slugify(rawKey);
+      const submenuId = `mobile-submenu-${key}`;
+      const expanded = mobileExpanded.has(key);
+      const active = matchesHref(child.href) || hasActiveDescendants(child.children);
 
-        if (child.children && child.children.length > 0) {
-          return (
-            <div key={key} className="space-y-1">
-              <button
-                type="button"
-                className={cn(
-                  "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
-                  active ? "bg-primary/10 text-primary" : "text-muted-foreground",
-                )}
-                onClick={() => toggleMobileKey(key)}
-                data-testid={`link-mobile-${key}`}
-              >
-                <span>{child.name}</span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 transition-transform",
-                    expanded ? "rotate-180" : "",
-                  )}
-                />
-              </button>
-              <AnimatePresence>
-                {expanded && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {renderMobileNavItems(child.children, key, depth + 1)}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        }
-
+      if (child.children && child.children.length > 0) {
         return (
-          <Link
-            key={key}
-            href={child.href}
-            className={cn(
-              "block rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
-              active ? "bg-primary/10 text-primary" : "text-muted-foreground",
-            )}
-            onClick={closeMobileMenu}
-            data-testid={`link-mobile-${key}`}
-          >
-            {child.name}
-          </Link>
+          <div key={key} className="space-y-1">
+            <button
+              type="button"
+              className={cn(
+                "flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
+                active ? "bg-primary/10 text-primary" : "text-muted-foreground",
+              )}
+              onClick={() => toggleMobileKey(key)}
+              aria-expanded={expanded}
+              aria-controls={submenuId}
+              data-testid={`link-mobile-${key}`}
+            >
+              <span>{child.name}</span>
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 transition-transform",
+                  expanded ? "rotate-180" : "",
+                )}
+              />
+            </button>
+            <AnimatePresence>
+              {expanded && (
+                <motion.div
+                  id={submenuId}
+                  role="group"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {renderMobileNavItems(child.children, key, depth + 1)}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         );
-      })}
-    </div>
-  );
+      }
+
+      return (
+        <Link
+          key={key}
+          href={child.href}
+          className={cn(
+            "block rounded-md px-3 py-2 text-sm font-medium hover-elevate active-elevate-2",
+            active ? "bg-primary/10 text-primary" : "text-muted-foreground",
+          )}
+          onClick={closeMobileMenu}
+          data-testid={`link-mobile-${key}`}
+        >
+          {child.name}
+        </Link>
+      );
+    })}
+  </div>
+);
 
   const headerBadges = useMemo(() => {
     const contextual = getBadges({
@@ -259,26 +271,26 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_8px_20px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="grid w-full grid-cols-[auto,minmax(0,1fr),auto] items-center gap-4 px-6 py-4 lg:px-12">
+      <div className="container flex w-full flex-wrap items-center gap-4 py-4 xs:gap-6">
         {/* Logo + Name */}
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2"
+          className="order-1 flex min-w-0 flex-1 items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 xs:flex-none"
           data-testid="link-home-logo"
         >
           <img
             src={assetPath("/images/logo.png")}
             alt="MF Logo"
-            className="h-10 w-10 object-contain"
+            className="h-10 w-10 flex-shrink-0 object-contain xs:h-11 xs:w-11"
           />
-          <span className="text-lg font-semibold tracking-wide text-foreground">
+          <span className="truncate text-lg font-semibold tracking-wide text-foreground">
             MAHDIEH FAKHAR
           </span>
         </Link>
 
         {/* Badge strip */}
-        <div className="flex items-center justify-center">
-          <div className="flex max-w-full snap-x snap-mandatory items-center justify-center gap-3 overflow-x-auto px-2">
+        <div className="order-3 w-full xs:order-2 xs:w-auto xs:flex-1">
+          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-3 overflow-x-auto px-1 xs:justify-center">
             {headerBadges.map((badge) => (
               <BadgePill key={badge.id} badge={badge} size="sm" />
             ))}
@@ -286,42 +298,48 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="flex items-center justify-end gap-2">
+        <div className="order-2 ml-auto flex items-center gap-2 xs:order-3 xs:ml-0">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
             data-testid="button-theme-toggle"
             className="hover-elevate active-elevate-2"
+            aria-label="Toggle color theme"
           >
             {theme === "dark" ? (
               <Sun className="h-5 w-5" />
             ) : (
               <Moon className="h-5 w-5" />
             )}
-            <span className="sr-only">Toggle theme</span>
           </Button>
 
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden hover-elevate active-elevate-2"
+            className="hover-elevate active-elevate-2 lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             data-testid="button-mobile-menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls={MOBILE_NAV_ID}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-haspopup="true"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" />
             ) : (
               <Menu className="h-6 w-6" />
             )}
-            <span className="sr-only">Toggle menu</span>
           </Button>
         </div>
       </div>
 
       {/* Desktop Navigation */}
       <div className="border-t border-primary/20 bg-background/90">
-        <div className="hidden lg:flex w-full items-center justify-center gap-6 px-6 py-3">
+        <nav
+          aria-label="Primary navigation"
+          className="container hidden items-center justify-center gap-6 py-3 lg:flex"
+        >
           {navigation.map((item) =>
             item.children ? (
               <DropdownMenu key={item.name}>
@@ -374,7 +392,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
               </Link>
             ),
           )}
-        </div>
+        </nav>
       </div>
 
       {/* Mobile Navigation */}
@@ -385,9 +403,14 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden border-t"
+            className="border-t lg:hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto supports-[height:100dvh]:max-h-[calc(100dvh-4.5rem)]"
+            role="presentation"
           >
-            <div className="space-y-1 px-4 py-4">
+            <motion.nav
+              id={MOBILE_NAV_ID}
+              aria-label="Mobile primary navigation"
+              className="space-y-1 px-4 py-4 pb-6 max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain supports-[height:100dvh]:max-h-[calc(100dvh-6rem)]"
+            >
               {navigation.map((item) => {
                 const itemKey = `nav-${slugify(item.name)}`;
                 const expanded = mobileExpanded.has(itemKey);
@@ -404,6 +427,8 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
                             : "text-muted-foreground",
                         )}
                         onClick={() => toggleMobileKey(itemKey)}
+                        aria-expanded={expanded}
+                        aria-controls={`mobile-submenu-${itemKey}`}
                         data-testid={`link-mobile-${itemKey}`}
                       >
                         <span>{item.name}</span>
@@ -417,6 +442,8 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
                       <AnimatePresence>
                         {expanded && (
                           <motion.div
+                            id={`mobile-submenu-${itemKey}`}
+                            role="group"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
@@ -447,7 +474,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
                   </Link>
                 );
               })}
-            </div>
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>

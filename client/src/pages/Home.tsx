@@ -238,12 +238,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="stack-gap-lg">
       {/* Hero Section */}
       <section className="relative flex min-h-[80vh] items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-ai-accent/5" />
-        <div className="relative mx-auto w-full max-w-7xl px-6 py-24 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="container relative w-full py-20 md:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)] lg:gap-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -355,7 +355,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <div className="auto-grid mt-10">
               {supportingBadges.map((badge) => (
                 <motion.div
                   key={badge.id}
@@ -510,7 +510,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="auto-grid mt-12 xl:auto-grid-lg">
           {campaignSpotlights.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -569,7 +569,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="auto-grid mt-12">
             {innovationTracks.map((track, index) => {
               const Icon = track.icon;
               return (

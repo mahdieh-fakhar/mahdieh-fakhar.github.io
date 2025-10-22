@@ -24,12 +24,12 @@ export default function About() {
   const aboutBadges = getBadges({ page: "about" }).filter((badge) => badge.placements.includes("about"));
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="container py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="stack-gap-md"
       >
         {/* Header */}
         <div className="space-y-4">
@@ -74,7 +74,7 @@ export default function About() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="auto-grid">
               {languages.map((lang, index) => (
                 <div key={lang.name} className="space-y-1" data-testid={`item-language-${index}`}>
                   <p className="font-medium" data-testid={`text-language-name-${index}`}>{lang.name}</p>

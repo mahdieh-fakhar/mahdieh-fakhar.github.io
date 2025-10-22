@@ -48,11 +48,19 @@ const educationPages: NavChild[] = [
   { name: "Workshops", href: "/education/workshops", slug: "workshops" },
 ];
 
+const investigationPages: NavChild[] = [
+  { name: "All Investigations", href: "/investigations/all", slug: "all" },
+  { name: "Articles", href: "/investigations/articles", slug: "articles" },
+  { name: "Theses", href: "/investigations/theses", slug: "theses" },
+  { name: "Books", href: "/investigations/books", slug: "books" },
+  { name: "Handbooks", href: "/investigations/handbooks", slug: "handbooks" },
+];
+
 const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all", children: educationPages },
-  { name: "Investigations", href: "/investigations/all" },
+  { name: "Investigations", href: "/investigations/all", children: investigationPages },
   { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },
   { name: "Career", href: "/career" },

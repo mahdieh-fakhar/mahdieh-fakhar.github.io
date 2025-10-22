@@ -610,7 +610,11 @@ export default function Events({ params }: EventsProps = {}) {
         </div>
 
         <div className="space-y-6">
-          <div className="flex flex-wrap gap-3 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
+          <nav
+            className="flex flex-wrap justify-center gap-3 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+            role="tablist"
+            aria-label="Event categories"
+          >
             {navItems.map((item) => {
               const href = item.slug === "all" ? "/events/all" : `/events/${item.slug}`;
               const isActive = item.slug === activeItem.slug;
@@ -626,12 +630,15 @@ export default function Events({ params }: EventsProps = {}) {
                       : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary",
                   )}
                   data-testid={`link-category-${item.slug}`}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
                 >
                   {item.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           <section
             className="space-y-6"

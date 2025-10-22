@@ -135,7 +135,11 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         </div>
 
         {topLevelNodes.length > 0 && (
-          <div className="flex flex-wrap gap-3">
+          <nav
+            className="flex flex-wrap justify-center gap-3 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+            role="tablist"
+            aria-label="Investigation sections"
+          >
             {topLevelNodes.map((node) => {
               const href = nodeHref(node);
               const slug = node.path[0] ?? "all";
@@ -152,12 +156,15 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
                       : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary",
                   )}
                   data-testid={`link-investigations-nav-${slug}`}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
                 >
                   {node.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
         )}
 
         <nav

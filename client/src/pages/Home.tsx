@@ -16,7 +16,6 @@ import {
   Puzzle,
   ScrollText,
   Send,
-  Layers,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
 import { getBadges, getPrimaryBadgeForPage } from "@/lib/badgeUtils";
@@ -116,13 +115,6 @@ export default function Home() {
             "Peer-reviewed outputs with bibliometric context and AI-generated abstracts.",
           href: "/articles",
           icon: FileText,
-        },
-        {
-          name: "Investigations",
-          summary:
-            "Deep hierarchical index for theses, books, handbooks, and specialized study types.",
-          href: "/investigations/all",
-          icon: Layers,
         },
         {
           name: "Events",

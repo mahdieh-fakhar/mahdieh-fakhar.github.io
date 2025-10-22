@@ -12,7 +12,6 @@ import { BadgeStructuredData } from "@/components/BadgeStructuredData";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Education from "@/pages/Education";
-import Investigations from "@/pages/Investigations";
 import Articles from "@/pages/Articles";
 import Events from "@/pages/Events";
 import Memberships from "@/pages/Memberships";
@@ -49,8 +48,6 @@ function AppShell() {
           <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
           <Route path="/articles" component={Articles} />
-          <Route path="/investigations/:path*" component={Investigations} />
-          <Route path="/investigations" component={Investigations} />
           <Route path="/events/:category" component={Events} />
           <Route path="/events" component={Events} />
           <Route path="/memberships" component={Memberships} />

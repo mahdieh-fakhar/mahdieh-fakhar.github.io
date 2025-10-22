@@ -17,12 +17,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import {
-  investigationsRoot,
-  nodeHref,
-  InvestigationNode,
-} from "@/data/investigationsHierarchy";
-
 type NavChild = {
   name: string;
   href: string;
@@ -36,13 +30,6 @@ type NavigationItem = {
   children?: NavChild[];
 };
 
-const mapInvestigationNodeToNav = (node: InvestigationNode): NavChild => ({
-  name: node.label,
-  href: nodeHref(node),
-  slug: node.path.join("-") || "root",
-  children: node.children.map(mapInvestigationNodeToNav),
-});
-
 const slugify = (value: string) => value.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
 
 const eventPages: NavChild[] = [
@@ -53,8 +40,6 @@ const eventPages: NavChild[] = [
   { name: "Congresses", href: "/events/congresses", slug: "congresses" },
   { name: "Symposia", href: "/events/symposia", slug: "symposia" },
 ];
-
-const investigationPages: NavChild[] = investigationsRoot.children.map(mapInvestigationNodeToNav);
 
 const educationPages: NavChild[] = [
   { name: "All Education", href: "/education/all", slug: "all" },
@@ -67,7 +52,6 @@ const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all", children: educationPages },
-  { name: "Investigations", href: "/investigations/all", children: investigationPages },
   { name: "Articles", href: "/articles" },
   { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },

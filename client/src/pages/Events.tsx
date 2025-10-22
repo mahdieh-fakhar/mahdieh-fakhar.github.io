@@ -34,6 +34,7 @@ type EventNavItem = {
   label: string;
   slug: string;
   filter: EventCategory | null;
+  description: string;
 };
 
 const certificateData: ConferenceCertificate[] = [
@@ -409,12 +410,42 @@ const formatDate = (value: string) => {
 };
 
 const navItems: EventNavItem[] = [
-  { label: "All", slug: "all", filter: null },
-  { label: "Conferences", slug: "conferences", filter: "Conferences" },
-  { label: "Seminars", slug: "seminars", filter: "Seminars" },
-  { label: "Webinars", slug: "webinars", filter: "Webinars" },
-  { label: "Congresses", slug: "congresses", filter: "Congresses" },
-  { label: "Symposia", slug: "symposia", filter: "Symposia" },
+  {
+    label: "All",
+    slug: "all",
+    filter: null,
+    description: "All certificates across orientations",
+  },
+  {
+    label: "Conferences",
+    slug: "conferences",
+    filter: "Conferences",
+    description: "Flagship international conference appearances",
+  },
+  {
+    label: "Seminars",
+    slug: "seminars",
+    filter: "Seminars",
+    description: "Academic seminars and invited talks",
+  },
+  {
+    label: "Webinars",
+    slug: "webinars",
+    filter: "Webinars",
+    description: "Virtual engagements and remote workshops",
+  },
+  {
+    label: "Congresses",
+    slug: "congresses",
+    filter: "Congresses",
+    description: "Large-scale congress participation",
+  },
+  {
+    label: "Symposia",
+    slug: "symposia",
+    filter: "Symposia",
+    description: "Specialist symposia and panels",
+  },
 ];
 
 type CertificateCardProps = {
@@ -598,7 +629,7 @@ export default function Events({ params }: EventsProps = {}) {
         transition={{ duration: 0.5 }}
         className="stack-gap-lg"
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex items-center gap-2">
             <Presentation className="h-6 w-6 text-accent" />
             <h1 className="text-4xl font-bold">Events</h1>
@@ -609,9 +640,9 @@ export default function Events({ params }: EventsProps = {}) {
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
           <nav
-            className="flex flex-wrap justify-center gap-3 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+            className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
             role="tablist"
             aria-label="Event categories"
           >
@@ -624,7 +655,7 @@ export default function Events({ params }: EventsProps = {}) {
                   key={item.slug}
                   href={href}
                   className={cn(
-                    "inline-flex items-center rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+                    "inline-flex items-center rounded-full border-2 px-4 py-2 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
                     isActive
                       ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
                       : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary",
@@ -639,8 +670,12 @@ export default function Events({ params }: EventsProps = {}) {
               );
             })}
           </nav>
+          <span className="text-muted-foreground normal-case tracking-normal">
+            {activeItem.description}
+          </span>
+        </div>
 
-          <section
+        <section
             className="space-y-6"
             data-testid={`section-category-${activeItem.slug}`}
           >
@@ -694,8 +729,7 @@ export default function Events({ params }: EventsProps = {}) {
               </div>
             )}
           </section>
-        </div>
-      </motion.div>
+        </motion.div>
 
       <Dialog open={dialogOpen} onOpenChange={handleDialogChange}>
         <DialogContent className="w-[92vw] max-w-4xl border border-primary/30 bg-background/95 p-6 shadow-2xl">

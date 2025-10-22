@@ -285,7 +285,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         transition={{ duration: 0.5 }}
         className="stack-gap-md"
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
@@ -299,36 +299,34 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground sm:text-sm">
-            <span className="rounded-full border border-primary/30 px-3 py-1 text-primary">
-              {activeItem.label}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
+            <nav
+              className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+              aria-label="Investigations categories"
+              role="tablist"
+            >
+              {navItems.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/investigations/${item.slug}`}
+                  className={`inline-flex items-center rounded-full border-2 px-4 py-2 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                    item.slug === activeSlug
+                      ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
+                      : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary"
+                  }`}
+                  role="tab"
+                  aria-selected={item.slug === activeSlug}
+                  tabIndex={item.slug === activeSlug ? 0 : -1}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <span className="text-muted-foreground normal-case tracking-normal">
+              {activeItem.description}
             </span>
-            <span>{activeItem.description}</span>
           </div>
         </div>
-
-        <nav
-          className="flex flex-wrap justify-center gap-3 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
-          aria-label="Investigations categories"
-          role="tablist"
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/investigations/${item.slug}`}
-              className={`inline-flex items-center rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
-                item.slug === activeSlug
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
-                  : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary"
-              }`}
-              role="tab"
-              aria-selected={item.slug === activeSlug}
-              tabIndex={item.slug === activeSlug ? 0 : -1}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
 
         {renderContent(activeSlug)}
       </motion.div>

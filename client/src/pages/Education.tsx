@@ -31,6 +31,7 @@ type EducationNavItem = {
   label: string;
   slug: string;
   filter: EducationCategory | null;
+  description: string;
 };
 
 type EducationRouteParams = {
@@ -158,10 +159,30 @@ const allRecords: EducationRecord[] = [
 const categoryOrder: EducationCategory[] = ["Academic", "Courses", "Workshops"];
 
 const navItems: EducationNavItem[] = [
-  { label: "All", slug: "all", filter: null },
-  { label: "Academic", slug: "academic", filter: "Academic" },
-  { label: "Courses", slug: "courses", filter: "Courses" },
-  { label: "Workshops", slug: "workshops", filter: "Workshops" },
+  {
+    label: "All",
+    slug: "all",
+    filter: null,
+    description: "Complete academic journey",
+  },
+  {
+    label: "Academic",
+    slug: "academic",
+    filter: "Academic",
+    description: "Degree programmes and research training",
+  },
+  {
+    label: "Courses",
+    slug: "courses",
+    filter: "Courses",
+    description: "Professional certificates and micro-credentials",
+  },
+  {
+    label: "Workshops",
+    slug: "workshops",
+    filter: "Workshops",
+    description: "Specialised workshops and masterclasses",
+  },
 ];
 
 const categoryLabels: Record<EducationCategory, string> = {
@@ -367,7 +388,7 @@ export default function Education({ params }: EducationProps = {}) {
         transition={{ duration: 0.5 }}
         className="stack-gap-lg"
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6 text-primary" />
             <h1 className="text-4xl font-bold text-foreground">Education</h1>
@@ -377,9 +398,9 @@ export default function Education({ params }: EducationProps = {}) {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
           <nav
-            className="flex flex-wrap justify-center gap-3 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+            className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
             role="tablist"
             aria-label="Education sections"
           >
@@ -392,7 +413,7 @@ export default function Education({ params }: EducationProps = {}) {
                   key={item.slug}
                   href={href}
                   className={cn(
-                    "inline-flex items-center rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+                    "inline-flex items-center rounded-full border-2 px-4 py-2 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
                     isActive
                       ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
                       : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary",
@@ -407,9 +428,12 @@ export default function Education({ params }: EducationProps = {}) {
               );
             })}
           </nav>
-
-          {renderActiveCategory()}
+          <span className="text-muted-foreground normal-case tracking-normal">
+            {activeItem.description}
+          </span>
         </div>
+
+        {renderActiveCategory()}
       </motion.div>
     </div>
   );

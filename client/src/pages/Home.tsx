@@ -10,12 +10,12 @@ import {
   Sparkles,
   Home as HomeIcon,
   UserRound,
-  FileText,
   Microscope,
   BadgeCheck,
   Puzzle,
   ScrollText,
   Send,
+  Layers,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
 import { getBadges, getPrimaryBadgeForPage } from "@/lib/badgeUtils";
@@ -110,11 +110,11 @@ export default function Home() {
       accent: "from-ai-accent/30 via-primary/10 to-background",
       items: [
         {
-          name: "Articles",
+          name: "Investigations",
           summary:
-            "Peer-reviewed outputs with bibliometric context and AI-generated abstracts.",
-          href: "/articles",
-          icon: FileText,
+            "Unified research hub spanning articles, theses, monographs, and applied handbooks.",
+          href: "/investigations/all",
+          icon: Layers,
         },
         {
           name: "Events",
@@ -178,12 +178,12 @@ export default function Home() {
 
   const campaignSpotlights = [
     {
-      title: "Digital Scholarship Showcase",
+      title: "Investigations Research Hub",
       description:
-        "Dive into evidence-based publications and conference storytelling augmented with AI curation and bibliometric dashboards.",
-      icon: Microscope,
-      href: "/articles",
-      cta: "Review publications",
+        "Survey journal publications, graduate theses, and professional handbooks with bibliometric context and AI-enabled storytelling.",
+      icon: Layers,
+      href: "/investigations/all",
+      cta: "Browse investigations",
       accent: "from-primary/20 via-primary/5 to-ai-accent/10",
     },
     {
@@ -617,10 +617,10 @@ export default function Home() {
               Innovation projects
             </Link>
             <Link
-              href="/articles"
+              href="/investigations/all"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
-              Research publications
+              Investigations archive
             </Link>
           </div>
         </div>

@@ -52,7 +52,7 @@ const navigation: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all", children: educationPages },
-  { name: "Articles", href: "/articles" },
+  { name: "Investigations", href: "/investigations/all" },
   { name: "Events", href: "/events/all", children: eventPages },
   { name: "Memberships", href: "/memberships" },
   { name: "Career", href: "/career" },

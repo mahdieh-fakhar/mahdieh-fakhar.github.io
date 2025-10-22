@@ -107,7 +107,7 @@ Each page has distinct URL and layout:
 - **/home**: Hero + Featured work + Recent publications
 - **/about**: Bio + Interests + Current work
 - **/education**: Timeline of degrees with expandable details
-- **/articles**: Filterable list of publications
+- **/investigations/articles**: Filterable list of publications
 - **/conferences**: Image gallery + participation list with AI upload for certificates
 - **/memberships**: Cards with organization logos
 - **/career-history**: Timeline with role descriptions

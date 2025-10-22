@@ -1,15 +1,23 @@
 ﻿import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { ExternalLink } from "lucide-react";
 import {
   investigationsRoot,
   findInvestigationNode,
   nodeHref,
   InvestigationNode,
 } from "@/data/investigationsHierarchy";
+import {
+  publications,
+  conferenceProceedings,
+  researchFocusAreas,
+  type Publication,
+} from "@/data/researchOutputs";
+import type { ReactNode } from "react";
 
 type InvestigationsRouteParams = {
   path?: string;
@@ -85,6 +93,149 @@ const renderCategoryGrid = (categories: InvestigationNode[], activeNode: Investi
   );
 };
 
+const publicationTypeVariant: Record<Publication["type"], "default" | "secondary" | "outline"> = {
+  journal: "default",
+  book: "secondary",
+  review: "outline",
+};
+
+const PublicationCards = ({ items }: { items: Publication[] }) => {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="stack-gap-md">
+      {items.map((pub) => (
+        <Card key={pub.id} className="hover-elevate transition-shadow">
+          <CardHeader>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <CardTitle className="text-lg">{pub.title}</CardTitle>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant={publicationTypeVariant[pub.type]} className="capitalize">
+                  {pub.type}
+                </Badge>
+                {pub.status && <Badge variant="outline">{pub.status}</Badge>}
+                <Badge variant="outline">{pub.year}</Badge>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground">{pub.authors}</p>
+            <p className="text-sm font-medium text-primary">{pub.venue}</p>
+          </CardHeader>
+          {pub.description && (
+            <CardContent>
+              <p className="text-sm text-muted-foreground">{pub.description}</p>
+            </CardContent>
+          )}
+        </Card>
+      ))}
+    </div>
+  );
+};
+
+const renderPublicationSection = (heading: string, items: Publication[]): ReactNode => {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-xl font-semibold text-foreground">{heading}</h3>
+      <PublicationCards items={items} />
+    </div>
+  );
+};
+
+const renderConferenceSection = (): ReactNode => (
+  <div className="space-y-4">
+    <h3 className="text-xl font-semibold text-foreground">Conference Proceedings</h3>
+    <Card>
+      <CardHeader>
+        <CardTitle>Notable Conferences (13+ papers)</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4 text-sm text-muted-foreground">
+        <p>Full conference paper list available in the digital portfolio.</p>
+        <div className="auto-grid">
+          {conferenceProceedings.map((conf) => (
+            <span key={conf} className="flex items-center gap-2 text-foreground">
+              <ExternalLink className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+              {conf}
+            </span>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+);
+
+const renderFocusAreas = (): ReactNode => (
+  <Card className="bg-gradient-to-br from-accent/5 to-primary/5">
+    <CardHeader>
+      <CardTitle>Research Focus Areas</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
+        {researchFocusAreas.map((area) => (
+          <Badge key={area} variant="secondary">
+            {area}
+          </Badge>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const journalPublications = publications.filter((pub) => pub.type === "journal");
+const reviewPublications = publications.filter((pub) => pub.type === "review");
+const bookPublications = publications.filter((pub) => pub.type === "book");
+
+const nodeContentRenderers: Record<string, () => ReactNode> = {
+  "articles": () => (
+    <div className="stack-gap-md">
+      {renderPublicationSection("Indexed Journal Publications", journalPublications)}
+      {renderConferenceSection()}
+      {renderPublicationSection("Book Reviews & Commentaries", reviewPublications)}
+      {renderFocusAreas()}
+    </div>
+  ),
+  "articles/all": () => (
+    <div className="stack-gap-md">
+      {renderPublicationSection("Indexed Journal Publications", journalPublications)}
+      {renderConferenceSection()}
+      {renderPublicationSection("Book Reviews & Commentaries", reviewPublications)}
+      {renderFocusAreas()}
+    </div>
+  ),
+  "articles/journal-articles": () =>
+    renderPublicationSection("Indexed Journal Publications", journalPublications),
+  "articles/journal-articles/all": () =>
+    renderPublicationSection("Indexed Journal Publications", journalPublications),
+  "articles/journal-articles/review-articles": () =>
+    renderPublicationSection("Review Articles & Commentaries", reviewPublications),
+  "articles/journal-articles/review-articles/all": () =>
+    renderPublicationSection("Review Articles & Commentaries", reviewPublications),
+  "articles/conference-publications": () => renderConferenceSection(),
+  "articles/conference-publications/all": () => renderConferenceSection(),
+  "books": () => renderPublicationSection("Scholarly Monographs & Volumes", bookPublications),
+  "books/all": () => renderPublicationSection("Scholarly Monographs & Volumes", bookPublications),
+};
+
+const renderNodeContent = (node: InvestigationNode): ReactNode => {
+  const pathKey = node.path.join("/");
+  if (nodeContentRenderers[pathKey]) {
+    return nodeContentRenderers[pathKey]();
+  }
+
+  if (pathKey.endsWith("/all")) {
+    const parentKey = node.path.slice(0, -1).join("/");
+    if (nodeContentRenderers[parentKey]) {
+      return nodeContentRenderers[parentKey]();
+    }
+  }
+
+  return null;
+};
+
 export default function Investigations({ params }: InvestigationsProps = {}) {
   const [location, setLocation] = useLocation();
   const normalizedLocation = location.replace(/\/+$/, "") || "/";
@@ -112,6 +263,8 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
   const childCategories = activeNode.children;
   const parentNode = breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length - 2] : null;
   const siblingCategories = parentNode ? parentNode.children : [];
+  const nodeContent = renderNodeContent(activeNode);
+  const showPlaceholder = childCategories.length === 0 && nodeContent === null;
 
   return (
     <div className="container py-12">
@@ -228,15 +381,19 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
             </p>
           </div>
 
-          {childCategories.length > 0 ? (
-            renderCategoryGrid(childCategories, activeNode)
-          ) : (
-            <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-              Curated entries for{" "}
-              <span className="font-semibold text-foreground">{activeNode.label}</span> will appear
-              here. Use the navigation above to explore adjacent categories.
-            </div>
-          )}
+          <div className="stack-gap-md">
+            {childCategories.length > 0 ? renderCategoryGrid(childCategories, activeNode) : null}
+
+            {nodeContent}
+
+            {showPlaceholder && (
+              <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
+                Curated entries for{" "}
+                <span className="font-semibold text-foreground">{activeNode.label}</span> will appear
+                here. Use the navigation above to explore adjacent categories.
+              </div>
+            )}
+          </div>
         </section>
       </motion.div>
     </div>

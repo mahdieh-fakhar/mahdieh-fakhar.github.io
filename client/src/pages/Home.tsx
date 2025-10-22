@@ -114,7 +114,7 @@ export default function Home() {
           name: "Articles",
           summary:
             "Peer-reviewed outputs with bibliometric context and AI-generated abstracts.",
-          href: "/investigations/articles",
+          href: "/articles",
           icon: FileText,
         },
         {
@@ -190,7 +190,7 @@ export default function Home() {
       description:
         "Dive into evidence-based publications and conference storytelling augmented with AI curation and bibliometric dashboards.",
       icon: Microscope,
-      href: "/investigations/articles",
+      href: "/articles",
       cta: "Review publications",
       accent: "from-primary/20 via-primary/5 to-ai-accent/10",
     },
@@ -625,7 +625,7 @@ export default function Home() {
               Innovation projects
             </Link>
             <Link
-              href="/investigations/articles"
+              href="/articles"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
               Research publications

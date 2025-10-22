@@ -159,10 +159,6 @@ export function Header() {
             )}
           >
             <span className="truncate">{child.name}</span>
-            <ChevronRight
-              className="h-4 w-4 flex-shrink-0 opacity-70 transition-transform group-data-[state=open]:rotate-90"
-              aria-hidden="true"
-            />
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-lg backdrop-blur">
             {renderDropdownItems(child.children, key)}

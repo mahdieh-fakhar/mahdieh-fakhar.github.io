@@ -4,7 +4,8 @@ import { Link, useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, BookOpen, Layers, Library, ScrollText, FlaskConical } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
   investigationsRoot,
   findInvestigationNode,
@@ -236,6 +237,44 @@ const renderNodeContent = (node: InvestigationNode): ReactNode => {
   return null;
 };
 
+const sectionMeta: Record<
+  string,
+  { title: string; subtitle: string; icon: LucideIcon }
+> = {
+  default: {
+    title: "Research Investigations",
+    subtitle:
+      "Navigate a hierarchical catalogue of research outputs across publications, theses, books, and handbooks.",
+    icon: Layers,
+  },
+  all: {
+    title: "Research Investigations",
+    subtitle:
+      "Navigate a hierarchical catalogue of research outputs across publications, theses, books, and handbooks.",
+    icon: Layers,
+  },
+  articles: {
+    title: "Publications & Articles",
+    subtitle: "Research contributions to academic literature and scholarly communications.",
+    icon: BookOpen,
+  },
+  "theses-dissertations": {
+    title: "Theses & Dissertations",
+    subtitle: "Graduate and doctoral research organised by level, methodology, and format.",
+    icon: ScrollText,
+  },
+  books: {
+    title: "Scholarly Books & Monographs",
+    subtitle: "Curated academic volumes advancing research and professional practice.",
+    icon: Library,
+  },
+  handbooks: {
+    title: "Handbooks & Reference Works",
+    subtitle: "Applied guides, protocols, and best practices supporting research execution.",
+    icon: FlaskConical,
+  },
+};
+
 export default function Investigations({ params }: InvestigationsProps = {}) {
   const [location, setLocation] = useLocation();
   const normalizedLocation = location.replace(/\/+$/, "") || "/";
@@ -265,6 +304,9 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
   const siblingCategories = parentNode ? parentNode.children : [];
   const nodeContent = renderNodeContent(activeNode);
   const showPlaceholder = childCategories.length === 0 && nodeContent === null;
+  const heroMeta =
+    sectionMeta[topLevelActiveSlug as keyof typeof sectionMeta] ?? sectionMeta.default;
+  const HeroIcon = heroMeta.icon;
 
   return (
     <div className="container py-12">
@@ -274,16 +316,15 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         transition={{ duration: 0.5 }}
         className="stack-gap-md"
       >
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-primary">
-              <span className="text-lg font-semibold">In</span>
-            </div>
-            <h1 className="text-4xl font-bold text-foreground">Investigations</h1>
+        <div className="space-y-3 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary sm:h-14 sm:w-14">
+              <HeroIcon className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden="true" />
+            </span>
+            <h1 className="text-3xl font-bold text-foreground sm:text-4xl">{heroMeta.title}</h1>
           </div>
-          <p className="text-xl text-muted-foreground">
-            Navigate a hierarchical catalogue of research outputs: peer-reviewed articles, graduate
-            theses, scholarly books, and specialist handbooks.
+          <p className="mx-auto max-w-3xl text-base text-muted-foreground sm:mx-0 sm:text-lg">
+            {heroMeta.subtitle}
           </p>
         </div>
 

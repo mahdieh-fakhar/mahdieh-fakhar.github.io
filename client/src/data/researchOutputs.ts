@@ -34,7 +34,7 @@ export const publications: Publication[] = [
   {
     id: 3,
     title: "Duolingo & Language Learning",
-    authors: "Fakhar Shahreza, M., Bárcena Madera, E., & Khany, R.",
+    authors: "Fakhar Shahreza, M., Barcena Madera, E., & Khany, R.",
     year: "2023",
     venue: "Comares",
     type: "book",

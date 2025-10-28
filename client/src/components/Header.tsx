@@ -259,17 +259,17 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_8px_20px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex w-full flex-wrap items-center gap-4 py-4 xs:gap-6">
+      <div className="container flex w-full flex-wrap items-center gap-3 py-2 xs:gap-4">
         {/* Logo + Name */}
         <Link
           href="/"
-          className="order-1 flex min-w-0 flex-1 items-center gap-3 rounded-md px-2 py-1 hover-elevate active-elevate-2 xs:flex-none"
+           className="order-1 flex min-w-0 flex-1 items-center gap-2 rounded-md px-2 py-1 hover-elevate active-elevate-2 xs:flex-none"
           data-testid="link-home-logo"
         >
           <img
             src={assetPath("/images/logo.png")}
             alt="MF Logo"
-            className="h-10 w-10 flex-shrink-0 object-contain xs:h-11 xs:w-11"
+            className="h-9 w-9 flex-shrink-0 object-contain xs:h-10 xs:w-10"
           />
           <span className="truncate text-lg font-semibold tracking-wide text-foreground">
             MAHDIEH FAKHAR
@@ -278,7 +278,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
         {/* Badge strip */}
         <div className="order-3 w-full xs:order-2 xs:w-auto xs:flex-1">
-          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-3 overflow-x-auto px-1 xs:justify-center">
+          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-2.5 overflow-x-auto px-1 xs:justify-center">
             {headerBadges.map((badge) => (
               <BadgePill key={badge.id} badge={badge} size="sm" />
             ))}
@@ -323,10 +323,10 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
       </div>
 
       {/* Desktop Navigation */}
-      <div className="border-t border-primary/20 bg-background/90">
+       <div className="border-t border-primary/20 bg-background/90">
         <nav
           aria-label="Primary navigation"
-          className="container hidden items-center justify-center gap-6 py-3 lg:flex"
+          className="container hidden items-center justify-center gap-5 py-2 lg:flex"
         >
           {navigationItems.map((item) =>
             item.children ? (
@@ -386,8 +386,8 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
         </nav>
       </div>
 
-      <div className="border-t border-primary/15 bg-background/80 backdrop-blur">
-        <div className="container flex flex-col gap-3 py-3 lg:flex-row lg:items-center lg:justify-between">
+       <div className="border-t border-primary/15 bg-background/80 backdrop-blur">
+        <div className="container flex flex-col gap-2 py-2 lg:flex-row lg:items-center lg:justify-between">
           <nav
             aria-label="Breadcrumb"
             className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm"
@@ -420,7 +420,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             role="search"
             aria-label="Site search"
           >
-            <div className="flex w-full items-center gap-2 rounded-md border border-input bg-background/95 px-3 py-2 shadow-sm focus-within:ring-2 focus-within:ring-primary/40 sm:max-w-xs lg:max-w-md">
+            <div className="flex w-full items-center gap-2 rounded-md border border-input bg-background/95 px-3 py-1.5 shadow-sm focus-within:ring-2 focus-within:ring-primary/40 sm:max-w-xs lg:max-w-md">
               <Search className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               <Input
                 type="search"

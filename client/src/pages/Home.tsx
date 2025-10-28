@@ -257,15 +257,6 @@ export default function Home() {
                 >
                   MAHDIEH FAKHAR
                 </h1>
-                {totalBadgeCount > 0 && (
-                  <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary shadow-sm">
-                    <Sparkles className="h-4 w-4" />
-                    <span>
-                      {totalBadgeCount}{" "}
-                      {totalBadgeCount === 1 ? "credential" : "certifications"} verified via Credly
-                    </span>
-                  </div>
-                )}
               </div>
 
               <p className="text-xl font-medium text-muted-foreground" data-testid="text-title">

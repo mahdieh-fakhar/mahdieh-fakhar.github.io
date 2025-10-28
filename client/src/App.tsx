@@ -21,6 +21,7 @@ import Projects from "@/pages/Projects";
 import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 import Certifications from "@/pages/Certifications";
+import Search from "@/pages/Search";
 import NotFound from "@/pages/not-found";
 
 export default function App() {
@@ -58,6 +59,7 @@ function AppShell() {
           <Route path="/resume" component={Resume} />
           <Route path="/contact" component={Contact} />
           <Route path="/certifications" component={Certifications} />
+          <Route path="/search" component={Search} />
           <Route component={NotFound} />
         </Switch>
       </main>

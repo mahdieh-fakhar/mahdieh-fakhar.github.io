@@ -18,64 +18,17 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-type NavChild = {
-  name: string;
-  href: string;
-  slug: string;
-  children?: NavChild[];
-};
-
-type NavigationItem = {
-  name: string;
-  href: string;
-  children?: NavChild[];
-};
-
+import {
+  navigationItems,
+  type NavigationItem,
+  type NavChild,
+} from "@/data/navigation";
 const slugify = (value: string) => value.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
-
-const eventPages: NavChild[] = [
-  { name: "All Events", href: "/events/all", slug: "all" },
-  { name: "Conferences", href: "/events/conferences", slug: "conferences" },
-  { name: "Seminars", href: "/events/seminars", slug: "seminars" },
-  { name: "Webinars", href: "/events/webinars", slug: "webinars" },
-  { name: "Congresses", href: "/events/congresses", slug: "congresses" },
-  { name: "Symposia", href: "/events/symposia", slug: "symposia" },
-];
-
-const educationPages: NavChild[] = [
-  { name: "All Education", href: "/education/all", slug: "all" },
-  { name: "Academic Pathways", href: "/education/academic", slug: "academic" },
-  { name: "Courses", href: "/education/courses", slug: "courses" },
-  { name: "Workshops", href: "/education/workshops", slug: "workshops" },
-];
-
-const investigationPages: NavChild[] = [
-  { name: "All Investigations", href: "/investigations/all", slug: "all" },
-  { name: "Articles", href: "/investigations/articles", slug: "articles" },
-  { name: "Theses", href: "/investigations/theses", slug: "theses" },
-  { name: "Books", href: "/investigations/books", slug: "books" },
-  { name: "Handbooks", href: "/investigations/handbooks", slug: "handbooks" },
-];
-
-const navigation: NavigationItem[] = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Education", href: "/education/all", children: educationPages },
-  { name: "Investigations", href: "/investigations/all", children: investigationPages },
-  { name: "Events", href: "/events/all", children: eventPages },
-  { name: "Memberships", href: "/memberships" },
-  { name: "Career", href: "/career" },
-  { name: "Skills", href: "/skills" },
-  { name: "Projects", href: "/projects" },
-  { name: "Certifications", href: "/certifications" },
-  { name: "Resume", href: "/resume" },
-  { name: "Contact", href: "/contact" },
-];
 
 const MOBILE_NAV_ID = "primary-navigation-mobile";
 
 export function Header() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<Set<string>>(new Set());
@@ -151,7 +104,7 @@ export function Header() {
     segments.forEach((segment) => {
       pathAccumulator += `/${segment}`;
       const displayName =
-        navigation.find((item) => normalizeHref(item.href) === pathAccumulator)?.name ??
+        navigationItems.find((item) => normalizeHref(item.href) === pathAccumulator)?.name ??
         formatBreadcrumbLabel(segment);
 
       items.push({ name: displayName, href: pathAccumulator });
@@ -167,10 +120,10 @@ export function Header() {
       return;
     }
 
-    const searchUrl = new URL("https://www.google.com/search");
-    searchUrl.searchParams.set("q", `site:mahdieh-fakhar.github.io ${trimmedQuery}`);
-    window.open(searchUrl.toString(), "_blank", "noopener,noreferrer");
+    navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
     setSearchQuery("");
+    setMobileMenuOpen(false);
+    setMobileExpanded(new Set());
   };
 
   const isSearchDisabled = searchQuery.trim().length === 0;
@@ -375,7 +328,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
           aria-label="Primary navigation"
           className="container hidden items-center justify-center gap-6 py-3 lg:flex"
         >
-          {navigation.map((item) =>
+          {navigationItems.map((item) =>
             item.children ? (
               <DropdownMenu key={item.name}>
                 <DropdownMenuTrigger asChild>
@@ -503,7 +456,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
               aria-label="Mobile primary navigation"
               className="space-y-1 px-4 py-4 pb-6 max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain supports-[height:100dvh]:max-h-[calc(100dvh-6rem)]"
             >
-              {navigation.map((item) => {
+              {navigationItems.map((item) => {
                 const itemKey = `nav-${slugify(item.name)}`;
                 const expanded = mobileExpanded.has(itemKey);
 

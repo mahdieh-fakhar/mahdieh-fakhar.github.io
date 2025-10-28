@@ -259,17 +259,17 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_6px_16px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex w-full flex-wrap items-center gap-2 py-1.5 xs:gap-3">
+      <div className="container flex w-full flex-wrap items-center gap-1.5 py-0.5 xs:gap-2">
         {/* Logo + Name */}
         <Link
           href="/"
-           className="order-1 flex min-w-0 flex-1 items-center gap-2 rounded-md px-2 py-0.5 hover-elevate active-elevate-2 xs:flex-none"
+           className="order-1 flex min-w-0 flex-1 items-center gap-1.5 rounded-md px-1.5 py-0 hover-elevate active-elevate-2 xs:flex-none"
           data-testid="link-home-logo"
         >
           <img
             src={assetPath("/images/logo.png")}
             alt="MF Logo"
-            className="h-8 w-8 flex-shrink-0 object-contain xs:h-9 xs:w-9"
+            className="h-7 w-7 flex-shrink-0 object-contain xs:h-8 xs:w-8"
           />
           <span className="truncate text-lg font-semibold tracking-wide text-foreground">
             MAHDIEH FAKHAR
@@ -278,7 +278,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
         {/* Badge strip */}
         <div className="order-3 w-full xs:order-2 xs:w-auto xs:flex-1">
-          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-2 overflow-x-auto px-1 xs:justify-center">
+          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-1.5 overflow-x-auto px-0.5 xs:justify-center">
             {headerBadges.map((badge) => (
               <BadgePill key={badge.id} badge={badge} size="sm" />
             ))}
@@ -292,20 +292,20 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             size="icon"
             onClick={toggleTheme}
             data-testid="button-theme-toggle"
-            className="hover-elevate active-elevate-2"
+            className="hover-elevate active-elevate-2 h-9 w-9"
             aria-label="Toggle color theme"
           >
             {theme === "dark" ? (
-              <Sun className="h-5 w-5" />
+              <Sun className="h-4 w-4" />
             ) : (
-              <Moon className="h-5 w-5" />
+              <Moon className="h-4 w-4" />
             )}
           </Button>
 
           <Button
             variant="ghost"
             size="icon"
-            className="hover-elevate active-elevate-2 lg:hidden"
+            className="hover-elevate active-elevate-2 h-9 w-9 lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             data-testid="button-mobile-menu"
             aria-expanded={mobileMenuOpen}
@@ -314,9 +314,9 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             aria-haspopup="true"
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </Button>
         </div>

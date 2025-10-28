@@ -10,8 +10,9 @@ type BadgePillProps = {
 };
 
 export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
-  const compact = size === "sm";
-  const dimension = compact ? 56 : 68;
+  const isSmall = size === "sm";
+  const defaultMobile = isSmall ? 120 : 160;
+  const defaultDesktop = isSmall ? 100 : 140;
 
   return (
     <a
@@ -21,19 +22,23 @@ export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={cn(
-        "group flex flex-col items-center gap-2 rounded-3xl border border-primary/20 bg-background/95 px-4 py-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+        "flex items-center justify-center rounded-3xl border border-primary/20 bg-background/95 p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary/35 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
         className,
       )}
     >
       <img
         src={assetPath(badge.image)}
         alt={badge.imageAlt}
-        width={dimension}
-        height={dimension}
+        width={defaultMobile}
+        height={defaultMobile}
         loading="lazy"
-        className="h-full w-full max-w-full object-contain drop-shadow-sm"
+        className={cn(
+          "object-contain drop-shadow-sm",
+          isSmall
+            ? "h-[120px] w-[120px] md:h-[100px] md:w-[100px]"
+            : "h-[160px] w-[160px] md:h-[140px] md:w-[140px]",
+        )}
       />
-
     </a>
   );
 }

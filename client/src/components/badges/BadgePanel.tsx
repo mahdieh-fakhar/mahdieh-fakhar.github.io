@@ -24,7 +24,7 @@ export function BadgePanel({
 }: BadgePanelProps) {
   const dimension = size ?? layoutDimensions[layout];
   const containerStyle =
-    layout === "list" ? { width: "100%" } : { width: dimension + 80 };
+    layout === "list" ? { width: "100%" } : { width: dimension + 40 };
 
   return (
     <a
@@ -34,7 +34,7 @@ export function BadgePanel({
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={cn(
-        "group flex flex-col items-center gap-3 rounded-3xl border border-primary/20 bg-background/95 px-6 py-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+        "flex items-center justify-center rounded-3xl border border-primary/20 bg-background/95 p-4 shadow-sm transition hover:-translate-y-1 hover:border-primary/35 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
         className,
       )}
       style={containerStyle}
@@ -47,16 +47,7 @@ export function BadgePanel({
         loading="lazy"
         decoding="async"
         className="h-full w-full max-w-full object-contain drop-shadow-md"
-        style={{ minHeight: dimension }}
       />
-
-      <div className="space-y-1">
-        <p className="text-sm font-semibold uppercase tracking-[0.26em] text-primary/75">
-          {badge.provider}
-        </p>
-        <h3 className="text-base font-semibold text-foreground">{badge.title}</h3>
-        <p className="text-xs text-muted-foreground">{badge.issuer}</p>
-      </div>
     </a>
   );
 }

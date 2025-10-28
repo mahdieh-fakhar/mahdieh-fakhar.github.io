@@ -33,7 +33,7 @@ export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
         loading="lazy"
         className="h-full w-full max-w-full object-contain drop-shadow-sm"
       />
-      <span className="block truncate text-xs font-semibold text-primary">{badge.title}</span>
+
     </a>
   );
 }

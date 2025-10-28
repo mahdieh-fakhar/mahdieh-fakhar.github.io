@@ -260,10 +260,10 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-primary/70 bg-background/95 shadow-[0_6px_16px_-12px_hsl(356_78%_37%/0.45)] backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex w-full flex-wrap items-center gap-1 py-0 xs:gap-1.5">
-        {/* Logo + Name */}
+        {/* Logo */}
         <Link
           href="/"
-           className="order-1 flex min-w-0 flex-1 items-center gap-1 rounded-md px-1 py-0 hover-elevate active-elevate-2 xs:flex-none"
+          className="order-1 flex items-center rounded-md px-1 py-0 hover-elevate active-elevate-2"
           data-testid="link-home-logo"
         >
           <img
@@ -271,37 +271,22 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             alt="MF Logo"
             className="h-7 w-7 flex-shrink-0 object-contain xs:h-8 xs:w-8"
           />
-          <span className="truncate text-base font-semibold tracking-wide text-foreground leading-none">
-            MAHDIEH FAKHAR
-          </span>
         </Link>
 
+        {/* Name */}
+        <span className="order-2 flex-1 text-center text-sm font-semibold uppercase tracking-[0.3em] text-primary leading-none xs:text-base">
+          MAHDIEH FAKHAR
+        </span>
+
         {/* Badge strip */}
-        <div className="order-3 w-full xs:order-2 xs:w-auto xs:flex-1">
-          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-0.5 overflow-x-auto px-0 xs:justify-center">
-            {headerBadges.map((badge) => (
-              <BadgePill key={badge.id} badge={badge} size="sm" />
-            ))}
-          </div>
+        <div className="order-3 ml-auto flex items-center justify-end gap-0.5 xs:order-2 xs:ml-0">
+          {headerBadges.map((badge) => (
+            <BadgePill key={badge.id} badge={badge} size="sm" />
+          ))}
         </div>
 
         {/* Theme Toggle & Mobile Menu Button */}
-        <div className="order-2 ml-auto flex items-center gap-2 xs:order-3 xs:ml-0">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            data-testid="button-theme-toggle"
-            className="hover-elevate active-elevate-2 h-8 w-8 p-0"
-            aria-label="Toggle color theme"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-3.5 w-3.5" />
-            ) : (
-              <Moon className="h-3.5 w-3.5" />
-            )}
-          </Button>
-
+        <div className="order-4 ml-2 flex items-center gap-2 xs:order-3 xs:ml-0">
           <Button
             variant="ghost"
             size="icon"
@@ -438,6 +423,16 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
               aria-label="Submit site search"
             >
               Search
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle-secondary"
+              className="hover-elevate active-elevate-2 h-9 w-9 lg:flex hidden"
+              aria-label="Toggle color theme"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
           </form>
         </div>

@@ -11,9 +11,8 @@ type BadgePillProps = {
 
 export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
   const compact = size === "sm";
-  const cardWidth = compact ? 128 : 156;
-  const emblemSize = compact ? 78 : 96;
-  const emblemInner = emblemSize - 16;
+  const imageSize = compact ? 56 : 68;
+  const height = compact ? 72 : 82;
 
   return (
     <a
@@ -23,29 +22,29 @@ export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={cn(
-        "group inline-flex flex-col items-center gap-3 rounded-[28px] border border-primary/25 bg-gradient-to-b from-background via-background to-primary/10 px-4 py-4 text-center shadow-md transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+        "group inline-flex items-center gap-3 rounded-full border border-primary/25 bg-gradient-to-r from-background via-background to-primary/8 px-3 py-2 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
         className,
       )}
-      style={{ width: cardWidth }}
+      style={{ minHeight: height }}
     >
       <div
-        className="relative flex items-center justify-center rounded-full border border-primary/30 bg-background/95 p-3 shadow-[0_12px_30px_-18px_hsla(356,78%,37%,0.6)] transition-transform duration-300 group-hover:scale-105"
-        style={{ width: emblemSize, height: emblemSize }}
+        className="relative flex items-center justify-center rounded-full border border-primary/25 bg-background/95 p-2.5 shadow-[0_10px_22px_-16px_rgba(0,0,0,0.22)] transition-transform duration-300 group-hover:scale-105"
+        style={{ width: imageSize + 18, height: imageSize + 18 }}
       >
-        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/15 via-transparent to-ai-accent/25 opacity-70" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/14 via-transparent to-ai-accent/20 opacity-70" />
         <img
           src={assetPath(badge.image)}
           alt={badge.imageAlt}
-          width={emblemInner}
-          height={emblemInner}
+          width={imageSize}
+          height={imageSize}
           loading="lazy"
-          className="relative h-full w-full object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,0.2)]"
+          className="relative h-full w-full object-contain drop-shadow-[0_8px_12px_rgba(0,0,0,0.18)]"
         />
       </div>
 
-      <div className="space-y-1.5">
-        <span className="block truncate text-sm font-semibold text-primary">{badge.title}</span>
-        <span className="block truncate text-xs text-muted-foreground">{badge.issuer}</span>
+      <div className="flex min-w-0 flex-col leading-tight">
+        <span className="truncate text-sm font-semibold text-primary">{badge.title}</span>
+        <span className="truncate text-xs text-muted-foreground">{badge.issuer}</span>
       </div>
     </a>
   );

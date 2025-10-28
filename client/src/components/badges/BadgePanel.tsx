@@ -10,31 +10,24 @@ type BadgePanelProps = {
   size?: number;
 };
 
+const layoutDimensions: Record<NonNullable<BadgePanelProps["layout"]>, {
+  width: number;
+  imageSize: number;
+}> = {
+  hero: { width: 400, imageSize: 170 },
+  grid: { width: 320, imageSize: 140 },
+  list: { width: 420, imageSize: 130 },
+};
+
 export function BadgePanel({
   badge,
   layout = "grid",
   className,
   size,
 }: BadgePanelProps) {
-  const isHero = layout === "hero";
-  const isList = layout === "list";
-
-  const cardWidth =
-    typeof size === "number"
-      ? size
-      : isHero
-        ? 460
-        : isList
-          ? 380
-          : 340;
-
-  const emblemSize = isHero ? 240 : isList ? 190 : 210;
-  const emblemFrame = emblemSize + (isHero ? 52 : 40);
-
-  const wrapperClasses = cn(
-    "group relative overflow-hidden rounded-[32px] border border-primary/30 bg-gradient-to-br from-background via-background to-primary/12 shadow-lg transition hover:-translate-y-1 hover:border-primary/45 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
-    className,
-  );
+  const dimensions = layoutDimensions[layout];
+  const width = typeof size === "number" ? size : dimensions.width;
+  const imageSize = dimensions.imageSize;
 
   const issueDateLabel = (() => {
     if (!badge.issueDate) return null;
@@ -53,81 +46,53 @@ export function BadgePanel({
       rel="noopener noreferrer"
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
-      className={wrapperClasses}
-      style={{ width: isList ? "100%" : cardWidth }}
+      className={cn(
+        "group relative block overflow-hidden rounded-[26px] border border-primary/25 bg-gradient-to-r from-background via-background to-primary/8 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+        className,
+      )}
+      style={{ width: layout === "list" ? "100%" : width }}
     >
-      <div
-        className={cn(
-          "flex flex-col gap-6 p-6",
-          isList && "md:flex-row md:items-center md:gap-10",
-        )}
-      >
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-primary/15 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
+      <div className="flex items-center gap-6 px-6 py-5">
         <div
-          className="relative mx-auto flex items-center justify-center rounded-[44px] border border-primary/30 bg-background/96 p-6 shadow-[0_28px_60px_-32px_hsla(356,78%,37%,0.6)] transition-transform duration-300 group-hover:scale-105 md:mx-0"
-          style={{ width: emblemFrame, height: emblemFrame }}
+          className="flex items-center justify-center rounded-2xl border border-primary/25 bg-background/95 p-4 shadow-[0_14px_28px_-18px_rgba(0,0,0,0.25)] transition-transform group-hover:scale-105"
+          style={{ width: imageSize + 36, height: imageSize + 36 }}
         >
-          <div className="absolute inset-0 rounded-[44px] bg-gradient-to-br from-primary/18 via-transparent to-ai-accent/25 opacity-70" />
           <img
             src={assetPath(badge.image)}
             alt={badge.imageAlt}
-            width={emblemSize}
-            height={emblemSize}
+            width={imageSize}
+            height={imageSize}
             loading="lazy"
             decoding="async"
-            className="relative h-full w-full object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.22)]"
+            className="h-full w-full object-contain drop-shadow-[0_10px_12px_rgba(0,0,0,0.18)]"
           />
         </div>
 
-        <div
-          className={cn(
-            "flex-1 rounded-[28px] border border-primary/20 bg-background/92 px-6 py-5 backdrop-blur",
-            isList ? "text-left" : "text-center",
-          )}
-        >
-          <div
-            className={cn(
-              "flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-primary/75",
-              isList && "justify-start",
-            )}
-          >
-            <span className="rounded-full bg-primary/10 px-3 py-1">{badge.provider}</span>
-            <span className="rounded-full bg-primary/10 px-3 py-1">{badge.issuer}</span>
-            {issueDateLabel && (
-              <span className="rounded-full bg-primary/10 px-3 py-1">Issued {issueDateLabel}</span>
-            )}
+        <div className="flex-1 space-y-3">
+          <div className="space-y-1">
+            <h3 className="text-xl font-semibold text-foreground">{badge.title}</h3>
+            <p className="text-sm font-medium text-primary/85">{badge.issuer}</p>
+            <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="rounded-full bg-primary/10 px-3 py-1">{badge.provider}</span>
+              {issueDateLabel && (
+                <span className="rounded-full bg-primary/10 px-3 py-1">Issued {issueDateLabel}</span>
+              )}
+            </div>
           </div>
 
-          <h3
-            className={cn(
-              "mt-4 text-[22px] font-semibold leading-snug text-foreground md:text-2xl",
-              isList ? "" : "mx-auto max-w-xl",
-            )}
-          >
-            {badge.title}
-          </h3>
-
           {badge.summary && (
-            <p
-              className={cn(
-                "mt-3 text-sm leading-relaxed text-muted-foreground/90",
-                isList ? "" : "mx-auto max-w-xl",
-              )}
-            >
+            <p className="text-sm leading-relaxed text-muted-foreground/85">
               {badge.summary}
             </p>
           )}
 
           {badge.skills && badge.skills.length > 0 && (
-            <div
-              className={cn(
-                "mt-5 flex flex-wrap gap-2",
-                isList ? "" : "justify-center",
-              )}
-            >
-              {badge.skills.slice(0, 5).map((skill) => (
+            <div className="flex flex-wrap gap-1.5">
+              {badge.skills.slice(0, 4).map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-primary/25 bg-primary/7 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
+                  className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
                 >
                   {skill}
                 </span>

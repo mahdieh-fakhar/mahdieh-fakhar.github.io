@@ -10,7 +10,7 @@ type BadgePillProps = {
 };
 
 export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
-  const dimension = size === "sm" ? 36 : 48;
+  const dimension = size === "sm" ? 52 : 72;
 
   return (
     <a
@@ -20,9 +20,13 @@ export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={cn(
-        "inline-flex items-center justify-center rounded-full border border-primary/30 bg-background/90 p-1 transition hover:border-primary hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+        "inline-flex items-center justify-center rounded-full border border-primary/30 bg-background/90 transition hover:border-primary hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         className,
       )}
+      style={{
+        width: dimension,
+        height: dimension,
+      }}
     >
       <img
         src={assetPath(badge.image)}
@@ -30,7 +34,7 @@ export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
         width={dimension}
         height={dimension}
         loading="lazy"
-        className="h-full w-full max-w-[64px] rounded-full object-contain"
+        className="h-full w-full rounded-full object-contain"
       />
     </a>
   );

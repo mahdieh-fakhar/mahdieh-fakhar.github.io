@@ -16,11 +16,16 @@ export function BadgePanel({
   className,
   size,
 }: BadgePanelProps) {
-  const dimension = size ?? (layout === "hero" ? 180 : layout === "list" ? 140 : 160);
+  const dimension =
+    size ??
+    (layout === "hero"
+      ? 220
+      : layout === "grid"
+        ? 190
+        : 170);
 
   const wrapperClasses = cn(
-    "flex items-center justify-center",
-    layout === "hero" ? "py-4" : "py-3",
+    "inline-flex items-center justify-center rounded-xl border border-primary/25 bg-background/90 shadow-sm transition hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2",
     className,
   );
 
@@ -32,6 +37,10 @@ export function BadgePanel({
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={wrapperClasses}
+      style={{
+        width: dimension,
+        height: dimension,
+      }}
     >
       <img
         src={assetPath(badge.image)}
@@ -40,7 +49,7 @@ export function BadgePanel({
         height={dimension}
         loading="lazy"
         decoding="async"
-        className="rounded-xl object-contain shadow-sm ring-1 ring-primary/30"
+        className="h-full w-full rounded-lg object-contain"
       />
     </a>
   );

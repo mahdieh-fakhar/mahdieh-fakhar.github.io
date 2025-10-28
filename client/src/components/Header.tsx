@@ -271,7 +271,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             alt="MF Logo"
             className="h-7 w-7 flex-shrink-0 object-contain xs:h-8 xs:w-8"
           />
-          <span className="truncate text-lg font-semibold tracking-wide text-foreground">
+          <span className="truncate text-base font-semibold tracking-wide text-foreground leading-none">
             MAHDIEH FAKHAR
           </span>
         </Link>

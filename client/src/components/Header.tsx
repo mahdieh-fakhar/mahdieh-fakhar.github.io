@@ -263,18 +263,18 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
         {/* Logo */}
         <Link
           href="/"
-          className="order-1 flex items-center rounded-md px-1 py-0 hover-elevate active-elevate-2"
+          className="order-1 flex items-center justify-center rounded-md hover-elevate active-elevate-2"
           data-testid="link-home-logo"
         >
           <img
             src={assetPath("/images/logo.png")}
             alt="MF Logo"
-            className="h-7 w-7 flex-shrink-0 object-contain xs:h-8 xs:w-8"
+            className="h-[160px] w-[160px] object-contain drop-shadow-sm md:h-[140px] md:w-[140px]"
           />
         </Link>
 
         {/* Name */}
-        <span className="order-2 flex-1 text-center text-sm font-semibold uppercase tracking-[0.3em] text-primary leading-none xs:text-base">
+        <span className="order-2 flex-1 text-center text-base font-semibold uppercase tracking-[0.22em] text-primary leading-none xs:text-xl sm:text-2xl">
           MAHDIEH FAKHAR
         </span>
 
@@ -400,11 +400,22 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
           </nav>
 
           <form
-            className="flex w-full flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-end sm:gap-2 lg:w-auto"
+            className="flex w-full flex-col-reverse gap-1.5 sm:flex-row-reverse sm:items-center sm:justify-end sm:gap-2 lg:w-auto"
             onSubmit={handleSearchSubmit}
             role="search"
             aria-label="Site search"
           >
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle"
+              className="hover-elevate active-elevate-2 h-9 w-9 p-0"
+              aria-label="Toggle color theme"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </Button>
             <div className="flex w-full items-center gap-1.5 rounded-md border border-input bg-background/95 px-3 py-1 shadow-sm focus-within:ring-2 focus-within:ring-primary/40 sm:max-w-xs lg:max-w-md">
               <Search className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               <Input
@@ -423,16 +434,6 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
               aria-label="Submit site search"
             >
               Search
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              data-testid="button-theme-toggle-secondary"
-              className="hover-elevate active-elevate-2 h-9 w-9 lg:flex hidden"
-              aria-label="Toggle color theme"
-            >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
           </form>
         </div>

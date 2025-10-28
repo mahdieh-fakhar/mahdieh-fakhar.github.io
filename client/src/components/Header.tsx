@@ -1,13 +1,14 @@
 import { Link, useLocation } from "wouter";
-import { Moon, Sun, Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Moon, Sun, Menu, X, ChevronDown, ChevronRight, Search } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { assetPath } from "@/lib/basePath";
 import { getBadges, deriveBadgePageFromPath } from "@/lib/badgeUtils";
 import { BadgePill } from "@/components/badges/BadgePill";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -78,6 +79,7 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState("");
 
   const pageKey = deriveBadgePageFromPath(location ?? "/");
   const normalizedLocation = (location ?? "/").replace(/\/+$/, "") || "/";
@@ -132,6 +134,46 @@ export function Header() {
     setMobileMenuOpen(false);
     setMobileExpanded(new Set());
   };
+
+  const formatBreadcrumbLabel = (value: string) =>
+    value
+      .split(/[-_]/g)
+      .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+      .join(" ");
+
+  const breadcrumbItems = useMemo(() => {
+    const segments =
+      normalizedLocation === "/" ? [] : normalizedLocation.split("/").filter(Boolean);
+
+    const items: Array<{ name: string; href: string }> = [{ name: "Home", href: "/" }];
+    let pathAccumulator = "";
+
+    segments.forEach((segment) => {
+      pathAccumulator += `/${segment}`;
+      const displayName =
+        navigation.find((item) => normalizeHref(item.href) === pathAccumulator)?.name ??
+        formatBreadcrumbLabel(segment);
+
+      items.push({ name: displayName, href: pathAccumulator });
+    });
+
+    return items;
+  }, [normalizedLocation]);
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const trimmedQuery = searchQuery.trim();
+    if (!trimmedQuery) {
+      return;
+    }
+
+    const searchUrl = new URL("https://www.google.com/search");
+    searchUrl.searchParams.set("q", `site:mahdieh-fakhar.github.io ${trimmedQuery}`);
+    window.open(searchUrl.toString(), "_blank", "noopener,noreferrer");
+    setSearchQuery("");
+  };
+
+  const isSearchDisabled = searchQuery.trim().length === 0;
 
   const renderDropdownItems = (items: NavChild[], parentKey: string) => (
   items.map((child, index) => {
@@ -386,6 +428,63 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             ),
           )}
         </nav>
+      </div>
+
+      <div className="border-t border-primary/15 bg-background/80 backdrop-blur">
+        <div className="container flex flex-col gap-3 py-3 lg:flex-row lg:items-center lg:justify-between">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm"
+          >
+            {breadcrumbItems.map((item, index) => {
+              const isLast = index === breadcrumbItems.length - 1;
+              return (
+                <div key={item.href} className="flex items-center gap-2">
+                  {index > 0 && (
+                    <ChevronRight className="h-3 w-3 text-primary/60" aria-hidden="true" />
+                  )}
+                  {isLast ? (
+                    <span className="font-semibold text-primary">{item.name}</span>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          <form
+            className="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-end sm:gap-2 lg:w-auto"
+            onSubmit={handleSearchSubmit}
+            role="search"
+            aria-label="Site search"
+          >
+            <div className="flex w-full items-center gap-2 rounded-md border border-input bg-background/95 px-3 py-2 shadow-sm focus-within:ring-2 focus-within:ring-primary/40 sm:max-w-xs lg:max-w-md">
+              <Search className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+              <Input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Search the site"
+                aria-label="Search the site"
+                className="border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={isSearchDisabled}
+              className="w-full sm:w-auto"
+              aria-label="Submit site search"
+            >
+              Search
+            </Button>
+          </form>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

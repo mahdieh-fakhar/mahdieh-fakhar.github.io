@@ -21,6 +21,9 @@ export function BadgePanel({
   const isList = layout === "list";
   const hasCustomSize = typeof size === "number";
 
+  const mobileSize = hasCustomSize ? size! : DEFAULT_MOBILE_SIZE;
+  const desktopSize = hasCustomSize ? size! : 140;
+
   return (
     <a
       href={badge.url}
@@ -29,16 +32,23 @@ export function BadgePanel({
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={cn(
-        "flex items-center justify-center rounded-3xl border border-primary/20 bg-background/95 p-4 shadow-sm transition hover:-translate-y-1 hover:border-primary/35 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
-        isList ? "w-full" : "max-w-fit",
+        "relative flex items-center justify-center rounded-[32px] border border-primary/25 bg-background/96 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
         className,
       )}
+      style={
+        hasCustomSize
+          ? { width: size, height: size }
+          : {
+              width: mobileSize,
+              height: mobileSize,
+            }
+      }
     >
       <img
         src={assetPath(badge.image)}
         alt={badge.imageAlt}
-        width={hasCustomSize ? size : DEFAULT_MOBILE_SIZE}
-        height={hasCustomSize ? size : DEFAULT_MOBILE_SIZE}
+        width={mobileSize}
+        height={mobileSize}
         loading="lazy"
         decoding="async"
         className={cn(
@@ -47,7 +57,11 @@ export function BadgePanel({
             ? ""
             : "h-[160px] w-[160px] md:h-[140px] md:w-[140px]",
         )}
-        style={hasCustomSize ? { width: size, height: size } : undefined}
+        style={
+          hasCustomSize
+            ? { width: size, height: size }
+            : undefined
+        }
       />
     </a>
   );

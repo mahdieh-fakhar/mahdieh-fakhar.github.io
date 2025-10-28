@@ -16,23 +16,25 @@ export function BadgePanel({
   className,
   size,
 }: BadgePanelProps) {
-  const cardWidth =
-    size ??
-    (layout === "hero"
-      ? 360
-      : layout === "grid"
-        ? 300
-        : 260);
+  const isHero = layout === "hero";
+  const isList = layout === "list";
 
-  const imageSize =
-    layout === "hero"
-      ? 140
-      : layout === "grid"
-        ? 120
-        : 100;
+  const cardWidth =
+    typeof size === "number"
+      ? size
+      : isHero
+        ? 420
+        : isList
+          ? 360
+          : 320;
+
+  const minHeight = isHero ? 260 : 240;
+
+  const badgeImageSize = isHero ? 220 : isList ? 160 : 180;
+  const badgeImageContainer = badgeImageSize + (isHero ? 48 : 32);
 
   const wrapperClasses = cn(
-    "group relative overflow-hidden rounded-2xl border border-primary/25 bg-gradient-to-br from-background via-background/95 to-primary/10 p-5 shadow-md transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+    "group relative overflow-hidden rounded-3xl border border-primary/25 bg-gradient-to-br from-background via-background to-primary/10 p-6 shadow-md transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
     className,
   );
 
@@ -55,36 +57,49 @@ export function BadgePanel({
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={wrapperClasses}
       style={{
-        width: cardWidth,
-        minHeight: layout === "hero" ? 220 : 200,
+        width: isList ? "100%" : cardWidth,
+        minHeight,
       }}
     >
       <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <div className="h-full w-full bg-gradient-to-br from-primary/10 via-ai-accent/10 to-transparent" />
       </div>
 
-      <div className="relative flex items-center gap-5">
+      <div
+        className={cn(
+          "relative gap-6",
+          isList ? "flex items-center" : "flex flex-col items-center text-center",
+        )}
+      >
         <div
-          className="flex items-center justify-center rounded-xl border border-primary/30 bg-background/95 p-4 shadow-sm"
-          style={{ width: imageSize + 32, height: imageSize + 32 }}
+          className="relative flex items-center justify-center rounded-[32px] border border-primary/30 bg-background/95 shadow-lg ring-1 ring-primary/15 transition-transform duration-300 group-hover:scale-105"
+          style={{ width: badgeImageContainer, height: badgeImageContainer }}
         >
+          <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-primary/10 via-transparent to-secondary/20 opacity-60" />
+          <div className="relative flex items-center justify-center">
           <img
             src={assetPath(badge.image)}
             alt={badge.imageAlt}
-            width={imageSize}
-            height={imageSize}
+              width={badgeImageSize}
+              height={badgeImageSize}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-contain"
+              className="h-full w-full object-contain drop-shadow-md"
           />
         </div>
+        </div>
 
-        <div className="flex-1 space-y-3">
+        <div
+          className={cn(
+            "flex-1 space-y-4",
+            isList ? "text-left" : "text-center",
+          )}
+        >
           <div className="space-y-1">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary/80">
               {badge.provider}
             </p>
-            <h3 className="text-lg font-semibold text-foreground line-clamp-2">{badge.title}</h3>
+            <h3 className="text-xl font-semibold text-foreground line-clamp-2">{badge.title}</h3>
             <p className="text-sm text-muted-foreground">{badge.issuer}</p>
             {issueDateLabel && (
               <p className="text-xs font-medium text-muted-foreground/80">
@@ -94,15 +109,20 @@ export function BadgePanel({
           </div>
 
           {badge.summary && (
-            <p className="text-sm text-muted-foreground/90 line-clamp-2">{badge.summary}</p>
+            <p className="text-sm text-muted-foreground/90 line-clamp-3">{badge.summary}</p>
           )}
 
           {badge.skills && badge.skills.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 pt-1">
+            <div
+              className={cn(
+                "flex flex-wrap gap-1.5 pt-1",
+                isList ? "" : "justify-center",
+              )}
+            >
               {badge.skills.slice(0, 4).map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary"
+                  className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
                 >
                   {skill}
                 </span>

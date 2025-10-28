@@ -11,7 +11,7 @@ type BadgePillProps = {
 
 export function BadgePill({ badge, className, size = "md" }: BadgePillProps) {
   const compact = size === "sm";
-  const imageSize = compact ? 40 : 52;
+  const imageSize = compact ? 64 : 88;
 
   return (
     <a

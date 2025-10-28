@@ -18,11 +18,9 @@ export function BadgePanel({
   className,
   size,
 }: BadgePanelProps) {
-  const isList = layout === "list";
   const hasCustomSize = typeof size === "number";
 
   const mobileSize = hasCustomSize ? size! : DEFAULT_MOBILE_SIZE;
-  const desktopSize = hasCustomSize ? size! : 140;
 
   return (
     <a
@@ -31,10 +29,7 @@ export function BadgePanel({
       rel="noopener noreferrer"
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
-      className={cn(
-        "relative flex items-center justify-center rounded-[32px] border border-primary/25 bg-background/96 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
-        className,
-      )}
+      className={cn("inline-block", className)}
       style={
         hasCustomSize
           ? { width: size, height: size }
@@ -52,16 +47,12 @@ export function BadgePanel({
         loading="lazy"
         decoding="async"
         className={cn(
-          "object-contain drop-shadow-md",
+          "block object-contain drop-shadow-md",
           hasCustomSize
             ? ""
             : "h-[160px] w-[160px] md:h-[140px] md:w-[140px]",
         )}
-        style={
-          hasCustomSize
-            ? { width: size, height: size }
-            : undefined
-        }
+        style={hasCustomSize ? { width: size, height: size } : undefined}
       />
     </a>
   );

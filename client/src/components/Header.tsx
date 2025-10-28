@@ -278,7 +278,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
 
         {/* Badge strip */}
         <div className="order-3 w-full xs:order-2 xs:w-auto xs:flex-1">
-          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-1 overflow-x-auto px-0 xs:justify-center">
+          <div className="flex max-w-full snap-x snap-mandatory items-center justify-start gap-0.5 overflow-x-auto px-0 xs:justify-center">
             {headerBadges.map((badge) => (
               <BadgePill key={badge.id} badge={badge} size="sm" />
             ))}

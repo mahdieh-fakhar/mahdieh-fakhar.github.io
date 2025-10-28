@@ -23,18 +23,16 @@ export function BadgePanel({
     typeof size === "number"
       ? size
       : isHero
-        ? 420
+        ? 460
         : isList
-          ? 360
-          : 320;
+          ? 380
+          : 340;
 
-  const minHeight = isHero ? 260 : 240;
-
-  const badgeImageSize = isHero ? 220 : isList ? 160 : 180;
-  const badgeImageContainer = badgeImageSize + (isHero ? 48 : 32);
+  const emblemSize = isHero ? 240 : isList ? 190 : 210;
+  const emblemFrame = emblemSize + (isHero ? 52 : 40);
 
   const wrapperClasses = cn(
-    "group relative overflow-hidden rounded-3xl border border-primary/25 bg-gradient-to-br from-background via-background to-primary/10 p-6 shadow-md transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
+    "group relative overflow-hidden rounded-[32px] border border-primary/30 bg-gradient-to-br from-background via-background to-primary/12 shadow-lg transition hover:-translate-y-1 hover:border-primary/45 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2",
     className,
   );
 
@@ -56,73 +54,80 @@ export function BadgePanel({
       aria-label={formatBadgeLabel(badge)}
       data-analytics-event={`badge_click:${badge.provider}:${badge.slug}`}
       className={wrapperClasses}
-      style={{
-        width: isList ? "100%" : cardWidth,
-        minHeight,
-      }}
+      style={{ width: isList ? "100%" : cardWidth }}
     >
-      <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="h-full w-full bg-gradient-to-br from-primary/10 via-ai-accent/10 to-transparent" />
-      </div>
-
       <div
         className={cn(
-          "relative gap-6",
-          isList ? "flex items-center" : "flex flex-col items-center text-center",
+          "flex flex-col gap-6 p-6",
+          isList && "md:flex-row md:items-center md:gap-10",
         )}
       >
         <div
-          className="relative flex items-center justify-center rounded-[32px] border border-primary/30 bg-background/95 shadow-lg ring-1 ring-primary/15 transition-transform duration-300 group-hover:scale-105"
-          style={{ width: badgeImageContainer, height: badgeImageContainer }}
+          className="relative mx-auto flex items-center justify-center rounded-[44px] border border-primary/30 bg-background/96 p-6 shadow-[0_28px_60px_-32px_hsla(356,78%,37%,0.6)] transition-transform duration-300 group-hover:scale-105 md:mx-0"
+          style={{ width: emblemFrame, height: emblemFrame }}
         >
-          <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-primary/10 via-transparent to-secondary/20 opacity-60" />
-          <div className="relative flex items-center justify-center">
+          <div className="absolute inset-0 rounded-[44px] bg-gradient-to-br from-primary/18 via-transparent to-ai-accent/25 opacity-70" />
           <img
             src={assetPath(badge.image)}
             alt={badge.imageAlt}
-              width={badgeImageSize}
-              height={badgeImageSize}
+            width={emblemSize}
+            height={emblemSize}
             loading="lazy"
             decoding="async"
-              className="h-full w-full object-contain drop-shadow-md"
+            className="relative h-full w-full object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.22)]"
           />
-        </div>
         </div>
 
         <div
           className={cn(
-            "flex-1 space-y-4",
+            "flex-1 rounded-[28px] border border-primary/20 bg-background/92 px-6 py-5 backdrop-blur",
             isList ? "text-left" : "text-center",
           )}
         >
-          <div className="space-y-1">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary/80">
-              {badge.provider}
-            </p>
-            <h3 className="text-xl font-semibold text-foreground line-clamp-2">{badge.title}</h3>
-            <p className="text-sm text-muted-foreground">{badge.issuer}</p>
+          <div
+            className={cn(
+              "flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-primary/75",
+              isList && "justify-start",
+            )}
+          >
+            <span className="rounded-full bg-primary/10 px-3 py-1">{badge.provider}</span>
+            <span className="rounded-full bg-primary/10 px-3 py-1">{badge.issuer}</span>
             {issueDateLabel && (
-              <p className="text-xs font-medium text-muted-foreground/80">
-                Issued {issueDateLabel}
-              </p>
+              <span className="rounded-full bg-primary/10 px-3 py-1">Issued {issueDateLabel}</span>
             )}
           </div>
 
+          <h3
+            className={cn(
+              "mt-4 text-[22px] font-semibold leading-snug text-foreground md:text-2xl",
+              isList ? "" : "mx-auto max-w-xl",
+            )}
+          >
+            {badge.title}
+          </h3>
+
           {badge.summary && (
-            <p className="text-sm text-muted-foreground/90 line-clamp-3">{badge.summary}</p>
+            <p
+              className={cn(
+                "mt-3 text-sm leading-relaxed text-muted-foreground/90",
+                isList ? "" : "mx-auto max-w-xl",
+              )}
+            >
+              {badge.summary}
+            </p>
           )}
 
           {badge.skills && badge.skills.length > 0 && (
             <div
               className={cn(
-                "flex flex-wrap gap-1.5 pt-1",
+                "mt-5 flex flex-wrap gap-2",
                 isList ? "" : "justify-center",
               )}
             >
-              {badge.skills.slice(0, 4).map((skill) => (
+              {badge.skills.slice(0, 5).map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
+                  className="rounded-full border border-primary/25 bg-primary/7 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
                 >
                   {skill}
                 </span>
@@ -134,3 +139,4 @@ export function BadgePanel({
     </a>
   );
 }
+

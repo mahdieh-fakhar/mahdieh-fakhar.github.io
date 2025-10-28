@@ -341,13 +341,10 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
                     data-testid={`link-nav-${slugify(item.name)}`}
                   >
                     <span>{item.name}</span>
-                      <span
-                        className="ml-1 inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/80"
+                      <ChevronRight
+                        className="ml-1 h-4 w-4 text-primary/70 transition-transform group-data-[state=open]:rotate-90"
                         aria-hidden="true"
-                      >
-                        Sub
-                        <ChevronDown className="h-3 w-3 opacity-70 transition-transform group-data-[state=open]:rotate-180" />
-                      </span>
+                      />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent

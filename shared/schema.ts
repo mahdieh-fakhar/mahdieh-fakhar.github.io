@@ -81,7 +81,7 @@ export interface Project {
 export interface DocumentAnalysis {
   id: string;
   fileName: string;
-  fileUrl: string;
+  fileUrl?: string;
   extractedText: string;
   analysisDate: string;
   metadata?: {

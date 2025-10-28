@@ -138,28 +138,28 @@ export default function About() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <h3 className="font-semibold" data-testid="heading-current-studying">🎓 Studying</h3>
+              <h3 className="font-semibold" data-testid="heading-current-studying">Studying</h3>
               <p className="text-muted-foreground" data-testid="text-current-studying">
                 Master's in Big Data and Data Science at UNIR, focusing on advanced analytics, 
                 machine learning, and data-driven decision making.
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold" data-testid="heading-current-working">💼 Working</h3>
+              <h3 className="font-semibold" data-testid="heading-current-working">Working</h3>
               <p className="text-muted-foreground" data-testid="text-current-working">
                 Data analysis and digitalization of databases, applying cutting-edge techniques 
                 to transform raw data into actionable insights.
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold" data-testid="heading-current-learning">📚 Learning</h3>
+              <h3 className="font-semibold" data-testid="heading-current-learning">Learning</h3>
               <p className="text-muted-foreground" data-testid="text-current-learning">
                 Continuously expanding my knowledge in data analysis with R, Python, and Artificial Intelligence, 
                 as well as exploring new tools for data visualization and database automatization.
               </p>
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold" data-testid="heading-current-looking">🔍 Looking For</h3>
+              <h3 className="font-semibold" data-testid="heading-current-looking">Looking For</h3>
               <p className="text-muted-foreground" data-testid="text-current-looking">
                 Opportunities to participate in courses on data analysis, data visualization, AI in data analysis, 
                 and digitalization of databases to further enhance my expertise.

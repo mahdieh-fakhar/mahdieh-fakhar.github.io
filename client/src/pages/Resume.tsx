@@ -7,6 +7,30 @@ import { getBadges } from "@/lib/badgeUtils";
 
 export default function Resume() {
   const resumeBadges = getBadges({ page: "resume" }).filter((badge) => badge.placements.includes("resume"));
+  const educationHighlights = [
+    "Master's in Big Data & Data Science (In Progress) - UNIR",
+    "Master's in ICT for Language Teaching - UNED (GPA: 9.29/10)",
+    "Master's in TEFL - University of Ilam (GPA: 9.09/10)",
+    "BA in English Translation - Payame Noor (GPA: 7.91/10)",
+  ];
+  const keySkills = [
+    "Data Analysis: R, Python, SPSS, Excel",
+    "Visualization: Tableau, Data Dashboards",
+    "Research: SEM, Bibliometric Analysis, VOSviewer",
+    "Languages: English (C1+), Spanish (C1), Persian (Native)",
+  ];
+  const experienceSummary = [
+    "13+ years teaching experience",
+    "Two leadership positions in language institutions",
+    "Research collaborator at UNED (IHUPA, AGORA)",
+    "Published researcher with 5+ journal articles",
+  ];
+  const recentAchievements = [
+    "Top 100 Master's program in Spain (El Mundo 2023)",
+    "EUR 4,000 research fellowship (Iran Ministry of Science)",
+    "13+ conference presentations",
+    "Reviewer for SAGE Open & EPOS journals",
+  ];
   const handleDownload = () => {
     // This will trigger download of a CV file
     // In a real implementation, you would have a PDF file hosted
@@ -108,11 +132,12 @@ export default function Resume() {
             <CardHeader>
               <CardTitle className="text-lg">Education Highlights</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              <p data-testid="text-education-highlight-0">• Master's in Big Data & Data Science (In Progress) - UNIR</p>
-              <p data-testid="text-education-highlight-1">• Master's in ICT for Language Teaching - UNED (GPA: 9.29/10)</p>
-              <p data-testid="text-education-highlight-2">• Master's in TEFL - University of Ilam (GPA: 9.09/10)</p>
-              <p data-testid="text-education-highlight-3">• BA in English Translation - Payame Noor (GPA: 7.91/10)</p>
+            <CardContent className="text-sm">
+              <ul className="list-disc space-y-1 pl-5 marker:text-primary">
+                {educationHighlights.map((item, index) => (
+                  <li key={item} data-testid={`text-education-highlight-${index}`}>{item}</li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
 
@@ -120,11 +145,12 @@ export default function Resume() {
             <CardHeader>
               <CardTitle className="text-lg">Key Skills</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              <p data-testid="text-skill-item-0">• Data Analysis: R, Python, SPSS, Excel</p>
-              <p data-testid="text-skill-item-1">• Visualization: Tableau, Data Dashboards</p>
-              <p data-testid="text-skill-item-2">• Research: SEM, Bibliometric Analysis, VOSviewer</p>
-              <p data-testid="text-skill-item-3">• Languages: English (C1+), Spanish (C1), Persian (Native)</p>
+            <CardContent className="text-sm">
+              <ul className="list-disc space-y-1 pl-5 marker:text-primary">
+                {keySkills.map((item, index) => (
+                  <li key={item} data-testid={`text-skill-item-${index}`}>{item}</li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
 
@@ -132,11 +158,12 @@ export default function Resume() {
             <CardHeader>
               <CardTitle className="text-lg">Experience Summary</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              <p data-testid="text-experience-item-0">• 13+ years teaching experience</p>
-              <p data-testid="text-experience-item-1">• 2 leadership positions in language institutions</p>
-              <p data-testid="text-experience-item-2">• Research collaborator at UNED (IHUPA, AGORA)</p>
-              <p data-testid="text-experience-item-3">• Published researcher with 5+ journal articles</p>
+            <CardContent className="text-sm">
+              <ul className="list-disc space-y-1 pl-5 marker:text-primary">
+                {experienceSummary.map((item, index) => (
+                  <li key={item} data-testid={`text-experience-item-${index}`}>{item}</li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
 
@@ -144,11 +171,12 @@ export default function Resume() {
             <CardHeader>
               <CardTitle className="text-lg">Recent Achievements</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              <p data-testid="text-achievement-item-0">• Top 100 Master's program in Spain (El Mundo 2023)</p>
-              <p data-testid="text-achievement-item-1">• €4,000 research fellowship (Iran Ministry of Science)</p>
-              <p data-testid="text-achievement-item-2">• 13+ conference presentations</p>
-              <p data-testid="text-achievement-item-3">• Reviewer for SAGE Open & EPOS journals</p>
+            <CardContent className="text-sm">
+              <ul className="list-disc space-y-1 pl-5 marker:text-primary">
+                {recentAchievements.map((item, index) => (
+                  <li key={item} data-testid={`text-achievement-item-${index}`}>{item}</li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
         </div>

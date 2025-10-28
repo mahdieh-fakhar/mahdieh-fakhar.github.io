@@ -26,7 +26,8 @@ export interface DocumentAnalysisResult {
  */
 export async function analyzeDocumentImage(
   base64Image: string,
-  category: string = "certificate"
+  category: string = "certificate",
+  mimeType: string = "image/jpeg",
 ): Promise<DocumentAnalysisResult> {
   try {
     const prompt = `Analyze this ${category} document image and extract all text and relevant information.
@@ -53,43 +54,73 @@ Respond with JSON in this exact format:
   "confidence": 0.95
 }`;
 
-    const response = await openai.chat.completions.create({
+    const response = await openai.responses.parse({
       model: MODEL,
-      messages: [
+      input: [
         {
           role: "user",
           content: [
             {
-              type: "text",
-              text: prompt
+              type: "input_text",
+              text: prompt,
             },
             {
-              type: "image_url",
-              image_url: {
-                url: `data:image/jpeg;base64,${base64Image}`
-              }
-            }
+              type: "input_image",
+              image_url: `data:${mimeType};base64,${base64Image}`,
+              detail: "high",
+            },
           ],
         },
       ],
-      response_format: { type: "json_object" },
-      max_tokens: 2048,
+      text: {
+        format: {
+          type: "json_schema",
+          name: "DocumentAnalysis",
+          schema: {
+            type: "object",
+            additionalProperties: true,
+            properties: {
+              extractedText: { type: "string" },
+              documentType: { type: "string" },
+              keyInformation: {
+                type: "object",
+                additionalProperties: true,
+                properties: {
+                  title: { type: "string" },
+                  date: { type: "string" },
+                  institution: { type: "string" },
+                },
+              },
+              confidence: { type: "number" },
+            },
+            required: ["extractedText"],
+          },
+        },
+      },
+      max_output_tokens: 2048,
     });
 
-    const content = response.choices[0].message.content;
-    if (!content) {
+    const parsed = response.output_parsed as {
+      extractedText?: string;
+      documentType?: string;
+      keyInformation?: Record<string, unknown>;
+      confidence?: number;
+    } | null;
+
+    if (!parsed) {
       throw new Error("No response from OpenAI");
     }
-
-    const result = JSON.parse(content);
 
     return {
       success: true,
       analysis: {
-        extractedText: result.extractedText || "",
-        documentType: result.documentType,
-        keyInformation: result.keyInformation || {},
-        confidence: result.confidence || 0.8,
+        extractedText: parsed.extractedText ?? "",
+        documentType: parsed.documentType,
+        keyInformation: parsed.keyInformation ?? {},
+        confidence:
+          typeof parsed.confidence === "number" && !Number.isNaN(parsed.confidence)
+            ? parsed.confidence
+            : 0.8,
       },
     };
   } catch (error) {

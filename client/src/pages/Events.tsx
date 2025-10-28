@@ -690,10 +690,10 @@ export default function Events({ params }: EventsProps = {}) {
                     return null;
                   }
 
-                  const gridStyles: CSSProperties = {
+                  const gridStyles = {
                     "--auto-grid-item":
                       orientation === "portrait" ? "min(12rem, 100%)" : "min(16rem, 100%)",
-                  };
+                  } as CSSProperties;
 
                   return (
                     <div key={orientation} className="space-y-6">

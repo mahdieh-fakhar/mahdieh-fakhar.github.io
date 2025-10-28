@@ -48,7 +48,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Analyze with OpenAI Vision
       const analysisResult: DocumentAnalysisResult = await analyzeDocumentImage(
         base64Image,
-        category
+        category,
+        req.file.mimetype
       );
 
       if (!analysisResult.success) {
@@ -58,7 +59,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save analysis to storage
       const savedAnalysis = await storage.saveDocumentAnalysis({
         fileName: req.file.originalname,
-        fileUrl: `data:${req.file.mimetype};base64,${base64Image}`,
         extractedText: analysisResult.analysis.extractedText,
         analysisDate: new Date().toISOString(),
         metadata: {

@@ -63,7 +63,7 @@ const academicPrograms: EducationRecord[] = [
     id: "academic-phd-applied-linguistics",
     category: "Academic",
     title: "Ph.D. Programme in Applied Linguistics (Research Stage)",
-    institution: "Universidad Nacional de Educación a Distancia (UNED)",
+    institution: "Universidad Nacional de Educacion a Distancia (UNED)",
     location: "Madrid, Spain",
     period: "Feb 2024 - Present",
     status: "Preparing comprehensive doctoral exam",

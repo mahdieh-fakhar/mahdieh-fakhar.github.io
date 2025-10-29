@@ -269,12 +269,12 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
           <img
             src={assetPath("/images/logo.png")}
             alt="MF Logo"
-            className="h-[160px] w-[160px] object-contain drop-shadow-sm md:h-[140px] md:w-[140px]"
+            className="h-[80px] w-[80px] object-contain drop-shadow-sm md:h-[70px] md:w-[70px]"
           />
         </Link>
 
         {/* Name */}
-        <span className="order-2 flex-1 text-center text-base font-semibold uppercase tracking-[0.22em] text-primary leading-none xs:text-xl sm:text-2xl">
+        <span className="order-2 flex-1 text-center text-lg font-semibold uppercase tracking-[0.2em] text-primary leading-none xs:text-2xl sm:text-3xl">
           MAHDIEH FAKHAR
         </span>
 

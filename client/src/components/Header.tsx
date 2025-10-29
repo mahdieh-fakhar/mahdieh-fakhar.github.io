@@ -274,7 +274,7 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
         </Link>
 
         {/* Name */}
-        <span className="order-2 flex-1 text-center text-lg font-semibold uppercase tracking-[0.2em] text-primary leading-none xs:text-2xl sm:text-3xl">
+        <span className="order-2 flex-1 text-center text-lg font-semibold uppercase tracking-[0.2em] text-primary leading-none xs:text-2xl sm:text-[3rem] sm:leading-[3rem]">
           MAHDIEH FAKHAR
         </span>
 

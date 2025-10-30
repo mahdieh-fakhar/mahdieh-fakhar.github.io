@@ -37,7 +37,350 @@ type EventNavItem = {
   description: string;
 };
 
-const certificateData: ConferenceCertificate[] = [];
+const certificateData: ConferenceCertificate[] = [
+  {
+    id: "conf-2024-uned-eye-tracking",
+    conferenceName: "UNED Faculty of Philology Seminar Series",
+    certificateTitle: "Certificado de Asistencia",
+    certificateSubject:
+      "An introduction to Eye Tracking in Audiovisual Translation (AVT): Methods and Applications",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Attended the UNED Faculty of Philology seminar delivered by Dr. Valentina Ragni on AVT eye-tracking methodologies.",
+    eventDate: "2024-09-27",
+    location: "UNED, Madrid, Spain",
+    sponsors: ["UNED Faculty of Philology"],
+    imageUrl: "/images/conferences/Conference/2024.09.27.jpg",
+    aiInsights:
+      "Reinforces cutting-edge methodological literacy in audiovisual translation studies through eye-tracking analytics.",
+    orientation: "portrait",
+  },
+  {
+    id: "conf-2021-utm-covid19",
+    conferenceName:
+      "Current Trends in the Middle East: Virtual International Joint Conference on COVID-19 Global Impacts",
+    certificateTitle: "Certificate of Participation",
+    certificateSubject:
+      "Presenter contribution on pandemic-driven social and educational transformations across the Middle East.",
+    certificateType: "Participation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Delivered findings within the interdisciplinary COVID-19 global impacts track hosted by Universiti Teknologi Malaysia.",
+    eventDate: "2021-03-10",
+    location: "Virtual (UTM Johor, Malaysia)",
+    sponsors: ["Universiti Teknologi Malaysia", "Ilam University", "Pokhara University"],
+    imageUrl: "/images/conferences/Conference/2021.03.09-10.jpg",
+    aiInsights:
+      "Highlights agile knowledge transfer during the pandemic era with multinational academic partners.",
+    orientation: "portrait",
+  },
+  {
+    id: "conf-2019-tellsi-edumgmt",
+    conferenceName: "17th International TELLSI Conference: New Horizons in Language Studies",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "An Exploration of Iranian EFL Stakeholders’ Attitudes and Knowledge of Different Educational Management Systems",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Presented collaborative TELLSI research on stakeholder perspectives of educational management systems.",
+    eventDate: "2019-11-21",
+    location: "Islamic Azad University of Tabriz Branch, Tabriz, Iran",
+    sponsors: ["TELLSI", "Islamic Azad University of Tabriz"],
+    imageUrl: "/images/conferences/Conference/2019.11.20-21.jpg",
+    aiInsights:
+      "Extends applied linguistics scholarship into governance and policy implications for language programs.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2019-eurokd-learning-analytics",
+    conferenceName: "International Conference on Education, Psychology, and Behavioral Science",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Implementing Learning Analytics in a Higher Education Institution: Issues and Considerations",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Engaged with University of Leeds and EUROKD workshop content on institutional learning analytics strategy.",
+    eventDate: "2019-10-25",
+    location: "Istanbul, Turkey",
+    sponsors: ["University of Leeds", "EUROKD"],
+    imageUrl: "/images/conferences/Conference/2019.10.25.02.jpg",
+    aiInsights:
+      "Bridges educational data science and pedagogical decision-making within international higher education contexts.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2019-eurokd-developmental-psychology",
+    conferenceName: "International Conference on Education, Psychology, and Behavioral Science",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject: "Developmental Psychology without Positivistic Pretensions",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Participated in Professor Willem Koops’s workshop exploring qualitative perspectives in developmental psychology.",
+    eventDate: "2019-10-25",
+    location: "Istanbul, Turkey",
+    sponsors: ["University of Leeds", "EUROKD"],
+    imageUrl: "/images/conferences/Conference/2019.10.25.01.jpg",
+    aiInsights:
+      "Demonstrates cross-disciplinary curiosity connecting linguistics, psychology, and education research traditions.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2019-ldp-presentation",
+    conferenceName: "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Subjectivity and Objectivity in Discussion Sections of Iranian M.A. Thesis and Ph.D. Dissertations; the Case of Hard and Soft Science Fields of Studies",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Shared corpus-driven findings on disciplinary discourse practices within graduate research writing.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["KELTA", "Shahid Chamran University of Ahvaz", "LDP Conference"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.01.jpg",
+    aiInsights:
+      "Connects discourse analysis with academic writing pedagogy across hard and soft science domains.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2019-ldp-workshop-pragmatics",
+    conferenceName: "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Workshop Presentation",
+    certificateSubject:
+      "How to do a Valid Pragmatics Research: Dealing with Theory and Data",
+    certificateType: "Workshop",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Workshop Presenter",
+    roleDescription:
+      "Led a methodological workshop on designing empirically robust pragmatics investigations.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["KELTA", "Shahid Chamran University of Ahvaz", "LDP Conference"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.02.jpg",
+    aiInsights:
+      "Accelerates community capacity for evidence-based pragmatics research through hands-on mentoring.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2019-ldp-workshop-planning",
+    conferenceName: "5th International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Workshop Presentation",
+    certificateSubject: "Planning Research in Applied Linguistics",
+    certificateType: "Workshop",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Workshop Presenter",
+    roleDescription:
+      "Facilitated strategic planning discussions for applied linguistics inquiry within the LDP workshop track.",
+    eventDate: "2019-02-01",
+    location: "Ahvaz, Iran",
+    sponsors: ["KELTA", "Shahid Chamran University of Ahvaz", "LDP Conference"],
+    imageUrl: "/images/conferences/Conference/2019.01-02.30-01.03.jpg",
+    aiInsights:
+      "Equips scholars with structured research design frameworks tailored to applied linguistics challenges.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2018-tellsi-ecological-change",
+    conferenceName: "16th International TELLSI Conference",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "An Ecological Exploration of Iranian EFL Students’ Self-Change, Self-Construal, and Change Management through Classroom Communication Tasks",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Examined learner development through ecological perspectives alongside co-author Reza Khany.",
+    eventDate: "2018-11-16",
+    location: "Shiraz University, Shiraz, Iran",
+    sponsors: ["TELLSI", "Shiraz University", "Islamic World Science Citation Center"],
+    imageUrl: "/images/conferences/Conference/2018.11.14-16.jpg",
+    aiInsights:
+      "Integrates ecological linguistics with classroom task design for transformational learner outcomes.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2018-ntelt-self-leadership",
+    conferenceName: "3rd Conference on New Trends in English Language Teaching and Testing (NTELT)",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Investigating the Effect of EFL Teachers’ Self-leadership on their Processional Development and Change",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Presented empirical study on teacher self-leadership and professional growth within NTELT community.",
+    eventDate: "2018-09-05",
+    location: "Tehran, Iran",
+    sponsors: ["CIKD", "NTELT Conferences", "Victoria University of Wellington", "Civilica"],
+    imageUrl: "/images/conferences/Conference/2018.09.04-05.jpg",
+    aiInsights:
+      "Bridges leadership theory and ELT professional development with actionable classroom implications.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2018-dust-executive",
+    conferenceName: "The 2nd International Conference on Dust",
+    certificateTitle: "Executive Committee Appointment",
+    certificateSubject: "Executive Committee service for the 2nd International Conference on Dust",
+    certificateType: "Appointment",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Executive Committee Member",
+    roleDescription:
+      "Appointed to support interdisciplinary coordination on environmental dust research initiatives.",
+    eventDate: "2018-04-27",
+    location: "Ilam University, Ilam, Iran",
+    sponsors: ["Ilam University", "2nd International Conference on Dust"],
+    imageUrl: "/images/conferences/Conference/2018.04.25-27.jpg",
+    aiInsights:
+      "Demonstrates trusted leadership capacity within cross-disciplinary environmental communication projects.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2017-ldp-compensation-strategies",
+    conferenceName: "Fourth International Conference on Language, Discourse and Pragmatics",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Paralogism, Ambiguity and Circumlocution: Do Compensation Strategies Help?",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Explored strategic discourse techniques for mitigating ambiguity in EFL communication.",
+    eventDate: "2017-01-27",
+    location: "Ahvaz, Iran",
+    sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
+    imageUrl: "/images/conferences/Conference/2017.01.25-27.jpg",
+    aiInsights:
+      "Connects pragmatic strategy training with discourse competence in advanced EFL contexts.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2016-tellsi-presentation",
+    conferenceName: "14th International TELLSI Conference",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject: "Paper presentation at the 14th International TELLSI Conference",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Represented TELLSI community with research insights shared in Kerman, Iran.",
+    eventDate: "2016-11-18",
+    location: "Islamic Azad University, Kerman, Iran",
+    sponsors: ["TELLSI", "Islamic Azad University"],
+    imageUrl: "/images/conferences/Conference/2016.11.16-18.jpg",
+    aiInsights:
+      "Extends sustained engagement with TELLSI’s applied linguistics and teacher education network.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2016-english-french-poster",
+    conferenceName: "The First English-French Conference on Applied Linguistics and Literature",
+    certificateTitle: "Certificate",
+    certificateSubject:
+      "Language Learning through Whats app or Telegram, Which Court is the Ball in?",
+    certificateType: "Poster Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Co-presenter",
+    roleDescription:
+      "Presented bilingual poster research alongside Dr. Mohammad Aliakbari on messaging platforms in language learning.",
+    eventDate: "2016-05-13",
+    location: "University of Kurdistan, Sanandaj, Iran",
+    sponsors: [
+      "Association Iranienne de Linguistique Française (AILLF)",
+      "Kurdistan English Teachers' Association",
+    ],
+    imageUrl: "/images/conferences/Conference/2016.05.12-13.jpg",
+    aiInsights:
+      "Showcases early exploration of digital communication tools for collaborative EFL learning.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2015-tellsi-paper",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Professional Change, Professional Development, and Professional Identity of Iranian EFL Beginner vs. Experienced Teachers",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Delivered comparative study on professional identity formation among Iranian EFL teachers.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.04.jpg",
+    aiInsights:
+      "Tracks longitudinal interest in teacher identity frameworks within Iranian ELT ecosystems.",
+    orientation: "portrait",
+  },
+  {
+    id: "conf-2015-tellsi-workshop-ict",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Innovative Practices in English Language Learning and Research: Use of ICT Tools for the Preparation of Pre-Service English Teachers at the National Institute of Education in Singapore",
+    certificateType: "Workshop",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Participated in Dr. Mary Ellis’s workshop on integrating ICT into language teacher preparation.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.03.jpg",
+    aiInsights:
+      "Strengthens digital pedagogy capabilities for pre-service English teacher education programs.",
+    orientation: "portrait",
+  },
+  {
+    id: "conf-2015-tellsi-workshop-pragmatics",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Instructional Pragmatics: Teaching Students to Use Language Appropriately",
+    certificateType: "Workshop",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Joined workshops led by Texas A&M and Hosei University scholars on pragmatic classroom instruction.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.02.jpg",
+    aiInsights:
+      "Advances classroom pragmatics pedagogy for nuanced communicative competence training.",
+    orientation: "portrait",
+  },
+  {
+    id: "conf-2015-tellsi-workshop-critical-pedagogy",
+    conferenceName: "13th International TELLSI Conference",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Revisiting and Implementing Critical Pedagogy in Second Language Learning",
+    certificateType: "Workshop",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Engaged with critical pedagogy approaches facilitated by scholars from Allameh Tabataba'i University.",
+    eventDate: "2015-11-19",
+    location: "Lorestan University, Khorramabad, Iran",
+    sponsors: ["TELLSI", "Lorestan University"],
+    imageUrl: "/images/conferences/Conference/2015.11.17-19.01.jpg",
+    aiInsights:
+      "Builds reflective, learner-centered strategies rooted in critical pedagogy for EFL classrooms.",
+    orientation: "portrait",
+  },
+];
 
 const determineCategory = (certificate: ConferenceCertificate): EventCategory => {
   const text = `${certificate.conferenceName} ${certificate.certificateTitle} ${certificate.certificateType}`.toLowerCase();

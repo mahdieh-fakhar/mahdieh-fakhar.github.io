@@ -26,6 +26,7 @@ type ConferenceCertificate = {
   imageUrl: string;
   aiInsights: string;
   orientation: CertificateOrientation;
+  categoryOverride?: EventCategory;
 };
 
 type EventCategory = "Conferences" | "Seminars" | "Webinars" | "Congresses" | "Symposia";
@@ -58,6 +59,7 @@ const certificateData: ConferenceCertificate[] = [
     aiInsights:
       "Highlights adoption of evidence-based translation analytics with contemporary instrumentation.",
     orientation: "portrait",
+    categoryOverride: "Conferences",
   },
   {
     id: "conf-2021-utm-covid19",
@@ -313,7 +315,7 @@ const determineCategory = (certificate: ConferenceCertificate): EventCategory =>
 const certificates: CategorizedCertificate[] = certificateData.map((certificate) => ({
   ...certificate,
   imageUrl: assetPath(certificate.imageUrl),
-  category: determineCategory(certificate),
+  category: certificate.categoryOverride ?? determineCategory(certificate),
 }));
 
 const formatDate = (value: string) => {

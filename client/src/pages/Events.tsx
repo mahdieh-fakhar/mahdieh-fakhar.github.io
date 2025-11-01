@@ -62,6 +62,43 @@ const certificateData: ConferenceCertificate[] = [
     categoryOverride: "Conferences",
   },
   {
+    id: "sem-2024-xxvi-seminario",
+    conferenceName: "XXVI Seminario Permanente de Investigación TIC-ETL",
+    certificateTitle: "Certificado de Asistencia",
+    certificateSubject: "La IA Generativa en la Enseñanza y Tratamiento de Lenguas",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Participated in UNED's permanent seminar examining generative AI for language education contexts.",
+    eventDate: "2024-05-08",
+    location: "UNED, Madrid, Spain",
+    sponsors: ["UNED Facultad de Filología"],
+    imageUrl: "/images/seminars/2024-05-08-xxvi-seminario.jpg",
+    aiInsights:
+      "Extends research into generative AI adoption for blended language instruction and curriculum design.",
+    orientation: "landscape",
+  },
+  {
+    id: "sem-2022-eccoe-multiplier",
+    conferenceName: "II ECCOE Multiplier Event / XXIII Seminar TIC ETL",
+    certificateTitle: "Attendance Certificate",
+    certificateSubject:
+      "Digital micro-credentials. A solution with a vision for tomorrow's educational needs",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Engaged with Erasmus+ ECCOE experts to explore digital micro-credentials for future-ready education.",
+    eventDate: "2022-05-13",
+    location: "UNED, Madrid, Spain",
+    sponsors: ["UNED Facultad de Filología", "ECCOE"],
+    imageUrl: "/images/seminars/2022-05-13-eccoe-multiplier.jpg",
+    aiInsights:
+      "Strengthens strategic literacy in European micro-credential frameworks and lifelong learning pathways.",
+    orientation: "landscape",
+  },
+  {
     id: "conf-2021-utm-covid19",
     conferenceName:
       "Current Trends in the Middle East: Virtual International Joint Conference on COVID-19 Global Impacts",

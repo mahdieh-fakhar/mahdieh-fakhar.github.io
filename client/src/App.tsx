@@ -50,6 +50,7 @@ function AppShell() {
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/about/all" component={AllAbout} />
+          <Route path="/about/overview" component={Overview} />
           <Route path="/overview" component={Overview} />
           <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
@@ -57,12 +58,16 @@ function AppShell() {
           <Route path="/investigations" component={Investigations} />
           <Route path="/events/:category" component={Events} />
           <Route path="/events" component={Events} />
+          <Route path="/works/all" component={Works} />
           <Route path="/works" component={Works} />
           <Route path="/memberships" component={Memberships} />
+          <Route path="/about/memberships" component={Memberships} />
           <Route path="/career" component={Career} />
+          <Route path="/about/career" component={Career} />
           <Route path="/skills" component={Skills} />
           <Route path="/projects" component={Projects} />
           <Route path="/resume" component={Resume} />
+          <Route path="/about/resume" component={Resume} />
           <Route path="/contact" component={Contact} />
           <Route path="/certifications" component={Certifications} />
           <Route path="/search" component={Search} />

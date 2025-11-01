@@ -29,7 +29,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Overview",
-    href: "/overview",
+    href: "/about/overview",
     description:
       "Orientation hub summarising scholarship, research outputs, works, and collaboration pathways across the site.",
     keywords: ["overview", "summary", "orientation", "site map", "portfolio overview"],
@@ -50,7 +50,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Works",
-    href: "/works",
+    href: "/works/all",
     description:
       "Applied delivery hub linking projects, skills, and certifications with delivery cadence and spotlight credentials.",
     keywords: ["works", "projects", "skills", "certifications", "delivery"],
@@ -64,14 +64,14 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Memberships",
-    href: "/memberships",
+    href: "/about/memberships",
     description:
       "Professional affiliations and collaborations across journals, institutes, and research groups.",
     keywords: ["memberships", "affiliations", "collaboration", "reviewer", "research group"],
   },
   {
     title: "Career",
-    href: "/career",
+    href: "/about/career",
     description:
       "Career history including teaching, leadership, and professional interpreting experience.",
     keywords: ["career", "experience", "teaching", "leadership", "professional history"],
@@ -99,7 +99,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Resume",
-    href: "/resume",
+    href: "/about/resume",
     description:
       "Executive CV highlights, key achievements, and download links for the full curriculum vitae.",
     keywords: ["resume", "cv", "curriculum vitae", "researcher", "experience", "achievements"],

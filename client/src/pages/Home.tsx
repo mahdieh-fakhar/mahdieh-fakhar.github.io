@@ -82,16 +82,23 @@ export default function Home() {
           icon: HomeIcon,
         },
         {
-          name: "About",
+          name: "All About",
           summary:
-            "Human-centered biography covering research passions, pedagogy, and purpose.",
-          href: "/about",
+            "Human-centered biography combining research passions, personal ethos, and signature stories.",
+          href: "/about/all",
           icon: UserRound,
+        },
+        {
+          name: "Overview",
+          summary:
+            "Portfolio orientation hub connecting education, investigations, works, and collaboration paths.",
+          href: "/about/overview",
+          icon: Sparkles,
         },
         {
           name: "Education",
           summary:
-            "Three master's programs plus certifications powering data science and teaching excellence.",
+            "Three master's programmes plus specialised training powering data science and teaching excellence.",
           href: "/education/all",
           icon: GraduationCap,
         },
@@ -99,7 +106,7 @@ export default function Home() {
           name: "Resume",
           summary:
             "Downloadable CV, recruiter highlights, and a board-ready qualifications digest.",
-          href: "/resume",
+          href: "/about/resume",
           icon: ScrollText,
         },
       ],
@@ -127,7 +134,7 @@ export default function Home() {
           name: "Works",
           summary:
             "Gateway to projects, skill matrices, and verified credentials powering applied innovation.",
-          href: "/works",
+          href: "/works/all",
           icon: Briefcase,
         },
         {
@@ -148,14 +155,14 @@ export default function Home() {
           name: "Memberships",
           summary:
             "Professional bodies and communities amplifying research reach and advocacy.",
-          href: "/memberships",
+          href: "/about/memberships",
           icon: BadgeCheck,
         },
         {
           name: "Career",
           summary:
             "Experience timeline with leadership metrics, teaching missions, and innovation outputs.",
-          href: "/career",
+          href: "/about/career",
           icon: Briefcase,
         },
         {
@@ -198,7 +205,7 @@ export default function Home() {
       description:
         "Map institutional partnerships, memberships, and collaboration frameworks ready for universities, NGOs, and private sector alliances.",
       icon: Send,
-      href: "/memberships",
+      href: "/about/memberships",
       cta: "Explore partnerships",
       accent: "from-secondary/20 via-background to-primary/10",
     },
@@ -278,7 +285,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/resume">
+                <Link href="/about/resume">
                   <Button size="lg" data-testid="button-view-resume" className="gap-2">
                     View Resume
                     <ArrowRight className="h-4 w-4" />
@@ -609,7 +616,7 @@ export default function Home() {
               Education dossier
             </Link>
             <Link
-              href="/works"
+              href="/works/all"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
               Works hub

@@ -70,20 +70,20 @@ const alliedChapters = [
   {
     name: "Career",
     description: "Chronological view of teaching, leadership, and consulting milestones with measurable impacts.",
-    href: "/career",
+    href: "/about/career",
     icon: Compass,
   },
   {
     name: "Memberships",
     description: "Professional networks, editorial boards, and research collectives that extend ongoing collaborations.",
-    href: "/memberships",
+    href: "/about/memberships",
     icon: Users,
   },
   {
     name: "Resume",
     description:
       "Download-ready curriculum vitae featuring executive highlights, recent awards, and publication metrics.",
-    href: "/resume",
+    href: "/about/resume",
     icon: FileText,
   },
 ];

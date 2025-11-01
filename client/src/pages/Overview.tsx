@@ -39,8 +39,9 @@ const overviewSections = [
     description:
       "Projects, skills, and certifications that convert academic expertise into applied solutions.",
     links: [
-      { label: "All Works", href: "/works" },
+      { label: "All Works", href: "/works/all" },
       { label: "Projects", href: "/projects" },
+      { label: "Skills", href: "/skills" },
     ],
     icon: Briefcase,
     accent: "from-amber-300/40 via-primary/10 to-transparent",
@@ -50,7 +51,8 @@ const overviewSections = [
     description:
       "Memberships, career history, and direct contact routes maintain collaboration pipelines.",
     links: [
-      { label: "Career", href: "/career" },
+      { label: "Career", href: "/about/career" },
+      { label: "Memberships", href: "/about/memberships" },
       { label: "Contact", href: "/contact" },
     ],
     icon: Send,

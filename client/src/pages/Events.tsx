@@ -50,13 +50,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Participant",
     roleDescription:
-      "Attended Dr. Valentina Ragni's seminar on AVT eye-tracking methodologies hosted by UNED.",
+      "Attended Dr. Valentina Ragni's Madrid seminar exploring AVT eye-tracking techniques.",
     eventDate: "2024-09-27",
     location: "UNED, Madrid, Spain",
     sponsors: ["UNED Faculty of Philology"],
-    imageUrl: "/images/conferences/Conference/2024-09-27-uned-eye-tracking.jpg",
+    imageUrl: "/images/conferences/Conference/Certificado de eye-tracking.jpg",
     aiInsights:
-      "Reinforces advanced audiovisual translation scholarship through hands-on eye-tracking exposure.",
+      "Highlights adoption of evidence-based translation analytics with contemporary instrumentation.",
     orientation: "portrait",
   },
   {
@@ -70,13 +70,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Delivered an interdisciplinary presentation for the COVID-19 global impacts track coordinated by UTM.",
+      "Delivered interdisciplinary insights on regional COVID-19 impacts in collaboration with UTM and partners.",
     eventDate: "2021-03-10",
     location: "Virtual (UTM Johor, Malaysia)",
     sponsors: ["Universiti Teknologi Malaysia", "Ilam University", "Pokhara University"],
-    imageUrl: "/images/conferences/Conference/2021-03-10-utm-covid19.jpg",
+    imageUrl: "/images/conferences/Conference/2021-01.jpg",
     aiInsights:
-      "Highlights agile regional knowledge sharing on pandemic-induced educational change.",
+      "Documents agile academic exchange on pandemic-era educational resilience across the Middle East.",
     orientation: "portrait",
   },
   {
@@ -89,13 +89,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Presented stakeholder analysis on educational management systems within Iranian EFL institutions.",
+      "Presented stakeholder perspectives on educational management frameworks at Islamic Azad University of Tabriz.",
     eventDate: "2019-11-21",
-    location: "Islamic Azad University of Tabriz Branch, Tabriz, Iran",
+    location: "Tabriz, Iran",
     sponsors: ["TELLSI", "Islamic Azad University of Tabriz"],
-    imageUrl: "/images/conferences/Conference/2019-11-21-tellsi-conference.jpg",
+    imageUrl: "/images/conferences/Conference/2019-11.jpg",
     aiInsights:
-      "Connects language education governance with applied linguistics decision-making.",
+      "Aligns applied linguistics leadership with institutional governance modernization.",
     orientation: "landscape",
   },
   {
@@ -108,13 +108,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Shared corpus-driven findings on disciplinary discourse practices in graduate research writing.",
+      "Shared comparative discourse analysis of graduate research writing across disciplinary traditions.",
     eventDate: "2019-02-01",
     location: "Ahvaz, Iran",
-    sponsors: ["KELTA", "Shahid Chamran University of Ahvaz", "LDP Conference Committee"],
-    imageUrl: "/images/conferences/Conference/2019-02-01-ldp-conference.jpg",
+    sponsors: ["KELTA", "Shahid Chamran University of Ahvaz", "LDP Conference"],
+    imageUrl: "/images/conferences/Conference/2019-01-.jpg",
     aiInsights:
-      "Illuminates cross-disciplinary discourse expectations to support academic writing mentorship.",
+      "Bridges genre-based pedagogy with disciplinary writing expectations for Iranian scholars.",
     orientation: "landscape",
   },
   {
@@ -127,13 +127,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Introduced ecological perspectives on learner agency and classroom change management.",
+      "Examined ecological dimensions of learner agency during TELLSI's futurology program in Shiraz.",
     eventDate: "2018-11-16",
-    location: "Shiraz University, Shiraz, Iran",
+    location: "Shiraz, Iran",
     sponsors: ["TELLSI", "Shiraz University"],
-    imageUrl: "/images/conferences/Conference/2018-11-16-tellsi-conference.jpg",
+    imageUrl: "/images/conferences/Conference/2018-11.jpg",
     aiInsights:
-      "Applies ecological linguistics to empower communicative resilience in EFL classrooms.",
+      "Links ecological linguistics with transformative classroom change management.",
     orientation: "landscape",
   },
   {
@@ -146,32 +146,50 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Examined how teacher self-leadership contributes to sustained professional development.",
+      "Discussed empirical findings on self-leadership strategies for sustained professional growth.",
     eventDate: "2018-09-05",
     location: "Tehran, Iran",
     sponsors: ["Victoria University of Wellington", "CIVILICA", "NTELT"],
-    imageUrl: "/images/conferences/Conference/2018-09-05-ntelt-presentation.jpg",
+    imageUrl: "/images/conferences/Conference/2018-09.jpg",
     aiInsights:
-      "Links reflective leadership habits with long-term pedagogical growth for EFL instructors.",
+      "Showcases reflective leadership practices that drive teacher-led innovation.",
+    orientation: "landscape",
+  },
+  {
+    id: "conf-2018-ntelt-self-leadership-signed",
+    conferenceName: "3rd Conference on New Trends in English Language Teaching and Testing",
+    certificateTitle: "Certificate of Presentation",
+    certificateSubject:
+      "Investigating the Effect of EFL Teachers' Self-leadership on their Processional Development and Change",
+    certificateType: "Presentation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Presenter",
+    roleDescription:
+      "Signed copy acknowledging presentation within the NTELT professional development stream.",
+    eventDate: "2018-09-05",
+    location: "Tehran, Iran",
+    sponsors: ["Victoria University of Wellington", "CIVILICA", "NTELT"],
+    imageUrl: "/images/conferences/Conference/2018-09-.jpg",
+    aiInsights:
+      "Provides verified documentation of NTELT presentation credentials.",
     orientation: "landscape",
   },
   {
     id: "conf-2018-dust-executive",
     conferenceName: "The 2nd International Conference on Dust",
     certificateTitle: "Executive Committee Appointment",
-    certificateSubject:
-      "Executive committee duties for The 2nd International Conference on Dust",
+    certificateSubject: "Executive committee service for The 2nd International Conference on Dust",
     certificateType: "Executive Committee",
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Executive Committee Member",
     roleDescription:
-      "Appointed to the executive committee coordinating academic programming for 2DUST.",
+      "Recognised for academic coordination duties supporting Ilam University's environmental conference.",
     eventDate: "2018-04-27",
-    location: "Ilam University, Ilam, Iran",
-    sponsors: ["Ilam University", "2DUST Conference Secretariat"],
-    imageUrl: "/images/conferences/Conference/2018-04-27-dust-committee.jpg",
+    location: "Ilam, Iran",
+    sponsors: ["Ilam University", "2DUST Conference"],
+    imageUrl: "/images/conferences/Conference/2018-04.jpg",
     aiInsights:
-      "Demonstrates trusted leadership in multidisciplinary environmental conference delivery.",
+      "Highlights leadership trusted with multidisciplinary environmental programming.",
     orientation: "landscape",
   },
   {
@@ -184,13 +202,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Discussed pragmatic compensation strategies for managing discourse breakdowns.",
+      "Delivered findings on pragmatic compensation strategies at Shahid Chamran University of Ahvaz.",
     eventDate: "2017-01-27",
     location: "Ahvaz, Iran",
     sponsors: ["Shahid Chamran University of Ahvaz", "KELTA"],
-    imageUrl: "/images/conferences/Conference/2017-01-27-ldp-presentation.jpg",
+    imageUrl: "/images/conferences/Conference/2017-01.jpg",
     aiInsights:
-      "Provides actionable guidance on strategic discourse repair in applied linguistics.",
+      "Advances communicative strategy design within discourse and pragmatics research.",
     orientation: "landscape",
   },
   {
@@ -202,13 +220,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Contributed scholarly insights to TELLSI's national platform for English language teaching.",
+      "Contributed TELLSI community scholarship during the Kerman-hosted conference.",
     eventDate: "2016-11-18",
     location: "Kerman, Iran",
     sponsors: ["TELLSI", "Islamic Azad University of Kerman"],
-    imageUrl: "/images/conferences/Conference/2016-11-18-tellsi-conference.jpg",
+    imageUrl: "/images/conferences/Conference/2016-11.jpg",
     aiInsights:
-      "Strengthens TELLSI community dialogue with context-aware pedagogical research.",
+      "Sustains national knowledge exchange on forward-looking ELT methodologies.",
     orientation: "landscape",
   },
   {
@@ -221,17 +239,17 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Presented a poster on messaging platforms as collaborative learning environments.",
+      "Presented collaborative messaging-app research at the University of Kurdistan.",
     eventDate: "2016-05-13",
-    location: "University of Kurdistan, Sanandaj, Iran",
+    location: "Sanandaj, Iran",
     sponsors: ["AILLF", "Kurdistan English Teachers Association"],
-    imageUrl: "/images/conferences/Conference/2016-05-13-english-french-conference.jpg",
+    imageUrl: "/images/conferences/Conference/2016-05.jpg",
     aiInsights:
-      "Explores social messaging channels as scalable tools for applied linguistics engagement.",
+      "Explores technology-mediated collaboration in applied linguistics classrooms.",
     orientation: "landscape",
   },
   {
-    id: "conf-2015-tellsi-attendance",
+    id: "conf-2015-tellsi-presentation",
     conferenceName: "13th International TELLSI Conference",
     certificateTitle: "Certificate of Attendance",
     certificateSubject:
@@ -240,17 +258,17 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Presenter",
     roleDescription:
-      "Shared comparative insights on EFL teacher identity while participating in conference sessions.",
+      "Presented research on professional identity trajectories within TELLSI's Lorestan gathering.",
     eventDate: "2015-11-19",
-    location: "Lorestan University, Khorramabad, Iran",
+    location: "Khorramabad, Iran",
     sponsors: ["TELLSI", "Lorestan University"],
-    imageUrl: "/images/conferences/Conference/2015-11-19-tellsi-attendance.jpg",
+    imageUrl: "/images/conferences/Conference/2015-11.jpg",
     aiInsights:
-      "Charts professional identity development pathways for Iranian EFL educators.",
+      "Supports reflective development pathways for Iranian EFL educators.",
     orientation: "portrait",
   },
   {
-    id: "conf-2015-tellsi-workshop",
+    id: "conf-2015-tellsi-workshop-ict",
     conferenceName: "13th International TELLSI Conference",
     certificateTitle: "Certificate of Attendance",
     certificateSubject:
@@ -259,13 +277,13 @@ const certificateData: ConferenceCertificate[] = [
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Participant",
     roleDescription:
-      "Engaged with TELLSI workshop content on ICT integration for pre-service English teacher education.",
+      "Participated in TELLSI's ICT integration workshop facilitated by Dr. Mary Ellis.",
     eventDate: "2015-11-17",
-    location: "Lorestan University, Khorramabad, Iran",
+    location: "Khorramabad, Iran",
     sponsors: ["TELLSI", "Lorestan University"],
-    imageUrl: "/images/conferences/Conference/2015-11-17-tellsi-workshop.jpg",
+    imageUrl: "/images/conferences/Conference/2015-11--.jpg",
     aiInsights:
-      "Advances technology-enhanced teacher training strategies within Iranian ELT.",
+      "Advances pre-service teacher training through strategic technology adoption.",
     orientation: "portrait",
   },
 ];
@@ -675,5 +693,6 @@ export default function Events({ params }: EventsProps = {}) {
     </div>
   );
 }
+
 
 

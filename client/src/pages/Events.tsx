@@ -37,6 +37,8 @@ type EventNavItem = {
   description: string;
 };
 
+type CSSVarProperties = CSSProperties & Record<`--${string}`, string | number>;
+
 const certificateData: ConferenceCertificate[] = [
   {
     id: "conf-2024-uned-eye-tracking",
@@ -701,7 +703,7 @@ export default function Events({ params }: EventsProps = {}) {
                     return null;
                   }
 
-                  const gridStyles: CSSProperties =
+                  const gridStyles: CSSVarProperties =
                     orientation === "portrait"
                       ? {
                           "--auto-grid-item": "min(12rem, 100%)",

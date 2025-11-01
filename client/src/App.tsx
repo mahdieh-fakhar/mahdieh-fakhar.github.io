@@ -11,6 +11,7 @@ import { BadgeStructuredData } from "@/components/BadgeStructuredData";
 // Pages
 import Home from "@/pages/Home";
 import About from "@/pages/About";
+import AllAbout from "@/pages/AllAbout";
 import Education from "@/pages/Education";
 import Investigations from "@/pages/Investigations";
 import Events from "@/pages/Events";
@@ -22,6 +23,8 @@ import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 import Certifications from "@/pages/Certifications";
 import Search from "@/pages/Search";
+import Overview from "@/pages/Overview";
+import Works from "@/pages/Works";
 import NotFound from "@/pages/not-found";
 
 export default function App() {
@@ -46,12 +49,15 @@ function AppShell() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/about/all" component={AllAbout} />
+          <Route path="/overview" component={Overview} />
           <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
           <Route path="/investigations/:category" component={Investigations} />
           <Route path="/investigations" component={Investigations} />
           <Route path="/events/:category" component={Events} />
           <Route path="/events" component={Events} />
+          <Route path="/works" component={Works} />
           <Route path="/memberships" component={Memberships} />
           <Route path="/career" component={Career} />
           <Route path="/skills" component={Skills} />

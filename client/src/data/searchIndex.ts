@@ -21,6 +21,20 @@ export const searchDocuments: SearchDocument[] = [
     keywords: ["about", "researcher", "data scientist", "biography", "profile", "languages"],
   },
   {
+    title: "All About",
+    href: "/about/all",
+    description:
+      "Extended narrative combining identity signals, milestone timeline, and navigation to career, memberships, and resume chapters.",
+    keywords: ["all about", "identity", "timeline", "career", "memberships", "resume"],
+  },
+  {
+    title: "Overview",
+    href: "/overview",
+    description:
+      "Orientation hub summarising scholarship, research outputs, works, and collaboration pathways across the site.",
+    keywords: ["overview", "summary", "orientation", "site map", "portfolio overview"],
+  },
+  {
     title: "Education",
     href: "/education/all",
     description:
@@ -33,6 +47,13 @@ export const searchDocuments: SearchDocument[] = [
     description:
       "Research outputs including journal articles, theses, books, and practical handbooks.",
     keywords: ["research", "publications", "articles", "theses", "books", "handbooks"],
+  },
+  {
+    title: "Works",
+    href: "/works",
+    description:
+      "Applied delivery hub linking projects, skills, and certifications with delivery cadence and spotlight credentials.",
+    keywords: ["works", "projects", "skills", "certifications", "delivery"],
   },
   {
     title: "Events",
@@ -91,4 +112,3 @@ export const searchDocuments: SearchDocument[] = [
     keywords: ["contact", "email", "collaboration", "linkedin", "github", "form"],
   },
 ];
-

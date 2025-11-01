@@ -57,7 +57,7 @@ export default function Home() {
     {
       title: "Innovation & Project Delivery",
       description:
-        "Projects and Skills sections unveil living labs, AI transformations, and the technical fluency behind each engagement.",
+        "The Works hub orchestrates projects, skills, and certifications to evidence the technical fluency behind each engagement.",
       icon: Briefcase,
     },
     {
@@ -122,6 +122,13 @@ export default function Home() {
             "Global workshop leadership, keynote storytelling, and certificate vault.",
           href: "/events/all",
           icon: Microscope,
+        },
+        {
+          name: "Works",
+          summary:
+            "Gateway to projects, skill matrices, and verified credentials powering applied innovation.",
+          href: "/works",
+          icon: Briefcase,
         },
         {
           name: "Projects",
@@ -602,10 +609,10 @@ export default function Home() {
               Education dossier
             </Link>
             <Link
-              href="/projects"
+              href="/works"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
-              Innovation projects
+              Works hub
             </Link>
             <Link
               href="/investigations/all"

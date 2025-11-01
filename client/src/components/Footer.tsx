@@ -7,9 +7,11 @@ import { BadgePill } from "@/components/badges/BadgePill";
 
 const footerLinks = [
   { name: "Home", href: "/" },
+  { name: "Overview", href: "/overview" },
   { name: "About", href: "/about" },
   { name: "Education", href: "/education/all" },
   { name: "Investigations", href: "/investigations/all" },
+  { name: "Works", href: "/works" },
   { name: "Events", href: "/events/all" },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },

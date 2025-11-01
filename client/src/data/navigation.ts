@@ -11,6 +11,15 @@ export type NavigationItem = {
   children?: NavChild[];
 };
 
+export const homePages: NavChild[] = [
+  { name: "About", href: "/about", slug: "about" },
+  { name: "All About", href: "/about/all", slug: "all-about" },
+  { name: "Overview", href: "/overview", slug: "overview" },
+  { name: "Career", href: "/career", slug: "career" },
+  { name: "Memberships", href: "/memberships", slug: "memberships" },
+  { name: "Resume", href: "/resume", slug: "resume" },
+];
+
 export const eventPages: NavChild[] = [
   { name: "All Events", href: "/events/all", slug: "all" },
   { name: "Conferences", href: "/events/conferences", slug: "conferences" },
@@ -22,7 +31,7 @@ export const eventPages: NavChild[] = [
 
 export const educationPages: NavChild[] = [
   { name: "All Education", href: "/education/all", slug: "all" },
-  { name: "Academic Pathways", href: "/education/academic", slug: "academic" },
+  { name: "Academic", href: "/education/academic", slug: "academic" },
   { name: "Courses", href: "/education/courses", slug: "courses" },
   { name: "Workshops", href: "/education/workshops", slug: "workshops" },
 ];
@@ -35,18 +44,18 @@ export const investigationPages: NavChild[] = [
   { name: "Handbooks", href: "/investigations/handbooks", slug: "handbooks" },
 ];
 
-export const navigationItems: NavigationItem[] = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Education", href: "/education/all", children: educationPages },
-  { name: "Investigations", href: "/investigations/all", children: investigationPages },
-  { name: "Events", href: "/events/all", children: eventPages },
-  { name: "Memberships", href: "/memberships" },
-  { name: "Career", href: "/career" },
-  { name: "Skills", href: "/skills" },
-  { name: "Projects", href: "/projects" },
-  { name: "Certifications", href: "/certifications" },
-  { name: "Resume", href: "/resume" },
-  { name: "Contact", href: "/contact" },
+export const workPages: NavChild[] = [
+  { name: "All Works", href: "/works", slug: "all" },
+  { name: "Projects", href: "/projects", slug: "projects" },
+  { name: "Skills", href: "/skills", slug: "skills" },
+  { name: "Certifications", href: "/certifications", slug: "certifications" },
 ];
 
+export const navigationItems: NavigationItem[] = [
+  { name: "Home", href: "/", children: homePages },
+  { name: "Education", href: "/education/all", children: educationPages },
+  { name: "Investigations", href: "/investigations/all", children: investigationPages },
+  { name: "Works", href: "/works", children: workPages },
+  { name: "Events", href: "/events/all", children: eventPages },
+  { name: "Contact", href: "/contact" },
+];

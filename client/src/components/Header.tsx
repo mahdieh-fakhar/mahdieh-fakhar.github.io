@@ -273,13 +273,73 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
           />
         </Link>
 
-        {/* Name */}
-        <span className="order-2 flex-1 text-center text-lg font-semibold uppercase tracking-[0.2em] text-primary leading-none xs:text-2xl sm:text-[3rem] sm:leading-[3rem]">
-          MAHDIEH FAKHAR
-        </span>
+        {/* Name & desktop navigation */}
+        <div className="order-2 flex flex-1 flex-col items-center gap-1 text-center xs:gap-1.5">
+          <span className="text-lg font-semibold uppercase tracking-[0.2em] text-primary leading-none xs:text-2xl sm:text-[3rem] sm:leading-[3rem]">
+            MAHDIEH FAKHAR
+          </span>
+          <nav
+            aria-label="Primary navigation"
+            className="hidden w-full flex-wrap items-center justify-center gap-4 border-t border-primary/20 pt-1.5 text-sm lg:flex"
+          >
+            {navigationItems.map((item) =>
+              item.children ? (
+                <DropdownMenu key={item.name}>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      className={cn(
+                        "group relative flex items-center gap-1 rounded-md px-3 py-1.5 font-medium transition-colors hover-elevate active-elevate-2 whitespace-nowrap",
+                        isNavActive(item) ? "text-foreground" : "text-muted-foreground",
+                      )}
+                      data-testid={`link-nav-${slugify(item.name)}`}
+                    >
+                      <span>{item.name}</span>
+                      <ChevronRight
+                        className="ml-1 h-4 w-4 text-primary/70 transition-transform group-data-[state=open]:rotate-90"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    sideOffset={12}
+                    className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-xl backdrop-blur"
+                  >
+                    {renderDropdownItems(item.children, slugify(item.name))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "relative rounded-md px-3 py-1.5 font-medium transition-colors hover-elevate active-elevate-2 whitespace-nowrap",
+                    isNavActive(item) ? "text-foreground" : "text-muted-foreground",
+                  )}
+                  data-testid={`link-nav-${slugify(item.name)}`}
+                >
+                  {item.name}
+                  {isNavActive(item) && (
+                    <motion.div
+                      layoutId="navbar-indicator"
+                      className="absolute -bottom-[14px] left-3 right-3 h-0.5 bg-primary"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </Link>
+              ),
+            )}
+          </nav>
+        </div>
 
         {/* Badge strip */}
-        <div className="order-3 ml-auto flex items-center justify-end gap-0.5 xs:order-2 xs:ml-0">
+        <div className="order-3 ml-auto flex items-center justify-end gap-0.5 xs:order-3 xs:ml-0">
           {headerBadges.map((badge) => (
             <BadgePill key={badge.id} badge={badge} size="sm" />
           ))}
@@ -305,70 +365,6 @@ const renderMobileNavItems = (items: NavChild[], parentKey: string, depth = 1) =
             )}
           </Button>
         </div>
-      </div>
-
-      {/* Desktop Navigation */}
-       <div className="border-t border-primary/20 bg-background/90">
-        <nav
-          aria-label="Primary navigation"
-          className="container hidden items-center justify-center gap-4 py-1.5 lg:flex"
-        >
-          {navigationItems.map((item) =>
-            item.children ? (
-              <DropdownMenu key={item.name}>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    type="button"
-                    className={cn(
-                      "group relative flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover-elevate active-elevate-2 whitespace-nowrap",
-                      isNavActive(item) ? "text-foreground" : "text-muted-foreground",
-                    )}
-                    data-testid={`link-nav-${slugify(item.name)}`}
-                  >
-                    <span>{item.name}</span>
-                      <ChevronRight
-                        className="ml-1 h-4 w-4 text-primary/70 transition-transform group-data-[state=open]:rotate-90"
-                        aria-hidden="true"
-                      />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  sideOffset={12}
-                  className="w-80 max-h-none overflow-visible rounded-xl border border-primary/20 bg-background/95 p-2 shadow-xl backdrop-blur"
-                >
-                  {renderDropdownItems(
-                    item.children,
-                    slugify(item.name),
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`relative px-3 py-1.5 text-sm font-medium transition-colors hover-elevate active-elevate-2 rounded-md whitespace-nowrap ${
-                  isNavActive(item) ? "text-foreground" : "text-muted-foreground"
-                }`}
-                data-testid={`link-nav-${slugify(item.name)}`}
-              >
-                {item.name}
-                {isNavActive(item) && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-[14px] left-3 right-3 h-0.5 bg-primary"
-                    initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                    }}
-                  />
-                )}
-              </Link>
-            ),
-          )}
-        </nav>
       </div>
 
        <div className="border-t border-primary/15 bg-background/80 backdrop-blur">

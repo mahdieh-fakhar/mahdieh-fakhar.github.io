@@ -44,29 +44,6 @@ type EducationProps = {
 
 const academicPrograms: EducationRecord[] = [
   {
-    id: "academic-phd-teaching-english-2017",
-    category: "Academic",
-    title: "Doctor of Philosophy in Teaching English",
-    institution: "University of Ilam",
-    location: "Ilam, Ilam Province, Iran",
-    period: "Sep 2017 - Jul 2023",
-    status: "Research phase completed",
-    metadata: [
-      { label: "Program", value: "Teaching English" },
-      { label: "Mode", value: "Formal, in person" },
-      { label: "Institution type", value: "Public university" },
-      {
-        label: "Academic status",
-        value: "Coursework and comprehensive exam completed; research phase undertaken; degree not awarded",
-      },
-      {
-        label: "Notes",
-        value:
-          "All doctoral coursework requirements were completed; the comprehensive doctoral examination was passed with a grade of A. A research residency was conducted at the National Distance Education University (UNED) in Madrid, Spain. The dissertation was not submitted due to migration, and the program was discontinued.",
-      },
-    ],
-  },
-  {
     id: "academic-ma-ict-language-processing-2022",
     category: "Academic",
     title: "Master of Arts in ICT for Language Teaching and Language Processing",
@@ -137,19 +114,6 @@ const academicPrograms: EducationRecord[] = [
       { label: "Program", value: "English Translation" },
       { label: "Mode", value: "Formal, in person" },
       { label: "Institution type", value: "Public university" },
-    ],
-  },
-  {
-    id: "academic-diploma-experimental-sciences",
-    category: "Academic",
-    title: "Diploma in Experimental Sciences",
-    institution: "22 Bahman Girls' High School",
-    location: "Shahreza, Isfahan, Iran",
-    status: "Graduated",
-    metadata: [
-      { label: "Program", value: "Experimental Sciences" },
-      { label: "Mode", value: "Formal, in person" },
-      { label: "Institution type", value: "Public secondary school" },
     ],
   },
 ];

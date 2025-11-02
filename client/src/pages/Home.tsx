@@ -106,7 +106,7 @@ export default function Home() {
           name: "Resume",
           summary:
             "Downloadable CV, recruiter highlights, and a board-ready qualifications digest.",
-          href: "/about/resume",
+          href: "/resume",
           icon: ScrollText,
         },
       ],
@@ -285,7 +285,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/about/resume">
+                <Link href="/resume">
                   <Button size="lg" data-testid="button-view-resume" className="gap-2">
                     View Resume
                     <ArrowRight className="h-4 w-4" />

@@ -83,7 +83,7 @@ const alliedChapters = [
     name: "Resume",
     description:
       "Download-ready curriculum vitae featuring executive highlights, recent awards, and publication metrics.",
-    href: "/about/resume",
+    href: "/resume",
     icon: FileText,
   },
 ];

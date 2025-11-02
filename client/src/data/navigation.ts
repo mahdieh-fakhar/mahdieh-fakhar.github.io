@@ -16,7 +16,6 @@ export const aboutPages: NavChild[] = [
   { name: "Overview", href: "/about/overview", slug: "overview" },
   { name: "Career", href: "/about/career", slug: "career" },
   { name: "Memberships", href: "/about/memberships", slug: "memberships" },
-  { name: "Resume", href: "/about/resume", slug: "resume" },
 ];
 
 export const eventPages: NavChild[] = [
@@ -57,5 +56,6 @@ export const navigationItems: NavigationItem[] = [
   { name: "Investigations", href: "/investigations/all", children: investigationPages },
   { name: "Works", href: "/works/all", children: workPages },
   { name: "Events", href: "/events/all", children: eventPages },
+  { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];

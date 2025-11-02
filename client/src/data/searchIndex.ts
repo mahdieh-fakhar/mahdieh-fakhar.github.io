@@ -99,7 +99,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Resume",
-    href: "/about/resume",
+    href: "/resume",
     description:
       "Executive CV highlights, key achievements, and download links for the full curriculum vitae.",
     keywords: ["resume", "cv", "curriculum vitae", "researcher", "experience", "achievements"],

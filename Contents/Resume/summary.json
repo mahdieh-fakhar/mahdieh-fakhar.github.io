@@ -1,0 +1,17 @@
+{
+  "frontmatter": {
+    "title": "Executive Summary",
+    "summary": "Strategic leader with a decade of experience bridging research, localization, and AI ethics.",
+    "page": "resume",
+    "section": "summary",
+    "tags": ["template:list", "Resume"],
+    "date": "2024-09-15",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    "15+ years orchestrating multilingual product launches across SaaS and civic sectors.",
+    "Deep experience in AI governance, responsible experimentation, and evaluation frameworks.",
+    "Trusted advisor to executives, educators, and open-source communities worldwide."
+  ]
+}

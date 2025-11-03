@@ -1,0 +1,16 @@
+{
+  "frontmatter": {
+    "title": "Request the Full Resume",
+    "summary": "Download the latest resume or reach out for a tailored portfolio.",
+    "page": "resume",
+    "section": "call-to-action",
+    "tags": ["template:list", "CTA"],
+    "date": "2024-09-15",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": {
+    "downloadUrl": "https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io",
+    "email": "mailto:mfsh.intl@gmail.com"
+  }
+}

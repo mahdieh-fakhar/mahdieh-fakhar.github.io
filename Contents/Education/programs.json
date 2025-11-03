@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Education & Certifications",
+    "summary": "Formal degrees and continuing education pathways that inform my research and leadership practice.",
+    "page": "education",
+    "section": "programs",
+    "tags": ["template:list", "Education"],
+    "date": "2024-03-18",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "name": "Ph.D. in Translation Studies",
+      "institution": "Universidad Nacional de Educación a Distancia (UNED)",
+      "focus": "Eye-tracking, audiovisual translation, and educational technology."
+    },
+    {
+      "name": "M.A. in English Literature",
+      "institution": "University of Kashan",
+      "focus": "Comparative literature and discourse analysis."
+    },
+    {
+      "name": "Executive Program in AI Strategy",
+      "institution": "MIT Sloan (Online)",
+      "focus": "Bridging AI research with enterprise innovation and governance."
+    }
+  ]
+}

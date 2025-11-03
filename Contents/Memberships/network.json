@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Professional Memberships",
+    "summary": "Active memberships that keep me embedded in interdisciplinary research and community practice.",
+    "page": "memberships",
+    "section": "associations",
+    "tags": ["template:list", "Community"],
+    "date": "2024-05-04",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "name": "Women in AI Ethics Collective",
+      "role": "Advisor & Mentor",
+      "since": "2021"
+    },
+    {
+      "name": "IEEE Professional Communication Society",
+      "role": "Member",
+      "since": "2019"
+    },
+    {
+      "name": "European Association for Terminology",
+      "role": "Contributor",
+      "since": "2017"
+    }
+  ]
+}

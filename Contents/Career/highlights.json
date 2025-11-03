@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Career Highlights",
+    "summary": "Key impact moments that demonstrate cross-functional leadership, experimentation, and measurable growth.",
+    "page": "career",
+    "section": "highlights",
+    "tags": ["template:grid", "Milestones"],
+    "date": "2024-04-30",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "title": "Strategic AI Roadmaps",
+      "metric": "6 product teams",
+      "description": "Facilitated roadmap workshops aligning research insights with launch criteria."
+    },
+    {
+      "title": "Governance Playbooks",
+      "metric": "9 regulatory frameworks",
+      "description": "Mapped policy requirements to actionable engineering and research workflows."
+    },
+    {
+      "title": "Mentorship Hours",
+      "metric": "240+ hours",
+      "description": "Coached emerging researchers on inclusive UX research and AI safety."
+    }
+  ]
+}

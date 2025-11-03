@@ -1,0 +1,19 @@
+{
+  "frontmatter": {
+    "title": "Executive Overview",
+    "summary": "High-level snapshot of research, community impact, and strategic initiatives across current workstreams.",
+    "page": "overview",
+    "section": "summary",
+    "tags": ["template:hero", "Highlights"],
+    "date": "2024-09-05",
+    "cover": "images/profile.jpg",
+    "locale": "en"
+  },
+  "body": {
+    "metrics": [
+      { "label": "Programs Shipped", "value": "24" },
+      { "label": "Communities Served", "value": "5+" },
+      { "label": "Open Source Repos", "value": "18" }
+    ]
+  }
+}

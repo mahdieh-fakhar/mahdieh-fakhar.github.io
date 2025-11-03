@@ -1,0 +1,26 @@
+{
+  "frontmatter": {
+    "title": "AI Researcher & Localization Strategist",
+    "summary": "Driving multilingual AI products from discovery to deployment with a focus on ethical alignment, accessibility, and measurable outcomes.",
+    "page": "home",
+    "section": "hero",
+    "tags": ["template:hero", "Highlights", "AI Research", "Localization"],
+    "date": "2024-10-01",
+    "cover": "images/profile.jpg",
+    "locale": "en",
+    "lede": "Strategic research and applied AI programs that unlock responsible innovation for global teams."
+  },
+  "body": {
+    "callToAction": {
+      "primaryLabel": "View Current Projects",
+      "primaryHref": "/projects",
+      "secondaryLabel": "Download Resume",
+      "secondaryHref": "/resume"
+    },
+    "metrics": [
+      { "label": "Research Programs Shipped", "value": "24" },
+      { "label": "Languages Supported", "value": "12" },
+      { "label": "Communities Served", "value": "5+", "description": "Academic, civic, and open-source" }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Core Competencies",
+    "summary": "A blend of research rigor, strategic facilitation, and data fluency for cross-functional AI programs.",
+    "page": "skills",
+    "section": "core",
+    "tags": ["template:grid", "Skills"],
+    "date": "2024-09-01",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "name": "AI Research & Evaluation",
+      "level": "Expert",
+      "description": "Designing human-centered experiments, red-team sessions, and evaluation benchmarks."
+    },
+    {
+      "name": "Localization Strategy",
+      "level": "Expert",
+      "description": "End-to-end localization operations, from content strategy to quality assurance."
+    },
+    {
+      "name": "Program Leadership",
+      "level": "Advanced",
+      "description": "Facilitating cross-functional teams, budget planning, and stakeholder communications."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "frontmatter": {
+    "title": "Quarterly Research Highlights",
+    "summary": "A curated snapshot of field experiments, multilingual evaluation pipelines, and human-centered AI initiatives completed this quarter.",
+    "page": "home",
+    "section": "highlights",
+    "tags": ["template:grid", "Research Ops", "Evaluation"],
+    "date": "2024-09-18",
+    "cover": null,
+    "locale": "en",
+    "lede": "Evidence-backed progress across applied linguistics, AI safety, and accessibility."
+  },
+  "body": [
+    {
+      "title": "Cross-lingual Alignment Benchmarks",
+      "metric": "8% improvement",
+      "description": "Expanded evaluation harness for low-resource languages with human-in-the-loop validation."
+    },
+    {
+      "title": "Ethical AI Playbooks",
+      "metric": "3 enterprise rollouts",
+      "description": "Delivered rapid-read blueprints for compliance and risk mitigation across partner ecosystems."
+    },
+    {
+      "title": "Community Research Pods",
+      "metric": "120 contributors",
+      "description": "Activated distributed research pods to co-design inclusive language datasets."
+    }
+  ]
+}

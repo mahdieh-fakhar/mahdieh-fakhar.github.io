@@ -1,0 +1,17 @@
+{
+  "frontmatter": {
+    "title": "Search the Knowledge Base",
+    "summary": "Use the search field to filter the content index by tag, section, or keyword.",
+    "page": "search",
+    "section": "guide",
+    "tags": ["template:list", "Search"],
+    "date": "2024-07-01",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    "Search works across titles, summaries, tags, and sections.",
+    "Combine keywords like \"AI\" and \"community\" to surface interdisciplinary work.",
+    "Each result links back to the owning page section for additional context."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "frontmatter": {
+    "title": "Community Initiatives",
+    "summary": "Programs and cohorts I help steward as part of long-term community investment.",
+    "page": "memberships",
+    "section": "initiatives",
+    "tags": ["template:grid", "Programs"],
+    "date": "2024-06-28",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "title": "Responsible AI Guild",
+      "impact": "Monthly salons translating policy into practice."
+    },
+    {
+      "title": "Global Localization Alliance",
+      "impact": "Cross-border knowledge exchange on ethical localization."
+    },
+    {
+      "title": "Youth Research Fellows",
+      "impact": "Mentoring early career researchers on fieldwork and data ethics."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Selected Works",
+    "summary": "A library of talks, publications, and interactive demos showcasing research-to-impact.",
+    "page": "works",
+    "section": "portfolio",
+    "tags": ["template:gallery", "Portfolio"],
+    "date": "2024-07-08",
+    "cover": "images/conferences/Conference/2017-01.jpg",
+    "locale": "en"
+  },
+  "body": [
+    {
+      "title": "Applied Localization Summit",
+      "type": "Keynote",
+      "link": "https://speakerdeck.com"
+    },
+    {
+      "title": "UNED Eye Tracking Research",
+      "type": "Publication",
+      "link": "https://doi.org/xx.xxxx/eye-tracking"
+    },
+    {
+      "title": "Inclusive AI Evaluation Workshop",
+      "type": "Workshop",
+      "link": "https://github.com/mahdieh-fakhar"
+    }
+  ]
+}

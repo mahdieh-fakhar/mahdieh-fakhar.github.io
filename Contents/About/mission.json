@@ -1,0 +1,26 @@
+{
+  "frontmatter": {
+    "title": "Mission & Operating Principles",
+    "summary": "Center community expertise, measure impact rigorously, and ensure AI systems are trustworthy across languages.",
+    "page": "about",
+    "section": "mission",
+    "tags": ["template:grid", "Values", "Strategy"],
+    "date": "2024-06-15",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "principle": "Human-Centered Validation",
+      "description": "Blend qualitative research with quantitative signals to ship inclusive features."
+    },
+    {
+      "principle": "Transparent Tooling",
+      "description": "Document evaluation protocols so partners can replicate, audit, and improve them."
+    },
+    {
+      "principle": "Sustainable Communities",
+      "description": "Invest in mentorship, governance, and co-creation instead of extractive engagements."
+    }
+  ]
+}

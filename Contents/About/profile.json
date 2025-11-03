@@ -1,0 +1,20 @@
+{
+  "frontmatter": {
+    "title": "A Researcher Focused on Humane AI",
+    "summary": "My journey spans translation studies, computational linguistics, and socio-technical governance—bridging policy with production-ready ML.",
+    "page": "about",
+    "section": "profile",
+    "tags": ["template:list", "Biography", "Ethics"],
+    "date": "2024-07-10",
+    "cover": null,
+    "locale": "en",
+    "lede": "I translate complex AI systems into accessible experiences that respect culture, context, and community agency."
+  },
+  "body": {
+    "bullets": [
+      "Led localization strategy for enterprise SaaS platforms serving 2M+ users.",
+      "Published peer-reviewed research on generative AI impacts in language education.",
+      "Mentored cross-functional teams on evaluation, governance, and inclusive research."
+    ]
+  }
+}

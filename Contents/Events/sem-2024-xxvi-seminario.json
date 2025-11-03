@@ -1,0 +1,30 @@
+{
+  "frontmatter": {
+    "title": "XXVI Seminario Permanente de Investigación TIC-ETL",
+    "summary": "Explored generative AI for language education during UNED's permanent seminar series.",
+    "page": "events",
+    "section": "seminars",
+    "tags": ["template:list", "Seminars", "Generative AI"],
+    "date": "2024-05-08",
+    "cover": "images/seminars/2024-05-08-xxvi-seminario.jpg",
+    "locale": "en",
+    "eventCategory": "Seminars"
+  },
+  "body": {
+    "id": "sem-2024-xxvi-seminario",
+    "conferenceName": "XXVI Seminario Permanente de Investigación TIC-ETL",
+    "certificateTitle": "Certificado de Asistencia",
+    "certificateSubject": "La IA Generativa en la Enseñanza y Tratamiento de Lenguas",
+    "certificateType": "Attendance",
+    "holderName": "Mahdieh Fakhar Shahreza",
+    "holderRole": "Participant",
+    "roleDescription": "Participated in UNED's seminar examining generative AI for language education contexts.",
+    "eventDate": "2024-05-08",
+    "location": "UNED, Madrid, Spain",
+    "sponsors": ["UNED Facultad de Filología"],
+    "imageUrl": "/images/seminars/2024-05-08-xxvi-seminario.jpg",
+    "aiInsights": "Extends research into generative AI adoption for blended language instruction and curriculum design.",
+    "orientation": "landscape",
+    "categoryOverride": "Seminars"
+  }
+}

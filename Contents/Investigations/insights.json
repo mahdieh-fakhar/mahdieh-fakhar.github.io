@@ -1,0 +1,29 @@
+{
+  "frontmatter": {
+    "title": "Field Insights",
+    "summary": "Ethnographic surveys and usability research guiding inclusive AI tooling.",
+    "page": "investigations",
+    "section": "field-insights",
+    "tags": ["template:grid", "UX Research"],
+    "date": "2024-08-21",
+    "cover": null,
+    "locale": "en"
+  },
+  "body": [
+    {
+      "title": "Community glossaries improve comprehension",
+      "stat": "92% of testers",
+      "description": "Co-created terminology banks for Farsi and Spanish speakers reduced task abandonments."
+    },
+    {
+      "title": "Hybrid feedback loops outperform",
+      "stat": "2.3x faster iterations",
+      "description": "Combining Discord office hours with async video walk-throughs accelerated acceptance."
+    },
+    {
+      "title": "Trust metrics predict retention",
+      "stat": "18% increase",
+      "description": "Transparent changelogs and opt-in telemetry raised long-term engagement across teams."
+    }
+  ]
+}

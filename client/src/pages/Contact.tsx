@@ -130,18 +130,35 @@ export default function Contact() {
                     </div>
                   </div>
 
+                  {/* Updated content via AI sync from D:\MFSH\Contents\Contact\Contact.txt */}
                   <div className="flex items-start gap-3">
                     <Linkedin className="h-5 w-5 text-muted-foreground mt-0.5" />
                     <div>
                       <p className="text-sm font-medium">LinkedIn</p>
                       <a 
-                        href="https://www.linkedin.com/in/mahdieh-fakhar-b7319a1a5" 
+                        href="https://www.linkedin.com/in/mahdieh-fakhar-b7319a1a5?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-sm text-primary hover:underline"
                         data-testid="link-contact-linkedin"
                       >
                         Connect on LinkedIn
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <Sparkles className="h-5 w-5 text-muted-foreground mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium">Website</p>
+                      <a 
+                        href="https://mahdieh-fakhar.github.io/mfsh/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline"
+                        data-testid="link-contact-website"
+                      >
+                        Visit Website
                       </a>
                     </div>
                   </div>
@@ -158,6 +175,22 @@ export default function Contact() {
                         data-testid="link-contact-github"
                       >
                         View GitHub Profile
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <Github className="h-5 w-5 text-muted-foreground mt-0.5" />
+                    <div>
+                      <p className="text-sm font-medium">GitHub Page</p>
+                      <a 
+                        href="https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary hover:underline"
+                        data-testid="link-contact-github-page"
+                      >
+                        View Site Repository
                       </a>
                     </div>
                   </div>

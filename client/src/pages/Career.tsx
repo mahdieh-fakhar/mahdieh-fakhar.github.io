@@ -221,7 +221,6 @@ export default function Career() {
             const Icon = typeIcons[exp.type as keyof typeof typeIcons];
             const evidence = exp.evidence;
             const hasEvidence = Boolean(evidence?.slides.length);
-            const previewSlides = hasEvidence ? evidence!.slides : [];
 
             return (
               <motion.div
@@ -287,24 +286,27 @@ export default function Career() {
                               <span>{evidence.description ?? "Archived letters supplied by the institution."}</span>
                             </div>
 
-                            <div className="mb-4 space-y-3">
-                              {previewSlides.map((slide, slideIdx) => (
-                                <figure
-                                  key={slide.src}
-                                  className="overflow-hidden rounded-md border border-primary/30 bg-background"
-                                >
-                                  <img
-                                    src={slide.src}
-                                    alt={slide.alt}
-                                    className="h-40 w-full object-cover"
-                                    loading={slideIdx === 0 ? "eager" : "lazy"}
-                                  />
-                                  <figcaption className="bg-muted/20 px-3 py-1 text-xs text-muted-foreground">
-                                    {slide.caption ?? `Attachment ${slideIdx + 1}`}
-                                  </figcaption>
-                                </figure>
-                              ))}
-                            </div>
+                            <Carousel className="mb-4" opts={{ loop: true }}>
+                              <CarouselContent>
+                                {evidence.slides.map((slide, slideIdx) => (
+                                  <CarouselItem key={slide.src}>
+                                    <figure className="overflow-hidden rounded-md border border-primary/30 bg-background">
+                                      <img
+                                        src={slide.src}
+                                        alt={slide.alt}
+                                        className="h-48 w-full object-cover"
+                                        loading={slideIdx === 0 ? "eager" : "lazy"}
+                                      />
+                                      <figcaption className="bg-muted/20 px-3 py-1 text-xs text-muted-foreground">
+                                        {slide.caption ?? `Attachment ${slideIdx + 1}`}
+                                      </figcaption>
+                                    </figure>
+                                  </CarouselItem>
+                                ))}
+                              </CarouselContent>
+                              <CarouselPrevious className="-left-4" />
+                              <CarouselNext className="-right-4" />
+                            </Carousel>
 
                             <Dialog>
                               <DialogTrigger asChild>

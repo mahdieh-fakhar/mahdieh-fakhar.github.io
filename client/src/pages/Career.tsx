@@ -533,7 +533,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
             {evidence.ctaLabel ?? "View Attachments"}
           </Button>
         </DialogTrigger>
-        <DialogContent className="w-[88vw] max-w-2xl border border-primary/30 bg-background/95 sm:p-4">
+        <DialogContent className="w-[85vw] max-w-xl md:max-w-2xl max-h-[90vh] overflow-auto border border-primary/30 bg-background/95 sm:p-4">
           <DialogHeader className="space-y-2">
             <DialogTitle className="flex items-center gap-2 text-lg">
               <Images className="h-5 w-5 text-primary" />
@@ -579,17 +579,17 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
               </Button>
             </div>
           </div>
-          <Carousel className="mx-auto w-full max-w-2xl" opts={{ loop: true }} setApi={setModalApi}>
+          <Carousel className="mx-auto w-full max-w-xl md:max-w-2xl" opts={{ loop: true }} setApi={setModalApi}>
             <CarouselContent>
               {evidence.slides.map((slide, slideIndex) => (
                 <CarouselItem key={slide.src} className="flex justify-center">
                   <figure className="w-full space-y-3">
                     <div className="rounded-lg border bg-muted/20 p-3">
-                      <div className="max-h-[55vh] overflow-auto">
+                      <div className="max-h-[45vh] overflow-auto">
                         <img
                           src={slide.src}
                           alt={slide.alt}
-                          className="mx-auto max-h-[55vh] w-full rounded-md object-contain transition-transform duration-150 ease-out"
+                          className="mx-auto max-h-[45vh] w-full rounded-md object-contain transition-transform duration-150 ease-out"
                           loading={slideIndex === 0 ? "eager" : "lazy"}
                           style={{
                             transform: `scale(${modalZoom})`,

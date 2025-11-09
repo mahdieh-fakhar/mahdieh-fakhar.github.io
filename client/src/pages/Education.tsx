@@ -541,11 +541,8 @@ export default function Education({ params }: EducationProps = {}) {
                             ))}
                           </ul>
                         ) : null}
-                      </div>
-
-                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
-                        <div className="flex h-full flex-col rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
-                          {detailEntries.length ? (
+                        {detailEntries.length ? (
+                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
                             <dl className="space-y-2 text-left">
                               {detailEntries.map((entry) => (
                                 <div key={`${program.id}-${entry.label}`} className="flex flex-col">
@@ -556,23 +553,27 @@ export default function Education({ params }: EducationProps = {}) {
                                 </div>
                               ))}
                             </dl>
-                          ) : (
-                            <span>No additional metadata recorded.</span>
-                          )}
+                          </div>
+                        ) : null}
+                      </div>
 
-                          {program.url && (
-                            <a
-                              href={program.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-4 inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary/10"
-                              data-testid={`link-academic-url-${index}`}
-                            >
-                              {program.urlLabel ?? "Program details"}
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          )}
+                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
+                        <div className="flex h-full flex-col justify-center rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground text-center">
+                          <span className="font-medium text-foreground">Attachments</span>
+                          <span>Add supporting documents to showcase credentials.</span>
                         </div>
+                        {program.url && (
+                          <a
+                            href={program.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+                            data-testid={`link-academic-url-${index}`}
+                          >
+                            {program.urlLabel ?? "Program details"}
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
                       </div>
                     </div>
                   </CardContent>

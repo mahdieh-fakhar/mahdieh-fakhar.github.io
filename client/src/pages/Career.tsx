@@ -221,7 +221,7 @@ export default function Career() {
             const Icon = typeIcons[exp.type as keyof typeof typeIcons];
             const evidence = exp.evidence;
             const hasEvidence = Boolean(evidence?.slides.length);
-            const previewSlide = hasEvidence ? evidence!.slides[0] : null;
+            const previewSlides = hasEvidence ? evidence!.slides : [];
 
             return (
               <motion.div
@@ -287,19 +287,24 @@ export default function Career() {
                               <span>{evidence.description ?? "Archived letters supplied by the institution."}</span>
                             </div>
 
-                            {previewSlide && (
-                              <div className="relative mb-4 overflow-hidden rounded-md border border-primary/30 bg-background">
-                                <img
-                                  src={previewSlide.src}
-                                  alt={previewSlide.alt}
-                                  className="h-48 w-full object-cover"
-                                  loading="lazy"
-                                />
-                                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-1 text-xs text-white">
-                                  {previewSlide.caption ?? "Preview attachment"}
-                                </span>
-                              </div>
-                            )}
+                            <div className="mb-4 space-y-3">
+                              {previewSlides.map((slide, slideIdx) => (
+                                <figure
+                                  key={slide.src}
+                                  className="overflow-hidden rounded-md border border-primary/30 bg-background"
+                                >
+                                  <img
+                                    src={slide.src}
+                                    alt={slide.alt}
+                                    className="h-40 w-full object-cover"
+                                    loading={slideIdx === 0 ? "eager" : "lazy"}
+                                  />
+                                  <figcaption className="bg-muted/20 px-3 py-1 text-xs text-muted-foreground">
+                                    {slide.caption ?? `Attachment ${slideIdx + 1}`}
+                                  </figcaption>
+                                </figure>
+                              ))}
+                            </div>
 
                             <Dialog>
                               <DialogTrigger asChild>

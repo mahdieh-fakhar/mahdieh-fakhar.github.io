@@ -1,9 +1,59 @@
 ﻿import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
+  Briefcase,
+  GraduationCap,
+  Globe,
+  Building2,
+  Images,
+  Download,
+} from "lucide-react";
 
-const experiences = [
+type ExperienceType = "teaching" | "management" | "professional" | "research";
+
+type EvidenceSlide = {
+  src: string;
+  alt: string;
+  caption?: string;
+  downloadName?: string;
+};
+
+type EvidenceGallery = {
+  title: string;
+  description?: string;
+  ctaLabel?: string;
+  slides: EvidenceSlide[];
+};
+
+type Experience = {
+  id: number;
+  title: string;
+  organization: string;
+  location: string;
+  period: string;
+  type: ExperienceType;
+  responsibilities: string[];
+  evidence?: EvidenceGallery;
+};
+
+const experiences: Experience[] = [
   {
     id: 1,
     title: "Senior English Facilitator",
@@ -29,6 +79,25 @@ const experiences = [
       "Delivered general English and ESP modules such as Legal English and English for Mechanical Engineering",
       "Coordinated assessment rubrics and supervised undergraduate research projects for departmental boards",
     ],
+    evidence: {
+      title: "University of Ilam adjunct lecturer appointment",
+      description: "Digitised teaching forms confirming adjunct lecturer duties across humanities and engineering faculties.",
+      ctaLabel: "View university letters",
+      slides: [
+        {
+          src: "/images/career/adjunct-ilam-01.jpg",
+          alt: "University of Ilam adjunct lecturer confirmation letter page 1",
+          caption: "Page 1 – Faculty appointment confirmation with department signatures.",
+          downloadName: "adjunct-ilam-01.jpg",
+        },
+        {
+          src: "/images/career/adjunct-ilam-02.jpg",
+          alt: "University of Ilam adjunct lecturer confirmation letter page 2",
+          caption: "Page 2 – Teaching load summary and official stamp.",
+          downloadName: "adjunct-ilam-02.jpg",
+        },
+      ],
+    },
   },
   {
     id: 3,
@@ -201,6 +270,68 @@ export default function Career() {
                         </li>
                       ))}
                     </ul>
+
+                    {exp.evidence && (
+                      <div className="mt-4 rounded-lg border border-dashed border-primary/20 bg-primary/5 p-4">
+                        <div className="mb-3 flex flex-col gap-1 text-sm text-muted-foreground">
+                          <span className="font-medium text-primary">
+                            Supporting documents available
+                          </span>
+                          <span>{exp.evidence.description ?? "Archived letters supplied by the institution."}</span>
+                        </div>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="sm" className="gap-2" data-testid={`btn-evidence-${index}`}>
+                              <Images className="h-4 w-4" />
+                              {exp.evidence.ctaLabel ?? "View evidence"}
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="w-[92vw] max-w-4xl border border-primary/30 bg-background/95">
+                            <DialogHeader className="space-y-2">
+                              <DialogTitle className="flex items-center gap-2 text-lg">
+                                <Images className="h-5 w-5 text-primary" />
+                                {exp.evidence.title}
+                              </DialogTitle>
+                              <DialogDescription>
+                                {exp.evidence.description ??
+                                  "Use the arrows or keyboard to browse scans, then download originals for archival use."}
+                              </DialogDescription>
+                            </DialogHeader>
+                            <Carousel className="mx-auto w-full max-w-3xl" opts={{ loop: true }}>
+                              <CarouselContent>
+                                {exp.evidence.slides.map((slide, slideIndex) => (
+                                  <CarouselItem key={slide.src} className="flex justify-center">
+                                    <figure className="w-full space-y-3">
+                                      <div className="rounded-lg border bg-muted/20 p-3">
+                                        <img
+                                          src={slide.src}
+                                          alt={slide.alt}
+                                          className="mx-auto max-h-[70vh] w-full rounded-md object-contain"
+                                          loading={slideIndex === 0 ? "eager" : "lazy"}
+                                        />
+                                      </div>
+                                      <figcaption className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+                                        <span>{slide.caption ?? `Page ${slideIndex + 1}`}</span>
+                                        <a
+                                          href={slide.src}
+                                          download={slide.downloadName}
+                                          className="inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary/10"
+                                        >
+                                          <Download className="h-4 w-4" />
+                                          Download
+                                        </a>
+                                      </figcaption>
+                                    </figure>
+                                  </CarouselItem>
+                                ))}
+                              </CarouselContent>
+                              <CarouselPrevious className="-left-4 md:-left-12" />
+                              <CarouselNext className="-right-4 md:-right-12" />
+                            </Carousel>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>

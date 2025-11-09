@@ -33,7 +33,7 @@ const experiences = [
   {
     id: 3,
     title: "Lead IELTS & TOEFL Instructor",
-    organization: "Iran Language Institute (ILI) â€“ Ilam Centers",
+    organization: "Iranian Language Institute (ILI) - Ilam Branch",
     location: "Ilam, Iran",
     period: "2014-2019",
     type: "teaching",

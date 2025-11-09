@@ -89,7 +89,7 @@ const experiences: Experience[] = [
     evidence: {
       title: "University of Ilam adjunct lecturer appointment",
       description: "Digitised teaching forms confirming adjunct lecturer duties across humanities and engineering faculties.",
-      ctaLabel: "View university letters",
+      ctaLabel: "View Attachments",
       slides: [
         {
           src: "/images/career/adjunct-ilam-01.jpg",
@@ -283,7 +283,7 @@ export default function Career() {
                         </ul>
                       </div>
 
-                      <div className="mt-6 md:col-span-1 md:mt-0">
+                      <div className="mt-6 md:col-span-1 md:mt-0 md:-mt-6">
                         {hasEvidence && evidence ? (
                           <EvidencePreview
                             evidence={evidence}

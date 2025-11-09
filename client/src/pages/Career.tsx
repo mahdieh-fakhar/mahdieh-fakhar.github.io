@@ -347,6 +347,8 @@ export default function Career() {
 function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
   const [inlineApi, setInlineApi] = useState<CarouselApi | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [modalApi, setModalApi] = useState<CarouselApi | null>(null);
+  const [modalSlide, setModalSlide] = useState(0);
 
   useEffect(() => {
     if (!inlineApi) {
@@ -363,6 +365,22 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
       inlineApi.off("select", handleSelect);
     };
   }, [inlineApi]);
+
+  useEffect(() => {
+    if (!modalApi) {
+      return;
+    }
+
+    const handleSelect = () => {
+      setModalSlide(modalApi.selectedScrollSnap());
+    };
+
+    handleSelect();
+    modalApi.on("select", handleSelect);
+    return () => {
+      modalApi.off("select", handleSelect);
+    };
+  }, [modalApi]);
 
   return (
     <div className="flex h-full flex-col rounded-lg border border-primary/20 bg-primary/5 p-4">
@@ -424,7 +442,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
                 "Use the arrows or keyboard to browse scans, then download originals for archival use."}
             </DialogDescription>
           </DialogHeader>
-          <Carousel className="mx-auto w-full max-w-3xl" opts={{ loop: true }}>
+          <Carousel className="mx-auto w-full max-w-3xl" opts={{ loop: true }} setApi={setModalApi}>
             <CarouselContent>
               {evidence.slides.map((slide, slideIndex) => (
                 <CarouselItem key={slide.src} className="flex justify-center">
@@ -455,6 +473,20 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
             <CarouselPrevious className="-left-4 md:-left-12" />
             <CarouselNext className="-right-4 md:-right-12" />
           </Carousel>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {evidence.slides.map((_, dotIdx) => (
+              <button
+                key={`modal-dot-${dotIdx}`}
+                type="button"
+                className={`h-2.5 w-2.5 rounded-full transition ${
+                  modalSlide === dotIdx ? "bg-primary" : "bg-primary/30"
+                }`}
+                aria-label={`Go to attachment ${dotIdx + 1}`}
+                onClick={() => modalApi?.scrollTo(dotIdx)}
+                disabled={!modalApi}
+              />
+            ))}
+          </div>
         </DialogContent>
       </Dialog>
     </div>

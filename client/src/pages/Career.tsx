@@ -26,8 +26,6 @@ import {
   Building2,
   Images,
   Download,
-  ArrowLeft,
-  ArrowRight,
 } from "lucide-react";
 
 type ExperienceType = "teaching" | "management" | "professional" | "research";
@@ -368,12 +366,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
 
   return (
     <div className="flex h-full flex-col rounded-lg border border-primary/20 bg-primary/5 p-4">
-      <div className="mb-3 flex flex-col gap-1 text-sm text-muted-foreground">
-        <span className="font-medium text-primary">Supporting documents available</span>
-        <span>{evidence.description ?? "Archived letters supplied by the institution."}</span>
-      </div>
-
-      <Carousel className="mb-4" opts={{ loop: true }} setApi={setInlineApi}>
+      <Carousel className="mb-6" opts={{ loop: true }} setApi={setInlineApi}>
         <CarouselContent>
           {evidence.slides.map((slide, slideIdx) => (
             <CarouselItem key={slide.src}>
@@ -393,41 +386,19 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
         </CarouselContent>
       </Carousel>
 
-      <div className="mb-4 flex flex-col items-center gap-2">
-        <div className="flex items-center gap-4">
+      <div className="mb-4 flex items-center justify-center gap-2">
+        {evidence.slides.map((_, dotIdx) => (
           <button
+            key={`dot-${dotIdx}`}
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-background text-primary shadow-sm transition hover:bg-primary/5 disabled:cursor-not-allowed disabled:opacity-40"
-            onClick={() => inlineApi?.scrollPrev()}
-            disabled={!inlineApi || evidence.slides.length <= 1}
-            aria-label="Previous attachment"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-background text-primary shadow-sm transition hover:bg-primary/5 disabled:cursor-not-allowed disabled:opacity-40"
-            onClick={() => inlineApi?.scrollNext()}
-            disabled={!inlineApi || evidence.slides.length <= 1}
-            aria-label="Next attachment"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
-        <div className="flex items-center gap-2">
-          {evidence.slides.map((_, dotIdx) => (
-            <button
-              key={`dot-${dotIdx}`}
-              type="button"
-              className={`h-2.5 w-2.5 rounded-full transition ${
-                currentSlide === dotIdx ? "bg-primary" : "bg-primary/30"
-              }`}
-              aria-label={`Go to attachment ${dotIdx + 1}`}
-              onClick={() => inlineApi?.scrollTo(dotIdx)}
-              disabled={!inlineApi}
-            />
-          ))}
-        </div>
+            className={`h-2.5 w-2.5 rounded-full transition ${
+              currentSlide === dotIdx ? "bg-primary" : "bg-primary/30"
+            }`}
+            aria-label={`Go to attachment ${dotIdx + 1}`}
+            onClick={() => inlineApi?.scrollTo(dotIdx)}
+            disabled={!inlineApi}
+          />
+        ))}
       </div>
 
       <Dialog>
@@ -439,7 +410,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
             data-testid={triggerTestId}
           >
             <Images className="h-4 w-4" />
-            {evidence.ctaLabel ?? "View evidence"}
+            {evidence.ctaLabel ?? "View Attachments"}
           </Button>
         </DialogTrigger>
         <DialogContent className="w-[92vw] max-w-4xl border border-primary/30 bg-background/95">

@@ -205,6 +205,69 @@ const categoryLabels: Record<EducationCategory, string> = {
   Workshops: "Workshops & Masterclasses",
 };
 
+function getProgramDetailEntries(program: EducationRecord): Array<{ label: string; value: string }> {
+  const entries: Array<{ label: string; value: string }> = [];
+
+  if (program.status) {
+    entries.push({ label: "Status", value: program.status });
+  }
+
+  if (program.gpa) {
+    entries.push({ label: "GPA", value: program.gpa });
+  }
+
+  if (program.distinction) {
+    entries.push({ label: "Distinction", value: program.distinction });
+  }
+
+  if (program.thesis) {
+    entries.push({
+      label: "Thesis",
+      value: program.thesisGrade ? `${program.thesis} (Grade: ${program.thesisGrade})` : program.thesis,
+    });
+  }
+
+  if (program.metadata?.length) {
+    entries.push(...program.metadata);
+  }
+
+  return entries;
+}
+
+function getSortValueFromPeriod(period?: string): number {
+  if (!period) {
+    return 0;
+  }
+
+  const normalized = period.toLowerCase();
+  const years = Array.from(period.matchAll(/\d{4}/g)).map((match) => Number(match[0]));
+  const latestYear = years.length ? Math.max(...years) : 0;
+  const presentBoost = normalized.includes("present") || normalized.includes("in progress") ? 1000 : 0;
+  return latestYear + presentBoost;
+}
+
+const academicSummaryStats = (() => {
+  const totalPrograms = academicPrograms.length;
+  const inProgress = academicPrograms.filter((program) =>
+    `${program.status ?? program.period ?? ""}`.toLowerCase().includes("progress"),
+  ).length;
+  const completed = academicPrograms.filter((program) =>
+    `${program.status ?? ""}`.toLowerCase().includes("graduated"),
+  ).length;
+  const regions = new Set(
+    academicPrograms
+      .map((program) => program.location?.split(",").pop()?.trim())
+      .filter(Boolean) as string[],
+  ).size;
+
+  return [
+    { id: "programs", label: "Academic Programs", value: String(totalPrograms), accent: "text-primary" },
+    { id: "progress", label: "In Progress", value: String(inProgress), accent: "text-accent" },
+    { id: "completed", label: "Completed Degrees", value: String(completed), accent: "text-ai-accent" },
+    { id: "regions", label: "Regions Studied", value: String(regions), accent: "text-primary" },
+  ] as const;
+})();
+
 export default function Education({ params }: EducationProps = {}) {
   const [location, setLocation] = useLocation();
 
@@ -366,6 +429,10 @@ export default function Education({ params }: EducationProps = {}) {
   };
 
   const renderActiveCategory = () => {
+    if (activeItem.filter === "Academic") {
+      return renderAcademicTimeline();
+    }
+
     if (activeItem.filter === null) {
       return renderAllCategories();
     }
@@ -390,6 +457,143 @@ export default function Education({ params }: EducationProps = {}) {
           {categoryLabels[activeItem.filter]}
         </div>
         {renderCards(filteredRecords)}
+      </section>
+    );
+  };
+
+  const renderAcademicTimeline = () => {
+    if (!academicPrograms.length) {
+      return (
+        <div
+          className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground"
+          data-testid="section-education-academic"
+        >
+          Academic programs will appear here soon.
+        </div>
+      );
+    }
+
+    const sortedPrograms = [...academicPrograms].sort(
+      (a, b) => getSortValueFromPeriod(b.period) - getSortValueFromPeriod(a.period),
+    );
+
+    return (
+      <section className="space-y-6" data-testid="section-education-academic">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+          {categoryLabels.Academic}
+        </div>
+
+        <div className="relative space-y-8">
+          <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
+
+          {sortedPrograms.map((program, index) => {
+            const detailEntries = getProgramDetailEntries(program);
+            const statusVariant = program.status?.toLowerCase().includes("progress") ? "secondary" : "default";
+
+            return (
+              <motion.div
+                key={program.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative"
+              >
+                <Card className="md:ml-20" data-testid={`card-academic-${index}`}>
+                  <div className="absolute -left-12 top-6 hidden h-8 w-8 items-center justify-center rounded-full border-4 border-background bg-primary md:flex">
+                    <GraduationCap className="h-4 w-4 text-primary-foreground" />
+                  </div>
+
+                  <CardHeader>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="space-y-1">
+                        <CardTitle className="text-xl" data-testid={`text-academic-title-${index}`}>
+                          {program.title}
+                        </CardTitle>
+                        <p className="text-base font-medium text-primary" data-testid={`text-academic-institution-${index}`}>
+                          {program.institution}
+                        </p>
+                      </div>
+                      {program.status && (
+                        <Badge variant={statusVariant} className="w-fit" data-testid={`badge-academic-status-${index}`}>
+                          {program.status}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                      {program.location && <span data-testid={`text-academic-location-${index}`}>{program.location}</span>}
+                      {(program.location || program.period) && <span aria-hidden="true">|</span>}
+                      {program.period && <span data-testid={`text-academic-period-${index}`}>{program.period}</span>}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent>
+                    <div className="md:grid md:grid-cols-3 md:gap-6">
+                      <div className="space-y-3 md:col-span-2">
+                        {program.description && (
+                          <p className="text-sm text-muted-foreground" data-testid={`text-academic-description-${index}`}>
+                            {program.description}
+                          </p>
+                        )}
+                        {program.highlights?.length ? (
+                          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+                            {program.highlights.map((highlight) => (
+                              <li key={highlight}>{highlight}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+
+                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
+                        <div className="flex h-full flex-col rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
+                          {detailEntries.length ? (
+                            <dl className="space-y-2 text-left">
+                              {detailEntries.map((entry) => (
+                                <div key={`${program.id}-${entry.label}`} className="flex flex-col">
+                                  <dt className="text-xs font-semibold uppercase tracking-wide text-foreground">
+                                    {entry.label}
+                                  </dt>
+                                  <dd>{entry.value}</dd>
+                                </div>
+                              ))}
+                            </dl>
+                          ) : (
+                            <span>No additional metadata recorded.</span>
+                          )}
+
+                          {program.url && (
+                            <a
+                              href={program.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-4 inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary/10"
+                              data-testid={`link-academic-url-${index}`}
+                            >
+                              {program.urlLabel ?? "Program details"}
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        <div className="auto-grid md:auto-grid-lg">
+          {academicSummaryStats.map((stat) => (
+            <Card key={stat.id} data-testid={`card-academic-stat-${stat.id}`}>
+              <CardContent className="p-6 text-center">
+                <p className={`text-3xl font-bold ${stat.accent}`} data-testid={`text-academic-stat-${stat.id}`}>
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
     );
   };

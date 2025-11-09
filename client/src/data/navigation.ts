@@ -13,7 +13,6 @@ export type NavigationItem = {
 
 export const aboutPages: NavChild[] = [
   { name: "All About", href: "/about/all", slug: "all" },
-  { name: "Overview", href: "/about/overview", slug: "overview" },
   { name: "Career", href: "/about/career", slug: "career" },
   { name: "Memberships", href: "/about/memberships", slug: "memberships" },
 ];

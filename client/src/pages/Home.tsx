@@ -89,13 +89,6 @@ export default function Home() {
           icon: UserRound,
         },
         {
-          name: "Overview",
-          summary:
-            "Portfolio orientation hub connecting education, investigations, works, and collaboration paths.",
-          href: "/about/overview",
-          icon: Sparkles,
-        },
-        {
           name: "Education",
           summary:
             "Three master's programmes plus specialised training powering data science and teaching excellence.",

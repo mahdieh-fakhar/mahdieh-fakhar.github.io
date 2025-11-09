@@ -28,13 +28,6 @@ export const searchDocuments: SearchDocument[] = [
     keywords: ["all about", "identity", "timeline", "career", "memberships", "resume"],
   },
   {
-    title: "Overview",
-    href: "/about/overview",
-    description:
-      "Orientation hub summarising scholarship, research outputs, works, and collaboration pathways across the site.",
-    keywords: ["overview", "summary", "orientation", "site map", "portfolio overview"],
-  },
-  {
     title: "Education",
     href: "/education/all",
     description:

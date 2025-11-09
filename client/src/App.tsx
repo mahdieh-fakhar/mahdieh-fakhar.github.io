@@ -23,7 +23,6 @@ import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 import Certifications from "@/pages/Certifications";
 import Search from "@/pages/Search";
-import Overview from "@/pages/Overview";
 import Works from "@/pages/Works";
 import NotFound from "@/pages/not-found";
 
@@ -50,8 +49,6 @@ function AppShell() {
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/about/all" component={AllAbout} />
-          <Route path="/about/overview" component={Overview} />
-          <Route path="/overview" component={Overview} />
           <Route path="/education/:category" component={Education} />
           <Route path="/education" component={Education} />
           <Route path="/investigations/:category" component={Investigations} />

@@ -7,7 +7,6 @@ import { BadgePill } from "@/components/badges/BadgePill";
 
 const footerLinks = [
   { name: "Home", href: "/" },
-  { name: "Overview", href: "/about/overview" },
   { name: "All About", href: "/about/all" },
   { name: "Education", href: "/education/all" },
   { name: "Investigations", href: "/investigations/all" },

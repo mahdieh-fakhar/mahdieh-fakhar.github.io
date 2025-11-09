@@ -205,30 +205,30 @@ const categoryLabels: Record<EducationCategory, string> = {
   Workshops: "Workshops & Masterclasses",
 };
 
-function getProgramDetailEntries(program: EducationRecord): Array<{ label: string; value: string }> {
+function getRecordDetailEntries(record: EducationRecord): Array<{ label: string; value: string }> {
   const entries: Array<{ label: string; value: string }> = [];
 
-  if (program.status) {
-    entries.push({ label: "Status", value: program.status });
+  if (record.status) {
+    entries.push({ label: "Status", value: record.status });
   }
 
-  if (program.gpa) {
-    entries.push({ label: "GPA", value: program.gpa });
+  if (record.gpa) {
+    entries.push({ label: "GPA", value: record.gpa });
   }
 
-  if (program.distinction) {
-    entries.push({ label: "Distinction", value: program.distinction });
+  if (record.distinction) {
+    entries.push({ label: "Distinction", value: record.distinction });
   }
 
-  if (program.thesis) {
+  if (record.thesis) {
     entries.push({
       label: "Thesis",
-      value: program.thesisGrade ? `${program.thesis} (Grade: ${program.thesisGrade})` : program.thesis,
+      value: record.thesisGrade ? `${record.thesis} (Grade: ${record.thesisGrade})` : record.thesis,
     });
   }
 
-  if (program.metadata?.length) {
-    entries.push(...program.metadata);
+  if (record.metadata?.length) {
+    entries.push(...record.metadata);
   }
 
   return entries;
@@ -265,6 +265,24 @@ const academicSummaryStats = (() => {
     { id: "progress", label: "In Progress", value: String(inProgress), accent: "text-accent" },
     { id: "completed", label: "Completed Degrees", value: String(completed), accent: "text-ai-accent" },
     { id: "regions", label: "Regions Studied", value: String(regions), accent: "text-primary" },
+  ] as const;
+})();
+
+const courseSummaryStats = (() => {
+  const totalCertificates = coursePrograms.length;
+  const inProgress = coursePrograms.filter((course) =>
+    `${course.status ?? course.period ?? ""}`.toLowerCase().includes("progress"),
+  ).length;
+  const issued = coursePrograms.filter((course) =>
+    `${course.status ?? course.period ?? ""}`.toLowerCase().includes("issued"),
+  ).length;
+  const vendors = new Set(coursePrograms.map((course) => course.institution)).size;
+
+  return [
+    { id: "courses", label: "Specialist Courses", value: String(totalCertificates), accent: "text-primary" },
+    { id: "issued", label: "Issued Certificates", value: String(issued), accent: "text-accent" },
+    { id: "progress", label: "Active Tracks", value: String(inProgress), accent: "text-ai-accent" },
+    { id: "vendors", label: "Issuing Providers", value: String(vendors), accent: "text-primary" },
   ] as const;
 })();
 
@@ -433,6 +451,10 @@ export default function Education({ params }: EducationProps = {}) {
       return renderAcademicTimeline();
     }
 
+    if (activeItem.filter === "Courses") {
+      return renderCourseTimeline();
+    }
+
     if (activeItem.filter === null) {
       return renderAllCategories();
     }
@@ -487,7 +509,7 @@ export default function Education({ params }: EducationProps = {}) {
           <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
 
           {sortedPrograms.map((program, index) => {
-            const detailEntries = getProgramDetailEntries(program);
+            const detailEntries = getRecordDetailEntries(program);
             const statusVariant = program.status?.toLowerCase().includes("progress") ? "secondary" : "default";
 
             return (
@@ -588,6 +610,145 @@ export default function Education({ params }: EducationProps = {}) {
             <Card key={stat.id} data-testid={`card-academic-stat-${stat.id}`}>
               <CardContent className="p-6 text-center">
                 <p className={`text-3xl font-bold ${stat.accent}`} data-testid={`text-academic-stat-${stat.id}`}>
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
+  const renderCourseTimeline = () => {
+    if (!coursePrograms.length) {
+      return (
+        <div
+          className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground"
+          data-testid="section-education-courses"
+        >
+          Course records will appear here soon.
+        </div>
+      );
+    }
+
+    const sortedCourses = [...coursePrograms].sort(
+      (a, b) => getSortValueFromPeriod(b.period) - getSortValueFromPeriod(a.period),
+    );
+
+    return (
+      <section className="space-y-6" data-testid="section-education-courses">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+          {categoryLabels.Courses}
+        </div>
+
+        <div className="relative space-y-8">
+          <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
+
+          {sortedCourses.map((course, index) => {
+            const detailEntries = getRecordDetailEntries(course);
+            const statusVariant =
+              course.status && course.status.toLowerCase().includes("progress") ? "secondary" : "outline";
+
+            return (
+              <motion.div
+                key={course.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative"
+              >
+                <Card className="md:ml-20" data-testid={`card-course-${index}`}>
+                  <div className="absolute -left-12 top-6 hidden h-8 w-8 items-center justify-center rounded-full border-4 border-background bg-primary md:flex">
+                    <GraduationCap className="h-4 w-4 text-primary-foreground" />
+                  </div>
+
+                  <CardHeader>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="space-y-1">
+                        <CardTitle className="text-xl" data-testid={`text-course-title-${index}`}>
+                          {course.title}
+                        </CardTitle>
+                        <p className="text-base font-medium text-primary" data-testid={`text-course-institution-${index}`}>
+                          {course.institution}
+                        </p>
+                      </div>
+                      {course.status && (
+                        <Badge variant={statusVariant} className="w-fit" data-testid={`badge-course-status-${index}`}>
+                          {course.status}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                      {course.location && <span data-testid={`text-course-location-${index}`}>{course.location}</span>}
+                      {(course.location || course.period) && <span aria-hidden="true">|</span>}
+                      {course.period && <span data-testid={`text-course-period-${index}`}>{course.period}</span>}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent>
+                    <div className="md:grid md:grid-cols-3 md:gap-6">
+                      <div className="space-y-3 md:col-span-2">
+                        {course.description && (
+                          <p className="text-sm text-muted-foreground" data-testid={`text-course-description-${index}`}>
+                            {course.description}
+                          </p>
+                        )}
+                        {course.highlights?.length ? (
+                          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
+                            {course.highlights.map((highlight) => (
+                              <li key={highlight}>{highlight}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                        {detailEntries.length ? (
+                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
+                            <dl className="space-y-2 text-left">
+                              {detailEntries.map((entry) => (
+                                <div key={`${course.id}-${entry.label}`} className="flex flex-col">
+                                  <dt className="text-xs font-semibold uppercase tracking-wide text-foreground">
+                                    {entry.label}
+                                  </dt>
+                                  <dd>{entry.value}</dd>
+                                </div>
+                              ))}
+                            </dl>
+                          </div>
+                        ) : null}
+                      </div>
+
+                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
+                        <div className="flex h-full flex-col justify-center rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground text-center">
+                          <span className="font-medium text-foreground">Attachments</span>
+                          <span>Add supporting documents to showcase credentials.</span>
+                        </div>
+                        {course.url && (
+                          <a
+                            href={course.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+                            data-testid={`link-course-url-${index}`}
+                          >
+                            {course.urlLabel ?? "View credential"}
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        <div className="auto-grid md:auto-grid-lg">
+          {courseSummaryStats.map((stat) => (
+            <Card key={stat.id} data-testid={`card-course-stat-${stat.id}`}>
+              <CardContent className="p-6 text-center">
+                <p className={`text-3xl font-bold ${stat.accent}`} data-testid={`text-course-stat-${stat.id}`}>
                   {stat.value}
                 </p>
                 <p className="text-sm text-muted-foreground">{stat.label}</p>

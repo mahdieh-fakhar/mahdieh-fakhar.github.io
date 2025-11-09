@@ -168,6 +168,19 @@ const experiences: Experience[] = [
       "Balanced PhD research in English Language Teaching with intensive high-stakes exam preparation classes",
       "Supported learners continuously from 2014/07/07 through 2018/12/23 under IELI academic management",
     ],
+    evidence: {
+      title: "IELI upper-intermediate appointment letter",
+      description: "CamScanner-certified letter summarising IELI duties and compliance with ILI academic management.",
+      ctaLabel: "View Attachments",
+      slides: [
+        {
+          src: "/images/career/ieli-exam-01.jpg",
+          alt: "IELI upper-intermediate instructor confirmation letter",
+          caption: "Official confirmation of upper-intermediate and exam prep classes",
+          downloadName: "ieli-exam-01.jpg",
+        },
+      ],
+    },
   },
   {
     id: 5,

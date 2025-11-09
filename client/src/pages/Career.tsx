@@ -233,6 +233,19 @@ const experiences: Experience[] = [
       "Collaborated with the Isfahan Provincial Education Organisation on compliance and reporting",
       "Launched personalised learning plans for adolescents preparing for high-stakes examinations",
     ],
+    evidence: {
+      title: "Marefat Novin part-time instructor letter",
+      description: "Certificate confirming communicative English duties and provincial compliance.",
+      ctaLabel: "View Attachments",
+      slides: [
+        {
+          src: "/images/career/part-time-marefat.jpg",
+          alt: "Marefat Novin Language Academy part-time instructor confirmation",
+          caption: "Letter validating part-time communicative English instruction.",
+          downloadName: "part-time-marefat.jpg",
+        },
+      ],
+    },
   },
   {
     id: 8,

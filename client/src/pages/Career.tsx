@@ -46,14 +46,14 @@ const experiences = [
   {
     id: 4,
     title: "Upper-Intermediate & Exam Prep Instructor",
-    organization: "Iranian Language Institute (ILI)",
+    organization: "Iran English Language Institute (IELI)",
     location: "Ilam, Iran",
     period: "Jul 2014 - Dec 2018",
     type: "teaching",
     responsibilities: [
       "Letter 217 signed by Dr. Reza Khani confirms delivery of upper-intermediate, advanced, TOEFL, and IELTS cohorts",
       "Balanced PhD research in English Language Teaching with intensive high-stakes exam preparation classes",
-      "Supported learners continuously from 2014/07/07 through 2018/12/23 under ILI academic management",
+      "Supported learners continuously from 2014/07/07 through 2018/12/23 under IELI academic management",
     ],
   },
   {

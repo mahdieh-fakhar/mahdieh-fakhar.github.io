@@ -118,6 +118,43 @@ const experiences: Experience[] = [
       "Balanced multi-branch timetables (Ilam Sister and Baradar centres) with up to five concurrent classes per semester",
       "Implemented exam-readiness diagnostics and personalised progress reviews for adult and youth cohorts",
     ],
+    evidence: {
+      title: "ILI instructor appointment & evaluation letters",
+      description: "Official Ilam Branch letters confirming IELTS/TOEFL instruction quality and multi-branch assignments.",
+      ctaLabel: "View Attachments",
+      slides: [
+        {
+          src: "/images/career/ili-instructor-01.jpg",
+          alt: "ILI Ilam Branch instructor appointment letter page 1",
+          caption: "Page 1 - Class schedule confirmation and branch stamps.",
+          downloadName: "ili-instructor-01.jpg",
+        },
+        {
+          src: "/images/career/ili-instructor-02.jpg",
+          alt: "ILI instructor letter with exam preparation plan",
+          caption: "Page 2 - TOEFL/IELTS preparation duties and signature.",
+          downloadName: "ili-instructor-02.jpg",
+        },
+        {
+          src: "/images/career/ili-instructor-03.jpg",
+          alt: "ILI instructor evaluation notes page 3",
+          caption: "Page 3 - Performance evaluation and branch accreditation.",
+          downloadName: "ili-instructor-03.jpg",
+        },
+        {
+          src: "/images/career/ili-instructor-04.jpg",
+          alt: "ILI instructor schedule letter page 4",
+          caption: "Page 4 - Class timing details and seal.",
+          downloadName: "ili-instructor-04.jpg",
+        },
+        {
+          src: "/images/career/ili-instructor-05.jpg",
+          alt: "ILI instructor quality letter page 5",
+          caption: "Page 5 - Final sign-off for Ilam Sister & Baradar centres.",
+          downloadName: "ili-instructor-05.jpg",
+        },
+      ],
+    },
   },
   {
     id: 4,

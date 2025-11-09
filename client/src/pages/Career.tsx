@@ -264,6 +264,18 @@ const experiences: Experience[] = [
   },
 ];
 
+function getPeriodSortValue(period: string): number {
+  const normalized = period.toLowerCase();
+  const years = Array.from(period.matchAll(/\d{4}/g)).map((match) => Number(match[0]));
+  const latestYear = years.length ? Math.max(...years) : 0;
+  const presentBoost = normalized.includes("present") ? 1000 : 0;
+  return latestYear + presentBoost;
+}
+
+const sortedExperiences = [...experiences].sort(
+  (a, b) => getPeriodSortValue(b.period) - getPeriodSortValue(a.period),
+);
+
 const typeIcons = {
   teaching: GraduationCap,
   management: Building2,
@@ -303,7 +315,7 @@ export default function Career() {
           {/* Timeline line */}
           <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
 
-          {experiences.map((exp, index) => {
+          {sortedExperiences.map((exp, index) => {
             const Icon = typeIcons[exp.type as keyof typeof typeIcons];
             const evidence = exp.evidence;
             const hasEvidence = Boolean(evidence?.slides.length);

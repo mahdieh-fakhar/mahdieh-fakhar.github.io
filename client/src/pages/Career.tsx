@@ -207,6 +207,19 @@ const experiences: Experience[] = [
       "Produced placement pathways aligned with Longman curricular updates and learner feedback",
       "Maintained academic performance dossiers for submission to partner higher-education centres",
     ],
+    evidence: {
+      title: "Shokoh Pouyan head teacher confirmation",
+      description: "Letter confirming curriculum design and teacher leadership responsibilities at Shokoh Pouyan.",
+      ctaLabel: "View Attachments",
+      slides: [
+        {
+          src: "/images/career/head-teacher-shokoh.jpg",
+          alt: "Shokoh Pouyan head teacher confirmation letter",
+          caption: "Certification letter outlining course design and leadership duties.",
+          downloadName: "head-teacher-shokoh.jpg",
+        },
+      ],
+    },
   },
   {
     id: 7,

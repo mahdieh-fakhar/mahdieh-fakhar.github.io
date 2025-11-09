@@ -45,6 +45,19 @@ const experiences = [
   },
   {
     id: 4,
+    title: "Upper-Intermediate & Exam Prep Instructor",
+    organization: "Iranian Language Institute (ILI)",
+    location: "Ilam, Iran",
+    period: "Jul 2014 - Dec 2018",
+    type: "teaching",
+    responsibilities: [
+      "Letter 217 signed by Dr. Reza Khani confirms delivery of upper-intermediate, advanced, TOEFL, and IELTS cohorts",
+      "Balanced PhD research in English Language Teaching with intensive high-stakes exam preparation classes",
+      "Supported learners continuously from 2014/07/07 through 2018/12/23 under ILI academic management",
+    ],
+  },
+  {
+    id: 5,
     title: "Academic Director & Branch Coordinator",
     organization: "Ilam Language Academy & Safir Danesh Language Institute",
     location: "Ilam, Iran",
@@ -57,7 +70,7 @@ const experiences = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     title: "Head Teacher & Course Designer",
     organization: "Shokoh Pouyan (Longman) Language Academy",
     location: "Shahreza, Iran",
@@ -70,7 +83,7 @@ const experiences = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     title: "Part-time Instructor",
     organization: "Marefat Novin Language Academy",
     location: "Shahreza, Iran",
@@ -83,7 +96,7 @@ const experiences = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     title: "Conference Simultaneous Interpreter",
     organization: "2nd International Conference on Desertification",
     location: "University of Ilam",

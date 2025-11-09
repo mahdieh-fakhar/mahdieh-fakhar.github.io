@@ -26,6 +26,9 @@ import {
   Building2,
   Images,
   Download,
+  ZoomIn,
+  ZoomOut,
+  RefreshCw,
 } from "lucide-react";
 
 type ExperienceType = "teaching" | "management" | "professional" | "research";
@@ -425,6 +428,10 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [modalApi, setModalApi] = useState<CarouselApi | null>(null);
   const [modalSlide, setModalSlide] = useState(0);
+  const [modalZoom, setModalZoom] = useState(1);
+  const MIN_ZOOM = 0.75;
+  const MAX_ZOOM = 2;
+  const ZOOM_STEP = 0.25;
 
   useEffect(() => {
     if (!inlineApi) {
@@ -457,6 +464,25 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
       modalApi.off("select", handleSelect);
     };
   }, [modalApi]);
+
+  useEffect(() => {
+    setModalZoom(1);
+  }, [modalSlide]);
+
+  const handleZoomChange = (direction: "in" | "out" | "reset") => {
+    if (direction === "reset") {
+      setModalZoom(1);
+      return;
+    }
+
+    setModalZoom((prev) => {
+      const next = direction === "in" ? prev + ZOOM_STEP : prev - ZOOM_STEP;
+      return Math.min(Math.max(next, MIN_ZOOM), MAX_ZOOM);
+    });
+  };
+
+  const canZoomIn = modalZoom < MAX_ZOOM;
+  const canZoomOut = modalZoom > MIN_ZOOM;
 
   return (
     <div className="flex h-full flex-col rounded-lg border border-primary/20 bg-primary/5 p-4">
@@ -495,7 +521,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
         ))}
       </div>
 
-      <Dialog>
+      <Dialog onOpenChange={(open) => !open && setModalZoom(1)}>
         <DialogTrigger asChild>
           <Button
             variant="outline"
@@ -507,7 +533,7 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
             {evidence.ctaLabel ?? "View Attachments"}
           </Button>
         </DialogTrigger>
-        <DialogContent className="w-[92vw] max-w-4xl border border-primary/30 bg-background/95">
+        <DialogContent className="w-[90vw] max-w-3xl border border-primary/30 bg-background/95 sm:p-6">
           <DialogHeader className="space-y-2">
             <DialogTitle className="flex items-center gap-2 text-lg">
               <Images className="h-5 w-5 text-primary" />
@@ -518,18 +544,58 @@ function EvidencePreview({ evidence, triggerTestId }: EvidencePreviewProps) {
                 "Use the arrows or keyboard to browse scans, then download originals for archival use."}
             </DialogDescription>
           </DialogHeader>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm">
+            <span className="font-medium text-primary">Zoom: {Math.round(modalZoom * 100)}%</span>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                aria-label="Zoom out"
+                onClick={() => handleZoomChange("out")}
+                disabled={!canZoomOut}
+              >
+                <ZoomOut className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                aria-label="Reset zoom"
+                onClick={() => handleZoomChange("reset")}
+                disabled={modalZoom === 1}
+              >
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                aria-label="Zoom in"
+                onClick={() => handleZoomChange("in")}
+                disabled={!canZoomIn}
+              >
+                <ZoomIn className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
           <Carousel className="mx-auto w-full max-w-3xl" opts={{ loop: true }} setApi={setModalApi}>
             <CarouselContent>
               {evidence.slides.map((slide, slideIndex) => (
                 <CarouselItem key={slide.src} className="flex justify-center">
                   <figure className="w-full space-y-3">
                     <div className="rounded-lg border bg-muted/20 p-3">
-                      <img
-                        src={slide.src}
-                        alt={slide.alt}
-                        className="mx-auto max-h-[70vh] w-full rounded-md object-contain"
-                        loading={slideIndex === 0 ? "eager" : "lazy"}
-                      />
+                      <div className="max-h-[60vh] overflow-auto">
+                        <img
+                          src={slide.src}
+                          alt={slide.alt}
+                          className="mx-auto max-h-[60vh] w-full rounded-md object-contain transition-transform duration-150 ease-out"
+                          loading={slideIndex === 0 ? "eager" : "lazy"}
+                          style={{
+                            transform: `scale(${modalZoom})`,
+                          }}
+                        />
+                      </div>
                     </div>
                     <figcaption className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
                       <span>{slide.caption ?? `Page ${slideIndex + 1}`}</span>

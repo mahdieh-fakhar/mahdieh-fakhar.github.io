@@ -707,7 +707,7 @@ export default function Education({ params }: EducationProps = {}) {
   };
 
   return (
-    <div className="container py-12">
+    <div className="page-template-career">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}

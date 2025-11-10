@@ -7,7 +7,7 @@ export default function Certifications() {
   const badges = getAllBadges();
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12 lg:px-8">
+    <div className="page-template-career">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -59,7 +59,7 @@ export default function Projects() {
     badge.placements.includes("projects") || badge.placements.includes("project-card"),
   );
   return (
-    <div className="container py-12">
+    <div className="page-template-career">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

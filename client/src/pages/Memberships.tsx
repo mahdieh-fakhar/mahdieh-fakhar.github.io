@@ -166,7 +166,7 @@ const summaryStats = [
 
 export default function Memberships() {
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 lg:px-10">
+    <div className="page-template-career">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

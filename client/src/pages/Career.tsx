@@ -265,7 +265,7 @@ const experienceSlides = (experience: Experience): Slide[] => {
 
 export default function Career() {
   return (
-    <div className="mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 lg:px-10">
+    <div className="page-template-career">
       <div className="stack-gap-md">
         <div className="space-y-4">
           <div className="flex items-center gap-2">

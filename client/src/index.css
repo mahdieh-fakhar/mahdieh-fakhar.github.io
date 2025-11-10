@@ -574,3 +574,40 @@
     gap: clamp(2rem, 4vw, 4.5rem);
   }
 }
+
+@layer components {
+  .page-template-career {
+    @apply mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 lg:px-10;
+  }
+
+  .page-template-career .shadcn-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    border: 1px solid hsl(var(--card-border));
+    background-color: hsl(var(--card));
+    box-shadow: 0 20px 55px rgba(15, 23, 42, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .page-template-career .shadcn-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at left, rgba(99, 102, 241, 0.12), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .page-template-career .shadcn-card:hover::before,
+  .page-template-career .shadcn-card:focus-within::before {
+    opacity: 1;
+  }
+
+  .page-template-career .shadcn-card > * {
+    position: relative;
+    z-index: 1;
+  }
+}

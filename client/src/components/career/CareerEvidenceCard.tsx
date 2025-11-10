@@ -209,11 +209,11 @@ export function CareerEvidenceCard({
       </Card>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="w-[90vw] max-w-5xl rounded-3xl border border-white/15 bg-slate-950/95 text-white">
+        <DialogContent className="w-[90vw] max-w-5xl rounded-3xl border border-border bg-card text-card-foreground">
           <DialogHeader className="flex flex-row items-center justify-between">
             <div>
               <DialogTitle className="text-base font-semibold">Evidence gallery</DialogTitle>
-              <DialogDescription className="text-xs text-slate-400">
+              <DialogDescription className="text-xs text-muted-foreground">
                 Zoom, browse attachments, download files, or close the viewer.
               </DialogDescription>
             </div>
@@ -232,7 +232,7 @@ export function CareerEvidenceCard({
             </div>
           </DialogHeader>
           <div className="flex flex-col gap-4">
-            <div className="relative h-[55vh] overflow-hidden rounded-2xl border border-white/15 bg-black/40">
+            <div className="relative h-[55vh] overflow-hidden rounded-2xl border border-border bg-muted/40">
               <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: inlineIndex }}>
                 <CarouselContent className="h-full">
                   {slides.map((slide) => (
@@ -254,7 +254,7 @@ export function CareerEvidenceCard({
                 )}
               </Carousel>
             </div>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <span>
                 Page {modalIndex + 1} of {slides.length}
                 {currentSlide?.alt ? ` · ${currentSlide.alt}` : ""}
@@ -263,7 +263,7 @@ export function CareerEvidenceCard({
                 <a
                   href={currentSlide.src}
                   download={currentSlide.downloadName ?? `evidence-${modalIndex + 1}`}
-                  className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1 text-xs text-foreground transition hover:bg-muted/40"
+                  className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-foreground transition hover:bg-muted/60"
                 >
                   <Download className="h-4 w-4" />
                   Download
@@ -277,7 +277,7 @@ export function CareerEvidenceCard({
                     key={`modal-dot-${idx}`}
                     onClick={() => modalApi?.scrollTo(idx)}
                     className={`h-2 w-2 rounded-full ${
-                      idx === modalIndex ? "bg-primary" : "bg-muted/60 hover:bg-primary/60"
+                      idx === modalIndex ? "bg-primary" : "bg-muted/80 hover:bg-primary/60"
                     }`}
                     aria-label={`Go to page ${idx + 1}`}
                   />

@@ -223,6 +223,39 @@ const categoryLabels: Record<EducationCategory, string> = {
   Workshops: "Workshops & Masterclasses",
 };
 
+const academicFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Academic evidence placeholder" }];
+
+function getAcademicSlides(record: EducationRecord): Slide[] {
+  if (record.slides?.length) {
+    return record.slides;
+  }
+
+  return academicFallbackSlides;
+}
+
+function getAcademicHighlights(record: EducationRecord): string[] {
+  const highlights: string[] = [];
+
+  if (record.description) {
+    highlights.push(record.description);
+  }
+
+  if (record.highlights?.length) {
+    highlights.push(...record.highlights);
+  }
+
+  const detailEntries = getRecordDetailEntries(record);
+  if (detailEntries.length) {
+    highlights.push(...detailEntries.map((entry) => `${entry.label}: ${entry.value}`));
+  }
+
+  if (!highlights.length) {
+    highlights.push("Program highlights will be available soon.");
+  }
+
+  return highlights;
+}
+
 function getRecordDetailEntries(record: EducationRecord): Array<{ label: string; value: string }> {
   const entries: Array<{ label: string; value: string }> = [];
 
@@ -523,104 +556,28 @@ export default function Education({ params }: EducationProps = {}) {
           {categoryLabels.Academic}
         </div>
 
-        <div className="relative space-y-8">
-          <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
-
-          {sortedPrograms.map((program, index) => {
-            const detailEntries = getRecordDetailEntries(program);
-            const statusVariant = program.status?.toLowerCase().includes("progress") ? "secondary" : "default";
-
-            return (
-              <motion.div
-                key={program.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative"
-              >
-                <Card className="md:ml-20" data-testid={`card-academic-${index}`}>
-                  <div className="absolute -left-12 top-6 hidden h-8 w-8 items-center justify-center rounded-full border-4 border-background bg-primary md:flex">
-                    <GraduationCap className="h-4 w-4 text-primary-foreground" />
-                  </div>
-
-                  <CardHeader>
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="space-y-1">
-                        <CardTitle className="text-xl" data-testid={`text-academic-title-${index}`}>
-                          {program.title}
-                        </CardTitle>
-                        <p className="text-base font-medium text-primary" data-testid={`text-academic-institution-${index}`}>
-                          {program.institution}
-                        </p>
-                      </div>
-                      {program.status && (
-                        <Badge variant={statusVariant} className="w-fit" data-testid={`badge-academic-status-${index}`}>
-                          {program.status}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                      {program.location && <span data-testid={`text-academic-location-${index}`}>{program.location}</span>}
-                      {(program.location || program.period) && <span aria-hidden="true">|</span>}
-                      {program.period && <span data-testid={`text-academic-period-${index}`}>{program.period}</span>}
-                    </div>
-                  </CardHeader>
-
-                  <CardContent>
-                    <div className="md:grid md:grid-cols-3 md:gap-6">
-                      <div className="space-y-3 md:col-span-2">
-                        {program.description && (
-                          <p className="text-sm text-muted-foreground" data-testid={`text-academic-description-${index}`}>
-                            {program.description}
-                          </p>
-                        )}
-                        {program.highlights?.length ? (
-                          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-                            {program.highlights.map((highlight) => (
-                              <li key={highlight}>{highlight}</li>
-                            ))}
-                          </ul>
-                        ) : null}
-                        {detailEntries.length ? (
-                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
-                            <dl className="space-y-2 text-left">
-                              {detailEntries.map((entry) => (
-                                <div key={`${program.id}-${entry.label}`} className="flex flex-col">
-                                  <dt className="text-xs font-semibold uppercase tracking-wide text-foreground">
-                                    {entry.label}
-                                  </dt>
-                                  <dd>{entry.value}</dd>
-                                </div>
-                              ))}
-                            </dl>
-                          </div>
-                        ) : null}
-                      </div>
-
-                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
-                        <div className="flex h-full flex-col justify-center rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground text-center">
-                          <span className="font-medium text-foreground">Attachments</span>
-                          <span>Add supporting documents to showcase credentials.</span>
-                        </div>
-                        {program.url && (
-                          <a
-                            href={program.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
-                            data-testid={`link-academic-url-${index}`}
-                          >
-                            {program.urlLabel ?? "Program details"}
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
+        <div className="space-y-6">
+          {sortedPrograms.map((program, index) => (
+            <motion.div
+              key={program.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              data-testid={`card-academic-${index}`}
+            >
+              <CareerEvidenceCard
+                title={program.title}
+                organization={program.institution}
+                location={program.location ?? "Remote / Hybrid"}
+                period={program.period ?? "Ongoing"}
+                roleLabel={program.roleLabel ?? program.status ?? "Academic Program"}
+                highlights={getAcademicHighlights(program)}
+                slides={getAcademicSlides(program)}
+                referenceUrl={program.url}
+                referenceLabel={program.urlLabel ?? "Program details"}
+              />
+            </motion.div>
+          ))}
         </div>
 
         <div className="auto-grid md:auto-grid-lg">

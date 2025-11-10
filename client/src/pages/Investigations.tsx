@@ -51,6 +51,7 @@ const publicationIconLocation: Record<Publication["type"], string> = {
   review: "Publication outlet",
 };
 const thesisFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Thesis evidence placeholder" }];
+const handbookFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Handbook evidence placeholder" }];
 
 function getPublicationSlides(): Slide[] {
   return publicationFallbackSlides;
@@ -86,6 +87,18 @@ function getThesisHighlights(record: ThesisRecord): string[] {
 
 function getThesisSlides(): Slide[] {
   return thesisFallbackSlides;
+}
+
+function getHandbookHighlights(entry: HandbookEntry): string[] {
+  return [
+    `Domain: ${entry.domain}`,
+    `Format: ${entry.format}`,
+    entry.summary,
+  ];
+}
+
+function getHandbookSlides(): Slide[] {
+  return handbookFallbackSlides;
 }
 
 const PublicationCards = ({ items }: { items: Publication[] }) => (
@@ -237,26 +250,28 @@ const HandbooksSection = ({ items }: { items: HandbookEntry[] }) => (
         Handbooks & Toolkits
       </h2>
       <p className="max-w-3xl text-sm text-muted-foreground">
-        Practitioner-ready assets supporting analytics pipelines, AI adoption, and educator
-        upskilling.
+        Practitioner-ready assets supporting analytics pipelines, AI adoption, and educator upskilling.
       </p>
     </div>
 
-    <div className="stack-gap-md">
-      {items.map((entry) => (
-        <Card key={entry.id} className="hover-elevate transition-shadow">
-          <CardHeader>
-            <div className="flex flex-col gap-1">
-              <CardTitle className="text-lg text-foreground">{entry.title}</CardTitle>
-              <p className="text-sm font-semibold text-primary">
-                {entry.domain} • {entry.format}
-              </p>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground leading-relaxed">{entry.summary}</p>
-          </CardContent>
-        </Card>
+    <div className="space-y-6">
+      {items.map((entry, index) => (
+        <motion.div
+          key={entry.id}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: index * 0.08 }}
+        >
+          <CareerEvidenceCard
+            title={entry.title}
+            organization={entry.domain}
+            location={`${entry.format} reference`}
+            period="Updated periodically"
+            roleLabel={entry.format}
+            highlights={getHandbookHighlights(entry)}
+            slides={getHandbookSlides()}
+          />
+        </motion.div>
       ))}
     </div>
   </section>

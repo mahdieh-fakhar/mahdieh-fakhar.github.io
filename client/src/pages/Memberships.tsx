@@ -110,6 +110,20 @@ const memberships: Membership[] = [
   },
 ];
 
+const membershipStats = (() => {
+  const total = memberships.length;
+  const review = memberships.filter((membership) => membership.category === "review").length;
+  const research = memberships.filter((membership) => membership.category === "research").length;
+  const locations = new Set(memberships.map((membership) => membership.location)).size;
+
+  return [
+    { value: total, label: "Total Memberships" },
+    { value: review, label: "Peer Review Roles" },
+    { value: research, label: "Research Networks" },
+    { value: locations, label: "Regions Represented" },
+  ];
+})();
+
 const membershipHighlights = (membership: Membership): string[] => {
   if (membership.focus) {
     return [...membership.highlights, `Focus: ${membership.focus}`];
@@ -173,7 +187,7 @@ export default function Memberships() {
             </Card>
           ))}
         </div>
-        <StatsSection />
+        <StatsSection stats={membershipStats} />
       </motion.div>
     </div>
   );

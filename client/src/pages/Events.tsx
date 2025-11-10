@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Presentation } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -528,6 +528,20 @@ export default function Events({ params }: EventsProps = {}) {
     activeItem.filter === null
       ? certificates
       : certificates.filter((item) => item.category === activeItem.filter);
+  const eventStats = useMemo(() => {
+    if (!filteredCertificates.length) {
+      return [];
+    }
+    const categories = new Set(filteredCertificates.map((certificate) => certificate.category)).size;
+    const locations = new Set(filteredCertificates.map((certificate) => certificate.location)).size;
+    const sponsors = new Set(filteredCertificates.flatMap((certificate) => certificate.sponsors)).size;
+    return [
+      { value: filteredCertificates.length, label: `${activeItem.label} Certificates` },
+      { value: categories, label: "Event Categories" },
+      { value: locations, label: "Locations" },
+      { value: sponsors, label: "Sponsors" },
+    ];
+  }, [filteredCertificates, activeItem.label]);
 
   return (
     <div className="page-template-career">
@@ -611,7 +625,7 @@ export default function Events({ params }: EventsProps = {}) {
             </div>
           )}
         </section>
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={eventStats} />
       </motion.div>
     </div>
   );

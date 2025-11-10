@@ -224,6 +224,13 @@ const categoryLabels: Record<EducationCategory, string> = {
   Workshops: "Workshops & Masterclasses",
 };
 
+const educationStats = [
+  { value: academicPrograms.length, label: "Academic Programs" },
+  { value: coursePrograms.length, label: "Courses & Certificates" },
+  { value: workshopPrograms.length, label: "Workshops" },
+  { value: academicPrograms.length + coursePrograms.length + workshopPrograms.length, label: "Total Records" },
+];
+
 const academicFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Academic evidence placeholder" }];
 const courseFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Course evidence placeholder" }];
 const workshopFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Workshop evidence placeholder" }];
@@ -829,7 +836,7 @@ export default function Education({ params }: EducationProps = {}) {
         </div>
 
         {renderActiveCategory()}
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={educationStats} />
       </motion.div>
     </div>
   );

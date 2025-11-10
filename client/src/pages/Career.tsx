@@ -244,6 +244,24 @@ const sortedExperiences = [...experiences].sort(
   (a, b) => getPeriodSortValue(b.period) - getPeriodSortValue(a.period),
 );
 
+const careerStats = (() => {
+  const totalRoles = experiences.length;
+  const teachingRoles = experiences.filter((experience) => experience.type === "teaching").length;
+  const evidenceBacked = experiences.filter((experience) => experience.evidence?.slides.length).length;
+  const locations = new Set(
+    experiences
+      .map((experience) => experience.location.split(",").pop()?.trim())
+      .filter(Boolean) as string[],
+  ).size;
+
+  return [
+    { value: totalRoles, label: "Documented Roles" },
+    { value: teachingRoles, label: "Teaching Posts" },
+    { value: evidenceBacked, label: "Evidence-backed Records" },
+    { value: locations, label: "Cities Worked" },
+  ];
+})();
+
 const typeLabels: Record<ExperienceType, string> = {
   teaching: "Teaching",
   management: "Management",
@@ -294,7 +312,7 @@ export default function Career() {
           ))}
         </div>
 
-        <StatsSection />
+        <StatsSection stats={careerStats} />
       </div>
     </div>
   );

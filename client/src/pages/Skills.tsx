@@ -77,6 +77,19 @@ const languageSkills = [
   { language: "Persian", level: "Native", proficiency: 100 },
 ];
 
+const skillsStats = (() => {
+  const totalSkills = skillCategories.reduce((acc, category) => acc + category.skills.length, 0);
+  const advancedSkills = skillCategories
+    .flatMap((category) => category.skills)
+    .filter((skill) => skill.proficiency >= 90).length;
+  return [
+    { value: skillCategories.length, label: "Skill Categories" },
+    { value: totalSkills, label: "Individual Skills" },
+    { value: languageSkills.length, label: "Languages" },
+    { value: advancedSkills, label: "Advanced (90%+) Skills" },
+  ];
+})();
+
 export default function Skills() {
   return (
     <div className="page-template-career">
@@ -205,7 +218,7 @@ export default function Skills() {
             </div>
           </CardContent>
         </Card>
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={skillsStats} />
       </motion.div>
     </div>
   );

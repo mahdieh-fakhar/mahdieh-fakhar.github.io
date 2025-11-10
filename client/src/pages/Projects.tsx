@@ -113,6 +113,22 @@ export default function Projects() {
   const projectBadges = getBadges({ page: "projects" }).filter((badge) =>
     badge.placements.includes("projects") || badge.placements.includes("project-card"),
   );
+  const projectStats = (() => {
+    const total = projects.length;
+    const research = projects.filter((project) =>
+      `${project.role ?? ""} ${project.description}`.toLowerCase().includes("research"),
+    ).length;
+    const digitalBuilds = projects.filter((project) =>
+      (project.technologies ?? []).some((tech) => /react|ui|web|design|tailwind/i.test(tech)),
+    ).length;
+    const funded = projects.filter((project) => Boolean(project.funding)).length;
+    return [
+      { value: total, label: "Documented Projects" },
+      { value: research, label: "Research Collaborations" },
+      { value: digitalBuilds, label: "Digital Builds" },
+      { value: funded, label: "Funded Engagements" },
+    ];
+  })();
   return (
     <div className="page-template-career">
       <motion.div
@@ -186,7 +202,7 @@ export default function Projects() {
             </p>
           </CardContent>
         </Card>
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={projectStats} />
       </motion.div>
     </div>
   );

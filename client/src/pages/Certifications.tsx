@@ -6,6 +6,18 @@ import { StatsSection } from "@/components/StatsSection";
 
 export default function Certifications() {
   const badges = getAllBadges();
+  const issuerCount = new Set(badges.map((badge) => badge.issuer)).size;
+  const uniqueSkills = new Set(badges.flatMap((badge) => badge.skills ?? [])).size;
+  const latestYear = badges
+    .map((badge) => Number(badge.issueDate?.slice(0, 4)))
+    .filter((year) => Number.isFinite(year))
+    .sort((a, b) => b - a)[0];
+  const certificationsStats = [
+    { value: badges.length, label: "Verified Credentials" },
+    { value: issuerCount, label: "Issuing Bodies" },
+    { value: uniqueSkills, label: "Unique Skill Tags" },
+    { value: latestYear ?? "—", label: "Latest Issued Year" },
+  ];
 
   const badgeCards = badges.map((badge) => {
     const highlights = [
@@ -69,7 +81,7 @@ export default function Certifications() {
           </p>
         )}
       </div>
-      <StatsSection className="mt-10" />
+      <StatsSection className="mt-10" stats={certificationsStats} />
     </div>
   );
 }

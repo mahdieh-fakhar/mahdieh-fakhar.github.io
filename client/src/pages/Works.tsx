@@ -57,6 +57,12 @@ export default function Works() {
   const spotlightBadges = rawBadges.filter(
     (badge, index, self) => index === self.findIndex((candidate) => candidate.id === badge.id),
   );
+  const worksStats = [
+    { value: workStreams.length, label: "Work Streams" },
+    { value: deliveryHighlights.length, label: "Delivery Pillars" },
+    { value: rawBadges.length, label: "Relevant Badges" },
+    { value: spotlightBadges.length, label: "Spotlight Credentials" },
+  ];
 
   return (
     <div className="page-template-career">
@@ -158,7 +164,7 @@ export default function Works() {
             </Card>
           )}
         </section>
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={worksStats} />
       </motion.div>
     </div>
   );

@@ -89,6 +89,21 @@ const alliedChapters = [
   },
 ];
 
+const aboutStats = (() => {
+  const timelineYears = timeline
+    .map((entry) => Number(entry.year))
+    .filter((year) => Number.isFinite(year));
+  const spanValue =
+    timelineYears.length > 1 ? `${Math.max(...timelineYears) - Math.min(...timelineYears) + 1} yrs` : "Multi-year";
+
+  return [
+    { value: identitySignals.length, label: "Identity Signals" },
+    { value: timeline.length, label: "Timeline Milestones" },
+    { value: alliedChapters.length, label: "Allied Chapters" },
+    { value: spanValue, label: "Journey Span" },
+  ];
+})();
+
 export default function AllAbout() {
   return (
     <div className="page-template-career">
@@ -192,7 +207,7 @@ export default function AllAbout() {
             })}
           </div>
         </section>
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={aboutStats} />
       </motion.div>
     </div>
   );

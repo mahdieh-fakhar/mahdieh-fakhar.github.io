@@ -40,6 +40,13 @@ const navItems: NavItem[] = [
   { label: "Handbooks", slug: "handbooks", description: "Practical guides & toolkits" },
 ];
 
+const investigationStats = [
+  { value: publications.length, label: "Publications Tracked" },
+  { value: thesisRecords.length, label: "Graduate Theses" },
+  { value: handbookEntries.length, label: "Handbooks & Toolkits" },
+  { value: conferenceProceedings.length, label: "Conference Series" },
+];
+
 const publicationFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Research evidence placeholder" }];
 const publicationTypeLabels: Record<Publication["type"], string> = {
   journal: "Journal Article",
@@ -376,7 +383,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         </div>
 
         {renderContent(activeSlug)}
-        <StatsSection className="mt-10" />
+        <StatsSection className="mt-10" stats={investigationStats} />
       </motion.div>
     </div>
   );

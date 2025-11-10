@@ -1,18 +1,21 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-const stats = [
-  { value: "15+", label: "Years Teaching" },
-  { value: "8+", label: "Institutions" },
-  { value: "2", label: "Leadership Roles" },
-  { value: "2", label: "Countries" },
-] as const;
+type Stat = {
+  value: string | number;
+  label: string;
+};
 
 type StatsSectionProps = {
+  stats: Stat[];
   className?: string;
 };
 
-export function StatsSection({ className }: StatsSectionProps) {
+export function StatsSection({ stats, className }: StatsSectionProps) {
+  if (!stats.length) {
+    return null;
+  }
+
   return (
     <section
       className={cn(

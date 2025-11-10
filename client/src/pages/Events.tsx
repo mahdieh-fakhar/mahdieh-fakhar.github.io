@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { assetPath } from "@/lib/basePath";
 import { Link, useLocation } from "wouter";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { StatsSection } from "@/components/StatsSection";
 
 type CertificateOrientation = "portrait" | "landscape";
 
@@ -610,6 +611,7 @@ export default function Events({ params }: EventsProps = {}) {
             </div>
           )}
         </section>
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

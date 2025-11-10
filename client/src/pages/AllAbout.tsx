@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
+import { StatsSection } from "@/components/StatsSection";
 import {
   Sparkles,
   Target,
@@ -191,6 +192,7 @@ export default function AllAbout() {
             })}
           </div>
         </section>
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

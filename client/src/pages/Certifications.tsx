@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { getAllBadges } from "@/lib/badgeUtils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { StatsSection } from "@/components/StatsSection";
 
 export default function Certifications() {
   const badges = getAllBadges();
@@ -68,6 +69,7 @@ export default function Certifications() {
           </p>
         )}
       </div>
+      <StatsSection className="mt-10" />
     </div>
   );
 }

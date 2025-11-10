@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { StatsSection } from "@/components/StatsSection";
 import {
   publications,
   researchFocusAreas,
@@ -375,6 +376,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         </div>
 
         {renderContent(activeSlug)}
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

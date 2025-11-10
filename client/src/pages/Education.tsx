@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { GraduationCap, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { StatsSection } from "@/components/StatsSection";
 
 type EducationCategory = "Academic" | "Courses" | "Workshops";
 
@@ -828,6 +829,7 @@ export default function Education({ params }: EducationProps = {}) {
         </div>
 
         {renderActiveCategory()}
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

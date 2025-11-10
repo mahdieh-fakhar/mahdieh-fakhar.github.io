@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
+import { StatsSection } from "@/components/StatsSection";
 
 const workStreams = [
   {
@@ -157,6 +158,7 @@ export default function Works() {
             </Card>
           )}
         </section>
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

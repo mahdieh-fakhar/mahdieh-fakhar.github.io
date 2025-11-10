@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Rocket } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { StatsSection } from "@/components/StatsSection";
 
 type Project = {
   id: number;
@@ -187,6 +186,7 @@ export default function Projects() {
             </p>
           </CardContent>
         </Card>
+        <StatsSection className="mt-10" />
       </motion.div>
     </div>
   );

@@ -2,6 +2,8 @@
 import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
+import { StatsSection } from "@/components/StatsSection";
+
 type ExperienceType = "teaching" | "management" | "professional" | "research";
 
 type EvidenceSlide = {
@@ -292,40 +294,7 @@ export default function Career() {
           ))}
         </div>
 
-        <div className="auto-grid md:auto-grid-lg">
-          <Card data-testid="card-stat-years">
-            <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-primary" data-testid="text-stat-years">
-                15+
-              </p>
-              <p className="text-sm text-muted-foreground">Years Teaching</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="card-stat-institutions">
-            <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-accent" data-testid="text-stat-institutions">
-                8+
-              </p>
-              <p className="text-sm text-muted-foreground">Institutions</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="card-stat-leadership">
-            <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-ai-accent" data-testid="text-stat-leadership">
-                2
-              </p>
-              <p className="text-sm text-muted-foreground">Leadership Roles</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="card-stat-countries">
-            <CardContent className="p-6 text-center">
-              <p className="text-3xl font-bold text-primary" data-testid="text-stat-countries">
-                2
-              </p>
-              <p className="text-sm text-muted-foreground">Countries</p>
-            </CardContent>
-          </Card>
-        </div>
+        <StatsSection />
       </div>
     </div>
   );

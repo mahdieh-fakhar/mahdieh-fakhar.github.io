@@ -714,6 +714,31 @@ export default function Education({ params }: EducationProps = {}) {
                                 </div>
                               ))}
                             </dl>
+                            {course.url && (
+                              <a
+                                href={course.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-4 inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+                                data-testid={`link-course-url-${index}`}
+                              >
+                                {course.urlLabel ?? "View credential"}
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            )}
+                          </div>
+                        ) : course.url ? (
+                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
+                            <a
+                              href={course.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+                              data-testid={`link-course-url-${index}`}
+                            >
+                              {course.urlLabel ?? "View credential"}
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
                           </div>
                         ) : null}
                       </div>
@@ -723,18 +748,6 @@ export default function Education({ params }: EducationProps = {}) {
                           <span className="font-medium text-foreground">Attachments</span>
                           <span>Add supporting documents to showcase credentials.</span>
                         </div>
-                        {course.url && (
-                          <a
-                            href={course.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
-                            data-testid={`link-course-url-${index}`}
-                          >
-                            {course.urlLabel ?? "View credential"}
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
-                        )}
                       </div>
                     </div>
                   </CardContent>

@@ -2,11 +2,25 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Rocket, ExternalLink, Users, Calendar } from "lucide-react";
+import { Rocket } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
+import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
-const projects = [
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  role?: string;
+  period?: string;
+  technologies?: string[];
+  imageUrl?: string | null;
+  url?: string;
+  directors?: string;
+  funding?: string;
+};
+
+const projects: Project[] = [
   {
     id: 1,
     title: "IHUPA Research Institute",
@@ -53,6 +67,48 @@ const projects = [
     funding: "€4,000",
   },
 ];
+
+const projectFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Project evidence placeholder" }];
+
+function getProjectHighlights(project: Project): string[] {
+  const highlights: string[] = [project.description];
+
+  if (project.role) {
+    highlights.push(`Role: ${project.role}`);
+  }
+
+  if (project.period) {
+    highlights.push(`Timeline: ${project.period}`);
+  }
+
+  if (project.directors) {
+    highlights.push(`Directors: ${project.directors}`);
+  }
+
+  if (project.technologies?.length) {
+    highlights.push(`Technologies & Methods: ${project.technologies.join(", ")}`);
+  }
+
+  if (project.funding) {
+    highlights.push(`Funding: ${project.funding}`);
+  }
+
+  return highlights;
+}
+
+function getProjectSlides(project: Project): Slide[] {
+  if (project.imageUrl) {
+    return [
+      {
+        src: project.imageUrl,
+        alt: `${project.title} preview`,
+        caption: project.title,
+      },
+    ];
+  }
+
+  return projectFallbackSlides;
+}
 
 export default function Projects() {
   const projectBadges = getBadges({ page: "projects" }).filter((badge) =>
@@ -103,65 +159,19 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              data-testid={`card-project-${index}`}
             >
-              <Card className="hover-elevate transition-shadow" data-testid={`card-project-${index}`}>
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    <div className="space-y-2 flex-1">
-                      <CardTitle className="text-xl" data-testid={`text-title-${index}`}>{project.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground" data-testid={`text-description-${index}`}>{project.description}</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Users className="h-4 w-4" />
-                      <span data-testid={`text-role-${index}`}>{project.role}</span>
-                    </div>
-                    <span className="text-muted-foreground">•</span>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span data-testid={`text-period-${index}`}>{project.period}</span>
-                    </div>
-                    {project.funding && (
-                      <>
-                        <span className="text-muted-foreground">•</span>
-                        <Badge variant="outline" data-testid={`badge-funding-${index}`}>{project.funding}</Badge>
-                      </>
-                    )}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                  {project.directors && (
-                    <div className="text-sm">
-                      <span className="text-muted-foreground">Directors: </span>
-                      <span data-testid={`text-directors-${index}`}>{project.directors}</span>
-                    </div>
-                  )}
-
-                  {project.technologies && project.technologies.length > 0 && (
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium">Technologies & Methods</p>
-                      <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
-                        {project.technologies.map((tech) => (
-                          <Badge key={tech} variant="secondary" className="text-xs" data-testid={`badge-tech-${index}-${tech.toLowerCase().replace(/\s+/g, '-')}`}>
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.url && (
-                    <Button variant="outline" size="sm" className="gap-2" asChild>
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" data-testid={`link-project-${index}`}>
-                        View Project
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
+              <CareerEvidenceCard
+                title={project.title}
+                organization={project.description}
+                location={project.technologies?.[0] ?? "Interdisciplinary"}
+                period={project.period ?? "Ongoing"}
+                roleLabel={project.role ?? "Project"}
+                highlights={getProjectHighlights(project)}
+                slides={getProjectSlides(project)}
+                referenceUrl={project.url}
+                referenceLabel={project.url ? "View project" : undefined}
+              />
             </motion.div>
           ))}
         </div>

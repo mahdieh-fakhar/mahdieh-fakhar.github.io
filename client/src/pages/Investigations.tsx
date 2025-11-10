@@ -45,6 +45,11 @@ const publicationTypeLabels: Record<Publication["type"], string> = {
   book: "Book / Monograph",
   review: "Peer Review",
 };
+const publicationIconLocation: Record<Publication["type"], string> = {
+  journal: "Indexed venue",
+  book: "Publisher",
+  review: "Publication outlet",
+};
 const thesisFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Thesis evidence placeholder" }];
 
 function getPublicationSlides(): Slide[] {
@@ -96,7 +101,7 @@ const PublicationCards = ({ items }: { items: Publication[] }) => (
           title={pub.title}
           roleLabel={pub.status ?? publicationTypeLabels[pub.type]}
           organization={pub.venue}
-          location={publicationTypeLabels[pub.type]}
+          location={publicationIconLocation[pub.type]}
           period={pub.year}
           highlights={getPublicationHighlights(pub)}
           slides={getPublicationSlides()}
@@ -218,8 +223,7 @@ const BooksSection = ({ items }: { items: Publication[] }) => (
         Books & Monographs
       </h2>
       <p className="max-w-3xl text-sm text-muted-foreground">
-        Long-form scholarship advancing digital competence, language learning, and educational
-        technology.
+        Long-form scholarship advancing digital competence, language learning, and educational technology.
       </p>
     </div>
     <PublicationCards items={items} />

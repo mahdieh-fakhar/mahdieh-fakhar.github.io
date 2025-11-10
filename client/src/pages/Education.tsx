@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
 type EducationCategory = "Academic" | "Courses" | "Workshops";
 
@@ -25,6 +26,8 @@ type EducationRecord = {
   metadata?: Array<{ label: string; value: string }>;
   url?: string;
   urlLabel?: string;
+  slides?: Slide[];
+  roleLabel?: string;
 };
 
 type EducationNavItem = {
@@ -125,6 +128,7 @@ const coursePrograms: EducationRecord[] = [
     institution: "Amazon Web Services (AWS)",
     period: "Issued Aug 2024",
     status: "Professional Certificate",
+    roleLabel: "Cloud Credential",
     highlights: [
       "Validated cloud fluency across AWS compute, networking, storage, and security services.",
       "Completed scenario-based labs covering governance, architecture patterns, and automation workflows.",
@@ -132,6 +136,20 @@ const coursePrograms: EducationRecord[] = [
     metadata: [{ label: "Credential ID", value: "298b5e29-2f62-456b-b2f9-69419b0aa29d" }],
     url: "https://www.credly.com/badges/298b5e29-2f62-456b-b2f9-69419b0aa29d/public_url",
     urlLabel: "View digital credential",
+    slides: [
+      {
+        src: "/images/profile.jpg",
+        alt: "AWS Cloud Quest certificate preview",
+        caption: "AWS Cloud Quest – official badge preview",
+        downloadName: "aws-cloud-quest-1.jpg",
+      },
+      {
+        src: "/images/logo.png",
+        alt: "AWS Cloud Quest credential seal",
+        caption: "AWS official seal",
+        downloadName: "aws-cloud-quest-2.jpg",
+      },
+    ],
   },
 ];
 
@@ -643,116 +661,31 @@ export default function Education({ params }: EducationProps = {}) {
           {categoryLabels.Courses}
         </div>
 
-        <div className="relative space-y-8">
-          <div className="absolute left-8 top-0 bottom-0 hidden w-0.5 bg-border md:block" />
-
-          {sortedCourses.map((course, index) => {
-            const detailEntries = getRecordDetailEntries(course);
-            const statusVariant =
-              course.status && course.status.toLowerCase().includes("progress") ? "secondary" : "outline";
+        <div className="space-y-6">
+          {sortedCourses.map((course) => {
+            const slides = course.slides?.length
+              ? course.slides
+              : [
+                  {
+                    src: "/images/profile.jpg",
+                    alt: `${course.title} credential preview`,
+                    caption: course.title,
+                  },
+                ];
 
             return (
-              <motion.div
+              <CareerEvidenceCard
                 key={course.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative"
-              >
-                <Card className="md:ml-20" data-testid={`card-course-${index}`}>
-                  <div className="absolute -left-12 top-6 hidden h-8 w-8 items-center justify-center rounded-full border-4 border-background bg-primary md:flex">
-                    <GraduationCap className="h-4 w-4 text-primary-foreground" />
-                  </div>
-
-                  <CardHeader>
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="space-y-1">
-                        <CardTitle className="text-xl" data-testid={`text-course-title-${index}`}>
-                          {course.title}
-                        </CardTitle>
-                        <p className="text-base font-medium text-primary" data-testid={`text-course-institution-${index}`}>
-                          {course.institution}
-                        </p>
-                      </div>
-                      {course.status && (
-                        <Badge variant={statusVariant} className="w-fit" data-testid={`badge-course-status-${index}`}>
-                          {course.status}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                      {course.location && <span data-testid={`text-course-location-${index}`}>{course.location}</span>}
-                      {(course.location || course.period) && <span aria-hidden="true">|</span>}
-                      {course.period && <span data-testid={`text-course-period-${index}`}>{course.period}</span>}
-                    </div>
-                  </CardHeader>
-
-                  <CardContent>
-                    <div className="md:grid md:grid-cols-3 md:gap-6">
-                      <div className="space-y-3 md:col-span-2">
-                        {course.description && (
-                          <p className="text-sm text-muted-foreground" data-testid={`text-course-description-${index}`}>
-                            {course.description}
-                          </p>
-                        )}
-                        {course.highlights?.length ? (
-                          <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
-                            {course.highlights.map((highlight) => (
-                              <li key={highlight}>{highlight}</li>
-                            ))}
-                          </ul>
-                        ) : null}
-                        {detailEntries.length ? (
-                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
-                            <dl className="space-y-2 text-left">
-                              {detailEntries.map((entry) => (
-                                <div key={`${course.id}-${entry.label}`} className="flex flex-col">
-                                  <dt className="text-xs font-semibold uppercase tracking-wide text-foreground">
-                                    {entry.label}
-                                  </dt>
-                                  <dd>{entry.value}</dd>
-                                </div>
-                              ))}
-                            </dl>
-                            {course.url && (
-                              <a
-                                href={course.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-4 inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
-                                data-testid={`link-course-url-${index}`}
-                              >
-                                {course.urlLabel ?? "View credential"}
-                                <ExternalLink className="h-3 w-3" />
-                              </a>
-                            )}
-                          </div>
-                        ) : course.url ? (
-                          <div className="rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground">
-                            <a
-                              href={course.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 rounded-md border border-primary/40 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
-                              data-testid={`link-course-url-${index}`}
-                            >
-                              {course.urlLabel ?? "View credential"}
-                              <ExternalLink className="h-3 w-3" />
-                            </a>
-                          </div>
-                        ) : null}
-                      </div>
-
-                      <div className="mt-6 space-y-3 md:col-span-1 md:mt-0 md:-mt-6">
-                        <div className="flex h-full flex-col justify-center rounded-lg border border-dashed border-muted-foreground/40 bg-muted/10 p-4 text-sm text-muted-foreground text-center">
-                          <span className="font-medium text-foreground">Attachments</span>
-                          <span>Add supporting documents to showcase credentials.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                title={course.title}
+                organization={course.institution}
+                location={course.location ?? "Remote"}
+                period={course.period ?? "Date unavailable"}
+                roleLabel={course.roleLabel ?? course.status ?? "Professional Certificate"}
+                highlights={course.highlights ?? []}
+                referenceUrl={course.url}
+                referenceLabel={course.urlLabel}
+                slides={slides}
+              />
             );
           })}
         </div>

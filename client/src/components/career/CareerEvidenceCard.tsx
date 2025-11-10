@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -164,14 +164,6 @@ export function CareerEvidenceCard({
               Open Evidence Gallery
             </Button>
 
-            <div className="flex flex-wrap gap-2 text-[0.7rem] text-slate-300">
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">
-                Attachments: {slides.length} file(s)
-              </span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">
-                Horizontal / interactive / responsive
-              </span>
-            </div>
           </div>
 
           <div className="flex flex-col gap-4 text-left md:w-[65%]">
@@ -265,7 +257,7 @@ export function CareerEvidenceCard({
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
               <span>
                 Page {modalIndex + 1} of {slides.length}
-                {currentSlide?.alt ? ` � ${currentSlide.alt}` : ""}
+                {currentSlide?.alt ? ` · ${currentSlide.alt}` : ""}
               </span>
               {currentSlide && (
                 <a
@@ -298,3 +290,4 @@ export function CareerEvidenceCard({
     </motion.div>
   );
 }
+

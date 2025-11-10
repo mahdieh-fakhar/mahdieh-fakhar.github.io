@@ -224,6 +224,7 @@ const categoryLabels: Record<EducationCategory, string> = {
 };
 
 const academicFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Academic evidence placeholder" }];
+const courseFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Course evidence placeholder" }];
 
 function getAcademicSlides(record: EducationRecord): Slide[] {
   if (record.slides?.length) {
@@ -231,6 +232,17 @@ function getAcademicSlides(record: EducationRecord): Slide[] {
   }
 
   return academicFallbackSlides;
+}
+
+function getCourseSlides(record: EducationRecord): Slide[] {
+  if (record.slides?.length) {
+    return record.slides;
+  }
+
+  return courseFallbackSlides.map((slide) => ({
+    ...slide,
+    alt: `${record.title} credential preview`,
+  }));
 }
 
 function getAcademicHighlights(record: EducationRecord): string[] {
@@ -251,6 +263,29 @@ function getAcademicHighlights(record: EducationRecord): string[] {
 
   if (!highlights.length) {
     highlights.push("Program highlights will be available soon.");
+  }
+
+  return highlights;
+}
+
+function getCourseHighlights(record: EducationRecord): string[] {
+  const highlights: string[] = [];
+
+  if (record.description) {
+    highlights.push(record.description);
+  }
+
+  if (record.highlights?.length) {
+    highlights.push(...record.highlights);
+  }
+
+  const detailEntries = getRecordDetailEntries(record);
+  if (detailEntries.length) {
+    highlights.push(...detailEntries.map((entry) => `${entry.label}: ${entry.value}`));
+  }
+
+  if (!highlights.length) {
+    highlights.push("Course details will be documented soon.");
   }
 
   return highlights;
@@ -619,32 +654,20 @@ export default function Education({ params }: EducationProps = {}) {
         </div>
 
         <div className="space-y-6">
-          {sortedCourses.map((course) => {
-            const slides = course.slides?.length
-              ? course.slides
-              : [
-                  {
-                    src: "/images/profile.jpg",
-                    alt: `${course.title} credential preview`,
-                    caption: course.title,
-                  },
-                ];
-
-            return (
-              <CareerEvidenceCard
-                key={course.id}
-                title={course.title}
-                organization={course.institution}
-                location={course.location ?? "Remote"}
-                period={course.period ?? "Date unavailable"}
-                roleLabel={course.roleLabel ?? course.status ?? "Professional Certificate"}
-                highlights={course.highlights ?? []}
-                referenceUrl={course.url}
-                referenceLabel={course.urlLabel}
-                slides={slides}
-              />
-            );
-          })}
+          {sortedCourses.map((course) => (
+            <CareerEvidenceCard
+              key={course.id}
+              title={course.title}
+              organization={course.institution}
+              location={course.location ?? "Remote"}
+              period={course.period ?? "Date unavailable"}
+              roleLabel={course.roleLabel ?? course.status ?? "Professional Certificate"}
+              highlights={getCourseHighlights(course)}
+              referenceUrl={course.url}
+              referenceLabel={course.urlLabel}
+              slides={getCourseSlides(course)}
+            />
+          ))}
         </div>
 
         <div className="auto-grid md:auto-grid-lg">

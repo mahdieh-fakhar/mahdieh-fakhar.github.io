@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import {
   publications,
   researchFocusAreas,
@@ -38,11 +39,33 @@ const navItems: NavItem[] = [
   { label: "Handbooks", slug: "handbooks", description: "Practical guides & toolkits" },
 ];
 
-const publicationTypeVariant: Record<Publication["type"], "default" | "secondary" | "outline"> = {
-  journal: "default",
-  book: "secondary",
-  review: "outline",
+const publicationFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Research evidence placeholder" }];
+const publicationTypeLabels: Record<Publication["type"], string> = {
+  journal: "Journal Article",
+  book: "Book / Monograph",
+  review: "Peer Review",
 };
+
+function getPublicationSlides(): Slide[] {
+  return publicationFallbackSlides;
+}
+
+function getPublicationHighlights(pub: Publication): string[] {
+  const highlights: string[] = [];
+  highlights.push(`Authors: ${pub.authors}`);
+  highlights.push(`Venue: ${pub.venue}`);
+  highlights.push(`Publication Year: ${pub.year}`);
+
+  if (pub.status) {
+    highlights.push(`Status: ${pub.status}`);
+  }
+
+  if (pub.description) {
+    highlights.push(pub.description);
+  }
+
+  return highlights;
+}
 
 const PublicationCards = ({ items }: { items: Publication[] }) => (
   <div className="stack-gap-md">
@@ -53,27 +76,15 @@ const PublicationCards = ({ items }: { items: Publication[] }) => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: index * 0.08 }}
       >
-        <Card className="hover-elevate transition-shadow">
-          <CardHeader>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <CardTitle className="text-lg">{pub.title}</CardTitle>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant={publicationTypeVariant[pub.type]} className="capitalize">
-                  {pub.type}
-                </Badge>
-                {pub.status && <Badge variant="outline">{pub.status}</Badge>}
-                <Badge variant="outline">{pub.year}</Badge>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground">{pub.authors}</p>
-            <p className="text-sm font-medium text-primary">{pub.venue}</p>
-          </CardHeader>
-          {pub.description && (
-            <CardContent>
-              <p className="text-sm text-muted-foreground">{pub.description}</p>
-            </CardContent>
-          )}
-        </Card>
+        <CareerEvidenceCard
+          title={pub.title}
+          roleLabel={pub.status ?? publicationTypeLabels[pub.type]}
+          organization={pub.venue}
+          location={publicationTypeLabels[pub.type]}
+          period={pub.year}
+          highlights={getPublicationHighlights(pub)}
+          slides={getPublicationSlides()}
+        />
       </motion.div>
     ))}
   </div>

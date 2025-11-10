@@ -600,8 +600,6 @@ export default function Events({ params }: EventsProps = {}) {
                     roleLabel={item.holderRole ?? item.certificateType}
                     highlights={certificateHighlights(item)}
                     slides={certificateSlides(item)}
-                    referenceUrl={item.imageUrl}
-                    referenceLabel="Download certificate"
                   />
                 </motion.div>
               ))}

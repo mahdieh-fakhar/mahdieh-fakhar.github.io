@@ -276,7 +276,7 @@ export function CareerEvidenceCard({
               </DialogContent>
             </Dialog>
           </div>
-          <div className="flex flex-col justify-between gap-3 text-right md:w-2/3 md:order-2">
+          <div className="flex flex-col justify-between gap-3 text-left md:w-2/3 md:order-2">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <Badge className="rounded-xl bg-indigo-600/80 px-2.5 py-1 text-xs font-semibold text-white">
                 {roleLabel}

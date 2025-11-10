@@ -3,14 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   Carousel,
   type CarouselApi,
@@ -224,11 +217,6 @@ export function CareerEvidenceCard({
               <Button variant="outline" size="icon" disabled={zoom >= MAX_ZOOM} onClick={() => handleZoom("in")}>
                 <ZoomIn className="h-4 w-4" />
               </Button>
-              <DialogClose asChild>
-                <Button variant="outline" size="icon" onClick={() => setZoom(1)}>
-                  <X className="h-4 w-4" />
-                </Button>
-              </DialogClose>
             </div>
           </DialogHeader>
           <div className="flex flex-col gap-4">
@@ -237,12 +225,14 @@ export function CareerEvidenceCard({
                 <CarouselContent className="h-full">
                   {slides.map((slide) => (
                     <CarouselItem key={slide.src} className="flex h-full items-center justify-center">
-                      <img
-                        src={slide.src}
-                        alt={slide.alt}
-                        className="max-h-full max-w-full object-contain transition-transform duration-300"
-                        style={{ transform: `scale(${zoom})` }}
-                      />
+                      <div className="flex h-full w-full items-center justify-center p-4">
+                        <img
+                          src={slide.src}
+                          alt={slide.alt}
+                          className="max-h-full max-w-full w-auto object-contain transition-transform duration-300"
+                          style={{ transform: `scale(${zoom})` }}
+                        />
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>

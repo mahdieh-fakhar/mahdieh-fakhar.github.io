@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -63,7 +63,9 @@ export function CareerEvidenceCard({
     const handleSelect = () => setInlineIndex(inlineApi.selectedScrollSnap());
     handleSelect();
     inlineApi.on("select", handleSelect);
-    return () => inlineApi.off("select", handleSelect);
+    return () => {
+      inlineApi.off("select", handleSelect);
+    };
   }, [inlineApi]);
 
   useEffect(() => {
@@ -74,7 +76,9 @@ export function CareerEvidenceCard({
     const handleSelect = () => setModalIndex(modalApi.selectedScrollSnap());
     handleSelect();
     modalApi.on("select", handleSelect);
-    return () => modalApi.off("select", handleSelect);
+    return () => {
+      modalApi.off("select", handleSelect);
+    };
   }, [modalApi]);
 
   useEffect(() => {
@@ -224,13 +228,13 @@ export function CareerEvidenceCard({
               <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: inlineIndex }}>
                 <CarouselContent className="h-full">
                   {slides.map((slide) => (
-                    <CarouselItem key={slide.src} className="flex h-full items-center justify-center">
-                      <div className="flex h-full w-full items-center justify-center p-4">
+                    <CarouselItem key={slide.src} className="flex h-full w-full items-center justify-center">
+                      <div className="flex h-full w-full items-center justify-center overflow-auto p-4">
                         <img
                           src={slide.src}
                           alt={slide.alt}
-                          className="max-h-full max-w-full w-auto object-contain transition-transform duration-300"
-                          style={{ transform: `scale(${zoom})` }}
+                          className="h-full w-full object-contain transition-transform duration-300"
+                          style={{ transform: `scale(${zoom})`, transformOrigin: "center center" }}
                         />
                       </div>
                     </CarouselItem>
@@ -247,7 +251,7 @@ export function CareerEvidenceCard({
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <span>
                 Page {modalIndex + 1} of {slides.length}
-                {currentSlide?.alt ? ` · ${currentSlide.alt}` : ""}
+                {currentSlide?.alt ? ` - ${currentSlide.alt}` : ""}
               </span>
               {currentSlide && (
                 <a
@@ -280,4 +284,3 @@ export function CareerEvidenceCard({
     </motion.div>
   );
 }
-

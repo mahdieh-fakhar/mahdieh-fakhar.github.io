@@ -106,8 +106,8 @@ export function CareerEvidenceCard({
     >
       <Card className="group relative overflow-hidden rounded-3xl border border-slate-800/70 bg-gradient-to-l from-slate-950 via-slate-900 to-slate-950/80 shadow-2xl shadow-slate-900/70 backdrop-blur-xl">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(148,163,253,0.10),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <CardContent className="relative flex flex-col gap-5 p-5 md:flex-row-reverse md:gap-7 md:p-7">
-          <div className="flex flex-col gap-3 md:w-1/3">
+        <CardContent className="relative flex flex-col gap-5 p-5 md:flex-row md:gap-7 md:p-7">
+          <div className="flex flex-col gap-3 md:w-1/3 md:order-1">
             <div className="relative h-52 w-full overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-900/80 shadow-lg shadow-slate-950/80 md:h-56">
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-950/40 via-transparent to-indigo-500/10" />
               <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
@@ -276,7 +276,7 @@ export function CareerEvidenceCard({
               </DialogContent>
             </Dialog>
           </div>
-          <div className="flex flex-col justify-between gap-3 text-right md:w-2/3">
+          <div className="flex flex-col justify-between gap-3 text-right md:w-2/3 md:order-2">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <Badge className="rounded-xl bg-indigo-600/80 px-2.5 py-1 text-xs font-semibold text-white">
                 {roleLabel}

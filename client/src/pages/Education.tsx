@@ -225,6 +225,7 @@ const categoryLabels: Record<EducationCategory, string> = {
 
 const academicFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Academic evidence placeholder" }];
 const courseFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Course evidence placeholder" }];
+const workshopFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Workshop evidence placeholder" }];
 
 function getAcademicSlides(record: EducationRecord): Slide[] {
   if (record.slides?.length) {
@@ -242,6 +243,17 @@ function getCourseSlides(record: EducationRecord): Slide[] {
   return courseFallbackSlides.map((slide) => ({
     ...slide,
     alt: `${record.title} credential preview`,
+  }));
+}
+
+function getWorkshopSlides(record: EducationRecord): Slide[] {
+  if (record.slides?.length) {
+    return record.slides;
+  }
+
+  return workshopFallbackSlides.map((slide) => ({
+    ...slide,
+    alt: `${record.title} workshop documentation`,
   }));
 }
 
@@ -286,6 +298,29 @@ function getCourseHighlights(record: EducationRecord): string[] {
 
   if (!highlights.length) {
     highlights.push("Course details will be documented soon.");
+  }
+
+  return highlights;
+}
+
+function getWorkshopHighlights(record: EducationRecord): string[] {
+  const highlights: string[] = [];
+
+  if (record.description) {
+    highlights.push(record.description);
+  }
+
+  if (record.highlights?.length) {
+    highlights.push(...record.highlights);
+  }
+
+  const detailEntries = getRecordDetailEntries(record);
+  if (detailEntries.length) {
+    highlights.push(...detailEntries.map((entry) => `${entry.label}: ${entry.value}`));
+  }
+
+  if (!highlights.length) {
+    highlights.push("Workshop documentation will be shared soon.");
   }
 
   return highlights;
@@ -541,6 +576,10 @@ export default function Education({ params }: EducationProps = {}) {
       return renderCourseTimeline();
     }
 
+    if (activeItem.filter === "Workshops") {
+      return renderWorkshopTimeline();
+    }
+
     if (activeItem.filter === null) {
       return renderAllCategories();
     }
@@ -680,6 +719,55 @@ export default function Education({ params }: EducationProps = {}) {
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
               </CardContent>
             </Card>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
+  const renderWorkshopTimeline = () => {
+    if (!workshopPrograms.length) {
+      return (
+        <div
+          className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground"
+          data-testid="section-education-workshops"
+        >
+          Workshop records will appear here soon.
+        </div>
+      );
+    }
+
+    const sortedWorkshops = [...workshopPrograms].sort(
+      (a, b) => getSortValueFromPeriod(b.period) - getSortValueFromPeriod(a.period),
+    );
+
+    return (
+      <section className="space-y-6" data-testid="section-education-workshops">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+          {categoryLabels.Workshops}
+        </div>
+
+        <div className="space-y-6">
+          {sortedWorkshops.map((workshop, index) => (
+            <motion.div
+              key={workshop.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              data-testid={`card-workshop-${index}`}
+            >
+              <CareerEvidenceCard
+                title={workshop.title}
+                organization={workshop.institution}
+                location={workshop.location ?? "On-site / Remote"}
+                period={workshop.period ?? "Date unavailable"}
+                roleLabel={workshop.roleLabel ?? workshop.status ?? "Workshop"}
+                highlights={getWorkshopHighlights(workshop)}
+                slides={getWorkshopSlides(workshop)}
+                referenceUrl={workshop.url}
+                referenceLabel={workshop.urlLabel ?? "Workshop details"}
+              />
+            </motion.div>
           ))}
         </div>
       </section>

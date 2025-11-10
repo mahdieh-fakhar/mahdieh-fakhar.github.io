@@ -159,16 +159,16 @@ export function CareerEvidenceCard({
                 className="w-full gap-2 rounded-2xl border-slate-700 bg-slate-950/80 text-slate-100 transition-all hover:bg-slate-900 hover:text-indigo-300"
                 onClick={() => setModalOpen(true)}
               >
-                مشاهده گالری مستندات
+                Open Evidence Gallery
               </Button>
               <DialogContent className="max-w-5xl rounded-3xl border border-slate-800 bg-slate-950/95 p-4 text-slate-50 md:p-6">
                 <DialogHeader className="flex flex-row items-center justify-between gap-3">
                   <div>
                     <DialogTitle className="text-sm font-semibold text-indigo-300 md:text-base">
-                      گالری مستندات این سابقه
+                      Evidence Gallery
                     </DialogTitle>
                     <p className="text-[10px] text-slate-400 md:text-xs">
-                      زوم، ورق زدن، دانلود هر تصویر و بستن پنجره در دسترس است.
+                      Zoom, browse, download each image, or close the window at any time.
                     </p>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -239,7 +239,7 @@ export function CareerEvidenceCard({
                     <div className="font-semibold text-slate-100">
                       {currentSlide?.caption || "Attachment"}
                     </div>
-                    <div className="leading-relaxed">برای هر تصویر می‌توانید نسخه اصلی را دانلود کنید.</div>
+                    <div className="leading-relaxed">Download the original asset for every slide.</div>
                     <div className="mt-1 flex flex-wrap gap-1.5">
                       {slides.map((slide, i) => (
                         <a
@@ -253,7 +253,7 @@ export function CareerEvidenceCard({
                           }`}
                         >
                           <Download className="h-3 w-3" />
-                          <span>{`دانلود ${i + 1}`}</span>
+                          <span>{`Download ${i + 1}`}</span>
                         </a>
                       ))}
                     </div>
@@ -302,10 +302,10 @@ export function CareerEvidenceCard({
             <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap gap-1.5 text-[9px] text-slate-500">
                 <span className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2 py-0.5">
-                  مستندات پیوست شده: {slides.length} فایل
+                  Attachments: {slides.length} file(s)
                 </span>
                 <span className="rounded-full border border-slate-700/80 bg-slate-900/80 px-2 py-0.5">
-                  کارت افقی / قابل کلیک / ریسپانسیو
+                  Horizontal / interactive / responsive
                 </span>
               </div>
               {referenceUrl && (

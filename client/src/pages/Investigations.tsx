@@ -45,6 +45,7 @@ const publicationTypeLabels: Record<Publication["type"], string> = {
   book: "Book / Monograph",
   review: "Peer Review",
 };
+const thesisFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Thesis evidence placeholder" }];
 
 function getPublicationSlides(): Slide[] {
   return publicationFallbackSlides;
@@ -65,6 +66,21 @@ function getPublicationHighlights(pub: Publication): string[] {
   }
 
   return highlights;
+}
+
+function getThesisHighlights(record: ThesisRecord): string[] {
+  const highlights: string[] = [
+    `Degree: ${record.degree}`,
+    `Institution: ${record.institution}`,
+    `Research Focus: ${record.focus}`,
+    record.summary,
+  ];
+
+  return highlights;
+}
+
+function getThesisSlides(): Slide[] {
+  return thesisFallbackSlides;
 }
 
 const PublicationCards = ({ items }: { items: Publication[] }) => (
@@ -172,24 +188,24 @@ const ThesesSection = ({ records }: { records: ThesisRecord[] }) => (
       </p>
     </div>
 
-    <div className="stack-gap-md">
-      {records.map((record) => (
-        <Card key={record.id} className="hover-elevate transition-shadow">
-          <CardHeader>
-            <div className="flex flex-col gap-1">
-              <CardTitle className="text-lg text-foreground">{record.title}</CardTitle>
-              <p className="text-sm font-semibold text-primary">
-                {record.degree} • {record.institution} • {record.year}
-              </p>
-            </div>
-            <p className="text-sm uppercase tracking-wide text-muted-foreground">
-              Focus: {record.focus}
-            </p>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground leading-relaxed">{record.summary}</p>
-          </CardContent>
-        </Card>
+    <div className="space-y-6">
+      {records.map((record, index) => (
+        <motion.div
+          key={record.id}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: index * 0.08 }}
+        >
+          <CareerEvidenceCard
+            title={record.title}
+            organization={record.institution}
+            location={record.focus}
+            period={record.year}
+            roleLabel={record.degree}
+            highlights={getThesisHighlights(record)}
+            slides={getThesisSlides()}
+          />
+        </motion.div>
       ))}
     </div>
   </section>

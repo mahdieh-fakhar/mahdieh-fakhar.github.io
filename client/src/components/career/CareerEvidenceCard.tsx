@@ -103,12 +103,12 @@ export function CareerEvidenceCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <Card className="group relative overflow-hidden rounded-[32px] border border-[#1e2644] bg-gradient-to-r from-[#0f172a] via-[#111c3c] to-[#0d1430] text-white shadow-[0_25px_60px_rgba(7,11,25,0.65)]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,_rgba(99,102,241,0.2),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <Card className="group relative overflow-hidden rounded-[32px] border border-card-border bg-card shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,_rgba(99,102,241,0.12),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <CardContent className="relative flex flex-col gap-6 p-6 md:flex-row md:gap-10 md:p-8">
           <div className="flex flex-col gap-4 md:w-[35%]">
-            <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-white/15 bg-slate-900/60 shadow-lg shadow-black/60 md:h-64">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/55 via-transparent to-indigo-500/15" />
+            <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
               <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
                 <CarouselContent className="h-full">
                   {slides.map((slide, index) => (
@@ -158,7 +158,7 @@ export function CareerEvidenceCard({
             <Button
               variant="outline"
               size="lg"
-              className="w-full justify-center gap-2 rounded-2xl border-white/20 bg-white/5 text-white transition hover:bg-white/15"
+              className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
               onClick={() => setModalOpen(true)}
             >
               Open Evidence Gallery
@@ -167,8 +167,8 @@ export function CareerEvidenceCard({
           </div>
 
           <div className="flex flex-col gap-4 text-left md:w-[65%]">
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-200">
-              <Badge className="rounded-full bg-indigo-500/90 px-3 py-1 text-[0.65rem] font-semibold text-white shadow" >
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+              <Badge className="rounded-full bg-primary/90 px-3 py-1 text-[0.65rem] font-semibold text-primary-foreground shadow">
                 {roleLabel}
               </Badge>
               <span>
@@ -177,14 +177,14 @@ export function CareerEvidenceCard({
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold leading-tight text-white">{title}</h2>
-              <p className="text-base font-medium text-indigo-200">{organization}</p>
+              <h2 className="text-2xl font-semibold leading-tight text-foreground">{title}</h2>
+              <p className="text-base font-medium text-primary">{organization}</p>
             </div>
 
-            <ul className="space-y-2 text-sm leading-relaxed text-slate-200">
+            <ul className="space-y-2 text-sm leading-relaxed text-foreground/85">
               {highlights.map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-300" />
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/70" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -195,7 +195,7 @@ export function CareerEvidenceCard({
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full bg-indigo-500 px-6 py-2 text-sm font-semibold text-white transition hover:bg-indigo-400"
+                  className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
                 >
                   <a href={referenceUrl} target="_blank" rel="noreferrer" aria-label={referenceLabel}>
                     {referenceLabel}
@@ -263,7 +263,7 @@ export function CareerEvidenceCard({
                 <a
                   href={currentSlide.src}
                   download={currentSlide.downloadName ?? `evidence-${modalIndex + 1}`}
-                  className="inline-flex items-center gap-1 rounded-full border border-white/20 px-3 py-1 text-xs text-white transition hover:bg-white/10"
+                  className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1 text-xs text-foreground transition hover:bg-muted/40"
                 >
                   <Download className="h-4 w-4" />
                   Download
@@ -277,7 +277,7 @@ export function CareerEvidenceCard({
                     key={`modal-dot-${idx}`}
                     onClick={() => modalApi?.scrollTo(idx)}
                     className={`h-2 w-2 rounded-full ${
-                      idx === modalIndex ? "bg-indigo-400" : "bg-white/40 hover:bg-indigo-300"
+                      idx === modalIndex ? "bg-primary" : "bg-muted/60 hover:bg-primary/60"
                     }`}
                     aria-label={`Go to page ${idx + 1}`}
                   />

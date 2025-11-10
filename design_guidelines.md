@@ -111,7 +111,7 @@ Each page has distinct URL and layout:
 - **/conferences**: Image gallery + participation list with AI upload for certificates
 - **/memberships**: Cards with organization logos
 - **/career-history**: Timeline with role descriptions
-- **/skills**: Categorized skill matrix with proficiency
+- **/works/skills**: Categorized skill matrix with proficiency
 - **/projects**: Project cards (IHUPA, AGORA, portfolio examples)
 - **/resume**: Downloadable CV + visual resume
 - **/contact**: Form + contact details + office hours

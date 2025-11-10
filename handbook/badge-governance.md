@@ -51,7 +51,7 @@ This guide explains how badges are modelled, stored, and rendered so new credent
 
 ## 4. Display Rules
 
-- Certifications page: `/certifications` lists every published badge.
+- Certifications page: `/works/certifications` lists every published badge.
 - Header strip: up to three highest-priority badges where `placement="header"`.
 - Hero / trust block: first badge with `placement="hero"` for the active page.
 - Thematic sections: filter by `pages[]`; e.g. Projects shows badges where `pages` includes `projects` or `*`.
@@ -69,3 +69,4 @@ This guide explains how badges are modelled, stored, and rendered so new credent
 - Compare header vs. sectional vs. footer engagement to tune priorities and placements.
 
 Following this process keeps the badge catalogue scalable, reviewable, and presentation-agnostic.
+

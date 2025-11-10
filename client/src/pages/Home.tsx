@@ -134,7 +134,7 @@ export default function Home() {
           name: "Projects",
           summary:
             "Spotlight on innovation labs, cross-institution pilots, and impact narratives.",
-          href: "/projects",
+          href: "/works/projects",
           icon: BookOpen,
         },
       ],
@@ -162,7 +162,7 @@ export default function Home() {
           name: "Skills",
           summary:
             "Competency matrix covering data science, pedagogy, and strategic soft skills.",
-          href: "/skills",
+          href: "/works/skills",
           icon: Puzzle,
         },
         {
@@ -207,7 +207,7 @@ export default function Home() {
       description:
         "Assess the skills architecture, teaching innovations, and project leadership powering data-driven transformation.",
       icon: Puzzle,
-      href: "/skills",
+      href: "/works/skills",
       cta: "See competencies",
       accent: "from-ai-accent/20 via-secondary/10 to-primary/5",
     },

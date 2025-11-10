@@ -43,9 +43,9 @@ export const investigationPages: NavChild[] = [
 
 export const workPages: NavChild[] = [
   { name: "All Works", href: "/works/all", slug: "all" },
-  { name: "Projects", href: "/projects", slug: "projects" },
-  { name: "Skills", href: "/skills", slug: "skills" },
-  { name: "Certifications", href: "/certifications", slug: "certifications" },
+  { name: "Projects", href: "/works/projects", slug: "projects" },
+  { name: "Skills", href: "/works/skills", slug: "skills" },
+  { name: "Certifications", href: "/works/certifications", slug: "certifications" },
 ];
 
 export const navigationItems: NavigationItem[] = [

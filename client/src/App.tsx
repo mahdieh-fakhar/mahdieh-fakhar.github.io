@@ -57,6 +57,9 @@ function AppShell() {
           <Route path="/events" component={Events} />
           <Route path="/works/all" component={Works} />
           <Route path="/works" component={Works} />
+          <Route path="/works/projects" component={Projects} />
+          <Route path="/works/skills" component={Skills} />
+          <Route path="/works/certifications" component={Certifications} />
           <Route path="/memberships" component={Memberships} />
           <Route path="/about/memberships" component={Memberships} />
           <Route path="/career" component={Career} />

@@ -11,7 +11,7 @@ const workStreams = [
     name: "Projects",
     description:
       "Flagship engagements across research institutes, ministry-funded programs, and AI-first web platforms.",
-    href: "/projects",
+    href: "/works/projects",
     icon: Rocket,
     meta: ["5 documented initiatives", "Interdisciplinary delivery teams", "Hybrid research and development"],
   },
@@ -19,7 +19,7 @@ const workStreams = [
     name: "Skills",
     description:
       "Technical proficiencies spanning statistics, visualization, AI, and multilingual communication, all mapped with proficiency scoring.",
-    href: "/skills",
+    href: "/works/skills",
     icon: Code2,
     meta: ["Data analysis suite", "Visualization and dashboarding", "Research automation tooling"],
   },
@@ -27,7 +27,7 @@ const workStreams = [
     name: "Certifications",
     description:
       "Verified digital badges curated via Credly and project partners to evidence continuous professional development.",
-    href: "/certifications",
+    href: "/works/certifications",
     icon: Award,
     meta: ["12+ live credentials", "AI, data, and pedagogy coverage", "Auto-synced catalogue"],
   },

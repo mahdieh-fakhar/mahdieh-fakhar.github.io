@@ -71,21 +71,21 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Skills",
-    href: "/skills",
+    href: "/works/skills",
     description:
       "Technical proficiencies in data analysis, visualization, research tooling, and language fluency.",
     keywords: ["skills", "data analysis", "visualization", "bibliometrics", "languages", "expertise"],
   },
   {
     title: "Projects",
-    href: "/projects",
+    href: "/works/projects",
     description:
       "Selected projects spanning research collaborations, web development, and innovation initiatives.",
     keywords: ["projects", "collaboration", "innovation", "research", "web design"],
   },
   {
     title: "Certifications",
-    href: "/certifications",
+    href: "/works/certifications",
     description:
       "Catalogue of verified digital badges and professional certifications with live credential links.",
     keywords: ["certifications", "badges", "credentials", "verification"],

@@ -22,10 +22,10 @@
     <loc>https://mahdieh-fakhar.github.io/career</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/skills</loc>
+    <loc>https://mahdieh-fakhar.github.io/works/skills</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/projects</loc>
+    <loc>https://mahdieh-fakhar.github.io/works/projects</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/resume</loc>
@@ -34,7 +34,7 @@
     <loc>https://mahdieh-fakhar.github.io/contact</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/certifications</loc>
+    <loc>https://mahdieh-fakhar.github.io/works/certifications</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

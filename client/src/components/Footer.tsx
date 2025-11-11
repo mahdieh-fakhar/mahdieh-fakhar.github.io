@@ -76,7 +76,7 @@ export function Footer() {
 
           <section className="space-y-4 sm:order-2 xl:order-last">
             <h3 className="text-lg font-semibold">Certifications</h3>
-            <div className="grid gap-3 text-sm sm:grid-cols-2 xl:grid-cols-1">
+            <div className="flex flex-wrap items-center gap-3">
               {footerBadges.length > 0 ? (
                 footerBadges.map((badge) => (
                   <BadgePill key={badge.id} badge={badge} size="sm" className="min-w-0" />

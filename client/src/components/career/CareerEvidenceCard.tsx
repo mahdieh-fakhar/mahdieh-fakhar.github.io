@@ -54,6 +54,7 @@ export function CareerEvidenceCard({
   const [modalApi, setModalApi] = useState<CarouselApi | null>(null);
   const [modalIndex, setModalIndex] = useState(0);
   const [zoom, setZoom] = useState(1);
+  const hasSlides = slides.length > 0;
 
   useEffect(() => {
     if (!inlineApi) {
@@ -92,7 +93,7 @@ export function CareerEvidenceCard({
     });
   };
 
-  const currentSlide = slides[modalIndex] ?? slides[0];
+  const currentSlide = hasSlides ? slides[modalIndex] ?? slides[0] : undefined;
 
   return (
     <motion.div
@@ -104,63 +105,71 @@ export function CareerEvidenceCard({
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,_rgba(99,102,241,0.12),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <CardContent className="relative flex flex-col gap-6 p-6 md:flex-row md:gap-10 md:p-8">
           <div className="flex flex-col gap-4 md:w-[35%]">
-            <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
-              <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
-                <CarouselContent className="h-full">
-                  {slides.map((slide, index) => (
-                    <CarouselItem key={slide.src} className="h-full">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setModalIndex(index);
-                          setModalOpen(true);
-                        }}
-                        className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-                      >
-                        <img
-                          src={slide.src}
-                          alt={slide.alt}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
+            {hasSlides ? (
+              <>
+                <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
+                  <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
+                    <CarouselContent className="h-full">
+                      {slides.map((slide, index) => (
+                        <CarouselItem key={slide.src} className="h-full">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setModalIndex(index);
+                              setModalOpen(true);
+                            }}
+                            className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                          >
+                            <img
+                              src={slide.src}
+                              alt={slide.alt}
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                          </button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    {slides.length > 1 && (
+                      <>
+                        <CarouselPrevious className="left-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                        <CarouselNext className="right-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                      </>
+                    )}
+                  </Carousel>
+                  {slides.length > 1 && (
+                    <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5">
+                      {slides.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => inlineApi?.scrollTo(idx)}
+                          className={`h-2 rounded-full transition-all ${
+                            idx === inlineIndex ? "w-6 bg-indigo-400" : "w-2 bg-white/40 hover:bg-indigo-300"
+                          }`}
+                          aria-label={`Go to slide ${idx + 1}`}
                         />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                      </button>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                {slides.length > 1 && (
-                  <>
-                    <CarouselPrevious className="left-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
-                    <CarouselNext className="right-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
-                  </>
-                )}
-              </Carousel>
-              {slides.length > 1 && (
-                <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5">
-                  {slides.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => inlineApi?.scrollTo(idx)}
-                      className={`h-2 rounded-full transition-all ${
-                        idx === inlineIndex ? "w-6 bg-indigo-400" : "w-2 bg-white/40 hover:bg-indigo-300"
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
-              onClick={() => setModalOpen(true)}
-            >
-              Open Evidence Gallery
-            </Button>
-
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
+                  onClick={() => setModalOpen(true)}
+                >
+                  Open Evidence Gallery
+                </Button>
+              </>
+            ) : (
+              <div className="flex h-56 w-full flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-background/60 p-6 text-center text-sm text-muted-foreground shadow-inner shadow-black/5 md:h-64">
+                <span className="text-sm font-semibold text-foreground/80">Evidence gallery unavailable</span>
+                <p className="mt-2 text-xs text-muted-foreground">Documentation will be added soon.</p>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-4 text-left md:w-[65%]">
@@ -205,82 +214,84 @@ export function CareerEvidenceCard({
         </CardContent>
       </Card>
 
-      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="w-[90vw] max-w-5xl rounded-3xl border border-border bg-card text-card-foreground">
-          <DialogHeader className="flex flex-row items-center justify-between">
-            <div>
-              <DialogTitle className="text-base font-semibold">Evidence gallery</DialogTitle>
-              <DialogDescription className="text-xs text-muted-foreground">
-                Zoom, browse attachments, download files, or close the viewer.
-              </DialogDescription>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Button variant="outline" size="icon" disabled={zoom <= MIN_ZOOM} onClick={() => handleZoom("out")}>
-                <ZoomOut className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon" disabled={zoom >= MAX_ZOOM} onClick={() => handleZoom("in")}>
-                <ZoomIn className="h-4 w-4" />
-              </Button>
-            </div>
-          </DialogHeader>
-          <div className="flex flex-col gap-4">
-            <div className="relative h-[55vh] overflow-hidden rounded-2xl border border-border bg-muted/40">
-              <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: inlineIndex }}>
-                <CarouselContent className="h-full">
-                  {slides.map((slide) => (
-                    <CarouselItem key={slide.src} className="flex h-full w-full items-center justify-center">
-                      <div className="flex h-full w-full items-center justify-center overflow-auto p-4">
-                        <img
-                          src={slide.src}
-                          alt={slide.alt}
-                          className="h-full w-full object-contain transition-transform duration-300"
-                          style={{ transform: `scale(${zoom})`, transformOrigin: "center center" }}
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                {slides.length > 1 && (
-                  <>
-                    <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2" />
-                    <CarouselNext className="right-4 top-1/2 -translate-y-1/2" />
-                  </>
+      {hasSlides && (
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+          <DialogContent className="w-[90vw] max-w-5xl rounded-3xl border border-border bg-card text-card-foreground">
+            <DialogHeader className="flex flex-row items-center justify-between">
+              <div>
+                <DialogTitle className="text-base font-semibold">Evidence gallery</DialogTitle>
+                <DialogDescription className="text-xs text-muted-foreground">
+                  Zoom, browse attachments, download files, or close the viewer.
+                </DialogDescription>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Button variant="outline" size="icon" disabled={zoom <= MIN_ZOOM} onClick={() => handleZoom("out")}>
+                  <ZoomOut className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" disabled={zoom >= MAX_ZOOM} onClick={() => handleZoom("in")}>
+                  <ZoomIn className="h-4 w-4" />
+                </Button>
+              </div>
+            </DialogHeader>
+            <div className="flex flex-col gap-4">
+              <div className="relative h-[55vh] overflow-hidden rounded-2xl border border-border bg-muted/40">
+                <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: inlineIndex }}>
+                  <CarouselContent className="h-full">
+                    {slides.map((slide) => (
+                      <CarouselItem key={slide.src} className="flex h-full w-full items-center justify-center">
+                        <div className="flex h-full w-full items-center justify-center overflow-auto p-4">
+                          <img
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="h-full w-full object-contain transition-transform duration-300"
+                            style={{ transform: `scale(${zoom})`, transformOrigin: "center center" }}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {slides.length > 1 && (
+                    <>
+                      <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2" />
+                      <CarouselNext className="right-4 top-1/2 -translate-y-1/2" />
+                    </>
+                  )}
+                </Carousel>
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+                <span>
+                  Page {modalIndex + 1} of {slides.length}
+                  {currentSlide?.alt ? ` - ${currentSlide.alt}` : ""}
+                </span>
+                {currentSlide && (
+                  <a
+                    href={currentSlide.src}
+                    download={currentSlide.downloadName ?? `evidence-${modalIndex + 1}`}
+                    className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-foreground transition hover:bg-muted/60"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download
+                  </a>
                 )}
-              </Carousel>
-            </div>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-              <span>
-                Page {modalIndex + 1} of {slides.length}
-                {currentSlide?.alt ? ` - ${currentSlide.alt}` : ""}
-              </span>
-              {currentSlide && (
-                <a
-                  href={currentSlide.src}
-                  download={currentSlide.downloadName ?? `evidence-${modalIndex + 1}`}
-                  className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-foreground transition hover:bg-muted/60"
-                >
-                  <Download className="h-4 w-4" />
-                  Download
-                </a>
+              </div>
+              {slides.length > 1 && (
+                <div className="flex items-center justify-center gap-1.5">
+                  {slides.map((_, idx) => (
+                    <button
+                      key={`modal-dot-${idx}`}
+                      onClick={() => modalApi?.scrollTo(idx)}
+                      className={`h-2 w-2 rounded-full ${
+                        idx === modalIndex ? "bg-primary" : "bg-muted/80 hover:bg-primary/60"
+                      }`}
+                      aria-label={`Go to page ${idx + 1}`}
+                    />
+                  ))}
+                </div>
               )}
             </div>
-            {slides.length > 1 && (
-              <div className="flex items-center justify-center gap-1.5">
-                {slides.map((_, idx) => (
-                  <button
-                    key={`modal-dot-${idx}`}
-                    onClick={() => modalApi?.scrollTo(idx)}
-                    className={`h-2 w-2 rounded-full ${
-                      idx === modalIndex ? "bg-primary" : "bg-muted/80 hover:bg-primary/60"
-                    }`}
-                    aria-label={`Go to page ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
+          </DialogContent>
+        </Dialog>
+      )}
     </motion.div>
   );
 }

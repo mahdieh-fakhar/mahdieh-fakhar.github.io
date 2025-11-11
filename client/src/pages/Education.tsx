@@ -231,7 +231,7 @@ const educationStats = [
   { value: academicPrograms.length + coursePrograms.length + workshopPrograms.length, label: "Total Records" },
 ];
 
-const academicFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Academic evidence placeholder" }];
+const academicFallbackSlides: Slide[] = [];
 const courseFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Course evidence placeholder" }];
 const workshopFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Workshop evidence placeholder" }];
 

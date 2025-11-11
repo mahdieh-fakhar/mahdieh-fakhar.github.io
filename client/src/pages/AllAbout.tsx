@@ -1,17 +1,8 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
 import { StatsSection } from "@/components/StatsSection";
-import {
-  Sparkles,
-  Target,
-  GraduationCap,
-  Users,
-  FileText,
-  Compass,
-  ArrowRight,
-} from "lucide-react";
+import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
+import { Sparkles, Target, GraduationCap, Users, FileText, Compass } from "lucide-react";
 
 type TimelineItem = {
   year: string;
@@ -89,6 +80,56 @@ const alliedChapters = [
   },
 ];
 
+const fallbackSlide: Slide = { src: "/images/profile.jpg", alt: "Portfolio highlight" };
+
+type OverviewCard = {
+  id: string;
+  title: string;
+  organization: string;
+  location: string;
+  period: string;
+  roleLabel: string;
+  highlights: string[];
+  slides: Slide[];
+  referenceUrl?: string;
+  referenceLabel?: string;
+};
+
+const overviewCards: OverviewCard[] = [
+  ...identitySignals.map((signal) => ({
+    id: `identity-${signal.title}`,
+    title: signal.title,
+    organization: "Identity Signal",
+    location: "Cross-disciplinary",
+    period: "Ongoing",
+    roleLabel: "Identity",
+    highlights: [signal.description],
+    slides: [fallbackSlide],
+  })),
+  ...timeline.map((item) => ({
+    id: `timeline-${item.year}`,
+    title: item.title,
+    organization: "Signature Milestone",
+    location: item.year,
+    period: item.year,
+    roleLabel: "Milestone",
+    highlights: [item.description],
+    slides: [fallbackSlide],
+  })),
+  ...alliedChapters.map((chapter) => ({
+    id: `chapter-${chapter.name}`,
+    title: chapter.name,
+    organization: "Chapter Entry",
+    location: "Portfolio Navigation",
+    period: "Live",
+    roleLabel: "Explore",
+    highlights: [chapter.description],
+    slides: [fallbackSlide],
+    referenceUrl: chapter.href,
+    referenceLabel: `Open ${chapter.name}`,
+  })),
+];
+
 const aboutStats = (() => {
   const timelineYears = timeline
     .map((entry) => Number(entry.year))
@@ -127,85 +168,27 @@ export default function AllAbout() {
           </Badge>
         </section>
 
-        <section className="grid gap-6 md:grid-cols-3" aria-label="Identity signals">
-          {identitySignals.map((signal) => {
-            const Icon = signal.icon;
-            return (
-              <Card key={signal.title} className="border-primary/20 bg-background/80 shadow-sm hover-elevate">
-                <CardHeader className="flex flex-row items-center gap-3">
-                  <span className="rounded-full bg-primary/10 p-2 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <CardTitle className="text-base">{signal.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{signal.description}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </section>
-
-        <section className="space-y-4" aria-label="Signature timeline">
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="text-xs uppercase tracking-widest">
-              Milestones
-            </Badge>
-            <p className="text-sm text-muted-foreground">
-              Anchor points that connect research depth with applied data science delivery.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {timeline.map((item) => (
-              <Card key={item.year} className="border-primary/15 bg-muted/40">
-                <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                  <Badge variant="outline">{item.year}</Badge>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-5">
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="text-xs uppercase tracking-widest">
-              Continue exploring
-            </Badge>
-            <p className="text-sm text-muted-foreground">
-              Dive into dedicated chapters for the full narrative, employment detail, and documented credentials.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {alliedChapters.map((chapter) => {
-              const Icon = chapter.icon;
-              return (
-                <Card key={chapter.name} className="group border-primary/20 bg-background/90 shadow-sm hover-elevate">
-                  <CardHeader>
-                    <div className="flex items-center gap-3">
-                      <span className="rounded-full bg-primary/10 p-2 text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <CardTitle className="text-lg">{chapter.name}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="text-sm text-muted-foreground">{chapter.description}</p>
-                    <Link
-                      href={chapter.href}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
-                    >
-                      Visit {chapter.name}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+        <section className="space-y-6" aria-label="All about cards">
+          {overviewCards.map((card, index) => (
+            <motion.div
+              key={card.id}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <CareerEvidenceCard
+                title={card.title}
+                organization={card.organization}
+                location={card.location}
+                period={card.period}
+                roleLabel={card.roleLabel}
+                highlights={card.highlights}
+                slides={card.slides}
+                referenceUrl={card.referenceUrl}
+                referenceLabel={card.referenceLabel}
+              />
+            </motion.div>
+          ))}
         </section>
         <StatsSection className="mt-10" stats={aboutStats} />
       </motion.div>

@@ -379,7 +379,7 @@ export default function Home() {
               <Sparkles className="h-4 w-4" />
               Portfolio Atlas
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl md:whitespace-nowrap">
               Navigate the full academic and innovation spectrum at a glance
             </h2>
             <p className="text-base text-muted-foreground md:text-lg">
@@ -550,7 +550,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold text-primary">
               Innovation Pipeline
             </div>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl md:whitespace-nowrap">
               Where the next chapter of research and impact is being built
             </h2>
             <p className="mt-3 text-base text-muted-foreground md:text-lg">

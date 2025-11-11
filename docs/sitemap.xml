@@ -10,71 +10,32 @@
     <loc>https://mahdieh-fakhar.github.io/education/all</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/education/academic</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/education/courses</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/education/workshops</loc>
-  </url>
-  <url>
     <loc>https://mahdieh-fakhar.github.io/investigations/all</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/investigations/articles</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/investigations/theses</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/investigations/books</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/investigations/handbooks</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/all</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/career</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/memberships</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/projects</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/skills</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/works/certifications</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/events/all</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/events/conferences</loc>
+    <loc>https://mahdieh-fakhar.github.io/memberships</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/events/seminars</loc>
+    <loc>https://mahdieh-fakhar.github.io/career</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/events/webinars</loc>
+    <loc>https://mahdieh-fakhar.github.io/works/skills</loc>
   </url>
   <url>
-    <loc>https://mahdieh-fakhar.github.io/events/congresses</loc>
-  </url>
-  <url>
-    <loc>https://mahdieh-fakhar.github.io/events/symposia</loc>
+    <loc>https://mahdieh-fakhar.github.io/works/projects</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/resume</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/contact</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/works/certifications</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

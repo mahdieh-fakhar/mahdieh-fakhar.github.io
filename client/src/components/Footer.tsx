@@ -99,6 +99,9 @@ export function Footer() {
             {"\u00A9"} {new Date().getFullYear()} Mahdieh Fakhar. All rights reserved.
           </p>
           <p className="mt-2">Madrid, Spain</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
+            Design &amp; Development: Mahdieh Fakhar
+          </p>
         </div>
       </div>
     </footer>

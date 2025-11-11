@@ -79,12 +79,7 @@ export function Footer() {
             <div className="grid gap-3 text-sm sm:grid-cols-2 xl:grid-cols-1">
               {footerBadges.length > 0 ? (
                 footerBadges.map((badge) => (
-                  <BadgePill
-                    key={badge.id}
-                    badge={badge}
-                    size="sm"
-                    className="min-w-0 border-primary/20 bg-background/85"
-                  />
+                  <BadgePill key={badge.id} badge={badge} size="sm" className="min-w-0" />
                 ))
               ) : (
                 <p className="text-muted-foreground">

@@ -57,13 +57,13 @@ export default function Home() {
     {
       title: "Innovation & Project Delivery",
       description:
-        "The Works hub orchestrates projects, skills, and certifications to evidence the technical fluency behind each engagement.",
+        "The Works hub orchestrates Career highlights, Membership networks, Projects, Skills, and Certifications to evidence the technical fluency behind each engagement.",
       icon: Briefcase,
     },
     {
       title: "Networks & Opportunities",
       description:
-        "Memberships, Career, and Contact routes open collaboration channels, governance roles, and partnership pathways.",
+        "Works > Memberships, Works > Career, and Contact routes open collaboration channels, governance roles, and partnership pathways.",
       icon: BadgeCheck,
     },
   ];
@@ -82,10 +82,10 @@ export default function Home() {
           icon: HomeIcon,
         },
         {
-          name: "All About",
+          name: "About",
           summary:
             "Human-centered biography combining research passions, personal ethos, and signature stories.",
-          href: "/about/all",
+          href: "/about",
           icon: UserRound,
         },
         {
@@ -148,14 +148,14 @@ export default function Home() {
           name: "Memberships",
           summary:
             "Professional bodies and communities amplifying research reach and advocacy.",
-          href: "/about/memberships",
+          href: "/works/memberships",
           icon: BadgeCheck,
         },
         {
           name: "Career",
           summary:
             "Experience timeline with leadership metrics, teaching missions, and innovation outputs.",
-          href: "/about/career",
+          href: "/works/career",
           icon: Briefcase,
         },
         {
@@ -198,7 +198,7 @@ export default function Home() {
       description:
         "Map institutional partnerships, memberships, and collaboration frameworks ready for universities, NGOs, and private sector alliances.",
       icon: Send,
-      href: "/about/memberships",
+      href: "/works/memberships",
       cta: "Explore partnerships",
       accent: "from-secondary/20 via-background to-primary/10",
     },

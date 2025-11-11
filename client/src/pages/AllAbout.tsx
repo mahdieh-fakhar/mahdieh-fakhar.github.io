@@ -61,14 +61,15 @@ const timeline: TimelineItem[] = [
 const alliedChapters = [
   {
     name: "Career",
-    description: "Chronological view of teaching, leadership, and consulting milestones with measurable impacts.",
-    href: "/about/career",
+    description: "Chronological view of teaching, leadership, and consulting milestones (now housed inside Works > Career).",
+    href: "/works/career",
     icon: Compass,
   },
   {
     name: "Memberships",
-    description: "Professional networks, editorial boards, and research collectives that extend ongoing collaborations.",
-    href: "/about/memberships",
+    description:
+      "Professional networks, editorial boards, and research collectives that extend ongoing collaborations via Works > Memberships.",
+    href: "/works/memberships",
     icon: Users,
   },
   {

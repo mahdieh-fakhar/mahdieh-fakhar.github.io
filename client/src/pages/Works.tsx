@@ -2,12 +2,28 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight } from "lucide-react";
+import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight, Users } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
 import { StatsSection } from "@/components/StatsSection";
 
 const workStreams = [
+  {
+    name: "Career",
+    description:
+      "Teaching, leadership, and consulting journey with evidence packs that underline operational scale and outcomes.",
+    href: "/works/career",
+    icon: Briefcase,
+    meta: ["12+ documented roles", "Multi-country delivery", "Evidence-driven storytelling"],
+  },
+  {
+    name: "Memberships",
+    description:
+      "Professional networks, editorial roles, and advocacy circles that unlock research collaborations and speaking invites.",
+    href: "/works/memberships",
+    icon: Users,
+    meta: ["Global academic boards", "Reviewer appointments", "Active partnerships"],
+  },
   {
     name: "Projects",
     description:
@@ -53,7 +69,12 @@ const deliveryHighlights = [
 ];
 
 export default function Works() {
-  const rawBadges = [...getBadges({ page: "projects", limit: 2 }), ...getBadges({ page: "skills", limit: 2 })];
+  const rawBadges = [
+    ...getBadges({ page: "projects", limit: 2 }),
+    ...getBadges({ page: "skills", limit: 2 }),
+    ...getBadges({ page: "career", limit: 2 }),
+    ...getBadges({ page: "memberships", limit: 2 }),
+  ];
   const spotlightBadges = rawBadges.filter(
     (badge, index, self) => index === self.findIndex((candidate) => candidate.id === badge.id),
   );

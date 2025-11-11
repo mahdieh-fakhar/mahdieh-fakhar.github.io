@@ -4,17 +4,9 @@ import { Mail, Linkedin, Github, Sparkles } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
 import { getBadges } from "@/lib/badgeUtils";
 import { BadgePill } from "@/components/badges/BadgePill";
+import { navigationItems } from "@/data/navigation";
 
-const footerLinks = [
-  { name: "Home", href: "/" },
-  { name: "All About", href: "/about/all" },
-  { name: "Education", href: "/education/all" },
-  { name: "Investigations", href: "/investigations/all" },
-  { name: "Works", href: "/works/all" },
-  { name: "Events", href: "/events/all" },
-  { name: "Resume", href: "/resume" },
-  { name: "Contact", href: "/contact" },
-];
+const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 export function Footer() {
   const footerBadges = useMemo(
@@ -46,18 +38,33 @@ export function Footer() {
           </section>
 
           <section className="space-y-4 sm:order-3 xl:order-none xl:justify-self-end">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
-            <nav aria-label="Footer quick links">
-              <ul className="grid grid-cols-2 gap-2 text-sm">
-                {footerLinks.map((link) => (
-                  <li key={link.name}>
+            <h3 className="text-lg font-semibold">Site Map</h3>
+            <nav aria-label="Footer site map">
+              <ul className="space-y-3 text-sm">
+                {navigationItems.map((item) => (
+                  <li key={item.name} className="space-y-2">
                     <Link
-                      href={link.href}
-                      className="rounded px-1 py-0.5 text-muted-foreground transition-colors hover:text-foreground hover-elevate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
-                      data-testid={`link-footer-${link.name.toLowerCase()}`}
+                      href={item.href}
+                      className="rounded px-1 py-0.5 font-medium text-muted-foreground transition-colors hover:text-foreground hover-elevate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+                      data-testid={`link-footer-${slugify(item.name)}`}
                     >
-                      {link.name}
+                      {item.name}
                     </Link>
+                    {item.children && item.children.length > 0 && (
+                      <ul className="space-y-1 border-l border-dashed border-primary/30 pl-3 text-xs">
+                        {item.children.map((child) => (
+                          <li key={`${item.name}-${child.slug}`}>
+                            <Link
+                              href={child.href}
+                              className="rounded px-1 py-0.5 text-muted-foreground transition-colors hover:text-foreground hover-elevate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                              data-testid={`link-footer-${slugify(`${item.name}-${child.slug}`)}`}
+                            >
+                              {child.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>

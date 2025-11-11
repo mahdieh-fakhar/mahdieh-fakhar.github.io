@@ -24,7 +24,7 @@ export const searchDocuments: SearchDocument[] = [
     title: "All About",
     href: "/about/all",
     description:
-      "Extended narrative combining identity signals, milestone timeline, and navigation to career, memberships, and resume chapters.",
+      "Extended narrative combining identity signals, milestone timeline, and navigation to Works > Career, Works > Memberships, and resume chapters.",
     keywords: ["all about", "identity", "timeline", "career", "memberships", "resume"],
   },
   {
@@ -45,8 +45,8 @@ export const searchDocuments: SearchDocument[] = [
     title: "Works",
     href: "/works/all",
     description:
-      "Applied delivery hub linking projects, skills, and certifications with delivery cadence and spotlight credentials.",
-    keywords: ["works", "projects", "skills", "certifications", "delivery"],
+      "Applied delivery hub linking projects, skills, certifications, and the consolidated Career and Memberships journeys.",
+    keywords: ["works", "projects", "skills", "certifications", "career", "memberships"],
   },
   {
     title: "Events",
@@ -57,14 +57,14 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Memberships",
-    href: "/about/memberships",
+    href: "/works/memberships",
     description:
       "Professional affiliations and collaborations across journals, institutes, and research groups.",
     keywords: ["memberships", "affiliations", "collaboration", "reviewer", "research group"],
   },
   {
     title: "Career",
-    href: "/about/career",
+    href: "/works/career",
     description:
       "Career history including teaching, leadership, and professional interpreting experience.",
     keywords: ["career", "experience", "teaching", "leadership", "professional history"],

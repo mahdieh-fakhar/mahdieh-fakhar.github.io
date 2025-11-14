@@ -1,4 +1,4 @@
-﻿import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
@@ -63,16 +63,16 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
-          src: "/images/career/adjunct-ilam-01.jpg",
+          src: "/images/career/career-2025-1345-4.jpg",
           alt: "University of Ilam adjunct lecturer confirmation letter page 1",
-          caption: "Page 1 â€“ Faculty appointment confirmation with department signatures.",
-          downloadName: "adjunct-ilam-01.jpg",
+          caption: "Teaching form confirming humanities and engineering teaching assignments.",
+          downloadName: "career-2025-1345-4.jpg",
         },
         {
-          src: "/images/career/adjunct-ilam-02.jpg",
+          src: "/images/career/career-2025-1345-5.jpg",
           alt: "University of Ilam adjunct lecturer confirmation letter page 2",
-          caption: "Page 2 â€“ Teaching load summary and official stamp.",
-          downloadName: "adjunct-ilam-02.jpg",
+          caption: "Teaching hours and unit summary signed by university administration.",
+          downloadName: "career-2025-1345-5.jpg",
         },
       ],
     },
@@ -95,34 +95,34 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
-          src: "/images/career/ili-instructor-01.jpg",
+          src: "/images/career/career-2025-1345-6.jpg",
           alt: "ILI Ilam Branch instructor appointment letter page 1",
           caption: "Page 1 - Class schedule confirmation and branch stamps.",
-          downloadName: "ili-instructor-01.jpg",
+          downloadName: "career-2025-1345-6.jpg",
         },
         {
-          src: "/images/career/ili-instructor-02.jpg",
+          src: "/images/career/career-2025-1345-7.jpg",
           alt: "ILI instructor letter with exam preparation plan",
           caption: "Page 2 - TOEFL/IELTS preparation duties and signature.",
-          downloadName: "ili-instructor-02.jpg",
+          downloadName: "career-2025-1345-7.jpg",
         },
         {
-          src: "/images/career/ili-instructor-03.jpg",
+          src: "/images/career/career-2025-1345-8.jpg",
           alt: "ILI instructor evaluation notes page 3",
           caption: "Page 3 - Performance evaluation and branch accreditation.",
-          downloadName: "ili-instructor-03.jpg",
+          downloadName: "career-2025-1345-8.jpg",
         },
         {
-          src: "/images/career/ili-instructor-04.jpg",
+          src: "/images/career/career-2025-1345-9.jpg",
           alt: "ILI instructor schedule letter page 4",
           caption: "Page 4 - Class timing details and seal.",
-          downloadName: "ili-instructor-04.jpg",
+          downloadName: "career-2025-1345-9.jpg",
         },
         {
-          src: "/images/career/ili-instructor-05.jpg",
+          src: "/images/career/career-2025-1345-10.jpg",
           alt: "ILI instructor quality letter page 5",
           caption: "Page 5 - Final sign-off for Ilam Sister & Baradar centres.",
-          downloadName: "ili-instructor-05.jpg",
+          downloadName: "career-2025-1345-10.jpg",
         },
       ],
     },
@@ -145,10 +145,10 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
-          src: "/images/career/ieli-exam-01.jpg",
+          src: "/images/career/career-2025-1345-2.jpg",
           alt: "IELI upper-intermediate instructor confirmation letter",
           caption: "Official confirmation of upper-intermediate and exam prep classes",
-          downloadName: "ieli-exam-01.jpg",
+          downloadName: "career-2025-1345-2.jpg",
         },
       ],
     },
@@ -184,10 +184,10 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
-          src: "/images/career/head-teacher-shokoh.jpg",
+          src: "/images/career/career-2025-1345-3.jpg",
           alt: "Shokoh Pouyan head teacher confirmation letter",
           caption: "Certification letter outlining course design and leadership duties.",
-          downloadName: "head-teacher-shokoh.jpg",
+          downloadName: "career-2025-1345-3.jpg",
         },
       ],
     },
@@ -210,10 +210,10 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
-          src: "/images/career/part-time-marefat.jpg",
+          src: "/images/career/career-2025-1345-1.jpg",
           alt: "Marefat Novin Language Academy part-time instructor confirmation",
           caption: "Letter validating part-time communicative English instruction.",
-          downloadName: "part-time-marefat.jpg",
+          downloadName: "career-2025-1345-1.jpg",
         },
       ],
     },
@@ -317,5 +317,13 @@ export default function Career() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
 
 

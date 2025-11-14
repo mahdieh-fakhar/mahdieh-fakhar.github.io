@@ -505,16 +505,69 @@ function getRecordDetailEntries(record: EducationRecord): Array<{ label: string;
   return entries;
 }
 
+const MONTH_LOOKUP: Record<string, number> = {
+  january: 1,
+  jan: 1,
+  february: 2,
+  feb: 2,
+  march: 3,
+  mar: 3,
+  april: 4,
+  apr: 4,
+  may: 5,
+  june: 6,
+  jun: 6,
+  july: 7,
+  jul: 7,
+  august: 8,
+  aug: 8,
+  september: 9,
+  sept: 9,
+  sep: 9,
+  october: 10,
+  oct: 10,
+  november: 11,
+  nov: 11,
+  december: 12,
+  dec: 12,
+};
+
 function getSortValueFromPeriod(period?: string): number {
   if (!period) {
     return 0;
   }
 
-  const normalized = period.toLowerCase();
-  const years = Array.from(period.matchAll(/\d{4}/g)).map((match) => Number(match[0]));
-  const latestYear = years.length ? Math.max(...years) : 0;
-  const presentBoost = normalized.includes("present") || normalized.includes("in progress") ? 1000 : 0;
-  return latestYear + presentBoost;
+  const normalized = period
+    .toLowerCase()
+    .replace(/\u2013|\u2014/g, "-")
+    .replace(/\s+/g, " ");
+
+  const present = normalized.includes("present") || normalized.includes("in progress");
+  const yearMatches = Array.from(normalized.matchAll(/\d{4}/g));
+
+  if (!yearMatches.length) {
+    return present ? Number.MAX_SAFE_INTEGER : 0;
+  }
+
+  const monthRegex =
+    /(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/g;
+
+  const candidateDates = yearMatches.map((match) => {
+    const year = Number(match[0]);
+    const yearIndex = match.index ?? normalized.length;
+    const searchWindowStart = Math.max(0, yearIndex - 40);
+    const window = normalized.slice(searchWindowStart, yearIndex);
+    const monthMatch = Array.from(window.matchAll(monthRegex)).pop();
+    const monthLabel = monthMatch?.[0];
+    const month = monthLabel ? MONTH_LOOKUP[monthLabel] ?? 12 : 12;
+    const between = monthMatch ? window.slice(monthMatch.index ?? 0) : window;
+    const dayMatches = Array.from(between.matchAll(/\d{1,2}/g));
+    const day = dayMatches.length ? Number(dayMatches.at(-1)?.[0]) : 28;
+    return Date.UTC(year, month - 1, day);
+  });
+
+  const latest = Math.max(...candidateDates);
+  return present ? latest + 60 * 60 * 24 * 365 * 1000 : latest;
 }
 
 const academicSummaryStats = (() => {

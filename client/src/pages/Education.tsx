@@ -146,7 +146,7 @@ const coursePrograms: EducationRecord[] = [
       },
       {
         src: "/images/badges/aws-cloudquest-certificate.jpg",
-        alt: "Certificate of participaciÃ³n en el AWS CloudQuest Tournament CSIC",
+        alt: "Certificate of participation in the AWS CloudQuest Tournament at CSIC",
         caption: "Tournament completion certificate issued for AWS CloudQuest at CSIC",
         downloadName: "aws-cloudquest-certificate.jpg",
       },
@@ -181,8 +181,8 @@ const coursePrograms: EducationRecord[] = [
   {
     id: "course-csic-ia-generativa-2025",
     category: "Courses",
-    title: "La IA generativa como aliada en el trabajo",
-    institution: "Consejo Superior de Investigaciones CientÃ­ficas (CSIC)",
+    title: "Generative AI as an Ally at Work",
+    institution: "Spanish National Research Council (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Apr 2025 - May 2025",
     status: "Professional Certificate",
@@ -193,19 +193,19 @@ const coursePrograms: EducationRecord[] = [
     ],
     metadata: [
       { label: "Duration", value: "25 hours (1 ECTS)" },
-      { label: "Campus", value: "CSIC iAprende virtual campus" },
+      { label: "Delivery Platform", value: "CSIC iAprende virtual campus" },
     ],
     slides: [
       {
         src: "/images/education/courses/csic-ia-generativa-1.jpg",
-        alt: "CSIC generative AI certificate page 1",
-        caption: "Completion certificate signed by the Vicepresidencia de InvestigaciÃ³n CientÃ­fica y TÃ©cnica",
+        alt: "Generative AI certificate issued by CSIC",
+        caption: "Signed completion certificate from the CSIC Vice Presidency for Scientific and Technical Research",
         downloadName: "csic-ia-generativa-1.jpg",
       },
       {
         src: "/images/education/courses/csic-ia-generativa-2.jpg",
-        alt: "CSIC generative AI certificate syllabus",
-        caption: "Program objectives and syllabus items highlighted by CSIC momentum campus",
+        alt: "Generative AI course syllabus from CSIC",
+        caption: "Program objectives outlining generative AI topics reviewed throughout the course",
         downloadName: "csic-ia-generativa-2.jpg",
       },
     ],
@@ -213,31 +213,31 @@ const coursePrograms: EducationRecord[] = [
   {
     id: "course-csic-estadistica-2025",
     category: "Courses",
-    title: "EstadÃ­stica aplicada avanzada con IBM SPSS Statistics",
-    institution: "Consejo Superior de Investigaciones CientÃ­ficas (CSIC)",
+    title: "Advanced Applied Statistics with IBM SPSS Statistics",
+    institution: "Spanish National Research Council (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Sep 2025",
     status: "In-person Training",
     roleLabel: "CSIC Professional Course",
     highlights: [
       "Completed multivariate analysis labs covering experimental design, mixed models, and classification methods.",
-      "Worked through IBM SPSS Statistics workflows for advanced inference inside CSICâ€™s Human Resources training plan.",
+      "Worked through IBM SPSS Statistics workflows for advanced inference inside CSIC's Human Resources training plan.",
     ],
     metadata: [
-      { label: "Program", value: "Curso presencial 2025DCEAAQ" },
+      { label: "Program Code", value: "In-person course 2025DCEAAQ" },
       { label: "Duration", value: "20 contact hours" },
     ],
     slides: [
       {
         src: "/images/education/courses/csic-estadistica-aplicada-1.jpg",
-        alt: "CSIC advanced statistics certificate page 1",
-        caption: "Official asistencia certificate for advanced applied statistics",
+        alt: "Advanced statistics certificate issued by CSIC",
+        caption: "Official certificate confirming completion of the advanced applied statistics curriculum",
         downloadName: "csic-estadistica-aplicada-1.jpg",
       },
       {
         src: "/images/education/courses/csic-estadistica-aplicada-2.jpg",
-        alt: "CSIC advanced statistics certificate program overview",
-        caption: "Program modules spanning theory and SPSS-based practice",
+        alt: "Advanced statistics certificate syllabus overview",
+        caption: "Program modules covering both theoretical and SPSS-based practice sessions",
         downloadName: "csic-estadistica-aplicada-2.jpg",
       },
     ],
@@ -245,8 +245,8 @@ const coursePrograms: EducationRecord[] = [
   {
     id: "course-csic-machine-learning-2025",
     category: "Courses",
-    title: "Machine Learning para InvestigaciÃ³n CientÃ­fica: Ãrboles de ClasificaciÃ³n y RegresiÃ³n",
-    institution: "Sociedad de Amigos del Museo Nacional de Ciencias Naturales (CSIC)",
+    title: "Machine Learning for Scientific Research: Classification and Regression Trees",
+    institution: "Friends Society of the National Museum of Natural Sciences (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Jun 9-19, 2025",
     status: "Specialized Course",
@@ -257,13 +257,13 @@ const coursePrograms: EducationRecord[] = [
     ],
     metadata: [
       { label: "Instruction Hours", value: "24 hours" },
-      { label: "Instructor", value: "Prof. Manuel Mendoza GarcÃ­a" },
+      { label: "Instructor", value: "Prof. Manuel Mendoza Garcia" },
     ],
     slides: [
       {
         src: "/images/education/courses/csic-machine-learning-2025.jpg",
         alt: "Machine learning course certificate issued June 20 2025",
-        caption: "Museo Nacional de Ciencias Naturales course completion statement",
+        caption: "Completion statement from the National Museum of Natural Sciences",
         downloadName: "csic-machine-learning-2025.jpg",
       },
     ],
@@ -272,7 +272,7 @@ const coursePrograms: EducationRecord[] = [
     id: "course-csic-r-intro-2025",
     category: "Courses",
     title: "Introduction to R and RStudio for Data Analysis in Scientific Research",
-    institution: "Sociedad de Amigos del Museo Nacional de Ciencias Naturales (CSIC)",
+    institution: "Friends Society of the National Museum of Natural Sciences (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "May 19-29, 2025",
     status: "Specialized Course",
@@ -283,13 +283,13 @@ const coursePrograms: EducationRecord[] = [
     ],
     metadata: [
       { label: "Instruction Hours", value: "12 hours" },
-      { label: "Professors", value: "Dr. Shaun Nielsen & Dra. Cristina Diez Vives" },
+      { label: "Facilitators", value: "Dr. Shaun Nielsen and Dr. Cristina Diez Vives" },
     ],
     slides: [
       {
         src: "/images/education/courses/csic-r-intro-2025.jpg",
-        alt: "Certificate for Introduction to R and RStudio course",
-        caption: "Credential endorsed by the Museo Nacional de Ciencias Naturales faculty",
+        alt: "Certificate for the Introduction to R and RStudio course",
+        caption: "Credential endorsed by the National Museum of Natural Sciences faculty",
         downloadName: "csic-r-intro-2025.jpg",
       },
     ],

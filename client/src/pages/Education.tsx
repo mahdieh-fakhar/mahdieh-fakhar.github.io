@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -139,16 +139,16 @@ const coursePrograms: EducationRecord[] = [
     urlLabel: "View digital credential",
     slides: [
       {
-        src: "/images/profile.jpg",
-        alt: "AWS Cloud Quest certificate preview",
-        caption: "AWS Cloud Quest – official badge preview",
-        downloadName: "aws-cloud-quest-1.jpg",
+        src: "/images/badges/aws-cloudquest-badge.png",
+        alt: "AWS Cloud Quest official badge",
+        caption: "Gamified AWS Cloud Quest badge awarded upon completion",
+        downloadName: "aws-cloudquest-badge.png",
       },
       {
-        src: "/images/logo.png",
-        alt: "AWS Cloud Quest credential seal",
-        caption: "AWS official seal",
-        downloadName: "aws-cloud-quest-2.jpg",
+        src: "/images/badges/aws-cloudquest-certificate.jpg",
+        alt: "Certificate of participaciÃ³n en el AWS CloudQuest Tournament CSIC",
+        caption: "Tournament completion certificate issued for AWS CloudQuest at CSIC",
+        downloadName: "aws-cloudquest-certificate.jpg",
       },
     ],
   },
@@ -182,7 +182,7 @@ const coursePrograms: EducationRecord[] = [
     id: "course-csic-ia-generativa-2025",
     category: "Courses",
     title: "La IA generativa como aliada en el trabajo",
-    institution: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    institution: "Consejo Superior de Investigaciones CientÃ­ficas (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Apr 2025 - May 2025",
     status: "Professional Certificate",
@@ -199,7 +199,7 @@ const coursePrograms: EducationRecord[] = [
       {
         src: "/images/education/courses/csic-ia-generativa-1.jpg",
         alt: "CSIC generative AI certificate page 1",
-        caption: "Completion certificate signed by the Vicepresidencia de Investigación Científica y Técnica",
+        caption: "Completion certificate signed by the Vicepresidencia de InvestigaciÃ³n CientÃ­fica y TÃ©cnica",
         downloadName: "csic-ia-generativa-1.jpg",
       },
       {
@@ -213,15 +213,15 @@ const coursePrograms: EducationRecord[] = [
   {
     id: "course-csic-estadistica-2025",
     category: "Courses",
-    title: "Estadística aplicada avanzada con IBM SPSS Statistics",
-    institution: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    title: "EstadÃ­stica aplicada avanzada con IBM SPSS Statistics",
+    institution: "Consejo Superior de Investigaciones CientÃ­ficas (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Sep 2025",
     status: "In-person Training",
     roleLabel: "CSIC Professional Course",
     highlights: [
       "Completed multivariate analysis labs covering experimental design, mixed models, and classification methods.",
-      "Worked through IBM SPSS Statistics workflows for advanced inference inside CSIC’s Human Resources training plan.",
+      "Worked through IBM SPSS Statistics workflows for advanced inference inside CSICâ€™s Human Resources training plan.",
     ],
     metadata: [
       { label: "Program", value: "Curso presencial 2025DCEAAQ" },
@@ -245,7 +245,7 @@ const coursePrograms: EducationRecord[] = [
   {
     id: "course-csic-machine-learning-2025",
     category: "Courses",
-    title: "Machine Learning para Investigación Científica: Árboles de Clasificación y Regresión",
+    title: "Machine Learning para InvestigaciÃ³n CientÃ­fica: Ãrboles de ClasificaciÃ³n y RegresiÃ³n",
     institution: "Sociedad de Amigos del Museo Nacional de Ciencias Naturales (CSIC)",
     location: "Madrid, Community of Madrid, Spain",
     period: "Jun 9-19, 2025",
@@ -257,7 +257,7 @@ const coursePrograms: EducationRecord[] = [
     ],
     metadata: [
       { label: "Instruction Hours", value: "24 hours" },
-      { label: "Instructor", value: "Prof. Manuel Mendoza García" },
+      { label: "Instructor", value: "Prof. Manuel Mendoza GarcÃ­a" },
     ],
     slides: [
       {
@@ -626,7 +626,7 @@ export default function Education({ params }: EducationProps = {}) {
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                     {metaParts.map((part, partIndex) => (
                       <span key={part}>
-                        {partIndex > 0 ? <span className="px-1">•</span> : null}
+                        {partIndex > 0 ? <span className="px-1">â€¢</span> : null}
                         {part}
                       </span>
                     ))}
@@ -983,3 +983,4 @@ export default function Education({ params }: EducationProps = {}) {
     </div>
   );
 }
+

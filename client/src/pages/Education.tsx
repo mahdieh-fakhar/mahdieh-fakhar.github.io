@@ -152,6 +152,148 @@ const coursePrograms: EducationRecord[] = [
       },
     ],
   },
+  {
+    id: "course-nasle-farda-toefl-2010",
+    category: "Courses",
+    title: "TOEFL Certificate Program",
+    institution: "Nasle Farda English Language Center",
+    location: "Shahreza, Isfahan, Iran",
+    period: "Mar 2010",
+    status: "Language Certificate",
+    roleLabel: "TOEFL Credential",
+    highlights: [
+      "Completed an intensive TOEFL-focused curriculum emphasizing academic reading, listening, writing, and speaking.",
+      "Demonstrated readiness for international standardized testing with instructor-evaluated practice exams.",
+    ],
+    metadata: [
+      { label: "Program Level", value: "TOEFL preparation, advanced track" },
+      { label: "Delivery", value: "In-person classroom sessions" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/nasle-farda-toefl-2010.jpg",
+        alt: "Nasle Farda TOEFL certificate (March 2010)",
+        caption: "Official completion certificate issued by Nasle Farda English Language Center",
+        downloadName: "nasle-farda-toefl-2010.jpg",
+      },
+    ],
+  },
+  {
+    id: "course-csic-ia-generativa-2025",
+    category: "Courses",
+    title: "La IA generativa como aliada en el trabajo",
+    institution: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    location: "Madrid, Community of Madrid, Spain",
+    period: "Apr 2025 - May 2025",
+    status: "Professional Certificate",
+    roleLabel: "1 ECTS Online Course",
+    highlights: [
+      "Explored advanced prompts, copilots, and GenAI tooling for research-quality translation, analysis, and automation.",
+      "Produced guided exercises applying generative AI to scientific communication, data storytelling, and classroom practice.",
+    ],
+    metadata: [
+      { label: "Duration", value: "25 hours (1 ECTS)" },
+      { label: "Campus", value: "CSIC iAprende virtual campus" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/csic-ia-generativa-1.jpg",
+        alt: "CSIC generative AI certificate page 1",
+        caption: "Completion certificate signed by the Vicepresidencia de Investigación Científica y Técnica",
+        downloadName: "csic-ia-generativa-1.jpg",
+      },
+      {
+        src: "/images/education/courses/csic-ia-generativa-2.jpg",
+        alt: "CSIC generative AI certificate syllabus",
+        caption: "Program objectives and syllabus items highlighted by CSIC momentum campus",
+        downloadName: "csic-ia-generativa-2.jpg",
+      },
+    ],
+  },
+  {
+    id: "course-csic-estadistica-2025",
+    category: "Courses",
+    title: "Estadística aplicada avanzada con IBM SPSS Statistics",
+    institution: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    location: "Madrid, Community of Madrid, Spain",
+    period: "Sep 2025",
+    status: "In-person Training",
+    roleLabel: "CSIC Professional Course",
+    highlights: [
+      "Completed multivariate analysis labs covering experimental design, mixed models, and classification methods.",
+      "Worked through IBM SPSS Statistics workflows for advanced inference inside CSIC’s Human Resources training plan.",
+    ],
+    metadata: [
+      { label: "Program", value: "Curso presencial 2025DCEAAQ" },
+      { label: "Duration", value: "20 contact hours" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/csic-estadistica-aplicada-1.jpg",
+        alt: "CSIC advanced statistics certificate page 1",
+        caption: "Official asistencia certificate for advanced applied statistics",
+        downloadName: "csic-estadistica-aplicada-1.jpg",
+      },
+      {
+        src: "/images/education/courses/csic-estadistica-aplicada-2.jpg",
+        alt: "CSIC advanced statistics certificate program overview",
+        caption: "Program modules spanning theory and SPSS-based practice",
+        downloadName: "csic-estadistica-aplicada-2.jpg",
+      },
+    ],
+  },
+  {
+    id: "course-csic-machine-learning-2025",
+    category: "Courses",
+    title: "Machine Learning para Investigación Científica: Árboles de Clasificación y Regresión",
+    institution: "Sociedad de Amigos del Museo Nacional de Ciencias Naturales (CSIC)",
+    location: "Madrid, Community of Madrid, Spain",
+    period: "Jun 9-19, 2025",
+    status: "Specialized Course",
+    roleLabel: "Advanced Analytics Track",
+    highlights: [
+      "Learned supervised modeling techniques tailored to museum-led research data sets.",
+      "Implemented classification and regression trees to accelerate scientific discovery workflows.",
+    ],
+    metadata: [
+      { label: "Instruction Hours", value: "24 hours" },
+      { label: "Instructor", value: "Prof. Manuel Mendoza García" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/csic-machine-learning-2025.jpg",
+        alt: "Machine learning course certificate issued June 20 2025",
+        caption: "Museo Nacional de Ciencias Naturales course completion statement",
+        downloadName: "csic-machine-learning-2025.jpg",
+      },
+    ],
+  },
+  {
+    id: "course-csic-r-intro-2025",
+    category: "Courses",
+    title: "Introduction to R and RStudio for Data Analysis in Scientific Research",
+    institution: "Sociedad de Amigos del Museo Nacional de Ciencias Naturales (CSIC)",
+    location: "Madrid, Community of Madrid, Spain",
+    period: "May 19-29, 2025",
+    status: "Specialized Course",
+    roleLabel: "Data Science Foundations",
+    highlights: [
+      "Covered RStudio workflows for cleaning, transforming, and visualizing environmental research data.",
+      "Practiced reproducible scripting habits to support CSIC-led investigations.",
+    ],
+    metadata: [
+      { label: "Instruction Hours", value: "12 hours" },
+      { label: "Professors", value: "Dr. Shaun Nielsen & Dra. Cristina Diez Vives" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/csic-r-intro-2025.jpg",
+        alt: "Certificate for Introduction to R and RStudio course",
+        caption: "Credential endorsed by the Museo Nacional de Ciencias Naturales faculty",
+        downloadName: "csic-r-intro-2025.jpg",
+      },
+    ],
+  },
 ];
 
 const workshopPrograms: EducationRecord[] = [

@@ -127,7 +127,7 @@ const coursePrograms: EducationRecord[] = [
     category: "Courses",
     title: "AWS Cloud Quest: Cloud Practitioner",
     institution: "Amazon Web Services (AWS)",
-    period: "Issued Aug 2024",
+    period: "Issued Oct 2025",
     status: "Professional Certificate",
     roleLabel: "Cloud Credential",
     highlights: [

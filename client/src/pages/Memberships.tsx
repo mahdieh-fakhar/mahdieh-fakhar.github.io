@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Award } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import { StatsSection } from "@/components/StatsSection";
+import { assetPath } from "@/lib/basePath";
 
 type MembershipCategory = "review" | "research" | "affiliation";
 
@@ -35,7 +36,7 @@ const summaryStats = [
   { id: "years", label: "Years Collaborating", value: "5+", accent: "text-primary" },
 ] as const;
 
-const fallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Evidence placeholder" }];
+const fallbackSlides: Slide[] = [{ src: assetPath("/images/profile.jpg"), alt: "Evidence placeholder" }];
 
 const memberships: Membership[] = [
   {
@@ -51,6 +52,22 @@ const memberships: Membership[] = [
       "Maintained rapid decision cycles aligned with UNED editorial governance.",
     ],
     focus: "Quality assurance for humanities peer review portfolios.",
+    evidence: {
+      slides: [
+        {
+          src: "/images/memberships/EPOS-UNED.jpg",
+          alt: "EPOS-UNED peer review certificate",
+          caption: "EPOS Journal double-blind reviewer recognition",
+          downloadName: "membership-epos-review.jpg",
+        },
+        {
+          src: "/images/memberships/UNED-logo.jpg",
+          alt: "UNED crest",
+          caption: "UNED editorial network emblem",
+          downloadName: "membership-uned-editorial.jpg",
+        },
+      ],
+    },
   },
   {
     id: 2,
@@ -65,6 +82,16 @@ const memberships: Membership[] = [
       "Collaborated with editors to refine rubric-based AI-assisted review pilots.",
     ],
     focus: "Global, multi-domain editorial collaboration.",
+    evidence: {
+      slides: [
+        {
+          src: "/images/memberships/SAGE.png",
+          alt: "SAGE Open reviewer badge",
+          caption: "SAGE Open international review appointment",
+          downloadName: "membership-sage-reviewer.png",
+        },
+      ],
+    },
   },
   {
     id: 3,
@@ -79,6 +106,22 @@ const memberships: Membership[] = [
       "Connected humanities researchers with instructional design resources for outreach.",
     ],
     focus: "Bridging humanities research and instructional design.",
+    evidence: {
+      slides: [
+        {
+          src: "/images/memberships/IHUPA.png",
+          alt: "IHUPA Research Institute badge",
+          caption: "IHUPA-UNED research collaboration",
+          downloadName: "membership-ihupa.png",
+        },
+        {
+          src: "/images/memberships/UNED.webp",
+          alt: "UNED institutional branding",
+          caption: "UNED collaboration footprint",
+          downloadName: "membership-uned.png",
+        },
+      ],
+    },
   },
   {
     id: 4,
@@ -93,6 +136,16 @@ const memberships: Membership[] = [
       "Documented teacher training outcomes and shared impact briefs with the board.",
     ],
     focus: "Innovation governance across ministry-funded pilots.",
+    evidence: {
+      slides: [
+        {
+          src: "/images/memberships/AGORA.png",
+          alt: "AGORA project identity",
+          caption: "AGORA consortium collaboration",
+          downloadName: "membership-agora.png",
+        },
+      ],
+    },
   },
   {
     id: 5,
@@ -107,6 +160,28 @@ const memberships: Membership[] = [
       "Facilitated collaboration between instructional technologists and faculty leads.",
     ],
     focus: "Applied research for technology-enabled pedagogy.",
+    evidence: {
+      slides: [
+        {
+          src: "/images/memberships/ATLAS.jpg",
+          alt: "ATLAS research badge",
+          caption: "ATLAS Research Group fellowship",
+          downloadName: "membership-atlas.jpg",
+        },
+        {
+          src: "/images/memberships/ATLAS-UNED.jpg",
+          alt: "ATLAS-UNED collaboration graphic",
+          caption: "Joint ATLAS x UNED initiatives",
+          downloadName: "membership-atlas-uned.jpg",
+        },
+        {
+          src: "/images/memberships/UNED-Madrid.jpg",
+          alt: "UNED Madrid campus imagery",
+          caption: "Madrid-based ATLAS deployments",
+          downloadName: "membership-uned-madrid.jpg",
+        },
+      ],
+    },
   },
 ];
 
@@ -133,8 +208,13 @@ const membershipHighlights = (membership: Membership): string[] => {
 };
 
 const membershipSlides = (membership: Membership): Slide[] => {
-  if (membership.evidence?.slides?.length) {
-    return membership.evidence.slides;
+  const slides = membership.evidence?.slides?.map((slide) => ({
+    ...slide,
+    src: assetPath(slide.src),
+  }));
+
+  if (slides?.length) {
+    return slides;
   }
 
   return fallbackSlides;

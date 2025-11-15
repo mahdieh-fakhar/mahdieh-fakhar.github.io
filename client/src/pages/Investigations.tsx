@@ -47,7 +47,7 @@ const investigationStats = [
   { value: conferenceProceedings.length, label: "Conference Series" },
 ];
 
-const publicationFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Research evidence placeholder" }];
+const publicationFallbackSlides: Slide[] = [];
 const publicationTypeLabels: Record<Publication["type"], string> = {
   journal: "Journal Article",
   book: "Book / Monograph",

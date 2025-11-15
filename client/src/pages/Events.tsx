@@ -40,7 +40,7 @@ const certificateData: ConferenceCertificate[] = [
   {
     id: "conf-2024-uned-eye-tracking",
     conferenceName: "UNED Faculty of Philology Seminar Series",
-    certificateTitle: "Certificado de Asistencia",
+    certificateTitle: "Certificate of Attendance",
     certificateSubject:
       "An introduction to Eye Tracking in Audiovisual Translation (AVT): Methods and Applications",
     certificateType: "Attendance",
@@ -56,43 +56,6 @@ const certificateData: ConferenceCertificate[] = [
       "Highlights adoption of evidence-based translation analytics with contemporary instrumentation.",
     orientation: "portrait",
     categoryOverride: "Conferences",
-  },
-  {
-    id: "sem-2024-xxvi-seminario",
-    conferenceName: "XXVI Seminario Permanente de Investigación TIC-ETL",
-    certificateTitle: "Certificado de Asistencia",
-    certificateSubject: "La IA Generativa en la Enseñanza y Tratamiento de Lenguas",
-    certificateType: "Attendance",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Participant",
-    roleDescription:
-      "Participated in UNED's permanent seminar examining generative AI for language education contexts.",
-    eventDate: "2024-05-08",
-    location: "UNED, Madrid, Spain",
-    sponsors: ["UNED Facultad de Filología"],
-    imageUrl: "/images/seminars/2024-05-08-xxvi-seminario.jpg",
-    aiInsights:
-      "Extends research into generative AI adoption for blended language instruction and curriculum design.",
-    orientation: "landscape",
-  },
-  {
-    id: "sem-2022-eccoe-multiplier",
-    conferenceName: "II ECCOE Multiplier Event / XXIII Seminar TIC ETL",
-    certificateTitle: "Attendance Certificate",
-    certificateSubject:
-      "Digital micro-credentials. A solution with a vision for tomorrow's educational needs",
-    certificateType: "Attendance",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Participant",
-    roleDescription:
-      "Engaged with Erasmus+ ECCOE experts to explore digital micro-credentials for future-ready education.",
-    eventDate: "2022-05-13",
-    location: "UNED, Madrid, Spain",
-    sponsors: ["UNED Facultad de Filología", "ECCOE"],
-    imageUrl: "/images/seminars/2022-05-13-eccoe-multiplier.jpg",
-    aiInsights:
-      "Strengthens strategic literacy in European micro-credential frameworks and lifelong learning pathways.",
-    orientation: "landscape",
   },
   {
     id: "conf-2021-utm-covid19",
@@ -321,84 +284,6 @@ const certificateData: ConferenceCertificate[] = [
       "Advances pre-service teacher training through strategic technology adoption.",
     orientation: "portrait",
   },
-  {
-    id: "congress-2025-inorms-earma",
-    conferenceName: "INORMS Congress 2025",
-    certificateTitle: "Certificate of Attendance",
-    certificateSubject: "Participation in the INORMS Congress hosted by EARMA",
-    certificateType: "Attendance",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Participant",
-    roleDescription:
-      "Attended the INORMS global congress to explore research management innovation across European institutions.",
-    eventDate: "2025-05-08",
-    location: "Madrid, Spain",
-    sponsors: ["European Association of Research Managers and Administrators (EARMA)"],
-    imageUrl: "/images/congresses/2025-05-08-inorms-earma.jpg",
-    aiInsights:
-      "Strengthens research management literacy through European professional association exchanges.",
-    orientation: "landscape",
-    categoryOverride: "Congresses",
-  },
-  {
-    id: "symp-2025-atlas-agora-attendance",
-    conferenceName: "II Jornadas ATLAS-ÁGORA de Formación de Profesorado",
-    certificateTitle: "Certificado de Asistencia",
-    certificateSubject:
-      "Formación de Profesorado de Lenguas en Entornos Rurales: Identidad, oportunidad, inclusión",
-    certificateType: "Attendance",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Participant",
-    roleDescription:
-      "Participated in UNED Zamora's ATLAS-ÁGORA symposium focusing on rural language education challenges.",
-    eventDate: "2025-05-10",
-    location: "UNED Zamora, Spain",
-    sponsors: ["UNED Zamora"],
-    imageUrl: "/images/symposia/2025-05-10-atlas-agora-attendance.jpg",
-    aiInsights:
-      "Expands rural education advocacy through collaborative symposium dialogues on inclusive language policy.",
-    orientation: "portrait",
-    categoryOverride: "Symposia",
-  },
-  {
-    id: "symp-2025-atlas-agora-panel",
-    conferenceName: "II Jornadas ATLAS-ÁGORA de Formación de Profesorado",
-    certificateTitle: "Certificado de Participación",
-    certificateSubject: "Los profesores de las lenguas actúan – parte II",
-    certificateType: "Panel Participation",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Panelist",
-    roleDescription:
-      "Contributed to the ATLAS-ÁGORA panel discussing teacher agency within rural language classrooms.",
-    eventDate: "2025-05-10",
-    location: "UNED Zamora, Spain",
-    sponsors: ["UNED Zamora"],
-    imageUrl: "/images/symposia/2025-05-10-atlas-agora-panel.jpg",
-    aiInsights:
-      "Showcases leadership in rural language teacher development through collaborative symposium panels.",
-    orientation: "landscape",
-    categoryOverride: "Symposia",
-  },
-  {
-    id: "symp-2025-encuentro-momentum",
-    conferenceName: "Encuentro Momentum: De la teoría a la práctica",
-    certificateTitle: "Certificado de Participación",
-    certificateSubject:
-      "Reflexiones sobre la IA, las RRSS y el portfolio profesional en el encuentro Momentum CSIC",
-    certificateType: "Participation",
-    holderName: "Mahdieh Fakhar Shahreza",
-    holderRole: "Participant",
-    roleDescription:
-      "Joined CSIC's Momentum Encuentro to examine AI, social networks, and professional portfolios.",
-    eventDate: "2025-02-26",
-    location: "Madrid, Spain",
-    sponsors: ["CSIC", "Ministerio de Ciencia, Innovación y Universidades"],
-    imageUrl: "/images/symposia/2025-02-26-encuentro-momentum.jpg",
-    aiInsights:
-      "Enhances interdisciplinary proficiency at the intersection of AI and professional development strategies.",
-    orientation: "portrait",
-    categoryOverride: "Symposia",
-  },
 ];
 
 const determineCategory = (certificate: ConferenceCertificate): EventCategory => {
@@ -423,11 +308,18 @@ const determineCategory = (certificate: ConferenceCertificate): EventCategory =>
   return "Conferences";
 };
 
-const certificates: CategorizedCertificate[] = certificateData.map((certificate) => ({
-  ...certificate,
-  imageUrl: assetPath(certificate.imageUrl),
-  category: certificate.categoryOverride ?? determineCategory(certificate),
-}));
+const parseEventDateValue = (value: string) => {
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+};
+
+const certificates: CategorizedCertificate[] = certificateData
+  .map((certificate) => ({
+    ...certificate,
+    imageUrl: assetPath(certificate.imageUrl),
+    category: certificate.categoryOverride ?? determineCategory(certificate),
+  }))
+  .sort((a, b) => parseEventDateValue(b.eventDate) - parseEventDateValue(a.eventDate));
 
 const formatDate = (value: string) => {
   const parsed = new Date(value);

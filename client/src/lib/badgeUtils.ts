@@ -68,8 +68,8 @@ export function getPrimaryBadgeForPage(page: string): BadgeRecord | undefined {
 
 export function formatBadgeLabel(badge: BadgeRecord): string {
   const { title, issuer, issueDate } = badge;
-  const datePart = issueDate ? ` · Issued ${issueDate}` : "";
-  return `${title} — ${issuer}${datePart}`;
+  const datePart = issueDate ? ` | Issued ${issueDate}` : "";
+  return `${title} - ${issuer}${datePart}`;
 }
 
 export function deriveBadgePageFromPath(pathname: string): string {

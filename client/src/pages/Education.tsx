@@ -363,7 +363,7 @@ const workshopPrograms: EducationRecord[] = [
     id: "workshop-cam-spss-2015",
     category: "Workshops",
     title: "SPSS Training Workshop",
-    institution: "Ilam University – Student Scientific Association",
+    institution: "Ilam University - Student Scientific Association",
     location: "Ilam, Iran",
     period: "Dec 3, 2014",
     status: "Workshop Completion",
@@ -929,7 +929,7 @@ export default function Education({ params }: EducationProps = {}) {
                   <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                     {metaParts.map((part, partIndex) => (
                       <span key={part}>
-                        {partIndex > 0 ? <span className="px-1">â€¢</span> : null}
+                        {partIndex > 0 ? <span className="px-1">|</span> : null}
                         {part}
                       </span>
                     ))}

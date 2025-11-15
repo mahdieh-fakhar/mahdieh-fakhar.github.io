@@ -16,7 +16,7 @@ export default function Certifications() {
     { value: badges.length, label: "Verified Credentials" },
     { value: issuerCount, label: "Issuing Bodies" },
     { value: uniqueSkills, label: "Unique Skill Tags" },
-    { value: latestYear ?? "—", label: "Latest Issued Year" },
+    { value: latestYear ?? "N/A", label: "Latest Issued Year" },
   ];
 
   const badgeCards = badges.map((badge) => {

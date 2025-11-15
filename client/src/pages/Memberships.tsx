@@ -57,7 +57,7 @@ const memberships: Membership[] = [
         {
           src: "/images/memberships/EPOS.png",
           alt: "EPOS reviewer frame",
-          caption: "EPOS Revista de Filología framing badge",
+          caption: "EPOS Philology journal framing badge",
           downloadName: "membership-epos-frame.png",
         },
         {
@@ -103,7 +103,7 @@ const memberships: Membership[] = [
     id: 3,
     title: "Research Collaborator",
     organization: "IHUPA Research Institute",
-    location: "UNED-AlcaA�iz, Spain",
+    location: "UNED-Alcaniz, Spain",
     period: "2021-2023",
     category: "research",
     highlights: [

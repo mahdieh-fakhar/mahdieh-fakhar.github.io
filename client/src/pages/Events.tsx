@@ -108,7 +108,7 @@ const certificateData: ConferenceCertificate[] = [
     id: "symp-2025-atlas-agora-panel",
     conferenceName: "II ATLAS-AGORA Symposium on Rural Language Education",
     certificateTitle: "Certificate of Participation",
-    certificateSubject: "Language teachers take action – part II (roundtable)",
+    certificateSubject: "Language teachers take action - part II (roundtable)",
     certificateType: "Panel Participation",
     holderName: "Mahdieh Fakhar Shahreza",
     holderRole: "Panelist",
@@ -154,7 +154,7 @@ const certificateData: ConferenceCertificate[] = [
     eventDate: "2024-05-08",
     location: "UNED, Madrid, Spain",
     sponsors: ["UNED Faculty of Philology"],
-    imageUrl: "/images/seminars/XXVI Seminario Permanente de Investigación-66_signed (1).jpg",
+    imageUrl: "/images/seminars/XXVI-Permanent-Research-Seminar-66_signed-1.jpg",
     aiInsights:
       "Extends research into responsible generative AI adoption for blended language instruction.",
     orientation: "landscape",

@@ -267,13 +267,13 @@ export default function Home() {
               </div>
 
               <p className="text-xl font-medium text-muted-foreground" data-testid="text-title">
-                Data Scientist · Researcher · Academic Strategist
+                Data Scientist | Researcher | Academic Strategist
               </p>
 
               <p className="text-base text-muted-foreground/90 md:text-lg" data-testid="text-bio">
                 Strategic data scientist and researcher shaping multilingual learning and digital
                 transformation agendas through AI-driven analytics, bibliometrics, and evidence-based
-                storytelling. Currently completing a Data Science & Big Data master’s at UNIR (Spain)
+                storytelling. Currently completing a Data Science & Big Data master's at UNIR (Spain)
                 while leading cross-border collaborations across Europe and the Middle East.
               </p>
 
@@ -383,7 +383,7 @@ export default function Home() {
               Navigate the full academic and innovation spectrum at a glance
             </h2>
             <p className="text-base text-muted-foreground md:text-lg">
-              Every page is architected as a campaign touchpoint—blending narrative, data, and design.
+              Every page is architected as a campaign touchpoint, blending narrative, data, and design.
               Use this dynamic map to drop into the stories, dashboards, and assets most relevant to
               your collaboration goals.
             </p>
@@ -495,7 +495,7 @@ export default function Home() {
           </h2>
           <p className="mt-3 text-base text-muted-foreground md:text-lg">
             Each spotlight is built for investors, universities, and innovation partners seeking
-            rapid insight into Mahdieh’s portfolio. Activate the module that aligns with your goals
+            rapid insight into Mahdieh's portfolio. Activate the module that aligns with your goals
             and dive in.
           </p>
         </motion.div>

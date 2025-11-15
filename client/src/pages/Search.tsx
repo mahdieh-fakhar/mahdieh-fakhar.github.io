@@ -109,7 +109,7 @@ export default function Search() {
 
       {normalizedQuery && (
         <p className="mt-6 text-sm text-muted-foreground">
-          Showing results for <span className="font-semibold text-primary">“{query}”</span>
+          Showing results for <span className="font-semibold text-primary">"{query}"</span>
         </p>
       )}
 
@@ -160,7 +160,7 @@ export default function Search() {
                 Start typing to search the site
               </h2>
               <p className="text-sm text-muted-foreground">
-                You can look up pages like “Investigations”, “Researcher”, or “Data Scientist”.
+                You can look up pages like "Investigations", "Researcher", or "Data Scientist".
               </p>
             </CardContent>
           </Card>
@@ -188,4 +188,3 @@ export default function Search() {
     </div>
   );
 }
-

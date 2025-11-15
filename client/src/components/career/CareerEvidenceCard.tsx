@@ -103,76 +103,71 @@ export function CareerEvidenceCard({
     >
       <Card className="group relative overflow-hidden rounded-[32px] border border-card-border bg-card shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,_rgba(99,102,241,0.12),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <CardContent className="relative flex flex-col gap-6 p-6 md:flex-row md:gap-10 md:p-8">
-          <div className="flex flex-col gap-4 md:w-[35%]">
-            {hasSlides ? (
-              <>
-                <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
-                  <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
-                    <CarouselContent className="h-full">
-                      {slides.map((slide, index) => (
-                        <CarouselItem key={slide.src} className="h-full">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setModalIndex(index);
-                              setModalOpen(true);
-                            }}
-                            className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-                          >
-                            <img
-                              src={slide.src}
-                              alt={slide.alt}
-                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              loading="lazy"
-                            />
-                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                          </button>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    {slides.length > 1 && (
-                      <>
-                        <CarouselPrevious className="left-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
-                        <CarouselNext className="right-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
-                      </>
-                    )}
-                  </Carousel>
-                  {slides.length > 1 && (
-                    <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5">
-                      {slides.map((_, idx) => (
+        <CardContent
+          className={`relative flex flex-col gap-6 p-6 md:p-8 ${hasSlides ? "md:flex-row md:gap-10" : ""}`}
+        >
+          {hasSlides && (
+            <div className="flex flex-col gap-4 md:w-[35%]">
+              <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
+                <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
+                  <CarouselContent className="h-full">
+                    {slides.map((slide, index) => (
+                      <CarouselItem key={slide.src} className="h-full">
                         <button
-                          key={idx}
-                          onClick={() => inlineApi?.scrollTo(idx)}
-                          className={`h-2 rounded-full transition-all ${
-                            idx === inlineIndex ? "w-6 bg-indigo-400" : "w-2 bg-white/40 hover:bg-indigo-300"
-                          }`}
-                          aria-label={`Go to slide ${idx + 1}`}
-                        />
-                      ))}
-                    </div>
+                          type="button"
+                          onClick={() => {
+                            setModalIndex(index);
+                            setModalOpen(true);
+                          }}
+                          className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        >
+                          <img
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                        </button>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {slides.length > 1 && (
+                    <>
+                      <CarouselPrevious className="left-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                      <CarouselNext className="right-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                    </>
                   )}
-                </div>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
-                  onClick={() => setModalOpen(true)}
-                >
-                  Open Evidence Gallery
-                </Button>
-              </>
-            ) : (
-              <div className="flex h-56 w-full flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-background/60 p-6 text-center text-sm text-muted-foreground shadow-inner shadow-black/5 md:h-64">
-                <span className="text-sm font-semibold text-foreground/80">Evidence gallery unavailable</span>
-                <p className="mt-2 text-xs text-muted-foreground">Documentation will be added soon.</p>
+                </Carousel>
+                {slides.length > 1 && (
+                  <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5">
+                    {slides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => inlineApi?.scrollTo(idx)}
+                        className={`h-2 rounded-full transition-all ${
+                          idx === inlineIndex ? "w-6 bg-indigo-400" : "w-2 bg-white/40 hover:bg-indigo-300"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div className="flex flex-col gap-4 text-left md:w-[65%]">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
+                onClick={() => setModalOpen(true)}
+              >
+                Open Evidence Gallery
+              </Button>
+            </div>
+          )}
+
+          <div className={`flex flex-col gap-4 text-left ${hasSlides ? "md:w-[65%]" : "md:w-full"}`}>
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <Badge className="rounded-full bg-primary/90 px-3 py-1 text-[0.65rem] font-semibold text-primary-foreground shadow">
                 {roleLabel}

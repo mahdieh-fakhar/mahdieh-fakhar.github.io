@@ -62,7 +62,7 @@ const thesisFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Thesi
 const handbookFallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Handbook evidence placeholder" }];
 
 function getPublicationSlides(): Slide[] {
-  return publicationFallbackSlides;
+  return [];
 }
 
 function getPublicationHighlights(pub: Publication): string[] {

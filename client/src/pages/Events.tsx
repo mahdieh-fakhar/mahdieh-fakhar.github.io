@@ -58,6 +58,45 @@ const certificateData: ConferenceCertificate[] = [
     categoryOverride: "Conferences",
   },
   {
+    id: "sem-2024-xxvi-seminario",
+    conferenceName: "XXVI Permanent Research Seminar TIC-ETL",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject: "Generative AI in Language Teaching and Processing",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Joined UNED's permanent seminar exploring generative AI for language education contexts.",
+    eventDate: "2024-05-08",
+    location: "UNED, Madrid, Spain",
+    sponsors: ["UNED Faculty of Philology"],
+    imageUrl: "/images/seminars/XXVI Seminario Permanente de Investigación-66_signed (1).jpg",
+    aiInsights:
+      "Extends research into responsible generative AI adoption for blended language instruction.",
+    orientation: "landscape",
+    categoryOverride: "Seminars",
+  },
+  {
+    id: "sem-2022-eccoe-multiplier",
+    conferenceName: "II ECCOE Multiplier Event / XXIII Seminar TIC ETL",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Digital micro-credentials: a solution with a vision for tomorrow's educational needs",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Worked with ECCOE partners on micro-credential frameworks for flexible learning pathways.",
+    eventDate: "2022-05-13",
+    location: "UNED, Madrid, Spain",
+    sponsors: ["UNED Faculty of Philology", "ECCOE"],
+    imageUrl: "/images/seminars/Certificate_ECCOE-Mahdie.jpg",
+    aiInsights:
+      "Strengthens strategic literacy in European micro-credential standards and recognition.",
+    orientation: "landscape",
+    categoryOverride: "Seminars",
+  },
+  {
     id: "conf-2021-utm-covid19",
     conferenceName:
       "Current Trends in the Middle East: Virtual International Joint Conference on COVID-19 Global Impacts",

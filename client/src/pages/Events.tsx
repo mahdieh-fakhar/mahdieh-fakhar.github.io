@@ -22,6 +22,7 @@ type ConferenceCertificate = {
   location: string;
   sponsors: string[];
   imageUrl: string;
+  additionalImages?: string[];
   aiInsights: string;
   orientation: CertificateOrientation;
   categoryOverride?: EventCategory;
@@ -56,6 +57,71 @@ const certificateData: ConferenceCertificate[] = [
       "Highlights adoption of evidence-based translation analytics with contemporary instrumentation.",
     orientation: "portrait",
     categoryOverride: "Conferences",
+  },
+  {
+    id: "symp-2025-encuentro-momentum",
+    conferenceName: "Momentum Encounter: From Theory to Practice",
+    certificateTitle: "Certificate of Participation",
+    certificateSubject: "Reflections on AI, social media, and professional portfolios",
+    certificateType: "Participation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Participated in Momentum CSIC's in-person program on AI, social platforms, and digital professional portfolios.",
+    eventDate: "2025-02-26",
+    location: "Madrid, Spain",
+    sponsors: [
+      "CSIC",
+      "Ministry of Science, Innovation and Universities",
+      "NextGenerationEU",
+    ],
+    imageUrl: "/images/symposia/Mahdieh Fakhar Shahreza_Certificado_Encuentro_Momentum_Page_1.jpg",
+    additionalImages: [
+      "/images/symposia/Mahdieh Fakhar Shahreza_Certificado_Encuentro_Momentum_Page_2.jpg",
+    ],
+    aiInsights:
+      "Expands interdisciplinary proficiency at the intersection of AI, scientific communication, and professional development.",
+    orientation: "portrait",
+    categoryOverride: "Symposia",
+  },
+  {
+    id: "symp-2025-atlas-agora-attendance",
+    conferenceName: "II ATLAS-AGORA Symposium on Rural Language Education",
+    certificateTitle: "Certificate of Attendance",
+    certificateSubject:
+      "Attendance at ATLAS-AGORA rural language teacher education symposium (identity, opportunity, inclusion)",
+    certificateType: "Attendance",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Participant",
+    roleDescription:
+      "Attended UNED Zamora's ATLAS-AGORA sessions on rural language education and inclusion.",
+    eventDate: "2025-05-10",
+    location: "UNED Zamora, Spain",
+    sponsors: ["UNED Zamora"],
+    imageUrl: "/images/symposia/Asistencia Mahdieh Fakhar_ f.jpg",
+    aiInsights:
+      "Advances rural education advocacy through collaborative symposium dialogues on inclusive language policy.",
+    orientation: "portrait",
+    categoryOverride: "Symposia",
+  },
+  {
+    id: "symp-2025-atlas-agora-panel",
+    conferenceName: "II ATLAS-AGORA Symposium on Rural Language Education",
+    certificateTitle: "Certificate of Participation",
+    certificateSubject: "Language teachers take action – part II (roundtable)",
+    certificateType: "Panel Participation",
+    holderName: "Mahdieh Fakhar Shahreza",
+    holderRole: "Panelist",
+    roleDescription:
+      "Joined the ATLAS-AGORA roundtable discussing teacher agency and action in rural contexts.",
+    eventDate: "2025-05-10",
+    location: "UNED Zamora, Spain",
+    sponsors: ["UNED Zamora", "Ministry of Science, Innovation and Universities"],
+    imageUrl: "/images/symposia/Mahdieh Fakhar_f.jpg",
+    aiInsights:
+      "Showcases leadership in rural language teacher development through collaborative symposium panels.",
+    orientation: "landscape",
+    categoryOverride: "Symposia",
   },
   {
     id: "congress-2025-earma-inorms",
@@ -374,6 +440,7 @@ const certificates: CategorizedCertificate[] = certificateData
   .map((certificate) => ({
     ...certificate,
     imageUrl: assetPath(certificate.imageUrl),
+    additionalImages: certificate.additionalImages?.map((src) => assetPath(src)),
     category: certificate.categoryOverride ?? determineCategory(certificate),
   }))
   .sort((a, b) => parseEventDateValue(b.eventDate) - parseEventDateValue(a.eventDate));
@@ -406,13 +473,16 @@ const certificateHighlights = (certificate: CategorizedCertificate): string[] =>
 };
 
 const certificateSlides = (certificate: CategorizedCertificate): Slide[] => [
-  {
-    src: certificate.imageUrl,
-    alt: `${certificate.certificateTitle} - ${certificate.conferenceName}`,
-    caption: certificate.certificateSubject,
-    downloadName: `${certificate.id}.jpg`,
-  },
-];
+  certificate.imageUrl,
+  ...(certificate.additionalImages ?? []),
+].map((src, index) => ({
+  src,
+  alt: `${certificate.certificateTitle} - ${certificate.conferenceName}${
+    index > 0 ? ` (page ${index + 1})` : ""
+  }`,
+  caption: certificate.certificateSubject,
+  downloadName: `${certificate.id}${index > 0 ? `-page-${index + 1}` : ""}.jpg`,
+}));
 
 const navItems: EventNavItem[] = [
   {

@@ -55,6 +55,12 @@ const memberships: Membership[] = [
     evidence: {
       slides: [
         {
+          src: "/images/memberships/EPOS.png",
+          alt: "EPOS reviewer frame",
+          caption: "EPOS Revista de Filología framing badge",
+          downloadName: "membership-epos-frame.png",
+        },
+        {
           src: "/images/memberships/EPOS-UNED.jpg",
           alt: "EPOS-UNED peer review certificate",
           caption: "EPOS Journal double-blind reviewer recognition",

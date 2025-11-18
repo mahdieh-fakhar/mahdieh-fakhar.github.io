@@ -65,6 +65,26 @@ function getPublicationSlides(): Slide[] {
   return [];
 }
 
+function getPublicationTimestamp(pub: Publication): number {
+  if (pub.date) {
+    const explicit = Date.parse(pub.date);
+    if (!Number.isNaN(explicit)) {
+      return explicit;
+    }
+  }
+
+  const fallback = Date.parse(pub.year);
+  if (!Number.isNaN(fallback)) {
+    return fallback;
+  }
+
+  return 0;
+}
+
+function sortPublicationsByDate(items: Publication[]): Publication[] {
+  return [...items].sort((a, b) => getPublicationTimestamp(b) - getPublicationTimestamp(a));
+}
+
 function getPublicationHighlights(pub: Publication): string[] {
   const highlights: string[] = [];
   highlights.push(`Authors: ${pub.authors}`);
@@ -109,28 +129,34 @@ function getHandbookSlides(): Slide[] {
   return handbookFallbackSlides;
 }
 
-const PublicationCards = ({ items }: { items: Publication[] }) => (
-  <div className="stack-gap-md">
-    {items.map((pub, index) => (
-      <motion.div
-        key={pub.id}
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: index * 0.08 }}
-      >
-        <CareerEvidenceCard
-          title={pub.title}
-          roleLabel={pub.status ?? publicationTypeLabels[pub.type]}
-          organization={pub.venue}
-          location={publicationIconLocation[pub.type]}
-          period={pub.year}
-          highlights={getPublicationHighlights(pub)}
-          slides={getPublicationSlides()}
-        />
-      </motion.div>
-    ))}
-  </div>
-);
+const PublicationCards = ({ items }: { items: Publication[] }) => {
+  const sortedItems = sortPublicationsByDate(items);
+
+  return (
+    <div className="stack-gap-md">
+      {sortedItems.map((pub, index) => (
+        <motion.div
+          key={pub.id}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: index * 0.08 }}
+        >
+          <CareerEvidenceCard
+            title={pub.title}
+            roleLabel={pub.status ?? publicationTypeLabels[pub.type]}
+            organization={pub.venue}
+            location={publicationIconLocation[pub.type]}
+            period={pub.year}
+            highlights={getPublicationHighlights(pub)}
+            slides={getPublicationSlides()}
+            referenceUrl={pub.url}
+            referenceLabel={pub.urlLabel}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
 
 const ArticlesSection = ({ includeFocus = true }: { includeFocus?: boolean }) => {
   const journalPublications = publications.filter((pub) => pub.type === "journal");

@@ -38,6 +38,11 @@ const MIN_ZOOM = 0.75;
 const MAX_ZOOM = 2.5;
 const ZOOM_STEP = 0.25;
 
+const RESTRICTED_BRAND_PLACEHOLDER = "Publication Portal";
+
+const sanitizeRestrictedText = (value: string): string =>
+  value.replace(/researchgate/gi, RESTRICTED_BRAND_PLACEHOLDER);
+
 export function CareerEvidenceCard({
   title,
   roleLabel = "Verified Record",
@@ -46,7 +51,7 @@ export function CareerEvidenceCard({
   period,
   highlights,
   referenceUrl,
-  referenceLabel = "Visit Reference Site",
+  referenceLabel = "View Publication",
   abstract,
   slides,
 }: CareerEvidenceCardProps) {
@@ -57,6 +62,14 @@ export function CareerEvidenceCard({
   const [modalIndex, setModalIndex] = useState(0);
   const [zoom, setZoom] = useState(1);
   const hasSlides = slides.length > 0;
+
+  const sanitizedTitle = sanitizeRestrictedText(title);
+  const sanitizedRoleLabel = sanitizeRestrictedText(roleLabel);
+  const sanitizedOrganization = sanitizeRestrictedText(organization);
+  const sanitizedLocation = sanitizeRestrictedText(location);
+  const sanitizedHighlights = highlights.map((item) => sanitizeRestrictedText(item));
+  const sanitizedReferenceLabel = sanitizeRestrictedText(referenceLabel);
+  const sanitizedAbstract = abstract ? sanitizeRestrictedText(abstract) : undefined;
 
   useEffect(() => {
     if (!inlineApi) {
@@ -172,20 +185,20 @@ export function CareerEvidenceCard({
           <div className={`flex flex-col gap-4 text-left ${hasSlides ? "md:w-[65%]" : "md:w-full"}`}>
             <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
               <Badge className="rounded-full bg-primary/90 px-3 py-1 text-[0.65rem] font-semibold text-primary-foreground shadow">
-                {roleLabel}
+                {sanitizedRoleLabel}
               </Badge>
               <span>
-                {location} | {period}
+                {sanitizedLocation} | {period}
               </span>
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold leading-tight text-foreground">{title}</h2>
-              <p className="text-base font-medium text-primary">{organization}</p>
+              <h2 className="text-2xl font-semibold leading-tight text-foreground">{sanitizedTitle}</h2>
+              <p className="text-base font-medium text-primary">{sanitizedOrganization}</p>
             </div>
 
             <ul className="space-y-2 text-sm leading-relaxed text-foreground/85">
-              {highlights.map((item) => (
+              {sanitizedHighlights.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/70" />
                   <span>{item}</span>
@@ -193,12 +206,12 @@ export function CareerEvidenceCard({
               ))}
             </ul>
 
-            {abstract && (
+            {sanitizedAbstract && (
               <div className="rounded-2xl border border-border/70 bg-background/70 p-4 text-sm leading-relaxed text-foreground/85 shadow-inner">
                 <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-foreground/80">
                   Abstract
                 </p>
-                <p className="whitespace-pre-line text-foreground/80">{abstract}</p>
+                <p className="whitespace-pre-line text-foreground/80">{sanitizedAbstract}</p>
               </div>
             )}
 
@@ -209,8 +222,8 @@ export function CareerEvidenceCard({
                   size="lg"
                   className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
                 >
-                  <a href={referenceUrl} target="_blank" rel="noreferrer" aria-label={referenceLabel}>
-                    {referenceLabel}
+                  <a href={referenceUrl} target="_blank" rel="noreferrer" aria-label={sanitizedReferenceLabel}>
+                    {sanitizedReferenceLabel}
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>

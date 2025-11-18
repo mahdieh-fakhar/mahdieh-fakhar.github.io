@@ -56,7 +56,7 @@ export const publications: Publication[] = [
     type: "journal",
     description: "Introduces a Rasch-based workflow that selects optimal items for evaluation-heavy research.",
     url: "https://www.researchgate.net/publication/370591206_Rasch-Preselected_Items_An_Optimal_Approach_in_Item-based_Evaluation",
-    urlLabel: "Read on ResearchGate",
+    urlLabel: "View Publication",
     date: "2023-10-01",
   },
   {
@@ -71,7 +71,7 @@ export const publications: Publication[] = [
     description:
       "Applies social network analysis to 12-session Moodle-based PBL cohorts, mapping learner interactions with Gephi.",
     url: "https://www.researchgate.net/publication/370591278_Visualized_Network_of_Online_Interactions_in_an_Ed-Tech_Enhanced_EFL_Language_Learning_Context_Using_Gephi_Software",
-    urlLabel: "View on ResearchGate",
+    urlLabel: "View Publication",
     date: "2023-05-01",
     abstract:
       "Background. The importance of Social Network Analysis (SNA) in the study of relations, interactions, communications, and collaborations has been the focus of many technology-assisted language learning studies in general and computer-supported collaborative learning (CSCL) investigations in particular. Although there is a wealth of research on problem-based learning (PBL), little if any has scrutinized the collaborative aspect of PBL processes visible by taking advantage of SNA software. Purpose. The main purpose of the current study was to provide automated visual and mathematical analysis of Iranian EFL students' and teachers' interaction processes, types, and patterns while examining correlations among interactivity variables and group academic performance. Method. Thirty Iranian EFL university students and two instructors were randomly assigned to two PBL groups and participated in a 12-session Moodle-based online PBL course. Researchers captured all interaction data and calculated SNA variables at individual and group network levels using Gephi version 9.2. Results. Analysis of 1,240 online student-to-student interactions showed a positive correlation between the students' level of interactivity with teachers and their academic performance while identifying roles for isolated and highly active participants. Conclusions. SNA as a common methodology within CSCL research can reliably monitor collaborative interactions and present a richer picture of PBL processes.",
@@ -82,13 +82,13 @@ export const publications: Publication[] = [
       "The study of EFL Students' Self-Regulation, Locus of Control, and Academic Achievement through Mobile-Assisted Language Learning; The Case of Duolingo App",
     authors: "Mahdieh Fakhar Shahreza, Elena Barcena, & Reza Khany",
     year: "May 2023",
-    venue: "ResearchGate",
+    venue: "Mobile-Assisted Language Learning Research Study",
     type: "journal",
     status: "Article",
     description:
       "Quasi-experimental Duolingo study comparing self-regulation, locus of control, and academic achievement across treatment and control cohorts.",
     url: "https://www.researchgate.net/publication/370591338_The_study_of_EFL_Students'_Self-Regulation_Locus_of_Control_and_Academic_Achievement_through_Mobile-Assisted_Language_Learning_The_Case_of_DuolingoR_App",
-    urlLabel: "View on ResearchGate",
+    urlLabel: "View Publication",
     date: "2023-05-15",
     abstract:
       "This study scrutinized the effectiveness of the Duolingo mobile language learning app on students' academic achievement in light of self-regulation and locus of control. Sixty-two Iranian learners studying Spanish were divided into a control group receiving traditional instruction and an experimental group integrating Duolingo sessions. Paired and independent sample t-tests revealed that the experimental group benefited more and demonstrated stronger self-regulation strategies. Locus of control also differed meaningfully, with Duolingo participants becoming more internal. Recommendations for deploying the app effectively are provided.",

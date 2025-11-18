@@ -12,6 +12,7 @@ export type Publication = {
   url?: string;
   urlLabel?: string;
   date?: string;
+  abstract?: string;
 };
 
 export const publications: Publication[] = [
@@ -72,6 +73,8 @@ export const publications: Publication[] = [
     url: "https://www.researchgate.net/publication/370591278_Visualized_Network_of_Online_Interactions_in_an_Ed-Tech_Enhanced_EFL_Language_Learning_Context_Using_Gephi_Software",
     urlLabel: "View on ResearchGate",
     date: "2023-05-01",
+    abstract:
+      "Background. The importance of Social Network Analysis (SNA) in the study of relations, interactions, communications, and collaborations has been the focus of many technology-assisted language learning studies in general and computer-supported collaborative learning (CSCL) investigations in particular. Although there is a wealth of research on problem-based learning (PBL), little if any has scrutinized the collaborative aspect of PBL processes visible by taking advantage of SNA software. Purpose. The main purpose of the current study was to provide automated visual and mathematical analysis of Iranian EFL students' and teachers' interaction processes, types, and patterns while examining correlations among interactivity variables and group academic performance. Method. Thirty Iranian EFL university students and two instructors were randomly assigned to two PBL groups and participated in a 12-session Moodle-based online PBL course. Researchers captured all interaction data and calculated SNA variables at individual and group network levels using Gephi version 9.2. Results. Analysis of 1,240 online student-to-student interactions showed a positive correlation between the students' level of interactivity with teachers and their academic performance while identifying roles for isolated and highly active participants. Conclusions. SNA as a common methodology within CSCL research can reliably monitor collaborative interactions and present a richer picture of PBL processes.",
   },
   {
     id: 6,

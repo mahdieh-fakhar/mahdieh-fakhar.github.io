@@ -30,6 +30,7 @@ export type CareerEvidenceCardProps = {
   highlights: string[];
   referenceUrl?: string;
   referenceLabel?: string;
+  abstract?: string;
   slides: Slide[];
 };
 
@@ -46,6 +47,7 @@ export function CareerEvidenceCard({
   highlights,
   referenceUrl,
   referenceLabel = "Visit Reference Site",
+  abstract,
   slides,
 }: CareerEvidenceCardProps) {
   const [inlineApi, setInlineApi] = useState<CarouselApi | null>(null);
@@ -190,6 +192,15 @@ export function CareerEvidenceCard({
                 </li>
               ))}
             </ul>
+
+            {abstract && (
+              <div className="rounded-2xl border border-border/70 bg-background/70 p-4 text-sm leading-relaxed text-foreground/85 shadow-inner">
+                <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-foreground/80">
+                  Abstract
+                </p>
+                <p className="whitespace-pre-line text-foreground/80">{abstract}</p>
+              </div>
+            )}
 
             <div className="mt-2 flex flex-wrap items-center justify-end gap-3">
               {referenceUrl && (

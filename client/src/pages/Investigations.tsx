@@ -147,12 +147,13 @@ const PublicationCards = ({ items }: { items: Publication[] }) => {
             organization={pub.venue}
             location={publicationIconLocation[pub.type]}
             period={pub.year}
-            highlights={getPublicationHighlights(pub)}
-            slides={getPublicationSlides()}
-            referenceUrl={pub.url}
-            referenceLabel={pub.urlLabel}
-          />
-        </motion.div>
+          highlights={getPublicationHighlights(pub)}
+          slides={getPublicationSlides()}
+          abstract={pub.abstract}
+          referenceUrl={pub.url}
+          referenceLabel={pub.urlLabel}
+        />
+      </motion.div>
       ))}
     </div>
   );

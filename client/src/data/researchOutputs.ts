@@ -113,16 +113,6 @@ export const publications: Publication[] = [
   },
   {
     id: 8,
-    title: "Social Media in Higher Education: Reflections and Case Studies",
-    authors: "Fakhar Shahreza, M.",
-    year: "2022",
-    venue: "Open Book Publishers / Taylor & Francis",
-    type: "review",
-    description: "Book review analyzing the role of social media in higher education settings.",
-    date: "2022-06-01",
-  },
-  {
-    id: 9,
     title: "Development of the EFL Teacher Change Scale",
     authors: "Khany, R. & Fakhar Shahreza, M.",
     year: "2016",

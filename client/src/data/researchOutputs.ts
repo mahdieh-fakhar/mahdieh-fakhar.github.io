@@ -78,6 +78,23 @@ export const publications: Publication[] = [
   },
   {
     id: 6,
+    title:
+      "The study of EFL Students' Self-Regulation, Locus of Control, and Academic Achievement through Mobile-Assisted Language Learning; The Case of Duolingo App",
+    authors: "Mahdieh Fakhar Shahreza, Elena Barcena, & Reza Khany",
+    year: "May 2023",
+    venue: "ResearchGate",
+    type: "journal",
+    status: "Article",
+    description:
+      "Quasi-experimental Duolingo study comparing self-regulation, locus of control, and academic achievement across treatment and control cohorts.",
+    url: "https://www.researchgate.net/publication/370591338_The_study_of_EFL_Students'_Self-Regulation_Locus_of_Control_and_Academic_Achievement_through_Mobile-Assisted_Language_Learning_The_Case_of_DuolingoR_App",
+    urlLabel: "View on ResearchGate",
+    date: "2023-05-15",
+    abstract:
+      "This study scrutinized the effectiveness of the Duolingo mobile language learning app on students' academic achievement in light of self-regulation and locus of control. Sixty-two Iranian learners studying Spanish were divided into a control group receiving traditional instruction and an experimental group integrating Duolingo sessions. Paired and independent sample t-tests revealed that the experimental group benefited more and demonstrated stronger self-regulation strategies. Locus of control also differed meaningfully, with Duolingo participants becoming more internal. Recommendations for deploying the app effectively are provided.",
+  },
+  {
+    id: 7,
     title: "Social Media in Higher Education: Reflections and Case Studies",
     authors: "Fakhar Shahreza, M.",
     year: "2022",
@@ -87,7 +104,7 @@ export const publications: Publication[] = [
     date: "2022-06-01",
   },
   {
-    id: 7,
+    id: 8,
     title: "Development of the EFL Teacher Change Scale",
     authors: "Khany, R. & Fakhar Shahreza, M.",
     year: "2016",

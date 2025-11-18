@@ -60,6 +60,21 @@ export const publications: Publication[] = [
   },
   {
     id: 5,
+    title: "Visualized Network of Online Interactions in an Ed-Tech Enhanced EFL Language Learning Context Using Gephi Software",
+    authors: "Reza Khany & Mahdieh Fakhar Shahreza",
+    year: "May 2023",
+    venue:
+      "18th International TELLSI Conference – Universidad de Tarbiat Modares & Universidad de Islamic Azad, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    description:
+      "Applies social network analysis to 12-session Moodle-based PBL cohorts, mapping learner interactions with Gephi.",
+    url: "https://www.researchgate.net/publication/370591278_Visualized_Network_of_Online_Interactions_in_an_Ed-Tech_Enhanced_EFL_Language_Learning_Context_Using_Gephi_Software",
+    urlLabel: "View on ResearchGate",
+    date: "2023-05-01",
+  },
+  {
+    id: 6,
     title: "Social Media in Higher Education: Reflections and Case Studies",
     authors: "Fakhar Shahreza, M.",
     year: "2022",
@@ -69,7 +84,7 @@ export const publications: Publication[] = [
     date: "2022-06-01",
   },
   {
-    id: 6,
+    id: 7,
     title: "Development of the EFL Teacher Change Scale",
     authors: "Khany, R. & Fakhar Shahreza, M.",
     year: "2016",

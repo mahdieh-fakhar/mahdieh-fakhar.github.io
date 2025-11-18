@@ -100,7 +100,7 @@ export const publications: Publication[] = [
     authors: "Reza Khany & Mahdieh Fakhar Shahreza",
     year: "May 2023",
     venue:
-      "3rd International Conference on New Trends in English Language Teaching and Testing · Tehran University, Iran",
+      "3rd International Conference on New Trends in English Language Teaching and Testing - Tehran University, Iran",
     type: "journal",
     status: "Conference Paper",
     description:

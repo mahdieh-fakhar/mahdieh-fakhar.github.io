@@ -95,6 +95,24 @@ export const publications: Publication[] = [
   },
   {
     id: 7,
+    title:
+      "Investigating the effects of teachers' self-leadership on their professional development and change",
+    authors: "Reza Khany & Mahdieh Fakhar Shahreza",
+    year: "May 2023",
+    venue:
+      "3rd International Conference on New Trends in English Language Teaching and Testing · Tehran University, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    description:
+      "SEM-based study exploring how self-leadership predicts professional development and change among Iranian EFL teachers.",
+    url: "https://www.researchgate.net/publication/370591582_Investigating_the_effects_of_teachers'_self-leadership_on_their_professional_development_and_change",
+    urlLabel: "View Publication",
+    date: "2023-05-10",
+    abstract:
+      "This study examined associations among EFL teachers' self-leadership, professional development, and professional change. Two hundred forty-six Iranian EFL teachers completed standardized questionnaires and the collected data were analyzed via structural equation modeling. Results indicated that self-leadership significantly relates to both development and change with acceptable fit indices, while contextual factors contribute to intra/inter-individual differences. Subcategories of professional development can affect professional change, and the findings highlight implications for teachers, language planners, and practitioners.",
+  },
+  {
+    id: 8,
     title: "Social Media in Higher Education: Reflections and Case Studies",
     authors: "Fakhar Shahreza, M.",
     year: "2022",
@@ -104,7 +122,7 @@ export const publications: Publication[] = [
     date: "2022-06-01",
   },
   {
-    id: 8,
+    id: 9,
     title: "Development of the EFL Teacher Change Scale",
     authors: "Khany, R. & Fakhar Shahreza, M.",
     year: "2016",

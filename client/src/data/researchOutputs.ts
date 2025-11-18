@@ -64,7 +64,7 @@ export const publications: Publication[] = [
     authors: "Reza Khany & Mahdieh Fakhar Shahreza",
     year: "May 2023",
     venue:
-      "18th International TELLSI Conference – Universidad de Tarbiat Modares & Universidad de Islamic Azad, Iran",
+      "18th International TELLSI Conference - Universidad de Tarbiat Modares & Universidad de Islamic Azad, Iran",
     type: "journal",
     status: "Conference Paper",
     description:

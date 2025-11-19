@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 14,
+    title:
+      "Research on Educational Technology Evaluation in Journal of Computer and Education; Implications for English Language Teaching.",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "November 2019",
+    venue:
+      "First International Conference on English Language Studies - Isfahan University, Iran (http://icels.ui.ac.ir/en/)",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2019-11-01",
+    url: "https://www.researchgate.net/publication/370591346_Research_on_Educational_Technology_Evaluation_in_Journal_of_Computer_and_Education_Implications_for_English_Language_Teaching",
+    urlLabel: "View Publication",
+    description:
+      "Reviews 2015-2019 Computer & Education journal articles on educational technology evaluation to surface implications for English language teaching research agendas.",
+    abstract:
+      "Much has been written on the improvements, innovations, applications, and importance of Educational Technologies (ETs) in the field of English Language Teaching (ELT) during the last decade. Hence, the present study aimed at scrutinizing and reviewing the published research articles in the journal of Computer & Education between the years of 2015-2019 to see how the use of ETs is evaluated. In so doing, having determined some inclusion criteria, 732 full-text research articles were included, codified, and tabulated by the researchers to be examined in the analyzing process. The collected data were qualitatively content analyzed using MAXQDA version 12. The analyzed data revealed that the usage design and procedure of more than half of the studies were experimental, testing the application of a new ET by a pre-test and post-test. In addition, it was further found that many new scales and questionnaires were developed, validated, and tested for different dimensions of ETs in ELT. This study has various implications for language teachers, teacher educators, material developers, and researchers.",
+  },
+  {
     id: 13,
     title:
       "Iranian University Students' Familiarity with Digital Portfolio Creation Tools during the COVID-19 Pandemic: Merits, Demerits",

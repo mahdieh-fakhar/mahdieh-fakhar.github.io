@@ -86,6 +86,10 @@ function sortPublicationsByDate(items: Publication[]): Publication[] {
 }
 
 function getPublicationHighlights(pub: Publication): string[] {
+  if (pub.highlightsOverride && pub.highlightsOverride.length > 0) {
+    return pub.highlightsOverride;
+  }
+
   const highlights: string[] = [];
   highlights.push(`Authors: ${pub.authors}`);
   highlights.push(`Venue: ${pub.venue}`);

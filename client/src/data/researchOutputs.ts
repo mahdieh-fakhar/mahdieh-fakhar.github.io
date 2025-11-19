@@ -15,6 +15,7 @@ export type Publication = {
   downloadLabel?: string;
   date?: string;
   abstract?: string;
+  highlightsOverride?: string[];
 };
 
 export const publications: Publication[] = [
@@ -120,13 +121,17 @@ export const publications: Publication[] = [
     year: "2016",
     venue: "Iranian Journal of Applied Language Studies",
     type: "journal",
-    description:
-      "Publication date: 2016/7/1. Publisher: University of Sistan and Baluchestan. The concept of teacher change is critical in second language teaching and English as a Foreign Language contexts because teacher education almost always looks for initiating some form of change. This multi-phase study reviewed prior scholarship to derive 186 teacher change items, built a data-driven model, and engaged 324 Ph.D. and M.A. EFL teachers in exploratory and confirmatory factor analyses. The final Teacher Change Scale consists of 66 items spanning three components and thirteen sub-components with strong factorial validity, internal consistency, and meaningful evidence for TCS subscales. Applications target language teachers and practitioners who need robust measures of professional change.",
     url: "https://ijals.usb.ac.ir/article_3083.html",
     urlLabel: "View Publication",
     downloadUrl: "https://ijals.usb.ac.ir/article_3083_9062a98dcedea78d0ee4cddead855e3f.pdf",
     downloadLabel: "Download",
     date: "2016-07-01",
+    highlightsOverride: [
+      "Authors  : Reza Khany, Mahdieh Fakhar Shahreza",
+      "Publication date  : 2016/7/1",
+      "Publisher  : University of Sistan and Baluchestan",
+      "Description : The concept of teacher change is critical in second language teaching and English as a Foreign Language (EFL) context due largely to the fact that, almost, whatever we do in teacher education looks for initiating change of one sort or another. A substantial body of research has been dedicated to investigate teacher change (TC) from various perspectives.  However, having studied the related literature, we found no robust, valid and reliable measure for TC in EFL context. Accordingly, effort was made to develop and validate a reliable and valid measure that could assess TC in an EFL context. The review of the prior research resulted in the collection of 186 items affecting TC out of which a temporary data driven model of teacher change was developed. 324 Ph.D. and M.A. graduated EFL teachers took part in exploratory and confirmatory factor analyses of the initial measure. Finally, a 66-item scale consisting of three components and thirteen sub-components was developed.The results showed both factorial validity andinternal consistency reliability for the measure.The TCSsubscales also had strong validity evidence based on the associationsfound. This study has various applications for language teachers and practitioners in the field.",
+    ],
   },
   {
     id: 9,

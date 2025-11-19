@@ -206,7 +206,7 @@ export function CareerEvidenceCard({
               {sanitizedHighlights.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/70" />
-                  <span>{item}</span>
+                  <span className="whitespace-pre-wrap">{item}</span>
                 </li>
               ))}
             </ul>

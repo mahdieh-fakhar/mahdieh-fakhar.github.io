@@ -20,6 +20,28 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 13,
+    title:
+      "Iranian University Students' Familiarity with Digital Portfolio Creation Tools during the COVID-19 Pandemic: Merits, Demerits",
+    authors: "Mohammad Aliakbari, Mahdieh Fakhar Shahreza",
+    year: "May 2021",
+    venue:
+      'International Conference of "Current Trends in the Middle East" - Virtual International Joint Conference on COVID-19, University of Technology, Malaysia & Ilam University, Iran',
+    type: "journal",
+    status: "Conference Paper",
+    date: "2021-05-01",
+    url: "https://www.researchgate.net/publication/370591287_Iranian_University_Students'_Familiarity_with_Digital_Portfolio_Creation_Tools_during_the_COVID-19_Pandemic_Merits_Demerits",
+    urlLabel: "View Publication",
+    description:
+      "Assesses how Iranian university students adopted digital portfolio creation tools during COVID-19 virtual instruction, identifying perceived merits and demerits for remote language learning.",
+    highlightsOverride: [
+      "Authors  : Mohammad Aliakbari, Mahdieh Fakhar Shahreza",
+      "Publication date  : May 2021",
+      'Conference  : International Conference of "Current Trends in the Middle East": Virtual International Joint Conference on COVID-19, University of Technology, Malaysia and Ilam University, Iran. At: University of Technology, Malaysia and Ilam University, Iran.',
+      "Description : Assesses how Iranian university students adopted digital portfolio creation tools during COVID-19 virtual instruction, identifying perceived merits and demerits for remote language learning.",
+    ],
+  },
+  {
     id: 12,
     title:
       "Investigating the Impacts of an Online Writing Platform on EFL Students' Writing and Critical Thinking Skills; The Case of Medium App",

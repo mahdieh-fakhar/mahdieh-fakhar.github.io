@@ -269,18 +269,6 @@ export const publications: Publication[] = [
     date: "2023-02-01",
   },
   {
-    id: 4,
-    title: "Rasch-Preselected Items: An Optimal Approach in Item-based Evaluation",
-    authors: "Reza Khany, Mahdieh Fakhar Shahreza, & Elena Barcena",
-    year: "October 2023",
-    venue: "National University of Distance Education (UNED)",
-    type: "journal",
-    description: "Introduces a Rasch-based workflow that selects optimal items for evaluation-heavy research.",
-    url: "https://www.researchgate.net/publication/370591206_Rasch-Preselected_Items_An_Optimal_Approach_in_Item-based_Evaluation",
-    urlLabel: "View Publication",
-    date: "2023-10-01",
-  },
-  {
     id: 5,
     title: "Visualized Network of Online Interactions in an Ed-Tech Enhanced EFL Language Learning Context Using Gephi Software",
     authors: "Reza Khany & Mahdieh Fakhar Shahreza",

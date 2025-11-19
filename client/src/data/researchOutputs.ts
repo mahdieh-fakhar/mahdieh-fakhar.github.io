@@ -20,6 +20,22 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 11,
+    title: "Teacher Training in Rural Settings: Enhancing Spanish Language Competence through Text-based Pedagogy",
+    authors: "G Portol\\u00E9s L\\u00E1zaro, B Sedano Cuevasz, M Fakhar Shahreza",
+    year: "2025",
+    venue: "Bilingual Publishing Group",
+    type: "journal",
+    date: "2025-06-11",
+    url: "https://doi.org/10.30564/fls.v7i12.9393",
+    urlLabel: "View Publication",
+    highlightsOverride: [
+      "Source  : Bilingual Publishing Group",
+      "Authors  : G Portol\\u00E9s L\\u00E1zaro B Sedano Cuevasz, M Fakhar Shahreza",
+      "Publication date  : 2025/6/11",
+    ],
+  },
+  {
     id: 10,
     title: "Introduction: Approaches to Machine Translation.",
     authors: "Mahdieh Fakhar, Monica Vilhelm, Paz D\\u00EDez-Arc\\u00F3n",

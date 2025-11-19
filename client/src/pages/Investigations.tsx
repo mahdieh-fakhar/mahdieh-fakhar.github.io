@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
@@ -106,6 +106,26 @@ function getPublicationHighlights(pub: Publication): string[] {
   return highlights;
 }
 
+function getPublicationCategories(pub: Publication): string[] {
+  const categories: string[] = [];
+
+  if (pub.type === "review") {
+    categories.push("Book Review");
+  } else if (pub.type === "journal" && pub.status === "Conference Paper") {
+    categories.push("Conference Paper");
+  } else if (pub.type === "journal") {
+    categories.push("Journal Article");
+  } else if (pub.type === "book") {
+    categories.push("Book / Monograph");
+  }
+
+  if (pub.status && pub.status !== "Conference Paper") {
+    categories.push(pub.status);
+  }
+
+  return Array.from(new Set(categories));
+}
+
 function getThesisHighlights(record: ThesisRecord): string[] {
   const highlights: string[] = [
     `Degree: ${record.degree}`,
@@ -158,16 +178,49 @@ const PublicationCards = ({ items }: { items: Publication[] }) => {
             referenceLabel={pub.urlLabel}
             downloadUrl={pub.downloadUrl}
             downloadLabel={pub.downloadLabel}
+            categoryTags={getPublicationCategories(pub)}
           />
-      </motion.div>
+        </motion.div>
       ))}
     </div>
   );
 };
 
 const ArticlesSection = ({ includeFocus = true }: { includeFocus?: boolean }) => {
-  const journalPublications = publications.filter((pub) => pub.type === "journal");
-  const reviewPublications = publications.filter((pub) => pub.type === "review");
+  const articleItems = useMemo(
+    () => publications.filter((pub) => pub.type === "journal" || pub.type === "review"),
+    [publications]
+  );
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const categoryOptions = useMemo(() => {
+    const labels = new Set<string>();
+    articleItems.forEach((pub) => {
+      getPublicationCategories(pub).forEach((label) => labels.add(label));
+    });
+    const priority = ["Journal Article", "Conference Paper", "Book Review"];
+    return Array.from(labels).sort((a, b) => {
+      const aIndex = priority.indexOf(a);
+      const bIndex = priority.indexOf(b);
+      if (aIndex === -1 && bIndex === -1) {
+        return a.localeCompare(b);
+      }
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    });
+  }, [articleItems]);
+
+  const filteredArticles = useMemo(
+    () =>
+      articleItems.filter((pub) => {
+        if (activeCategory === "all") {
+          return true;
+        }
+        return getPublicationCategories(pub).includes(activeCategory);
+      }),
+    [articleItems, activeCategory]
+  );
 
   return (
     <section className="space-y-6" aria-labelledby="investigations-articles-heading">
@@ -183,16 +236,38 @@ const ArticlesSection = ({ includeFocus = true }: { includeFocus?: boolean }) =>
 
       <div className="space-y-6">
         <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-foreground">Indexed Journal Publications</h3>
-          <PublicationCards items={journalPublications} />
-        </div>
-
-        {reviewPublications.length > 0 && (
-          <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-foreground">Book Reviews & Commentaries</h3>
-            <PublicationCards items={reviewPublications} />
+          <div className="flex flex-col gap-3">
+            <h3 className="text-xl font-semibold text-foreground">Browse by Category</h3>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveCategory("all")}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                  activeCategory === "all"
+                    ? "border-primary bg-primary text-primary-foreground shadow"
+                    : "border-border bg-background hover:border-primary hover:text-primary"
+                }`}
+              >
+                All Articles
+              </button>
+              {categoryOptions.map((label) => (
+                <button
+                  type="button"
+                  key={label}
+                  onClick={() => setActiveCategory(label)}
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                    activeCategory === label
+                      ? "border-primary bg-primary text-primary-foreground shadow"
+                      : "border-border bg-background hover:border-primary hover:text-primary"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
-        )}
+          <PublicationCards items={filteredArticles} />
+        </div>
 
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-foreground">Conference Proceedings</h3>

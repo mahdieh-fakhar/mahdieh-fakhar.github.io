@@ -34,6 +34,7 @@ export type CareerEvidenceCardProps = {
   downloadLabel?: string;
   abstract?: string;
   slides: Slide[];
+  categoryTags?: string[];
 };
 
 const MIN_ZOOM = 0.75;
@@ -58,6 +59,7 @@ export function CareerEvidenceCard({
   downloadLabel = "Download",
   abstract,
   slides,
+  categoryTags = [],
 }: CareerEvidenceCardProps) {
   const [inlineApi, setInlineApi] = useState<CarouselApi | null>(null);
   const [inlineIndex, setInlineIndex] = useState(0);
@@ -75,6 +77,7 @@ export function CareerEvidenceCard({
   const sanitizedReferenceLabel = sanitizeRestrictedText(referenceLabel);
   const sanitizedDownloadLabel = downloadLabel ? sanitizeRestrictedText(downloadLabel) : undefined;
   const sanitizedAbstract = abstract ? sanitizeRestrictedText(abstract) : undefined;
+  const sanitizedCategories = categoryTags.map((tag) => sanitizeRestrictedText(tag));
 
   useEffect(() => {
     if (!inlineApi) {
@@ -201,6 +204,16 @@ export function CareerEvidenceCard({
               <h2 className="text-2xl font-semibold leading-tight text-foreground">{sanitizedTitle}</h2>
               <p className="text-base font-medium text-primary">{sanitizedOrganization}</p>
             </div>
+
+            {sanitizedCategories.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {sanitizedCategories.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="rounded-full bg-primary/10 text-primary">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
 
             <ul className="space-y-2 text-sm leading-relaxed text-foreground/85">
               {sanitizedHighlights.map((item) => (

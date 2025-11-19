@@ -54,16 +54,6 @@ export const publications: Publication[] = [
     ],
   },
   {
-    id: 1,
-    title: "Approaches on Machine Translation",
-    authors: "Fakhar Shahreza, M., Vilhelm, M., & D\u00E1ez-Arca\u00EDn, P.",
-    year: "2025",
-    venue: "Journal of Translation and Translanguaging in Multilingual Contexts",
-    type: "journal",
-    description: "Special issue on approaches to machine translation in multilingual contexts.",
-    date: "2025-04-01",
-  },
-  {
     id: 2,
     title: "Two Decades of Technology-Mediated Reading",
     authors: "Fakhar Shahreza, M.",

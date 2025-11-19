@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 10,
+    title: "Introduction: Approaches to Machine Translation.",
+    authors: "Mahdieh Fakhar, Monica Vilhelm, Paz D\\u00EDez-Arc\\u00F3n",
+    year: "2025",
+    venue: "Translation & Translanguaging in Multilingual Contexts (TTMC)",
+    type: "journal",
+    date: "2025-01-01",
+    url: "https://search.ebscohost.com/login.aspx?direct=true&profile=ehost&scope=site&authtype=crawler&jrnl=23521805&asa=N&AN=182124521&h=rJc2FcJOU6SpTEACVmfKSNdLKHpOBe%2BK7B1fTUaF3ENE8Qs6rccMsoHHV1eqWr0w%2F1IXkc0CZrUERFgSkexR7w%3D%3D&crl=c",
+    urlLabel: "View Publication",
+    description:
+      "Editorial introduction surveying AI-enabled advances in machine translation, emotion-aware MT, and sector-specific deployment ranging from TEFL to cognitive science.",
+    highlightsOverride: [
+      "Authors  : Mahdieh Fakhar, Monica Vilhelm, Paz D\\u00EDez-Arc\\u00F3n",
+      "Publication date  : 2025/1/1",
+      "Description : The article discusses the advancements in Machine Translation (MT) due to Artificial Intelligence (AI) and Computational Linguistics, leading to more accurate and efficient translation systems. It highlights the importance of understanding emotions in translation technology and the integration of MT in various fields like cognitive science and psychology. The special issue focuses on knowledge representation, emotional narrative methodology in Machine Translation Post-editing (MTPE), quality assessment, comparative analysis of Neural Machine Translation (NMT) systems, and the application of NMT technology in Teaching English as a Foreign Language (TEFL). The papers in the issue explore topics such as predicting ternary-compound bracketing, emotional narratives in MTPE, quality assessment in tourism reviews, comparative analysis of NMT systems, and the application of NMT in teaching business English \u2026",
+    ],
+  },
+  {
     id: 1,
     title: "Approaches on Machine Translation",
     authors: "Fakhar Shahreza, M., Vilhelm, M., & D\u00E1ez-Arca\u00EDn, P.",

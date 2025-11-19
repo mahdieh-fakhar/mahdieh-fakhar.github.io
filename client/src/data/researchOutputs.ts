@@ -11,6 +11,8 @@ export type Publication = {
   description?: string;
   url?: string;
   urlLabel?: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
   date?: string;
   abstract?: string;
 };
@@ -113,14 +115,18 @@ export const publications: Publication[] = [
   },
   {
     id: 8,
-    title: "Development of the EFL Teacher Change Scale",
-    authors: "Khany, R. & Fakhar Shahreza, M.",
+    title: "Development, factor analysis, and validation of an EFL Teacher Change Scale (TCS)",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
     year: "2016",
-    venue: "Journal of Applied Linguistics Studies (JALS)",
+    venue: "Iranian Journal of Applied Language Studies",
     type: "journal",
     description:
-      "Development and validation of a scale measuring teacher change in EFL contexts.",
-    date: "2016-01-01",
+      "Publication date: 2016/7/1. Publisher: University of Sistan and Baluchestan. The concept of teacher change is critical in second language teaching and English as a Foreign Language contexts because teacher education almost always looks for initiating some form of change. This multi-phase study reviewed prior scholarship to derive 186 teacher change items, built a data-driven model, and engaged 324 Ph.D. and M.A. EFL teachers in exploratory and confirmatory factor analyses. The final Teacher Change Scale consists of 66 items spanning three components and thirteen sub-components with strong factorial validity, internal consistency, and meaningful evidence for TCS subscales. Applications target language teachers and practitioners who need robust measures of professional change.",
+    url: "https://www.tandfonline.com/doi/full/10.1080/02680513.2022.2135987",
+    urlLabel: "View Publication",
+    downloadUrl: "https://ijals.usb.ac.ir/article_3083_9062a98dcedea78d0ee4cddead855e3f.pdf",
+    downloadLabel: "Download",
+    date: "2016-07-01",
   },
   {
     id: 9,

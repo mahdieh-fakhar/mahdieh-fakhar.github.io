@@ -30,6 +30,8 @@ export type CareerEvidenceCardProps = {
   highlights: string[];
   referenceUrl?: string;
   referenceLabel?: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
   abstract?: string;
   slides: Slide[];
 };
@@ -52,6 +54,8 @@ export function CareerEvidenceCard({
   highlights,
   referenceUrl,
   referenceLabel = "View Publication",
+  downloadUrl,
+  downloadLabel = "Download",
   abstract,
   slides,
 }: CareerEvidenceCardProps) {
@@ -69,6 +73,7 @@ export function CareerEvidenceCard({
   const sanitizedLocation = sanitizeRestrictedText(location);
   const sanitizedHighlights = highlights.map((item) => sanitizeRestrictedText(item));
   const sanitizedReferenceLabel = sanitizeRestrictedText(referenceLabel);
+  const sanitizedDownloadLabel = downloadLabel ? sanitizeRestrictedText(downloadLabel) : undefined;
   const sanitizedAbstract = abstract ? sanitizeRestrictedText(abstract) : undefined;
 
   useEffect(() => {
@@ -216,6 +221,19 @@ export function CareerEvidenceCard({
             )}
 
             <div className="mt-2 flex flex-wrap items-center justify-end gap-3">
+              {downloadUrl && (
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full border-2 border-primary px-6 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10"
+                >
+                  <a href={downloadUrl} target="_blank" rel="noreferrer" aria-label={sanitizedDownloadLabel}>
+                    {sanitizedDownloadLabel ?? "Download"}
+                    <Download className="h-4 w-4" />
+                  </a>
+                </Button>
+              )}
               {referenceUrl && (
                 <Button
                   asChild

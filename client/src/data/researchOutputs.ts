@@ -20,6 +20,23 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 19,
+    title: "Iranian EFL students' pragmatic self-assessment revisited",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "May 2016",
+    venue:
+      "1st International English-French Conference on Applied Linguistics and Literature - Sanandaj University, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2016-05-01",
+    url: "https://www.researchgate.net/publication/370591486_Iranian_EFL_students''_pragmatic_self-assessment_revisited",
+    urlLabel: "View Publication",
+    description:
+      "Quasi-experimental investigation measuring how different teaching strategies influence Iranian EFL learners' pragmatic self-assessment outcomes across OPT and DSAT instruments.",
+    abstract:
+      "Self-assessment as one of the key learning strategies for autonomous language learning is used in educational contexts to enable students to monitor their progress and relate learning to individual needs. With regard to different aspects of second language acquisition however, little if any research can be found on the influence of different teaching strategies on pragmatic self-assessment. In the same line and based on a sound theoretical framework, besides studying the issue from various perspectives, this study investigated the influence of the given teaching strategies on pragmatic self-assessment. Using a quasi-experimental research procedure with a pre-test, post-test, and control group design. Sixty intermediate EFL students participated in the study and took two standardized questionnaires namely, an Oxford Placement Test (OPT), and a discourse self-assessment test (DSAT). The results revealed that the used teaching strategies significantly affect the language learners' pragmatic self-assessment though in different extents. The findings further showed to be the function of other variables addressed in the study calling for a more cautious treatment of the issue in an EFL context. The results have various implications for language teachers and practitioners.",
+  },
+  {
     id: 18,
     title: "Paralogism, ambiguity, and circumlocution: do compensation strategies help?",
     authors: "Reza Khany, Mahdieh Fakhar Shahreza",

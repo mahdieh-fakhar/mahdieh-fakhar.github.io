@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 22,
+    title:
+      "Professional change, professional identity, and professional development of Iranian beginner vs. experienced teachers",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "May 2015",
+    venue:
+      "13th International TELLSI Conference - Lorestan University, Khorramabad, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2015-05-01",
+    url: "https://www.researchgate.net/publication/370591489_Professional_change_professional_identity_and_professional_development_of_Iranian_beginner_vs_experienced_teachers",
+    urlLabel: "View Publication",
+    description:
+      "Structural equation modeling investigation mapping how professional change, identity, and development interrelate for Iranian EFL teachers at different career stages.",
+    abstract:
+      "The main purpose of this study was to scrutinize the network of associations among professional change (PC), professional development (PD), and professional identity (PI) of Iranian EFL beginner versus experienced teachers. To this end, 340 Iranian EFL teachers took three standardized scales on PD, PI, and PC. Structural Equation Modeling (SEM) was run to analyze the collected data testing the path model of the study. The SEM results revealed that PD had a close relationship with PI with acceptable goodness of fit indices (RMSEA=0.016, RMR= 0.016, GFI= 0.971, AGFI= 0.942, NFI= 0.962, CFI=0.998, IFI=0.998). The findings of the study further showed that experience affects the factors and categories underlying PD and PI with PC modifying the given relationships. Professional change was found to be highly sensitive to some of the subscales of the study. It was, also, shown that under certain conditions often as the result of professional development, the professional perceptions of the participants undergoes drastic changes. The findings have various implications for language teachers and practitioners.",
+  },
+  {
     id: 21,
     title: "Language learning through WhatsApp or Telegram, which court is the ball in?",
     authors: "Mohammad Aliakbari, Mahdieh Fakhar Shahreza",

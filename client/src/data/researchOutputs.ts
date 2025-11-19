@@ -20,6 +20,23 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 18,
+    title: "Paralogism, ambiguity, and circumlocution: do compensation strategies help?",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "May 2017",
+    venue:
+      "Fourth International Conference on Language, Discourse, and Pragmatics - Shahid Chamran University, Ahvaz, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2017-05-01",
+    url: "https://www.researchgate.net/publication/370591594_Paralogism_ambiguity_and_circumlocution_do_compensation_strategies_help",
+    urlLabel: "View Publication",
+    description:
+      "Investigates whether circumlocution as a compensation strategy mitigates intentional and unintentional paralogisms and ambiguities in spoken EFL communication.",
+    abstract:
+      "As one of the main functions of spoken language is transference of information, it is essential that interlocutors in the conversations be able to express what they really want without any ambiguity. Hence, the present study intends to investigate why and to what extent people use different kinds of paralogisms or false argumentations and paralogistic sentences and how the ambiguities in peoples' utterances can be removed by using a compensation strategy known as circumlocution to prevent misunderstanding. To this end, 150 Iranian EFL students with the age range of 18 to 26 took three standardized questionnaires. The collected data were analyzed using Statistical Package for the Social Science (SPSS, Version 21). The findings revealed that there are some intentional and unintentional reasons for using paralogistic words and sentences to mislead people. Furthermore, the results showed that people use different categories of circumlocution (Salazar, 2006) to solve communication problems, among which some of them were more frequently used. This study has various implications for language practitioners and language users.",
+  },
+  {
     id: 17,
     title:
       "An Ecological Exploration of Iranian EFL Students' Self-change, Self-construal, and Change Management through Classroom Communication Tasks",

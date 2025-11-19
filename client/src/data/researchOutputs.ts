@@ -146,6 +146,13 @@ export const publications: Publication[] = [
     url: "https://www.tandfonline.com/doi/full/10.1080/02680513.2022.2135987",
     urlLabel: "View Publication",
     date: "2023-01-02",
+    highlightsOverride: [
+      "Authors  : Mahdieh Fakhar Shahreza",
+      "Publication date  : 2023/1/2",
+      "Source  : Open Learning: The Journal of Open, Distance and e-Learning",
+      "Publisher  : Routledge",
+      "Description : HT The widespread use of social media (SM) in all types of organisations including Higher Education (HE) institutions is not a surprise anymore. In this regard, a multi-authored book on this subject is welcomed, especially a book with a wide variety of authors, from university professors, lecturers, managers, researchers and academic developers to journal editors, librarians, and bloggers. The main purpose of the book is to investigate the impacts of SM on HE. Across the chapters the authors tend to accentuate the positive aspects of SM, however, some important considerations, concerns, and controversial issues are also raised. The book consists of twenty-three chapters, each of which, except the second one on podcasting, explores the application of the most widely used SM tools in HE and provides a detailed explanation of their principal benefits. Generally, the book is divided into six broad themes representing ...",
+    ],
   },
 ];
 

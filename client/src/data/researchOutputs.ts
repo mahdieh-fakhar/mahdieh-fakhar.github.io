@@ -20,6 +20,21 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 21,
+    title: "Language learning through WhatsApp or Telegram, which court is the ball in?",
+    authors: "Mohammad Aliakbari, Mahdieh Fakhar Shahreza",
+    year: "May 2016",
+    venue:
+      "1st International English-French Conference on Applied Linguistics and Literature - Sanandaj University, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2016-05-10",
+    url: "https://www.researchgate.net/publication/370591600_Language_learning_through_WhatsApp_or_telegram_which_court_is_the_ball_in",
+    urlLabel: "View Publication",
+    description:
+      "Comparative analysis of Iranian EFL learners' experiences using WhatsApp versus Telegram for mobile language learning workflows.",
+  },
+  {
     id: 20,
     title:
       "The equation of critical thinking skills, professional identity and professional development in Iranian EFL teaching context",

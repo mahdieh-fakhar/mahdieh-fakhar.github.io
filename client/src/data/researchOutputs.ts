@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 15,
+    title:
+      "Subjectivity and Objectivity in Discussion Sections of Iranian M.A. Thesis and Ph.D. Dissertations; the Case of Hard and Soft Science Fields of Studies",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "October 2019",
+    venue:
+      "5th International Conference on Language, Discourse, and Pragmatics (LDP) - Shahid Chamran University, Ahvaz, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2019-10-01",
+    url: "https://www.researchgate.net/publication/370591526_Subjectivity_and_Objectivity_in_Discussion_Sections_of_Iranian_MA_Thesis_and_PhD_Dissertations_the_Case_of_Hard_and_Soft_Science_Fields_of_Studies",
+    urlLabel: "View Publication",
+    description:
+      "Examines lexical, syntactic, and rhetorical patterns of subjectivity vs. objectivity markers in discussion sections of Iranian M.A. theses and Ph.D. dissertations across hard and soft science majors.",
+    abstract:
+      "In this study attempt was made to investigate how subjectivity and objectivity in discussion sections of students' M.A. thesis and Ph.D. dissertations in hard and soft science fields of studies were lexically, syntactically, and rhetorically structured. To this end, 30 M.A. thesis and 30 Ph.D. dissertations from six different majors were randomly selected to be investigated. Thematic analysis (Braun and Clarke, 2006) was used to provide and codify a list of subjective and objective (S & O) markers in the discussion sections. Having applied MAXQDA software, the collected data were analyzed. The findings revealed that there were drastic differences in frequency of using objective markers between hard vs. soft science majors. It was also found that objective markers outperformed in hard science thesis discussion sections; while subjective markers were mostly used in soft science. Furthermore, with regard to the academic levels, improvements were observed at the Ph.D. level as long as the appropriate use of markers was concerned. This study has various implications for researchers, scholars, and higher education students.",
+  },
+  {
     id: 14,
     title:
       "Research on Educational Technology Evaluation in Journal of Computer and Education; Implications for English Language Teaching.",

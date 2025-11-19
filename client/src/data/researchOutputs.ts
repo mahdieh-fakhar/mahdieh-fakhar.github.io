@@ -34,8 +34,6 @@ export const publications: Publication[] = [
     urlLabel: "View Publication",
     description:
       "Reports on relationships shaping Iranian EFL teachers' critical thinking skills, professional identity, and professional development trajectories within TELLSI networks.",
-    abstract:
-      "This conference study explores the interplay between critical thinking skills, professional identity, and pathways of professional development for Iranian EFL teachers. Drawing on TELLSI community data, the presentation surfaces how reflective practice and identity formation contribute to development outcomes and highlights practical strategies for supporting educators navigating these intertwined constructs.",
   },
   {
     id: 19,

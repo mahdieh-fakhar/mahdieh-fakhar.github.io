@@ -122,6 +122,20 @@ export const publications: Publication[] = [
       "Development and validation of a scale measuring teacher change in EFL contexts.",
     date: "2016-01-01",
   },
+  {
+    id: 9,
+    title:
+      "Social media in higher education: case studies, reflections and analysis: edited by C. Rowel, Open Book Publishers, Cambridge, UK, 2019, ISBN 978-1-78374-668-2 (paperback ...",
+    authors: "Mahdieh Fakhar Shahreza",
+    year: "2023",
+    venue: "Open Learning: The Journal of Open, Distance and e-Learning",
+    type: "review",
+    description:
+      "Publication date: 2023/1/2. Publisher: Routledge. HT The widespread use of social media (SM) in all types of organisations including Higher Education (HE) institutions is not a surprise anymore. In this regard, a multi-authored book on this subject is welcomed, especially a book with a wide variety of authors, from university professors, lecturers, managers, researchers and academic developers to journal editors, librarians, and bloggers. The main purpose of the book is to investigate the impacts of SM on HE. Across the chapters the authors tend to accentuate the positive aspects of SM, however, some important considerations, concerns, and controversial issues are also raised. The book consists of twenty-three chapters, each of which, except the second one on podcasting, explores the application of the most widely used SM tools in HE and provides a detailed explanation of their principal benefits. Generally, the book is divided into six broad themes representing ...",
+    url: "https://www.tandfonline.com/doi/full/10.1080/02680513.2022.2135987",
+    urlLabel: "View Publication",
+    date: "2023-01-02",
+  },
 ];
 
 export const conferenceProceedings: string[] = [

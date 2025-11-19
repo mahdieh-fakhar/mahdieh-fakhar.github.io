@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 20,
+    title:
+      "The equation of critical thinking skills, professional identity and professional development in Iranian EFL teaching context",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "May 2016",
+    venue:
+      "14th International TELLSI Conference - Shahid Bahonar University, Kerman, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2016-05-15",
+    url: "https://www.researchgate.net/publication/370591488_The_equation_of_critical_thinking_skills_professional_identity_and_professional_development_in_Iranian_EFL_teaching_context",
+    urlLabel: "View Publication",
+    description:
+      "Reports on relationships shaping Iranian EFL teachers' critical thinking skills, professional identity, and professional development trajectories within TELLSI networks.",
+    abstract:
+      "This conference study explores the interplay between critical thinking skills, professional identity, and pathways of professional development for Iranian EFL teachers. Drawing on TELLSI community data, the presentation surfaces how reflective practice and identity formation contribute to development outcomes and highlights practical strategies for supporting educators navigating these intertwined constructs.",
+  },
+  {
     id: 19,
     title: "Iranian EFL students' pragmatic self-assessment revisited",
     authors: "Reza Khany, Mahdieh Fakhar Shahreza",

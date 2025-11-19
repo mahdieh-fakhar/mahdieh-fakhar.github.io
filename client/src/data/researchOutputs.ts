@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 16,
+    title:
+      "An Exploration of Iranian EFL Stakeholders' Attitudes and Knowledge of Different Types of MOOCs",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "September 2019",
+    venue:
+      "17th International TELLSI Conference on New Horizons in Language Studies - Islamic Azad University of Tabriz, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2019-09-01",
+    url: "https://www.researchgate.net/publication/370591431_An_Exploration_of_Iranian_EFL_Stakeholders'_Attitudes_and_Knowledge_of_Different",
+    urlLabel: "View Publication",
+    description:
+      "Surveys 326 Iranian EFL stakeholders' familiarity with and attitudes toward different MOOC types, surfacing challenges for classroom integration.",
+    abstract:
+      "This study was an attempt to scrutinize Iranian EFL stakeholders' attitudes and knowledge of different types massive open online courses (MOOCs). The participants' main challenges and concerns regarding the integration of these new educational technologies in their classrooms were also investigated. Hence, 326 Iranian EFL stakeholders (i.e. 34 teacher trainers, 85 teacher educators, and 206 EFL teachers teaching English at schools, universities, and private language centers) were randomly selected to take part in the study. A researcher-made questionnaire was used to collect the required data. The analyzed data revealed that these three groups of participants were significantly different regarding their attitudes and familiarity with various types of MOOCs; amongst them, teacher trainers were at the highest level of familiarity. However, all the participants indicated highly positive attitudes towards the application and integration of MOOCs in their classrooms. It was further indicated that participants' attitudes and level of familiarity were drastically influenced by their educational degrees, age, and sex. This study has various implications for language teachers, practitioners, and policy makers.",
+  },
+  {
     id: 15,
     title:
       "Subjectivity and Objectivity in Discussion Sections of Iranian M.A. Thesis and Ph.D. Dissertations; the Case of Hard and Soft Science Fields of Studies",

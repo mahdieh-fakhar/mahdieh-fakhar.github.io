@@ -24,7 +24,7 @@ export const publications: Publication[] = [
     title:
       "Investigating the Impacts of an Online Writing Platform on EFL Students' Writing and Critical Thinking Skills; The Case of Medium App",
     authors: "Reza Khany, Mahdieh Fakhar Shahreza",
-    year: "2022",
+    year: "September 2022",
     venue: "19th International TELLSI Conference - Birjand University, Iran",
     type: "journal",
     status: "Conference Paper",
@@ -32,13 +32,9 @@ export const publications: Publication[] = [
     url: "https://www.researchgate.net/publication/370591344_Investigating_the_Impacts_of_an_Online_Writing_Platform_on_EFLStudents'_Writing_and_Critical_Thinking_Skills_The_Case_of_Medium_App",
     urlLabel: "View Publication",
     description:
-      "TELLSI conference proceedings article studying Medium app deployment for Iranian EFL writers, linking learner-contributed workflows to critical thinking gains.",
-    highlightsOverride: [
-      "Conference  : 19th International TELLSI Conference. Proceedings of Birjand University, Birjand, Iran.",
-      "Authors  : Reza Khany, Mahdieh Fakhar Shahreza",
-      "Publication date  : September 2022",
-      "Abstract : This study set out to investigate the impacts of Medium as an online social media writing platform on Iranian EFL Students' writing skills and to see whether the app is helpful for the development of critical thinking skills among the participating students. In doing so, having taken an open assessment pedagogy, a quasi-experimental design was used, and a total of 62 Iranian EFL students were assigned into an experimental and a control group. The experimental group received their instruction through the app, while the control group took part in face-to-face classroom instruction, taking advantage of traditional language learning activities. Paired and independent sample t-tests were used to analyze the collected data. The results revealed that the experimental group benefited more from the instruction than the control group. Further analysis showed that the students' development of writing and critical thinking skills were more in line with using the app in the experimental group than those in the control group. More specifically, being informed by a learner-contributed approach, the Medium app enabled the students to post their writing assignments in the app and to actively participate in a cyclic process of editing and reediting their assignments while keeping in mind their audience. This could, in turn, motivate them to have a critical perspective toward their own writing and to see how their thinking has changed. Although there are some potential challenges and pitfalls, suggestions regarding the effective deployment of the app are provided.",
-    ],
+      "Quasi-experimental TELLSI study gauging how a learner-contributed Medium workflow shapes Iranian EFL students' writing quality and critical thinking.",
+    abstract:
+      "This study set out to investigate the impacts of Medium as an online social media writing platform on Iranian EFL Students' writing skills and to see whether the app is helpful for the development of critical thinking skills among the participating students. In doing so, having taken an open assessment pedagogy, a quasi-experimental design was used, and a total of 62 Iranian EFL students were assigned into an experimental and a control group. The experimental group received their instruction through the app, while the control group took part in face-to-face classroom instruction, taking advantage of traditional language learning activities. Paired and independent sample t-tests were used to analyze the collected data. The results revealed that the experimental group benefited more from the instruction than the control group. Further analysis showed that the students' development of writing and critical thinking skills were more in line with using the app in the experimental group than those in the control group. More specifically, being informed by a learner-contributed approach, the Medium app enabled the students to post their writing assignments in the app and to actively participate in a cyclic process of editing and reediting their assignments while keeping in mind their audience. This could, in turn, motivate them to have a critical perspective toward their own writing and to see how their thinking has changed. Although there are some potential challenges and pitfalls, suggestions regarding the effective deployment of the app are provided.",
   },
   {
     id: 11,

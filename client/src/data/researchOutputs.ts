@@ -20,6 +20,24 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    id: 17,
+    title:
+      "An Ecological Exploration of Iranian EFL Students' Self-change, Self-construal, and Change Management through Classroom Communication Tasks",
+    authors: "Reza Khany, Mahdieh Fakhar Shahreza",
+    year: "May 2018",
+    venue:
+      "16th International Conference of English Language & Literature - Shiraz University, Iran",
+    type: "journal",
+    status: "Conference Paper",
+    date: "2018-05-01",
+    url: "https://www.researchgate.net/publication/370591641_An_Ecological_Exploration_of_Iranian_EFL_Students'_Self-change_Self-construal_and_Change_Management_through_Classroom_Communication_Tasks",
+    urlLabel: "View Publication",
+    description:
+      "Ecological case study following university students over eight months to analyze self-change, self-construal, and change management dynamics in Iranian EFL classrooms.",
+    abstract:
+      "The main purpose of this study was to scrutinize factors affecting students' self-change (SCH), self-construal (SC), and change management (CM) in English as a foreign language (EFL) classroom in Iran. To this end, eight university students took part in this study; semi-structured interviews, learning journals, and classroom observations over eight months were applied to collect the data. The collected data were qualitatively content analyzed by MAXQDA software based on Bronfenbrenner's (1979, 1993) nested ecosystems model as an analytical framework. Having analyzed the collected data, researchers found six factors influencing students' SCH, SC, and CM at the microsystemic level: students' beliefs, cognitive elements, linguistic knowledge, emotional factors, motivation, and classroom setting. The effect of meso-, exo-, and macrosystem on students' self, were also investigated. The findings, also provided socioculturally constructed evidence as a function of individual interactions and environmental elements.",
+  },
+  {
     id: 16,
     title:
       "An Exploration of Iranian EFL Stakeholders' Attitudes and Knowledge of Different Types of MOOCs",

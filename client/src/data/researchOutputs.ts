@@ -122,7 +122,7 @@ export const publications: Publication[] = [
     type: "journal",
     description:
       "Publication date: 2016/7/1. Publisher: University of Sistan and Baluchestan. The concept of teacher change is critical in second language teaching and English as a Foreign Language contexts because teacher education almost always looks for initiating some form of change. This multi-phase study reviewed prior scholarship to derive 186 teacher change items, built a data-driven model, and engaged 324 Ph.D. and M.A. EFL teachers in exploratory and confirmatory factor analyses. The final Teacher Change Scale consists of 66 items spanning three components and thirteen sub-components with strong factorial validity, internal consistency, and meaningful evidence for TCS subscales. Applications target language teachers and practitioners who need robust measures of professional change.",
-    url: "https://www.tandfonline.com/doi/full/10.1080/02680513.2022.2135987",
+    url: "https://ijals.usb.ac.ir/article_3083.html",
     urlLabel: "View Publication",
     downloadUrl: "https://ijals.usb.ac.ir/article_3083_9062a98dcedea78d0ee4cddead855e3f.pdf",
     downloadLabel: "Download",

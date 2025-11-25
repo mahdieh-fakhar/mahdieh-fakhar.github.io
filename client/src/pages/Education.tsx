@@ -294,6 +294,38 @@ const coursePrograms: EducationRecord[] = [
       },
     ],
   },
+  {
+    id: "course-csic-excel-advanced-2025",
+    category: "Courses",
+    title: "Excel 2016 Avanzado (Online)",
+    institution: "Spanish National Research Council (CSIC)",
+    location: "Madrid, Community of Madrid, Spain",
+    period: "Sep 22 - Oct 24, 2025",
+    status: "Professional Certificate",
+    roleLabel: "Online Training (40 hours)",
+    highlights: [
+      "Completed the CSIC human resources training plan on advanced Excel workflows.",
+      "Practiced secure sharing, advanced calculation functions, and productivity-focused tooling in Excel 2016.",
+    ],
+    metadata: [
+      { label: "Duration", value: "40 hours" },
+      { label: "Delivery", value: "Online, CSIC training plan" },
+    ],
+    slides: [
+      {
+        src: "/images/education/courses/csic-excel-advanced-2025-1.jpg",
+        alt: "CSIC Excel avanzado online certificate page 1",
+        caption: "Completion certificate for the CSIC Excel 2016 advanced online course",
+        downloadName: "csic-excel-advanced-2025-1.jpg",
+      },
+      {
+        src: "/images/education/courses/csic-excel-advanced-2025-2.jpg",
+        alt: "CSIC Excel avanzado online syllabus page 2",
+        caption: "Program topics covering advanced functions, security, and best practices in Excel 2016",
+        downloadName: "csic-excel-advanced-2025-2.jpg",
+      },
+    ],
+  },
 ];
 
 const workshopPrograms: EducationRecord[] = [

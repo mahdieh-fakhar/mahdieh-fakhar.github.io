@@ -48,6 +48,19 @@ const investigationStats = [
   { value: conferenceProceedings.length, label: "Conference Series" },
 ];
 
+const articleStats = [
+  { value: publications.length, label: "Publications Tracked" },
+  { value: conferenceProceedings.length, label: "Conference Series" },
+];
+
+const thesisStats = [{ value: thesisRecords.length, label: "Graduate Theses" }];
+
+const bookStats = [
+  { value: publications.filter((pub) => pub.type === "book").length, label: "Books & Monographs" },
+];
+
+const handbookStats = [{ value: handbookEntries.length, label: "Handbooks & Toolkits" }];
+
 const overviewGlance = [
   { emoji: "🧪", label: "Research investigations", detail: "AI, data, and language-centric studies." },
   { emoji: "📄", label: "Peer-reviewed outputs", detail: "Articles, proceedings, and scholarly reviews." },
@@ -453,28 +466,28 @@ const renderContent = (slug: string) => {
       return (
         <>
           <ArticlesSection />
-          <StatsSection className="mt-10" stats={investigationStats} />
+          <StatsSection className="mt-10" stats={articleStats} />
         </>
       );
     case "theses":
       return (
         <>
           <ThesesSection records={thesisRecords} />
-          <StatsSection className="mt-10" stats={investigationStats} />
+          <StatsSection className="mt-10" stats={thesisStats} />
         </>
       );
     case "books":
       return (
         <>
           <BooksSection items={bookPublications} />
-          <StatsSection className="mt-10" stats={investigationStats} />
+          <StatsSection className="mt-10" stats={bookStats} />
         </>
       );
     case "handbooks":
       return (
         <>
           <HandbooksSection items={handbookEntries} />
-          <StatsSection className="mt-10" stats={investigationStats} />
+          <StatsSection className="mt-10" stats={handbookStats} />
         </>
       );
     default:

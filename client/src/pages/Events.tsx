@@ -823,9 +823,6 @@ export default function Events({ params }: EventsProps = {}) {
                     Detailed certificates and roles across {activeItem.label.toLowerCase()} events.
                   </p>
                 </div>
-                <span className="rounded-full border border-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-                  Evidence Catalog
-                </span>
               </div>
               {filteredCertificates.length > 0 ? (
                 <div className="space-y-6">

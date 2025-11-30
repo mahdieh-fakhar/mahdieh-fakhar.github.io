@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,7 +34,7 @@ type EducationRecord = {
 type EducationNavItem = {
   label: string;
   slug: string;
-  filter: EducationCategory | null;
+  filter: EducationCategory;
   description: string;
 };
 
@@ -613,15 +613,7 @@ const allRecords: EducationRecord[] = [
   ...workshopPrograms,
 ];
 
-const categoryOrder: EducationCategory[] = ["Academic", "Courses", "Workshops"];
-
 const navItems: EducationNavItem[] = [
-  {
-    label: "All",
-    slug: "all",
-    filter: null,
-    description: "Complete academic journey",
-  },
   {
     label: "Academic",
     slug: "academic",
@@ -895,30 +887,28 @@ const courseSummaryStats = (() => {
 export default function Education({ params }: EducationProps = {}) {
   const [location, setLocation] = useLocation();
 
+  const categorySlug = params?.category ? params.category.toLowerCase() : "academic";
+
   useEffect(() => {
     const normalizedLocation = location.replace(/\/+$/, "");
     if (!params?.category && normalizedLocation === "/education") {
-      setLocation("/education/all", { replace: true });
+      setLocation("/education/academic", { replace: true });
     }
   }, [location, params?.category, setLocation]);
 
-  const activeSlug = params?.category ? params.category.toLowerCase() : "all";
-  const activeItem = navItems.find((item) => item.slug === activeSlug) ?? navItems[0];
+  if (categorySlug === "all") {
+    return (
+      <div className="page-template-career">
+        <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
+          This page has been removed.
+        </div>
+      </div>
+    );
+  }
 
-  const groupedRecords = useMemo(
-    () =>
-      categoryOrder.map((category) => ({
-        category,
-        label: categoryLabels[category],
-        items: allRecords.filter((record) => record.category === category),
-      })),
-    [],
-  );
+  const activeItem = navItems.find((item) => item.slug === categorySlug) ?? navItems[0];
 
-  const filteredRecords =
-    activeItem.filter === null
-      ? allRecords
-      : allRecords.filter((record) => record.category === activeItem.filter);
+  const filteredRecords = allRecords.filter((record) => record.category === activeItem.filter);
 
   const renderCards = (records: EducationRecord[]) => (
     <div className="stack-gap-md">
@@ -1025,33 +1015,6 @@ export default function Education({ params }: EducationProps = {}) {
     </div>
   );
 
-  const renderAllCategories = () => {
-    const hasAnyRecords = groupedRecords.some((group) => group.items.length > 0);
-
-    if (!hasAnyRecords) {
-      return (
-        <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-          Education records will appear here soon.
-        </div>
-      );
-    }
-
-    return groupedRecords.map((group) =>
-      group.items.length === 0 ? null : (
-        <section
-          key={group.category}
-          className="space-y-4"
-          data-testid={`section-education-${group.category.toLowerCase()}`}
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-            {group.label}
-          </div>
-          {renderCards(group.items)}
-        </section>
-      ),
-    );
-  };
-
   const renderActiveCategory = () => {
     if (activeItem.filter === "Academic") {
       return renderAcademicTimeline();
@@ -1063,10 +1026,6 @@ export default function Education({ params }: EducationProps = {}) {
 
     if (activeItem.filter === "Workshops") {
       return renderWorkshopTimeline();
-    }
-
-    if (activeItem.filter === null) {
-      return renderAllCategories();
     }
 
     if (filteredRecords.length === 0) {
@@ -1281,11 +1240,11 @@ export default function Education({ params }: EducationProps = {}) {
           <nav
             className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
             role="tablist"
-            aria-label="Education sections"
-          >
-            {navItems.map((item) => {
-              const href = item.slug === "all" ? "/education/all" : `/education/${item.slug}`;
-              const isActive = item.slug === activeItem.slug;
+          aria-label="Education sections"
+        >
+          {navItems.map((item) => {
+            const href = `/education/${item.slug}`;
+            const isActive = item.slug === activeItem.slug;
 
               return (
                 <Link

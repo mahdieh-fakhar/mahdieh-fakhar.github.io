@@ -29,7 +29,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Education",
-    href: "/education/all",
+    href: "/education/academic",
     description:
       "Academic programs, professional courses, and workshops detailing formal training and achievements.",
     keywords: ["education", "degrees", "courses", "workshops", "academic", "master's", "certification"],

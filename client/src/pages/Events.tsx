@@ -520,7 +520,7 @@ const navItems: EventNavItem[] = [
     label: "Symposia",
     slug: "symposia",
     filter: "Symposia",
-    description: "Specialist symposia and panels",
+    description: "",
   },
 ];
 

@@ -176,6 +176,12 @@ const experiences: Experience[] = [
       ctaLabel: "View Branding",
       slides: [
         {
+          src: "/images/career/Safir.jpg",
+          alt: "Safir Danesh leadership portrait",
+          caption: "Portrait representing branch coordination at Safir Danesh Language Institute.",
+          downloadName: "Safir.jpg",
+        },
+        {
           src: "/images/career/safir-academy-logo.jpg",
           alt: "Safir Danesh Language Institute logo",
           caption: "Safir Danesh Language Institute brand mark for Ilam branch coordination.",

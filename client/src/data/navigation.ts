@@ -12,7 +12,7 @@ export type NavigationItem = {
 };
 
 export const eventPages: NavChild[] = [
-  { name: "All Events", href: "/events/all", slug: "all" },
+  { name: "Overview", href: "/events/all", slug: "all" },
   { name: "Conferences", href: "/events/conferences", slug: "conferences" },
   { name: "Seminars", href: "/events/seminars", slug: "seminars" },
   { name: "Webinars", href: "/events/webinars", slug: "webinars" },

@@ -36,7 +36,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Investigations",
-    href: "/investigations/all",
+    href: "/investigations",
     description:
       "Research outputs including journal articles, theses, books, and practical handbooks.",
     keywords: ["research", "publications", "articles", "theses", "books", "handbooks"],

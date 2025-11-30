@@ -33,7 +33,7 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "All", slug: "all", description: "Combined research view" },
+  { label: "Overview", slug: "overview", description: "Combined research view" },
   { label: "Articles", slug: "articles", description: "Published manuscripts & reviews" },
   { label: "Theses", slug: "theses", description: "Graduate research portfolio" },
   { label: "Books", slug: "books", description: "Authored & edited volumes" },
@@ -422,22 +422,26 @@ const renderContent = (slug: string) => {
 
 export default function Investigations({ params }: InvestigationsProps = {}) {
   const [location, setLocation] = useLocation();
-  const slug = params?.category ?? "all";
+  const slug = params?.category ?? "overview";
   const isValidSlug = navItems.some((item) => item.slug === slug);
-  const activeSlug = isValidSlug ? slug : "all";
+  const activeSlug = isValidSlug ? slug : "overview";
   const activeItem = navItems.find((item) => item.slug === activeSlug) ?? navItems[0];
 
   useEffect(() => {
-    if (!params?.category) {
-      setLocation("/investigations/all", { replace: true });
+    if (!params?.category && location !== "/investigations") {
+      setLocation("/investigations", { replace: true });
     }
-  }, [params?.category, setLocation]);
+  }, [location, params?.category, setLocation]);
 
   useEffect(() => {
-    if (!isValidSlug) {
-      setLocation("/investigations/all", { replace: true });
+    if (params?.category === "all" || params?.category === "overview") {
+      setLocation("/investigations", { replace: true });
+      return;
     }
-  }, [isValidSlug, setLocation]);
+    if (!isValidSlug) {
+      setLocation("/investigations", { replace: true });
+    }
+  }, [isValidSlug, params?.category, setLocation]);
 
   return (
     <div className="page-template-career">
@@ -453,11 +457,28 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
                 Research Portfolio
               </p>
-              <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Investigations</h1>
+              <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
+                {activeItem.slug === "articles"
+                  ? "Articles"
+                  : activeItem.slug === "theses"
+                    ? "Theses"
+                    : activeItem.slug === "books"
+                      ? "Books"
+                      : activeItem.slug === "handbooks"
+                        ? "Handbooks"
+                        : "Investigations Overview"}
+              </h1>
             </div>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Evidence base spanning journal publications, graduate theses, authored monographs, and
-              operational handbooks that support AI, bibliometrics, and digital transformation.
+              {activeItem.slug === "articles"
+                ? "Peer-reviewed publications, reviews, and journal outputs curated for impact and rigor."
+                : activeItem.slug === "theses"
+                  ? "Graduate theses highlighting research depth, methodologies, and scholarly contributions."
+                  : activeItem.slug === "books"
+                    ? "Authored and edited volumes, monographs, and book-length contributions."
+                    : activeItem.slug === "handbooks"
+                      ? "Practical guides and toolkits designed for applied learning and field use."
+                      : "Unified view of research outputs spanning articles, theses, books, and handbooks."}
             </p>
           </div>
 
@@ -465,17 +486,17 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
             <nav
               className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
               aria-label="Investigations categories"
-              role="tablist"
-            >
-              {navItems.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/investigations/${item.slug}`}
-                  className={`inline-flex items-center rounded-full border-2 px-4 py-2 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
-                    item.slug === activeSlug
-                      ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
-                      : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary"
-                  }`}
+            role="tablist"
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.slug}
+                href={item.slug === "overview" ? "/investigations" : `/investigations/${item.slug}`}
+                className={`inline-flex items-center rounded-full border-2 px-4 py-2 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                  item.slug === activeSlug
+                    ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/40"
+                    : "border-primary/30 text-primary/80 hover:border-primary hover:text-primary"
+                }`}
                   role="tab"
                   aria-selected={item.slug === activeSlug}
                   tabIndex={item.slug === activeSlug ? 0 : -1}
@@ -491,7 +512,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         </div>
 
         {renderContent(activeSlug)}
-        <StatsSection className="mt-10" stats={investigationStats} />
+        {activeItem.slug === "overview" && <StatsSection className="mt-10" stats={investigationStats} />}
       </motion.div>
     </div>
   );

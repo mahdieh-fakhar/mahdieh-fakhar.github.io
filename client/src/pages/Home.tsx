@@ -113,7 +113,7 @@ export default function Home() {
           name: "Investigations",
           summary:
             "Unified research hub spanning articles, theses, monographs, and applied handbooks.",
-          href: "/investigations/all",
+          href: "/investigations",
           icon: Layers,
         },
         {
@@ -189,10 +189,10 @@ export default function Home() {
       description:
         "Survey journal publications, graduate theses, and professional handbooks with bibliometric context and AI-enabled storytelling.",
       icon: Layers,
-      href: "/investigations/all",
-      cta: "Browse investigations",
-      accent: "from-primary/20 via-primary/5 to-ai-accent/10",
-    },
+    href: "/investigations",
+    cta: "Browse investigations",
+    accent: "from-primary/20 via-primary/5 to-ai-accent/10",
+  },
     {
       title: "Global Engagement Studio",
       description:
@@ -615,7 +615,7 @@ export default function Home() {
               Works hub
             </Link>
             <Link
-              href="/investigations/all"
+              href="/investigations"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
               Investigations archive

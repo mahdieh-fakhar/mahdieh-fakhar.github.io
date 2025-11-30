@@ -1061,15 +1061,6 @@ export default function Education({ params }: EducationProps = {}) {
                 formal education, courses, and workshops.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/education/academic"
-                className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/10"
-              >
-                View Academic Background
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
           </CardContent>
         </Card>
 

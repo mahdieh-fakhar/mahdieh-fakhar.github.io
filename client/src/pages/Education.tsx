@@ -1343,11 +1343,23 @@ export default function Education({ params }: EducationProps = {}) {
     );
   };
 
-  const heroTitle = activeItem.filter === null ? "Overview" : "Education";
+  const heroTitle =
+    activeItem.slug === "academic"
+      ? "Academic"
+      : activeItem.slug === "courses"
+        ? "Courses"
+        : activeItem.slug === "workshops"
+          ? "Workshops"
+          : "Overview";
+
   const heroSubtitle =
-    activeItem.filter === null
-      ? "A concise overview of my academic background, teaching activities, and learning initiatives across academic studies, courses, and workshops."
-      : "Explore academic milestones, professional courses, and immersive workshops shaping ongoing expertise.";
+    activeItem.slug === "academic"
+      ? "Formal education, degrees, research focus areas, and thesis work underpinning my academic trajectory."
+      : activeItem.slug === "courses"
+        ? "Designed and taught courses with clear learning outcomes, delivery formats, and audience alignment."
+        : activeItem.slug === "workshops"
+          ? "Hands-on workshops and short trainings crafted for applied learning, real-world scenarios, and collaborative practice."
+          : "A concise overview of my academic background, teaching activities, and learning initiatives across academic studies, courses, and workshops.";
 
   return (
     <div className="page-template-career">

@@ -127,7 +127,7 @@ export default function Home() {
           name: "Works",
           summary:
             "Gateway to projects, skill matrices, and verified credentials powering applied innovation.",
-          href: "/works/all",
+          href: "/works",
           icon: Briefcase,
         },
         {
@@ -609,7 +609,7 @@ export default function Home() {
               Education dossier
             </Link>
             <Link
-              href="/works/all"
+              href="/works"
               className="rounded-full border border-transparent bg-primary/10 px-3 py-1 text-primary transition hover:border-primary/40 hover:bg-primary/15"
             >
               Works hub

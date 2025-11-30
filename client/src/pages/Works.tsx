@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight, Users } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
@@ -119,6 +120,7 @@ const overviewSections = [
 ];
 
 export default function Works() {
+  const [location, setLocation] = useLocation();
   const rawBadges = [
     ...getBadges({ page: "projects", limit: 2 }),
     ...getBadges({ page: "skills", limit: 2 }),
@@ -128,6 +130,12 @@ export default function Works() {
   const spotlightBadges = rawBadges.filter(
     (badge, index, self) => index === self.findIndex((candidate) => candidate.id === badge.id),
   );
+
+  useEffect(() => {
+    if (location === "/works/all") {
+      setLocation("/works", { replace: true });
+    }
+  }, [location, setLocation]);
 
   return (
     <div className="page-template-career">

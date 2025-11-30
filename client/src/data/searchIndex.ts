@@ -43,7 +43,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Works",
-    href: "/works/all",
+    href: "/works",
     description:
       "Applied delivery hub linking projects, skills, certifications, and the consolidated Career and Memberships journeys.",
     keywords: ["works", "projects", "skills", "certifications", "career", "memberships"],

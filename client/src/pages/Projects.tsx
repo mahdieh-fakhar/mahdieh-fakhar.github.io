@@ -33,6 +33,7 @@ const projects: Project[] = [
     period: "2022-2025",
     technologies: ["Educational Technology", "Language Teaching", "Rural Education", "Innovation"],
     directors: "Prof. Elena Barcena & Prof. Timothy Read",
+    imageUrl: "/images/memberships/AGORA.png",
   },
   {
     id: 3,

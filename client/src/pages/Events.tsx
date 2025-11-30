@@ -823,46 +823,50 @@ export default function Events({ params }: EventsProps = {}) {
           </>
         )}
 
-        <section className="space-y-6" data-testid={`section-category-${activeItem.slug}`}>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <h2 className="text-2xl font-semibold">{activeItem.label} Certificates</h2>
-              <p className="text-sm text-muted-foreground">
-                Detailed certificates and roles across {activeItem.label.toLowerCase()} events.
-              </p>
-            </div>
-            <span className="rounded-full border border-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-              Evidence Catalog
-            </span>
-          </div>
-          {filteredCertificates.length > 0 ? (
-            <div className="space-y-6">
-              {filteredCertificates.map((item, index) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
-                >
-                  <CareerEvidenceCard
-                    title={item.certificateTitle}
-                    organization={item.conferenceName}
-                    location={item.location}
-                    period={formatDate(item.eventDate)}
-                    roleLabel={item.holderRole ?? item.certificateType}
-                    highlights={certificateHighlights(item)}
-                    slides={certificateSlides(item)}
-                  />
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-              No certificates found for {activeItem.label.toLowerCase()} yet.
-            </div>
-          )}
-        </section>
-        <StatsSection className="mt-10" stats={eventStats} />
+        {!isOverview && (
+          <>
+            <section className="space-y-6" data-testid={`section-category-${activeItem.slug}`}>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-2xl font-semibold">{activeItem.label} Certificates</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Detailed certificates and roles across {activeItem.label.toLowerCase()} events.
+                  </p>
+                </div>
+                <span className="rounded-full border border-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                  Evidence Catalog
+                </span>
+              </div>
+              {filteredCertificates.length > 0 ? (
+                <div className="space-y-6">
+                  {filteredCertificates.map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.45, delay: index * 0.05 }}
+                    >
+                      <CareerEvidenceCard
+                        title={item.certificateTitle}
+                        organization={item.conferenceName}
+                        location={item.location}
+                        period={formatDate(item.eventDate)}
+                        roleLabel={item.holderRole ?? item.certificateType}
+                        highlights={certificateHighlights(item)}
+                        slides={certificateSlides(item)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
+                  No certificates found for {activeItem.label.toLowerCase()} yet.
+                </div>
+              )}
+            </section>
+            <StatsSection className="mt-10" stats={eventStats} />
+          </>
+        )}
       </motion.div>
     </div>
   );

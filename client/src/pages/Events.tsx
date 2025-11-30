@@ -678,9 +678,6 @@ export default function Events({ params }: EventsProps = {}) {
                 <h1 className="text-4xl font-bold leading-tight">{heroTitle}</h1>
               </div>
             </div>
-            <div className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
-              Conferences • Seminars • Webinars • Congresses • Symposia
-            </div>
           </div>
           <p className="text-lg text-muted-foreground">{heroLead}</p>
           <p className="text-sm text-muted-foreground">{heroHelper}</p>

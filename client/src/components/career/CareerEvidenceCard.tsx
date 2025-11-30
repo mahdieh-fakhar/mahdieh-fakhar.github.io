@@ -42,8 +42,6 @@ const MAX_ZOOM = 2.5;
 const ZOOM_STEP = 0.25;
 
 const RESTRICTED_BRAND_PLACEHOLDER = "Publication Portal";
-const BRAND_LOGO_SRC = "/images/logo-mfs.png";
-const BRAND_LOGO_ALT = "MF personal brand logo";
 
 const sanitizeRestrictedText = (value: string): string =>
   value.replace(/researchgate/gi, RESTRICTED_BRAND_PLACEHOLDER);
@@ -63,21 +61,13 @@ export function CareerEvidenceCard({
   slides,
   categoryTags = [],
 }: CareerEvidenceCardProps) {
+  const [inlineApi, setInlineApi] = useState<CarouselApi | null>(null);
+  const [inlineIndex, setInlineIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalApi, setModalApi] = useState<CarouselApi | null>(null);
   const [modalIndex, setModalIndex] = useState(0);
   const [zoom, setZoom] = useState(1);
-  const resolvedSlides = slides.length
-    ? slides
-    : [
-        {
-          src: BRAND_LOGO_SRC,
-          alt: BRAND_LOGO_ALT,
-          caption: "Brand placeholder",
-          downloadName: "logo-mfs.png",
-        },
-      ];
-  const hasSlides = resolvedSlides.length > 0;
+  const hasSlides = slides.length > 0;
 
   const sanitizedTitle = sanitizeRestrictedText(title);
   const sanitizedRoleLabel = sanitizeRestrictedText(roleLabel);
@@ -88,6 +78,19 @@ export function CareerEvidenceCard({
   const sanitizedDownloadLabel = downloadLabel ? sanitizeRestrictedText(downloadLabel) : undefined;
   const sanitizedAbstract = abstract ? sanitizeRestrictedText(abstract) : undefined;
   const sanitizedCategories = categoryTags.map((tag) => sanitizeRestrictedText(tag));
+
+  useEffect(() => {
+    if (!inlineApi) {
+      return;
+    }
+
+    const handleSelect = () => setInlineIndex(inlineApi.selectedScrollSnap());
+    handleSelect();
+    inlineApi.on("select", handleSelect);
+    return () => {
+      inlineApi.off("select", handleSelect);
+    };
+  }, [inlineApi]);
 
   useEffect(() => {
     if (!modalApi) {
@@ -113,7 +116,7 @@ export function CareerEvidenceCard({
     });
   };
 
-  const currentSlide = hasSlides ? resolvedSlides[modalIndex] ?? resolvedSlides[0] : undefined;
+  const currentSlide = hasSlides ? slides[modalIndex] ?? slides[0] : undefined;
 
   return (
     <motion.div
@@ -130,32 +133,57 @@ export function CareerEvidenceCard({
             <div className="flex flex-col gap-4 md:w-[35%]">
               <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border bg-background/80 shadow-lg shadow-black/30 md:h-64">
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-transparent" />
-                <button
-                  type="button"
-                  onClick={() => {
-                    setModalIndex(0);
-                    setModalOpen(true);
-                  }}
-                  className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
-                >
-                  <img
-                    src={BRAND_LOGO_SRC}
-                    alt={BRAND_LOGO_ALT}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                </button>
+                <Carousel setApi={setInlineApi} className="h-full" opts={{ loop: true }}>
+                  <CarouselContent className="h-full">
+                    {slides.map((slide, index) => (
+                      <CarouselItem key={slide.src} className="h-full">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setModalIndex(index);
+                            setModalOpen(true);
+                          }}
+                          className="relative h-full w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                        >
+                          <img
+                            src={slide.src}
+                            alt={slide.alt}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                        </button>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  {slides.length > 1 && (
+                    <>
+                      <CarouselPrevious className="left-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                      <CarouselNext className="right-3 top-1/2 h-8 w-8 -translate-y-1/2 border-white/20 bg-black/40 text-white hover:bg-black/60" />
+                    </>
+                  )}
+                </Carousel>
+                {slides.length > 1 && (
+                  <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-1.5">
+                    {slides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => inlineApi?.scrollTo(idx)}
+                        className={`h-2 rounded-full transition-all ${
+                          idx === inlineIndex ? "w-6 bg-indigo-400" : "w-2 bg-white/40 hover:bg-indigo-300"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
               <Button
                 variant="outline"
                 size="lg"
                 className="w-full justify-center gap-2 rounded-2xl border-border bg-background/70 text-foreground transition hover:bg-background"
-                onClick={() => {
-                  setModalIndex(0);
-                  setModalOpen(true);
-                }}
+                onClick={() => setModalOpen(true)}
               >
                 Open Evidence Gallery
               </Button>
@@ -257,9 +285,9 @@ export function CareerEvidenceCard({
             </DialogHeader>
             <div className="flex flex-col gap-4">
               <div className="relative h-[55vh] overflow-hidden rounded-2xl border border-border bg-muted/40">
-                <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: 0 }}>
+                <Carousel setApi={setModalApi} className="h-full" opts={{ loop: true, startIndex: inlineIndex }}>
                   <CarouselContent className="h-full">
-                    {resolvedSlides.map((slide) => (
+                    {slides.map((slide) => (
                       <CarouselItem key={slide.src} className="flex h-full w-full items-center justify-center">
                         <div className="flex h-full w-full items-center justify-center overflow-auto p-4">
                           <img
@@ -272,7 +300,7 @@ export function CareerEvidenceCard({
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  {resolvedSlides.length > 1 && (
+                  {slides.length > 1 && (
                     <>
                       <CarouselPrevious className="left-4 top-1/2 -translate-y-1/2" />
                       <CarouselNext className="right-4 top-1/2 -translate-y-1/2" />
@@ -282,7 +310,7 @@ export function CareerEvidenceCard({
               </div>
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
                 <span>
-                  Page {modalIndex + 1} of {resolvedSlides.length}
+                  Page {modalIndex + 1} of {slides.length}
                   {currentSlide?.alt ? ` - ${currentSlide.alt}` : ""}
                 </span>
                 {currentSlide && (
@@ -296,9 +324,9 @@ export function CareerEvidenceCard({
                   </a>
                 )}
               </div>
-              {resolvedSlides.length > 1 && (
+              {slides.length > 1 && (
                 <div className="flex items-center justify-center gap-1.5">
-                  {resolvedSlides.map((_, idx) => (
+                  {slides.map((_, idx) => (
                     <button
                       key={`modal-dot-${idx}`}
                       onClick={() => modalApi?.scrollTo(idx)}

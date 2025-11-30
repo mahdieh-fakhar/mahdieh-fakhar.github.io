@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useEffect, useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import { StatsSection } from "@/components/StatsSection";
 import {
@@ -45,6 +46,50 @@ const investigationStats = [
   { value: thesisRecords.length, label: "Graduate Theses" },
   { value: handbookEntries.length, label: "Handbooks & Toolkits" },
   { value: conferenceProceedings.length, label: "Conference Series" },
+];
+
+const overviewGlance = [
+  { emoji: "🧪", label: "Research investigations", detail: "AI, data, and language-centric studies." },
+  { emoji: "📄", label: "Peer-reviewed outputs", detail: "Articles, proceedings, and scholarly reviews." },
+  { emoji: "📘", label: "Academic theses", detail: "In-depth explorations of focused research questions." },
+  { emoji: "📚", label: "Books & handbooks", detail: "Long-form works bridging theory and practice." },
+];
+
+const overviewCards = [
+  {
+    title: "Articles",
+    body:
+      "Journal articles, conference papers, and peer-reviewed manuscripts covering AI, digital transformation, and applied linguistics.",
+    href: "/investigations/articles",
+    cta: "View All Articles →",
+  },
+  {
+    title: "Theses",
+    body:
+      "Graduate theses demonstrating research depth, methodological rigor, and domain-specific inquiry across data and language topics.",
+    href: "/investigations/theses",
+    cta: "Explore Theses →",
+  },
+  {
+    title: "Books",
+    body:
+      "Authored and edited volumes that expand on research themes, synthesize findings, and provide comprehensive narratives.",
+    href: "/investigations/books",
+    cta: "Browse Books →",
+  },
+  {
+    title: "Handbooks",
+    body:
+      "Practical guides and manuals translating research into actionable frameworks, tools, and classroom-ready resources.",
+    href: "/investigations/handbooks",
+    cta: "See Handbooks →",
+  },
+];
+
+const researchThemes = [
+  { title: "AI-assisted research communication", detail: "Integrating AI to improve translation, summarization, and storytelling in scientific outputs." },
+  { title: "Bibliometrics & scientometrics", detail: "Evidence-based insights on research impact, collaboration networks, and publication trends." },
+  { title: "Digital transformation in education", detail: "Practical frameworks for adopting data-driven methods in teaching, assessment, and curriculum design." },
 ];
 
 const publicationFallbackSlides: Slide[] = [];
@@ -397,6 +442,105 @@ const renderContent = (slug: string) => {
   const bookPublications = publications.filter((pub) => pub.type === "book");
 
   switch (slug) {
+    case "overview":
+      return (
+        <div className="stack-gap-xl">
+          <section className="space-y-4 rounded-2xl border border-primary/15 bg-card/95 p-6 shadow-sm">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-semibold text-foreground">Investigations Overview</h2>
+              <p className="text-base text-muted-foreground">
+                A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks.
+              </p>
+              <p className="text-sm text-primary">
+                Use this page to quickly navigate to different types of research outputs.
+              </p>
+            </div>
+          </section>
+
+          <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
+            {overviewGlance.map((item) => (
+              <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">
+                <div className="text-2xl">{item.emoji}</div>
+                <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                <p className="text-sm text-muted-foreground">{item.detail}</p>
+              </div>
+            ))}
+          </section>
+
+          <section className="stack-gap-md">
+            <div className="space-y-1">
+              <h3 className="text-2xl font-semibold text-foreground">Choose your path</h3>
+              <p className="text-sm text-muted-foreground">
+                Jump directly to the research output type that matches your needs.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {overviewCards.map((card) => (
+                <Card key={card.title} className="h-full border border-primary/20 bg-background/90 shadow-sm">
+                  <CardContent className="flex h-full flex-col gap-4 p-6">
+                    <div className="space-y-2">
+                      <h4 className="text-xl font-semibold text-foreground">{card.title}</h4>
+                      <p className="text-sm text-muted-foreground">{card.body}</p>
+                    </div>
+                    <Link
+                      href={card.href}
+                      className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80"
+                    >
+                      {card.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section className="grid gap-4 rounded-2xl border border-primary/20 bg-card/90 p-6 sm:grid-cols-[1.1fr_1fr]">
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold text-foreground">Research Themes</h3>
+              <p className="text-sm text-muted-foreground">
+                Core themes guiding investigations, methodologies, and applied outputs.
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {researchThemes.map((theme) => (
+                  <li key={theme.title} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                    <div>
+                      <p className="font-semibold text-foreground">{theme.title}</p>
+                      <p>{theme.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-3 rounded-xl border border-dashed border-primary/30 bg-primary/5 p-4">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-primary/80">Navigation</h3>
+              <pre className="overflow-x-auto rounded-lg bg-background/80 p-4 text-xs text-muted-foreground">
+{`Investigations
+├── Overview (this page)
+├── Articles
+├── Theses
+├── Books
+└── Handbooks`}
+              </pre>
+              <div className="flex flex-wrap gap-2 text-sm font-semibold text-primary">
+                <Link href="/investigations/articles" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                  Articles
+                </Link>
+                <Link href="/investigations/theses" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                  Theses
+                </Link>
+                <Link href="/investigations/books" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                  Books
+                </Link>
+                <Link href="/investigations/handbooks" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                  Handbooks
+                </Link>
+              </div>
+            </div>
+          </section>
+        </div>
+      );
     case "articles":
       return (
         <ArticlesSection />
@@ -407,7 +551,6 @@ const renderContent = (slug: string) => {
       return <BooksSection items={bookPublications} />;
     case "handbooks":
       return <HandbooksSection items={handbookEntries} />;
-    case "all":
     default:
       return (
         <div className="stack-gap-lg">

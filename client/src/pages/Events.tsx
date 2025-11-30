@@ -496,7 +496,7 @@ const navItems: EventNavItem[] = [
     label: "Conferences",
     slug: "conferences",
     filter: "Conferences",
-    description: "Conference presentations, panels, and participation",
+    description: "",
   },
   {
     label: "Seminars",

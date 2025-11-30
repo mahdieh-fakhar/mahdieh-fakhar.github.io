@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
-import { StatsSection } from "@/components/StatsSection";
 import { assetPath } from "@/lib/basePath";
 
 type MembershipCategory = "review" | "research" | "affiliation";
@@ -273,7 +272,6 @@ export default function Memberships() {
             </Card>
           ))}
         </div>
-        <StatsSection stats={membershipStats} />
       </motion.div>
     </div>
   );

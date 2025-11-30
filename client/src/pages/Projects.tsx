@@ -4,7 +4,6 @@ import { Rocket } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
-import { StatsSection } from "@/components/StatsSection";
 
 type Project = {
   id: number;
@@ -202,7 +201,6 @@ export default function Projects() {
             </p>
           </CardContent>
         </Card>
-        <StatsSection className="mt-10" stats={projectStats} />
       </motion.div>
     </div>
   );

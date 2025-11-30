@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code2, Database, BarChart3, Languages, Sparkles } from "lucide-react";
-import { StatsSection } from "@/components/StatsSection";
 
 const skillCategories = [
   {
@@ -218,7 +217,6 @@ export default function Skills() {
             </div>
           </CardContent>
         </Card>
-        <StatsSection className="mt-10" stats={skillsStats} />
       </motion.div>
     </div>
   );

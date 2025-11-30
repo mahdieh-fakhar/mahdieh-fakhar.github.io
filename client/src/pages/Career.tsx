@@ -2,7 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, GraduationCap, Globe, Building2 } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
-import { StatsSection } from "@/components/StatsSection";
 
 type ExperienceType = "teaching" | "management" | "professional" | "research";
 
@@ -312,7 +311,6 @@ export default function Career() {
           ))}
         </div>
 
-        <StatsSection stats={careerStats} />
       </div>
     </div>
   );

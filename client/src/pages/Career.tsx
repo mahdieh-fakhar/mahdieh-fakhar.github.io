@@ -293,7 +293,7 @@ const typeLabels: Record<ExperienceType, string> = {
   research: "Research",
 };
 
-const fallbackSlides: Slide[] = [{ src: "/images/profile.jpg", alt: "Evidence placeholder" }];
+const fallbackSlides: Slide[] = [{ src: "/images/logo-mfs.png", alt: "Evidence placeholder" }];
 
 const experienceSlides = (experience: Experience): Slide[] => {
   if (experience.evidence?.slides?.length) {

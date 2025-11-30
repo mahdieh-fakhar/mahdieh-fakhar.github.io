@@ -890,6 +890,18 @@ const courseSummaryStats = (() => {
   ] as const;
 })();
 
+const workshopSummaryStats = (() => {
+  const total = workshopPrograms.length;
+  const uniqueLocations = new Set(workshopPrograms.map((workshop) => workshop.location).filter(Boolean)).size;
+  const withSlides = workshopPrograms.filter((workshop) => (workshop.slides?.length ?? 0) > 0).length;
+
+  return [
+    { id: "workshops", label: "Workshops", value: String(total), accent: "text-primary" },
+    { id: "locations", label: "Locations Represented", value: String(uniqueLocations), accent: "text-accent" },
+    { id: "evidence", label: "With Evidence Packs", value: String(withSlides), accent: "text-ai-accent" },
+  ] as const;
+})();
+
 export default function Education({ params }: EducationProps = {}) {
   const [location, setLocation] = useLocation();
 
@@ -1132,6 +1144,8 @@ export default function Education({ params }: EducationProps = {}) {
             </div>
           </div>
         </section>
+
+        <StatsSection className="mt-4" stats={educationStats} />
       </div>
     );
   };
@@ -1337,6 +1351,19 @@ export default function Education({ params }: EducationProps = {}) {
                 referenceLabel={workshop.urlLabel ?? "Workshop details"}
               />
             </motion.div>
+          ))}
+        </div>
+
+        <div className="auto-grid md:auto-grid-lg">
+          {workshopSummaryStats.map((stat) => (
+            <Card key={stat.id} data-testid={`card-workshop-stat-${stat.id}`}>
+              <CardContent className="p-6 text-center">
+                <p className={`text-3xl font-bold ${stat.accent}`} data-testid={`text-workshop-stat-${stat.id}`}>
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>

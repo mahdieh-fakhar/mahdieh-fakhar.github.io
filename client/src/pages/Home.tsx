@@ -120,7 +120,7 @@ export default function Home() {
           name: "Events",
           summary:
             "Global workshop leadership, keynote storytelling, and certificate vault.",
-          href: "/events/all",
+          href: "/events",
           icon: Microscope,
         },
         {

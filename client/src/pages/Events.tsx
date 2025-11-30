@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Presentation } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { assetPath } from "@/lib/basePath";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import { StatsSection } from "@/components/StatsSection";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -622,15 +622,6 @@ type EventsProps = {
 };
 
 export default function Events({ params }: EventsProps = {}) {
-  const [location, setLocation] = useLocation();
-
-  useEffect(() => {
-    const normalizedLocation = location.replace(/\/+$/, "");
-    if (!params?.category && normalizedLocation === "/events") {
-      setLocation("/events/all", { replace: true });
-    }
-  }, [location, params?.category, setLocation]);
-
   const activeSlug = params?.category ? params.category.toLowerCase() : "all";
   const activeItem = navItems.find((item) => item.slug === activeSlug) ?? navItems[0];
   const filteredCertificates =
@@ -690,7 +681,7 @@ export default function Events({ params }: EventsProps = {}) {
             aria-label="Event categories"
           >
             {navItems.map((item) => {
-              const href = item.slug === "all" ? "/events/all" : `/events/${item.slug}`;
+              const href = item.slug === "all" ? "/events" : `/events/${item.slug}`;
               const isActive = item.slug === activeItem.slug;
 
               return (

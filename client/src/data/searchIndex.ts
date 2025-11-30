@@ -50,7 +50,7 @@ export const searchDocuments: SearchDocument[] = [
   },
   {
     title: "Events",
-    href: "/events/all",
+    href: "/events",
     description:
       "Conference and workshop participation with certificate previews, AI insights, and download options.",
     keywords: ["events", "conferences", "seminars", "certificates", "presentations", "webinars"],

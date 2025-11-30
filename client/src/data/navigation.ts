@@ -12,7 +12,7 @@ export type NavigationItem = {
 };
 
 export const eventPages: NavChild[] = [
-  { name: "Overview", href: "/events/all", slug: "all" },
+  { name: "Overview", href: "/events", slug: "all" },
   { name: "Conferences", href: "/events/conferences", slug: "conferences" },
   { name: "Seminars", href: "/events/seminars", slug: "seminars" },
   { name: "Webinars", href: "/events/webinars", slug: "webinars" },
@@ -50,7 +50,7 @@ export const navigationItems: NavigationItem[] = [
   { name: "Education", href: "/education", children: educationPages },
   { name: "Investigations", href: "/investigations", children: investigationPages },
   { name: "Works", href: "/works", children: workPages },
-  { name: "Events", href: "/events/all", children: eventPages },
+  { name: "Events", href: "/events", children: eventPages },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];

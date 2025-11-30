@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Link, useLocation } from "wouter";
 import { useEffect } from "react";
 import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight, Users } from "lucide-react";
@@ -155,9 +154,6 @@ export default function Works() {
             projects, core skills, and certifications. Use this page to get a quick sense of my professional profile and
             navigate to detailed sections.
           </p>
-          <Badge variant="outline" className="text-xs uppercase tracking-widest">
-            Overview
-          </Badge>
         </header>
 
         <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">

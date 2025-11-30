@@ -451,14 +451,32 @@ const renderContent = (slug: string) => {
       );
     case "articles":
       return (
-        <ArticlesSection />
+        <>
+          <ArticlesSection />
+          <StatsSection className="mt-10" stats={investigationStats} />
+        </>
       );
     case "theses":
-      return <ThesesSection records={thesisRecords} />;
+      return (
+        <>
+          <ThesesSection records={thesisRecords} />
+          <StatsSection className="mt-10" stats={investigationStats} />
+        </>
+      );
     case "books":
-      return <BooksSection items={bookPublications} />;
+      return (
+        <>
+          <BooksSection items={bookPublications} />
+          <StatsSection className="mt-10" stats={investigationStats} />
+        </>
+      );
     case "handbooks":
-      return <HandbooksSection items={handbookEntries} />;
+      return (
+        <>
+          <HandbooksSection items={handbookEntries} />
+          <StatsSection className="mt-10" stats={investigationStats} />
+        </>
+      );
     default:
       return (
         <div className="stack-gap-lg">
@@ -466,6 +484,7 @@ const renderContent = (slug: string) => {
           <ThesesSection records={thesisRecords} />
           <BooksSection items={bookPublications} />
           <HandbooksSection items={handbookEntries} />
+          <StatsSection className="mt-10" stats={investigationStats} />
         </div>
       );
   }

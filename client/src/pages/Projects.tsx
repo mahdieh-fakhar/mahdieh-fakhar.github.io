@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Rocket } from "lucide-react";
-import { BadgePanel } from "@/components/badges/BadgePanel";
-import { getBadges } from "@/lib/badgeUtils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
 type Project = {
@@ -109,25 +107,6 @@ function getProjectSlides(project: Project): Slide[] {
 }
 
 export default function Projects() {
-  const projectBadges = getBadges({ page: "projects" }).filter((badge) =>
-    badge.placements.includes("projects") || badge.placements.includes("project-card"),
-  );
-  const projectStats = (() => {
-    const total = projects.length;
-    const research = projects.filter((project) =>
-      `${project.role ?? ""} ${project.description}`.toLowerCase().includes("research"),
-    ).length;
-    const digitalBuilds = projects.filter((project) =>
-      (project.technologies ?? []).some((tech) => /react|ui|web|design|tailwind/i.test(tech)),
-    ).length;
-    const funded = projects.filter((project) => Boolean(project.funding)).length;
-    return [
-      { value: total, label: "Documented Projects" },
-      { value: research, label: "Research Collaborations" },
-      { value: digitalBuilds, label: "Digital Builds" },
-      { value: funded, label: "Funded Engagements" },
-    ];
-  })();
   return (
     <div className="page-template-career">
       <motion.div
@@ -146,24 +125,6 @@ export default function Projects() {
             Research projects and web development work
           </p>
         </div>
-
-        {projectBadges.length > 0 && (
-          <Card className="border-primary/25 bg-background/80 shadow-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Rocket className="h-5 w-5 text-primary" />
-                Certifications informing delivery
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="auto-grid md:auto-grid-lg">
-                {projectBadges.map((badge) => (
-                  <BadgePanel key={badge.id} badge={badge} layout="grid" />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
 
         {/* Projects Grid */}
         <div className="stack-gap-md">

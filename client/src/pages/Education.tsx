@@ -616,9 +616,9 @@ const allRecords: EducationRecord[] = [
 const navItems: EducationNavItem[] = [
   {
     label: "Overview",
-    slug: "all",
+    slug: "overview",
     filter: null,
-    description: "High-level summary with links to Academic, Courses, and Workshops",
+    description: "Overview with links to Academic, Courses, and Workshops",
   },
   {
     label: "Academic",
@@ -893,12 +893,12 @@ const courseSummaryStats = (() => {
 export default function Education({ params }: EducationProps = {}) {
   const [location, setLocation] = useLocation();
 
-  const categorySlug = params?.category ? params.category.toLowerCase() : "all";
+  const categorySlug = params?.category ? params.category.toLowerCase() : "overview";
 
   useEffect(() => {
     const normalizedLocation = location.replace(/\/+$/, "");
-    if (!params?.category && normalizedLocation === "/education") {
-      setLocation("/education/all", { replace: true });
+    if (!params?.category && normalizedLocation !== "/education") {
+      setLocation("/education", { replace: true });
     }
   }, [location, params?.category, setLocation]);
 
@@ -1337,7 +1337,7 @@ export default function Education({ params }: EducationProps = {}) {
     );
   };
 
-  const heroTitle = activeItem.filter === null ? "Education Overview" : "Education";
+  const heroTitle = activeItem.filter === null ? "Overview" : "Education";
   const heroSubtitle =
     activeItem.filter === null
       ? "A concise overview of my academic background, teaching activities, and learning initiatives across academic studies, courses, and workshops."
@@ -1366,7 +1366,7 @@ export default function Education({ params }: EducationProps = {}) {
             aria-label="Education sections"
           >
             {navItems.map((item) => {
-              const href = `/education/${item.slug}`;
+              const href = item.slug === "overview" ? "/education" : `/education/${item.slug}`;
               const isActive = item.slug === activeItem.slug;
 
               return (

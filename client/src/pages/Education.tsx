@@ -1359,9 +1359,9 @@ export default function Education({ params }: EducationProps = {}) {
           <p className="text-xl text-muted-foreground">{heroSubtitle}</p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
+        <div className="flex flex-col items-center justify-center gap-3">
           <nav
-            className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
+            className="flex flex-wrap justify-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:flex-nowrap mobile:justify-center mobile:overflow-x-auto mobile:pr-2"
             role="tablist"
             aria-label="Education sections"
           >
@@ -1389,7 +1389,6 @@ export default function Education({ params }: EducationProps = {}) {
               );
             })}
           </nav>
-          <span className="text-muted-foreground normal-case tracking-normal">{activeItem.description}</span>
         </div>
 
         {renderActiveCategory()}

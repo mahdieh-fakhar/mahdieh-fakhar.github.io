@@ -502,7 +502,7 @@ const navItems: EventNavItem[] = [
     label: "Seminars",
     slug: "seminars",
     filter: "Seminars",
-    description: "Seminars, focused talks, and invited sessions",
+    description: "",
   },
   {
     label: "Webinars",

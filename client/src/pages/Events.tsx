@@ -508,7 +508,7 @@ const navItems: EventNavItem[] = [
     label: "Webinars",
     slug: "webinars",
     filter: "Webinars",
-    description: "Virtual engagements and remote workshops",
+    description: "",
   },
   {
     label: "Congresses",

@@ -23,7 +23,7 @@ const projects: Project[] = [
     role: "Research Collaborator",
     period: "2021-2023",
     technologies: ["Research Methodology", "Heritage Studies", "Digital Humanities"],
-    imageUrl: null,
+    imageUrl: "/images/memberships/IHUPA.png",
   },
   {
     id: 2,

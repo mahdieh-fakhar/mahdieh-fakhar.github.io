@@ -445,6 +445,16 @@ const renderContent = (slug: string) => {
     case "overview":
       return (
         <div className="stack-gap-xl">
+          <section className="space-y-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+              Research Portfolio
+            </p>
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Investigations Overview</h2>
+            <p className="max-w-3xl text-base text-muted-foreground">
+              A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks. Use this page to quickly navigate to different types of research outputs.
+            </p>
+          </section>
+
           <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
             {overviewGlance.map((item) => (
               <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">

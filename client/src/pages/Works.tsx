@@ -5,7 +5,6 @@ import { Link } from "wouter";
 import { Rocket, Code2, Award, Briefcase, CalendarRange, ArrowRight, Users } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
-import { StatsSection } from "@/components/StatsSection";
 
 const workStreams = [
   {
@@ -68,6 +67,57 @@ const deliveryHighlights = [
   },
 ];
 
+const glanceItems = [
+  { emoji: "💼", title: "Professional experience", detail: "Career history across education, data, and applied research." },
+  { emoji: "🤝", title: "Active memberships", detail: "Engagement with professional and academic communities." },
+  { emoji: "🧩", title: "Projects", detail: "Applied initiatives and collaborations delivered across domains." },
+  { emoji: "🧠", title: "Skills & certifications", detail: "Core competencies supported by verified credentials and training." },
+];
+
+const focusAreas = [
+  { title: "Data-informed education", detail: "Applying analytics and AI to improve teaching, learning, and assessment." },
+  { title: "Digital transformation", detail: "Operationalizing technology for research teams, institutions, and stakeholders." },
+  { title: "Collaborative delivery", detail: "Working across memberships and projects to align outcomes with impact goals." },
+];
+
+const overviewSections = [
+  {
+    title: "Career",
+    body:
+      "Roles, institutions, and responsibilities presented as a timeline to highlight growth, leadership, and delivery milestones.",
+    href: "/works/career",
+    cta: "View Career Timeline →",
+  },
+  {
+    title: "Memberships",
+    body:
+      "Professional and academic memberships, committee work, and community engagement that reinforce collaboration and governance.",
+    href: "/works/memberships",
+    cta: "See Professional Memberships →",
+  },
+  {
+    title: "Projects",
+    body:
+      "Selected projects showcasing applied research, innovation pilots, and cross-functional delivery in education and data-driven contexts.",
+    href: "/works/projects",
+    cta: "Browse Projects →",
+  },
+  {
+    title: "Skills",
+    body:
+      "Structured view of technical, research, and communication skills mapped to real-world outputs across projects and roles.",
+    href: "/works/skills",
+    cta: "Explore Skills →",
+  },
+  {
+    title: "Certifications",
+    body:
+      "Verified credentials, formal training, and licenses that underpin practice across analytics, education, and technology.",
+    href: "/works/certifications",
+    cta: "View Certifications →",
+  },
+];
+
 export default function Works() {
   const rawBadges = [
     ...getBadges({ page: "projects", limit: 2 }),
@@ -78,12 +128,6 @@ export default function Works() {
   const spotlightBadges = rawBadges.filter(
     (badge, index, self) => index === self.findIndex((candidate) => candidate.id === badge.id),
   );
-  const worksStats = [
-    { value: workStreams.length, label: "Work Streams" },
-    { value: deliveryHighlights.length, label: "Delivery Pillars" },
-    { value: rawBadges.length, label: "Relevant Badges" },
-    { value: spotlightBadges.length, label: "Spotlight Credentials" },
-  ];
 
   return (
     <div className="page-template-career">
@@ -96,51 +140,54 @@ export default function Works() {
         <header className="space-y-4">
           <div className="flex items-center gap-2">
             <Briefcase className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">All Works</h1>
+            <h1 className="text-4xl font-bold">Works Overview</h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-3xl">
-            Explore the applied side of Mahdieh Fakhar&apos;s portfolio. This hub surfaces active projects, technical
-            competencies, and third-party validated credentials that underpin every delivery.
+            A structured overview of my professional activities, including career history, professional memberships, key
+            projects, core skills, and certifications. Use this page to get a quick sense of my professional profile and
+            navigate to detailed sections.
           </p>
           <Badge variant="outline" className="text-xs uppercase tracking-widest">
-            All works
+            Overview
           </Badge>
         </header>
 
-        <section className="grid gap-6 md:grid-cols-3" aria-label="Work streams">
-          {workStreams.map((stream) => {
-            const Icon = stream.icon;
-            return (
-              <Card key={stream.name} className="border-primary/20 bg-background/80 shadow-sm hover-elevate">
-                <CardHeader className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="rounded-full bg-primary/10 p-2 text-primary">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <CardTitle className="text-xl">{stream.name}</CardTitle>
+        <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
+          {glanceItems.map((item) => (
+            <div key={item.title} className="space-y-2 rounded-xl border border-transparent p-3">
+              <div className="text-2xl">{item.emoji}</div>
+              <p className="text-sm font-semibold text-foreground">{item.title}</p>
+              <p className="text-sm text-muted-foreground">{item.detail}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="stack-gap-md">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-semibold text-foreground">Choose your path</h2>
+            <p className="text-sm text-muted-foreground">
+              Navigate directly to the section that matches what you are looking for.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {overviewSections.map((section) => (
+              <Card key={section.title} className="h-full border border-primary/20 bg-background/90 shadow-sm">
+                <CardContent className="flex h-full flex-col gap-4 p-6">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-foreground">{section.title}</h3>
+                    <p className="text-sm text-muted-foreground">{section.body}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground">{stream.description}</p>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {stream.meta.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
                   <Link
-                    href={stream.href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                    href={section.href}
+                    className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80"
                   >
-                    Visit {stream.name}
+                    {section.cta}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </CardContent>
               </Card>
-            );
-          })}
+            ))}
+          </div>
         </section>
 
         <section className="space-y-4" aria-label="Delivery highlights">
@@ -185,7 +232,59 @@ export default function Works() {
             </Card>
           )}
         </section>
-        <StatsSection className="mt-10" stats={worksStats} />
+
+        <section className="grid gap-4 rounded-2xl border border-primary/20 bg-card/90 p-6 sm:grid-cols-[1.1fr_1fr]">
+          <div className="space-y-3">
+            <h3 className="text-xl font-semibold text-foreground">Professional Profile</h3>
+            <p className="text-sm text-muted-foreground">
+              Applied strategist working across education, data, and technology to connect outcomes with impact, backed
+              by collaborations, memberships, and delivered projects.
+            </p>
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">Focus Areas</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {focusAreas.map((area) => (
+                  <li key={area.title} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                    <div>
+                      <p className="font-semibold text-foreground">{area.title}</p>
+                      <p>{area.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="space-y-3 rounded-xl border border-dashed border-primary/30 bg-primary/5 p-4">
+            <h4 className="text-sm font-semibold uppercase tracking-[0.25em] text-primary/80">Navigation</h4>
+            <pre className="overflow-x-auto rounded-lg bg-background/80 p-4 text-xs text-muted-foreground">
+{`Works
+├── Overview (this page)
+├── Career
+├── Memberships
+├── Projects
+├── Skills
+└── Certifications`}
+            </pre>
+            <div className="flex flex-wrap gap-2 text-sm font-semibold text-primary">
+              <Link href="/works/career" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Career
+              </Link>
+              <Link href="/works/memberships" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Memberships
+              </Link>
+              <Link href="/works/projects" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Projects
+              </Link>
+              <Link href="/works/skills" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Skills
+              </Link>
+              <Link href="/works/certifications" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Certifications
+              </Link>
+            </div>
+          </div>
+        </section>
       </motion.div>
     </div>
   );

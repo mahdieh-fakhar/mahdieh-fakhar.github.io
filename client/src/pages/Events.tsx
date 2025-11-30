@@ -487,10 +487,10 @@ const certificateSlides = (certificate: CategorizedCertificate): Slide[] => [
 
 const navItems: EventNavItem[] = [
   {
-    label: "All",
+    label: "Overview",
     slug: "all",
     filter: null,
-    description: "Overview plus every certificate",
+    description: "",
   },
   {
     label: "Conferences",
@@ -716,9 +716,11 @@ export default function Events({ params }: EventsProps = {}) {
               );
             })}
           </nav>
-          <span className="text-muted-foreground normal-case tracking-normal">
-            {activeItem.description}
-          </span>
+          {activeItem.description && (
+            <span className="text-muted-foreground normal-case tracking-normal">
+              {activeItem.description}
+            </span>
+          )}
         </div>
 
         {isOverview && (

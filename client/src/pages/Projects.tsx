@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { Rocket } from "lucide-react";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 
@@ -150,18 +149,6 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
-
-        {/* Summary */}
-        <Card className="bg-gradient-to-br from-ai-accent/5 to-primary/5">
-          <CardContent className="p-6">
-            <h3 className="font-semibold mb-3">Research & Development Focus</h3>
-            <p className="text-sm text-muted-foreground">
-              Active involvement in cutting-edge research projects focusing on language teaching innovation, 
-              educational technology, and digital humanities. Combining technical skills with academic research 
-              to create impactful solutions in education and data science.
-            </p>
-          </CardContent>
-        </Card>
       </motion.div>
     </div>
   );

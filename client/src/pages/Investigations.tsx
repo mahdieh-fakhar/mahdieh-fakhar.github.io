@@ -352,25 +352,8 @@ const HandbooksSection = ({ items }: { items: HandbookEntry[] }) => (
       </p>
     </div>
 
-    <div className="space-y-6">
-      {items.map((entry, index) => (
-        <motion.div
-          key={entry.id}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: index * 0.08 }}
-        >
-          <CareerEvidenceCard
-            title={entry.title}
-            organization={entry.domain}
-            location={`${entry.format} reference`}
-            period="Updated periodically"
-            roleLabel={entry.format}
-            highlights={getHandbookHighlights(entry)}
-            slides={getHandbookSlides()}
-          />
-        </motion.div>
-      ))}
+    <div className="rounded-2xl border border-dashed border-primary/30 bg-muted/40 p-6 text-sm text-muted-foreground">
+      Handbook entries are not available right now.
     </div>
   </section>
 );

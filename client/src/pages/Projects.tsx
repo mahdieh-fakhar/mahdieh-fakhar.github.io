@@ -41,6 +41,7 @@ const projects: Project[] = [
     role: "Web Designer & Developer",
     period: "2023",
     technologies: ["Web Design", "UI/UX", "HTML/CSS", "Responsive Design"],
+    imageUrl: "/images/memberships/IHUPA.png",
     url: "#",
   },
   {

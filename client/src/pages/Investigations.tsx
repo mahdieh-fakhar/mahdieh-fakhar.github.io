@@ -34,7 +34,7 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Overview", slug: "overview", description: "Combined research view" },
+  { label: "Overview", slug: "overview", description: "" },
   { label: "Articles", slug: "articles", description: "Published manuscripts & reviews" },
   { label: "Theses", slug: "theses", description: "Graduate research portfolio" },
   { label: "Books", slug: "books", description: "Authored & edited volumes" },
@@ -445,18 +445,6 @@ const renderContent = (slug: string) => {
     case "overview":
       return (
         <div className="stack-gap-xl">
-          <section className="space-y-4 rounded-2xl border border-primary/15 bg-card/95 p-6 shadow-sm">
-            <div className="space-y-2">
-              <h2 className="text-2xl font-semibold text-foreground">Investigations Overview</h2>
-              <p className="text-base text-muted-foreground">
-                A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks.
-              </p>
-              <p className="text-sm text-primary">
-                Use this page to quickly navigate to different types of research outputs.
-              </p>
-            </div>
-          </section>
-
           <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
             {overviewGlance.map((item) => (
               <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">
@@ -621,7 +609,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
                     ? "Authored and edited volumes, monographs, and book-length contributions."
                     : activeItem.slug === "handbooks"
                       ? "Practical guides and toolkits designed for applied learning and field use."
-                      : "Unified view of research outputs spanning articles, theses, books, and handbooks."}
+                      : ""}
             </p>
           </div>
 
@@ -646,12 +634,9 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
                 >
                   {item.label}
                 </Link>
-              ))}
-            </nav>
-            <span className="text-muted-foreground normal-case tracking-normal">
-              {activeItem.description}
-            </span>
-          </div>
+            ))}
+          </nav>
+        </div>
         </div>
 
         {renderContent(activeSlug)}

@@ -62,6 +62,12 @@ const experiences: Experience[] = [
       ctaLabel: "View Attachments",
       slides: [
         {
+          src: "/images/career/ilam-university-logo.png",
+          alt: "University of Ilam official logo",
+          caption: "Official University of Ilam insignia for adjunct lecturer appointment.",
+          downloadName: "ilam-university-logo.png",
+        },
+        {
           src: "/images/career/career-2025-1345-4.jpg",
           alt: "University of Ilam adjunct lecturer confirmation letter page 1",
           caption: "Teaching form confirming humanities and engineering teaching assignments.",
@@ -164,6 +170,19 @@ const experiences: Experience[] = [
       "Piloted curriculum refresh projects emphasising communicative methodology and digital literacy",
       "Facilitated continuous professional development and peer observations for more than 15 instructors",
     ],
+    evidence: {
+      title: "Safir Danesh Language Institute branding",
+      description: "Official mark representing Safir Danesh leadership and curriculum oversight.",
+      ctaLabel: "View Branding",
+      slides: [
+        {
+          src: "/images/career/safir-academy-logo.jpg",
+          alt: "Safir Danesh Language Institute logo",
+          caption: "Safir Danesh Language Institute brand mark for Ilam branch coordination.",
+          downloadName: "safir-academy-logo.jpg",
+        },
+      ],
+    },
   },
   {
     id: 6,

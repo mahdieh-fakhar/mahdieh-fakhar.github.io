@@ -445,16 +445,6 @@ const renderContent = (slug: string) => {
     case "overview":
       return (
         <div className="stack-gap-xl">
-          <section className="space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
-              Research Portfolio
-            </p>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">Investigations Overview</h2>
-            <p className="max-w-3xl text-base text-muted-foreground">
-              A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks. Use this page to quickly navigate to different types of research outputs.
-            </p>
-          </section>
-
           <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
             {overviewGlance.map((item) => (
               <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">
@@ -593,34 +583,36 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
         className="stack-gap-md"
       >
         <div className="space-y-6">
-          <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
-                Research Portfolio
-              </p>
-              <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
-                {activeItem.slug === "articles"
-                  ? "Articles"
-                  : activeItem.slug === "theses"
-                    ? "Theses"
-                    : activeItem.slug === "books"
-                      ? "Books"
-                      : activeItem.slug === "handbooks"
-                        ? "Handbooks"
-                        : "Investigations Overview"}
-              </h1>
-            </div>
-            <p className="max-w-2xl text-sm text-muted-foreground">
-              {activeItem.slug === "articles"
-                ? "Peer-reviewed publications, reviews, and journal outputs curated for impact and rigor."
-                : activeItem.slug === "theses"
-                  ? "Graduate theses highlighting research depth, methodologies, and scholarly contributions."
-                  : activeItem.slug === "books"
-                    ? "Authored and edited volumes, monographs, and book-length contributions."
-                    : activeItem.slug === "handbooks"
-                      ? "Practical guides and toolkits designed for applied learning and field use."
-                      : ""}
+          <div className="space-y-3">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+              Research Portfolio
             </p>
+            <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
+              {activeItem.slug === "articles"
+                ? "Articles"
+                : activeItem.slug === "theses"
+                  ? "Theses"
+                  : activeItem.slug === "books"
+                    ? "Books"
+                    : activeItem.slug === "handbooks"
+                      ? "Handbooks"
+                      : "Investigations Overview"}
+            </h1>
+            {activeItem.slug === "overview" ? (
+              <p className="max-w-3xl text-base text-muted-foreground">
+                A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks. Use this page to quickly navigate to different types of research outputs.
+              </p>
+            ) : (
+              <p className="max-w-2xl text-sm text-muted-foreground">
+                {activeItem.slug === "articles"
+                  ? "Peer-reviewed publications, reviews, and journal outputs curated for impact and rigor."
+                  : activeItem.slug === "theses"
+                    ? "Graduate theses highlighting research depth, methodologies, and scholarly contributions."
+                    : activeItem.slug === "books"
+                      ? "Authored and edited volumes, monographs, and book-length contributions."
+                      : "Practical guides and toolkits designed for applied learning and field use."}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">

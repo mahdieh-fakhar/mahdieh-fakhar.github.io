@@ -514,7 +514,7 @@ const navItems: EventNavItem[] = [
     label: "Congresses",
     slug: "congresses",
     filter: "Congresses",
-    description: "Multi-track, multi-day congress participation",
+    description: "",
   },
   {
     label: "Symposia",

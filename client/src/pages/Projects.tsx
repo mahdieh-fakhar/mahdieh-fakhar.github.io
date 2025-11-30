@@ -9,6 +9,7 @@ type Project = {
   role?: string;
   period?: string;
   technologies?: string[];
+  imageUrls?: string[];
   imageUrl?: string | null;
   url?: string;
   directors?: string;
@@ -62,6 +63,11 @@ const projects: Project[] = [
     period: "March-November 2022",
     technologies: ["Research", "Data Analysis", "Academic Writing"],
     funding: "EUR 4,000",
+    imageUrls: [
+      "/images/career/vezarat.jpg",
+      "/images/career/ilam.png",
+      "/images/memberships/UNED.webp",
+    ],
   },
 ];
 
@@ -94,6 +100,14 @@ function getProjectHighlights(project: Project): string[] {
 }
 
 function getProjectSlides(project: Project): Slide[] {
+  if (project.imageUrls?.length) {
+    return project.imageUrls.map((src, idx) => ({
+      src,
+      alt: `${project.title} evidence ${idx + 1}`,
+      caption: project.title,
+    }));
+  }
+
   if (project.imageUrl) {
     return [
       {

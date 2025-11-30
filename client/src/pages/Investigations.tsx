@@ -269,16 +269,6 @@ const ArticlesSection = ({ includeFocus = true }: { includeFocus?: boolean }) =>
 
   return (
     <section className="space-y-6" aria-labelledby="investigations-articles-heading">
-      <div className="space-y-2">
-        <h2 id="investigations-articles-heading" className="text-2xl font-semibold text-foreground">
-          Articles & Publications
-        </h2>
-        <p className="max-w-3xl text-sm text-muted-foreground">
-          Peer-reviewed outputs accompanied by bibliometric insights, conference dissemination, and
-          applied commentary.
-        </p>
-      </div>
-
       <div className="space-y-6">
         <div className="space-y-4">
           <div className="flex flex-col gap-3">
@@ -313,44 +303,6 @@ const ArticlesSection = ({ includeFocus = true }: { includeFocus?: boolean }) =>
           </div>
           <PublicationCards items={filteredArticles} />
         </div>
-
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-foreground">Conference Proceedings</h3>
-          <Card>
-            <CardHeader>
-              <CardTitle>Notable Conferences (13+ papers)</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Representative congresses and symposia where findings were showcased.
-              </p>
-              <div className="auto-grid">
-                {conferenceProceedings.map((entry) => (
-                  <span key={entry} className="text-sm text-foreground">
-                    {entry}
-                  </span>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {includeFocus && (
-          <Card className="bg-gradient-to-br from-accent/5 to-primary/5">
-            <CardHeader>
-              <CardTitle>Research Focus Areas</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2 mobile:flex-nowrap mobile:overflow-x-auto mobile:pr-2">
-                {researchFocusAreas.map((area) => (
-                  <Badge key={area} variant="secondary">
-                    {area}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </section>
   );

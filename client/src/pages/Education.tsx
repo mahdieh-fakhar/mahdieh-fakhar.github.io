@@ -1410,7 +1410,6 @@ export default function Education({ params }: EducationProps = {}) {
         </div>
 
         {renderActiveCategory()}
-        <StatsSection className="mt-10" stats={educationStats} />
       </motion.div>
     </div>
   );

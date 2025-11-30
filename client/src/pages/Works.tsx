@@ -190,28 +190,6 @@ export default function Works() {
           </div>
         </section>
 
-        <section className="space-y-4" aria-label="Delivery highlights">
-          <div className="flex items-center gap-2">
-            <CalendarRange className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-semibold">Delivery DNA</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {deliveryHighlights.map((highlight) => (
-              <Card key={highlight.label} className="border-primary/15 bg-muted/40">
-                <CardHeader className="space-y-3">
-                  <Badge variant="secondary" className="w-fit text-xs uppercase tracking-widest">
-                    {highlight.label}
-                  </Badge>
-                  <CardTitle className="text-xl text-primary">{highlight.value}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{highlight.detail}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
         <section className="space-y-4" aria-label="Spotlight credentials">
           <div className="flex items-center gap-2">
             <Award className="h-5 w-5 text-primary" />

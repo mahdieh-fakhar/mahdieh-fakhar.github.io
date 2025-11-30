@@ -902,6 +902,12 @@ export default function Education({ params }: EducationProps = {}) {
     }
   }, [location, params?.category, setLocation]);
 
+  useEffect(() => {
+    if (params?.category === "all" || params?.category === "overview") {
+      setLocation("/education", { replace: true });
+    }
+  }, [params?.category, setLocation]);
+
   const activeItem = navItems.find((item) => item.slug === categorySlug) ?? navItems[0];
 
   const filteredRecords =

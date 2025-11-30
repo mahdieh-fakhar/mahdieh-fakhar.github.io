@@ -1051,19 +1051,6 @@ export default function Education({ params }: EducationProps = {}) {
 
     return (
       <div className="stack-gap-xl">
-        <Card className="border border-primary/25 bg-card/95 shadow-lg shadow-primary/15">
-          <CardContent className="space-y-6 p-8">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">Education Overview</p>
-              <h1 className="text-4xl font-bold text-foreground">Education Overview</h1>
-              <p className="text-base text-muted-foreground">
-                A concise overview of my academic background, teaching activities, and learning initiatives, including
-                formal education, courses, and workshops.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
         <section className="grid gap-4 rounded-2xl border border-primary/20 bg-muted/40 p-6 sm:grid-cols-3">
           {glanceItems.map((item) => (
             <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">

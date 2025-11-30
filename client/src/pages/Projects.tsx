@@ -47,15 +47,6 @@ const projects: Project[] = [
     url: "#",
   },
   {
-    id: 4,
-    title: "Personal Portfolio Website",
-    description: "AI-powered digital portfolio showcasing academic achievements, research publications, and professional experience. Features document analysis with OpenAI Vision for certificate verification.",
-    role: "Developer",
-    period: "2024-2025",
-    technologies: ["React", "TypeScript", "AI Integration", "OpenAI Vision", "Tailwind CSS"],
-    url: "https://mahdieh-fakhar.github.io/",
-  },
-  {
     id: 5,
     title: "6-Month Research Fellowship",
     description: "Ministry of Science, Research, and Technology of Iran research fellowship hosted by UNED (ATLAS Research Group), Madrid. Focus on language teaching and digital competence research.",

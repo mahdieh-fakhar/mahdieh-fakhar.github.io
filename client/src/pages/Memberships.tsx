@@ -28,13 +28,6 @@ const categoryLabels: Record<MembershipCategory, string> = {
   affiliation: "Institutional Membership",
 };
 
-const summaryStats = [
-  { id: "peer", label: "Peer Review Venues", value: "2", accent: "text-primary" },
-  { id: "projects", label: "Research Consortia", value: "3", accent: "text-accent" },
-  { id: "regions", label: "Regions Engaged", value: "3", accent: "text-ai-accent" },
-  { id: "years", label: "Years Collaborating", value: "5+", accent: "text-primary" },
-] as const;
-
 const fallbackSlides: Slide[] = [];
 
 const memberships: Membership[] = [
@@ -190,20 +183,6 @@ const memberships: Membership[] = [
   },
 ];
 
-const membershipStats = (() => {
-  const total = memberships.length;
-  const review = memberships.filter((membership) => membership.category === "review").length;
-  const research = memberships.filter((membership) => membership.category === "research").length;
-  const locations = new Set(memberships.map((membership) => membership.location)).size;
-
-  return [
-    { value: total, label: "Total Memberships" },
-    { value: review, label: "Peer Review Roles" },
-    { value: research, label: "Research Networks" },
-    { value: locations, label: "Regions Represented" },
-  ];
-})();
-
 const membershipHighlights = (membership: Membership): string[] => {
   if (membership.focus) {
     return [...membership.highlights, `Focus: ${membership.focus}`];
@@ -257,19 +236,6 @@ export default function Memberships() {
               highlights={membershipHighlights(membership)}
               slides={membershipSlides(membership)}
             />
-          ))}
-        </div>
-
-        <div className="auto-grid md:auto-grid-lg">
-          {summaryStats.map((stat) => (
-            <Card key={stat.id} data-testid={`card-stat-${stat.id}`}>
-              <CardContent className="p-6 text-center">
-                <p className={`text-3xl font-bold ${stat.accent}`} data-testid={`text-stat-${stat.id}`}>
-                  {stat.value}
-                </p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </CardContent>
-            </Card>
           ))}
         </div>
       </motion.div>

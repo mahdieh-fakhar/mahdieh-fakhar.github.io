@@ -35,7 +35,7 @@ const summaryStats = [
   { id: "years", label: "Years Collaborating", value: "5+", accent: "text-primary" },
 ] as const;
 
-const fallbackSlides: Slide[] = [{ src: assetPath("/images/profile.jpg"), alt: "Evidence placeholder" }];
+const fallbackSlides: Slide[] = [];
 
 const memberships: Membership[] = [
   {
@@ -216,13 +216,13 @@ const membershipSlides = (membership: Membership): Slide[] => {
   const slides = membership.evidence?.slides?.map((slide) => ({
     ...slide,
     src: assetPath(slide.src),
-  }));
+  })) ?? [];
 
-  if (slides?.length) {
-    return slides;
+  if (slides.length === 0) {
+    return fallbackSlides;
   }
 
-  return fallbackSlides;
+  return slides;
 };
 
 export default function Memberships() {

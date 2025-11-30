@@ -335,7 +335,9 @@ const BooksSection = ({ items }: { items: Publication[] }) => (
         Long-form scholarship advancing digital competence, language learning, and educational technology.
       </p>
     </div>
-    <PublicationCards items={items} />
+    <div className="rounded-2xl border border-dashed border-primary/30 bg-muted/40 p-6 text-sm text-muted-foreground">
+      Book entries are not available right now.
+    </div>
   </section>
 );
 

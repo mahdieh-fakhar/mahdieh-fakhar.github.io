@@ -1,11 +1,12 @@
 import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Presentation } from "lucide-react";
+import { ArrowRight, Presentation } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { assetPath } from "@/lib/basePath";
 import { Link, useLocation } from "wouter";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import { StatsSection } from "@/components/StatsSection";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type CertificateOrientation = "portrait" | "landscape";
 
@@ -489,19 +490,19 @@ const navItems: EventNavItem[] = [
     label: "All",
     slug: "all",
     filter: null,
-    description: "All certificates across orientations",
+    description: "Overview plus every certificate",
   },
   {
     label: "Conferences",
     slug: "conferences",
     filter: "Conferences",
-    description: "Flagship international conference appearances",
+    description: "Conference presentations, panels, and participation",
   },
   {
     label: "Seminars",
     slug: "seminars",
     filter: "Seminars",
-    description: "Academic seminars and invited talks",
+    description: "Seminars, focused talks, and invited sessions",
   },
   {
     label: "Webinars",
@@ -513,7 +514,7 @@ const navItems: EventNavItem[] = [
     label: "Congresses",
     slug: "congresses",
     filter: "Congresses",
-    description: "Large-scale congress participation",
+    description: "Multi-track, multi-day congress participation",
   },
   {
     label: "Symposia",
@@ -521,6 +522,95 @@ const navItems: EventNavItem[] = [
     filter: "Symposia",
     description: "Specialist symposia and panels",
   },
+];
+
+const glanceHighlights = [
+  {
+    icon: "🎤",
+    title: "Conferences",
+    detail: "Participation in national and international conferences as presenter, panelist, and attendee.",
+  },
+  {
+    icon: "🧑‍🏫",
+    title: "Seminars",
+    detail: "Academic and professional seminars, invited talks, and department-focused sessions.",
+  },
+  {
+    icon: "💻",
+    title: "Webinars",
+    detail: "Online webinars delivered or attended with wide, remote audiences.",
+  },
+  {
+    icon: "🏛",
+    title: "Congresses",
+    detail: "Broader congresses with multi-track or multi-day programs and committee work.",
+  },
+  {
+    icon: "🧠",
+    title: "Symposia",
+    detail: "Theme-driven symposia and roundtables with targeted research discussions.",
+  },
+];
+
+const eventTypeSections = [
+  {
+    title: "Conferences",
+    summary:
+      "Conferences where I have presented, spoken, moderated, or participated, covering both national and international audiences.",
+    href: "/events/conferences",
+    cta: "View Conferences →",
+  },
+  {
+    title: "Seminars",
+    summary:
+      "Seminars and focused talks with smaller groups, including departmental presentations, guest lectures, and expert sessions.",
+    href: "/events/seminars",
+    cta: "Explore Seminars →",
+  },
+  {
+    title: "Webinars",
+    summary:
+      "Online webinars delivered or attended, emphasizing accessible, remote formats for sharing knowledge and practice.",
+    href: "/events/webinars",
+    cta: "Browse Webinars →",
+  },
+  {
+    title: "Congresses",
+    summary:
+      "Large-scale congresses with multi-track agendas where I have presented, joined committees, or contributed as a participant.",
+    href: "/events/congresses",
+    cta: "See Congresses →",
+  },
+  {
+    title: "Symposia",
+    summary:
+      "Specialist symposia focused on defined themes, highlighting my contributions as presenter, panelist, or engaged attendee.",
+    href: "/events/symposia",
+    cta: "Discover Symposia →",
+  },
+];
+
+const roleHighlights = [
+  "Presenting research and invited talks",
+  "Moderating or chairing sessions",
+  "Serving on organizing or scientific committees",
+  "Participating as an engaged attendee",
+];
+
+const navigationTree = `Events
+├── Overview (this page)
+├── Conferences
+├── Seminars
+├── Webinars
+├── Congresses
+└── Symposia`;
+
+const navigationLinks = [
+  { label: "Conferences", href: "/events/conferences" },
+  { label: "Seminars", href: "/events/seminars" },
+  { label: "Webinars", href: "/events/webinars" },
+  { label: "Congresses", href: "/events/congresses" },
+  { label: "Symposia", href: "/events/symposia" },
 ];
 
 type EventsRouteParams = {
@@ -562,6 +652,15 @@ export default function Events({ params }: EventsProps = {}) {
     ];
   }, [filteredCertificates, activeItem.label]);
 
+  const isOverview = activeItem.slug === "all";
+  const heroTitle = isOverview ? "Events Overview" : `${activeItem.label} Events`;
+  const heroLead = isOverview
+    ? "A high-level overview of events I have contributed to, including conferences, seminars, webinars, congresses, and symposia."
+    : `Focused view of ${activeItem.label.toLowerCase()} with roles, certificates, and supporting details.`;
+  const heroHelper = isOverview
+    ? "Use this page to navigate to different types of academic and professional events."
+    : "Switch categories via the tabs to jump across conferences, seminars, webinars, congresses, and symposia.";
+
   return (
     <div className="page-template-career">
       <motion.div
@@ -570,16 +669,22 @@ export default function Events({ params }: EventsProps = {}) {
         transition={{ duration: 0.5 }}
         className="stack-gap-lg"
       >
-        <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <Presentation className="h-6 w-6 text-accent" />
-            <h1 className="text-4xl font-bold">Events</h1>
+        <section className="space-y-4 rounded-3xl border border-primary/20 bg-gradient-to-br from-background via-background to-primary/5 p-6 shadow-sm">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-2">
+              <Presentation className="h-6 w-6 text-accent" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-primary">Events</p>
+                <h1 className="text-4xl font-bold leading-tight">{heroTitle}</h1>
+              </div>
+            </div>
+            <div className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+              Conferences • Seminars • Webinars • Congresses • Symposia
+            </div>
           </div>
-          <p className="text-xl text-muted-foreground">
-            Examine AI-curated certificates with immersive previews, smart role filters, and
-            on-demand catalog insights.
-          </p>
-        </div>
+          <p className="text-lg text-muted-foreground">{heroLead}</p>
+          <p className="text-sm text-muted-foreground">{heroHelper}</p>
+        </section>
 
         <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
           <nav
@@ -616,7 +721,120 @@ export default function Events({ params }: EventsProps = {}) {
           </span>
         </div>
 
+        {isOverview && (
+          <>
+            <section className="space-y-4 rounded-2xl border border-dashed border-primary/30 bg-muted/40 p-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-2xl font-semibold">Events at a Glance</h2>
+                <span className="text-sm text-muted-foreground">
+                  Quick snapshot of the breadth of event activity.
+                </span>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                {glanceHighlights.map((item) => (
+                  <div
+                    key={item.title}
+                    className="flex gap-3 rounded-xl border border-primary/20 bg-background/70 px-4 py-3 shadow-[0_4px_16px_rgba(0,0,0,0.04)]"
+                  >
+                    <span className="text-2xl" aria-hidden>
+                      {item.icon}
+                    </span>
+                    <div className="space-y-1">
+                      <p className="font-semibold">{item.title}</p>
+                      <p className="text-sm text-muted-foreground">{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-2xl font-semibold">Event Types</h2>
+                <span className="text-sm text-muted-foreground">
+                  Jump directly to detailed pages for each category.
+                </span>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {eventTypeSections.map((section) => (
+                  <Card key={section.title} className="h-full border border-primary/20 bg-background/80">
+                    <CardHeader>
+                      <CardTitle className="text-xl">{section.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-sm leading-relaxed text-muted-foreground">{section.summary}</p>
+                      <Link
+                        href={section.href}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80"
+                      >
+                        {section.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            <section className="space-y-4 rounded-2xl border border-primary/25 bg-muted/30 p-6">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-2xl font-semibold">Roles & Contributions</h2>
+                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                  Professional Presence
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Across these events, my roles have included presenting research, moderating sessions, serving
+                on scientific or organizing committees, and contributing as an engaged attendee.
+              </p>
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {roleHighlights.map((role) => (
+                  <li key={role} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-primary" aria-hidden />
+                    <span>{role}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold">Navigation</h2>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl border border-primary/20 bg-background/80 p-4 font-mono text-sm">
+                  <pre className="whitespace-pre-wrap leading-relaxed">{navigationTree}</pre>
+                </div>
+                <div className="rounded-2xl border border-primary/20 bg-muted/40 p-4">
+                  <p className="mb-3 text-sm text-muted-foreground">Quick links</p>
+                  <div className="flex flex-wrap gap-2">
+                    {navigationLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:text-primary/80"
+                      >
+                        {link.label}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
         <section className="space-y-6" data-testid={`section-category-${activeItem.slug}`}>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-2xl font-semibold">{activeItem.label} Certificates</h2>
+              <p className="text-sm text-muted-foreground">
+                Detailed certificates and roles across {activeItem.label.toLowerCase()} events.
+              </p>
+            </div>
+            <span className="rounded-full border border-primary/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+              Evidence Catalog
+            </span>
+          </div>
           {filteredCertificates.length > 0 ? (
             <div className="space-y-6">
               {filteredCertificates.map((item, index) => (

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, ExternalLink } from "lucide-react";
+import { GraduationCap, ExternalLink, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CareerEvidenceCard, type Slide } from "@/components/career/CareerEvidenceCard";
 import { StatsSection } from "@/components/StatsSection";
@@ -34,7 +34,7 @@ type EducationRecord = {
 type EducationNavItem = {
   label: string;
   slug: string;
-  filter: EducationCategory;
+  filter: EducationCategory | null;
   description: string;
 };
 
@@ -615,6 +615,12 @@ const allRecords: EducationRecord[] = [
 
 const navItems: EducationNavItem[] = [
   {
+    label: "Overview",
+    slug: "all",
+    filter: null,
+    description: "High-level summary with links to Academic, Courses, and Workshops",
+  },
+  {
     label: "Academic",
     slug: "academic",
     filter: "Academic",
@@ -887,28 +893,19 @@ const courseSummaryStats = (() => {
 export default function Education({ params }: EducationProps = {}) {
   const [location, setLocation] = useLocation();
 
-  const categorySlug = params?.category ? params.category.toLowerCase() : "academic";
+  const categorySlug = params?.category ? params.category.toLowerCase() : "all";
 
   useEffect(() => {
     const normalizedLocation = location.replace(/\/+$/, "");
     if (!params?.category && normalizedLocation === "/education") {
-      setLocation("/education/academic", { replace: true });
+      setLocation("/education/all", { replace: true });
     }
   }, [location, params?.category, setLocation]);
 
-  if (categorySlug === "all") {
-    return (
-      <div className="page-template-career">
-        <div className="rounded-2xl border border-dashed border-primary/40 bg-muted/40 p-10 text-center text-sm text-muted-foreground">
-          This page has been removed.
-        </div>
-      </div>
-    );
-  }
-
   const activeItem = navItems.find((item) => item.slug === categorySlug) ?? navItems[0];
 
-  const filteredRecords = allRecords.filter((record) => record.category === activeItem.filter);
+  const filteredRecords =
+    activeItem.filter === null ? [] : allRecords.filter((record) => record.category === activeItem.filter);
 
   const renderCards = (records: EducationRecord[]) => (
     <div className="stack-gap-md">
@@ -1015,7 +1012,151 @@ export default function Education({ params }: EducationProps = {}) {
     </div>
   );
 
+  const renderOverview = () => {
+    const glanceItems = [
+      { emoji: "🎓", label: "Formal education", detail: "Advanced degrees and academic research focus." },
+      { emoji: "📚", label: "Courses", detail: "Designed and taught specialised courses with clear outcomes." },
+      { emoji: "🛠", label: "Workshops", detail: "Hands-on trainings tailored to applied, real-world practice." },
+    ];
+
+    const overviewCards = [
+      {
+        title: "Academic",
+        body:
+          "Discover formal education, degrees, research focus areas, thesis work, and academic achievements that shaped my foundation.",
+        href: "/education/academic",
+        cta: "View Academic Background →",
+      },
+      {
+        title: "Courses",
+        body:
+          "Browse courses I have designed or taught, covering objectives, target audiences, formats, and learning outcomes.",
+        href: "/education/courses",
+        cta: "Browse Courses →",
+      },
+      {
+        title: "Workshops",
+        body:
+          "Explore practical workshops and short-format trainings, their audiences, delivery modes, and hands-on focus areas.",
+        href: "/education/workshops",
+        cta: "Explore Workshops →",
+      },
+    ];
+
+    const howToUse = [
+      "Explore formal academic background in Academic.",
+      "Discover the Courses I have designed or taught.",
+      "Learn about practical, hands-on Workshops I have delivered.",
+    ];
+
+    return (
+      <div className="stack-gap-xl">
+        <Card className="border border-primary/25 bg-card/95 shadow-lg shadow-primary/15">
+          <CardContent className="space-y-6 p-8">
+            <div className="space-y-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">Education Overview</p>
+              <h1 className="text-4xl font-bold text-foreground">Education Overview</h1>
+              <p className="text-base text-muted-foreground">
+                A concise overview of my academic background, teaching activities, and learning initiatives, including
+                formal education, courses, and workshops.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/education/academic"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/10"
+              >
+                View Academic Background
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
+        <section className="grid gap-4 rounded-2xl border border-primary/20 bg-muted/40 p-6 sm:grid-cols-3">
+          {glanceItems.map((item) => (
+            <div key={item.label} className="space-y-2 rounded-xl border border-transparent p-3">
+              <div className="text-2xl">{item.emoji}</div>
+              <p className="text-sm font-semibold text-foreground">{item.label}</p>
+              <p className="text-sm text-muted-foreground">{item.detail}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="stack-gap-md">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-semibold text-foreground">Choose your path</h2>
+            <p className="text-sm text-muted-foreground">
+              Jump straight into the detailed views that match what you are looking for.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {overviewCards.map((card) => (
+              <Card key={card.title} className="h-full border border-primary/25 bg-background/90 shadow-sm">
+                <CardContent className="flex h-full flex-col gap-4 p-6">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-foreground">{card.title}</h3>
+                    <p className="text-sm text-muted-foreground">{card.body}</p>
+                  </div>
+                  <Link
+                    href={card.href}
+                    className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80"
+                  >
+                    {card.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-4 rounded-2xl border border-primary/20 bg-card/90 p-6 sm:grid-cols-[1.1fr_1fr]">
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground">How to use this section</h2>
+            <p className="text-sm text-muted-foreground">
+              In this Education section, you can quickly understand what is available and move to the right place.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {howToUse.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-3 rounded-xl border border-dashed border-primary/30 bg-primary/5 p-4">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-primary/80">Navigation</h3>
+            <pre className="overflow-x-auto rounded-lg bg-background/80 p-4 text-xs text-muted-foreground">
+{`Education
+├── Overview (this page)
+├── Academic
+├── Courses
+└── Workshops`}
+            </pre>
+            <div className="flex flex-wrap gap-2 text-sm font-semibold text-primary">
+              <Link href="/education/academic" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Academic
+              </Link>
+              <Link href="/education/courses" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Courses
+              </Link>
+              <Link href="/education/workshops" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+                Workshops
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  };
+
   const renderActiveCategory = () => {
+    if (activeItem.filter === null) {
+      return renderOverview();
+    }
+
     if (activeItem.filter === "Academic") {
       return renderAcademicTimeline();
     }
@@ -1218,6 +1359,12 @@ export default function Education({ params }: EducationProps = {}) {
     );
   };
 
+  const heroTitle = activeItem.filter === null ? "Education Overview" : "Education";
+  const heroSubtitle =
+    activeItem.filter === null
+      ? "A concise overview of my academic background, teaching activities, and learning initiatives across academic studies, courses, and workshops."
+      : "Explore academic milestones, professional courses, and immersive workshops shaping ongoing expertise.";
+
   return (
     <div className="page-template-career">
       <motion.div
@@ -1229,22 +1376,20 @@ export default function Education({ params }: EducationProps = {}) {
         <div className="space-y-6">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold text-foreground">Education</h1>
+            <h1 className="text-4xl font-bold text-foreground">{heroTitle}</h1>
           </div>
-          <p className="text-xl text-muted-foreground">
-            Explore academic milestones, professional courses, and immersive workshops shaping ongoing expertise.
-          </p>
+          <p className="text-xl text-muted-foreground">{heroSubtitle}</p>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground sm:text-sm mobile:justify-start">
           <nav
             className="flex flex-wrap justify-center gap-2 mobile:flex-nowrap mobile:justify-start mobile:overflow-x-auto mobile:pr-2"
             role="tablist"
-          aria-label="Education sections"
-        >
-          {navItems.map((item) => {
-            const href = `/education/${item.slug}`;
-            const isActive = item.slug === activeItem.slug;
+            aria-label="Education sections"
+          >
+            {navItems.map((item) => {
+              const href = `/education/${item.slug}`;
+              const isActive = item.slug === activeItem.slug;
 
               return (
                 <Link
@@ -1266,9 +1411,7 @@ export default function Education({ params }: EducationProps = {}) {
               );
             })}
           </nav>
-          <span className="text-muted-foreground normal-case tracking-normal">
-            {activeItem.description}
-          </span>
+          <span className="text-muted-foreground normal-case tracking-normal">{activeItem.description}</span>
         </div>
 
         {renderActiveCategory()}
@@ -1277,4 +1420,3 @@ export default function Education({ params }: EducationProps = {}) {
     </div>
   );
 }
-

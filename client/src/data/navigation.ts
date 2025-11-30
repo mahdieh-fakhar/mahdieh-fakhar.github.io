@@ -21,6 +21,7 @@ export const eventPages: NavChild[] = [
 ];
 
 export const educationPages: NavChild[] = [
+  { name: "All Education", href: "/education/all", slug: "all" },
   { name: "Academic", href: "/education/academic", slug: "academic" },
   { name: "Courses", href: "/education/courses", slug: "courses" },
   { name: "Workshops", href: "/education/workshops", slug: "workshops" },
@@ -46,7 +47,7 @@ export const workPages: NavChild[] = [
 export const navigationItems: NavigationItem[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Education", href: "/education/academic", children: educationPages },
+  { name: "Education", href: "/education/all", children: educationPages },
   { name: "Investigations", href: "/investigations/all", children: investigationPages },
   { name: "Works", href: "/works/all", children: workPages },
   { name: "Events", href: "/events/all", children: eventPages },

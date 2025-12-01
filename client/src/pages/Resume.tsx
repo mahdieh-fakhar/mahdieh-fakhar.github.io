@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Download, FileText, Mail, Linkedin, Github, MapPin } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
+import { assetPath } from "@/lib/basePath";
 
 export default function Resume() {
   const resumeBadges = getBadges({ page: "resume" }).filter((badge) => badge.placements.includes("resume"));
@@ -31,10 +32,21 @@ export default function Resume() {
     "13+ conference presentations",
     "Reviewer for SAGE Open & EPOS journals",
   ];
-  const handleDownload = () => {
-    // This will trigger download of a CV file
-    // In a real implementation, you would have a PDF file hosted
-    alert("CV download functionality will be implemented with actual PDF file");
+
+  const downloadCv = (lang: "en" | "es") => {
+    const url =
+      lang === "es"
+        ? assetPath("/resume/cv-es-mahdieh-fakhar.pdf")
+        : assetPath("/resume/cv-en-mahdieh-fakhar.pdf");
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = lang === "es" ? "Mahdieh-Fakhar-CV-ES.pdf" : "Mahdieh-Fakhar-CV-EN.pdf";
+    link.rel = "noopener noreferrer";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -51,14 +63,23 @@ export default function Resume() {
             <FileText className="h-6 w-6 text-primary" />
             <h1 className="text-4xl font-bold">Resume</h1>
           </div>
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <p className="text-xl text-muted-foreground">
-              Curriculum Vitae
-            </p>
-            <Button onClick={handleDownload} className="gap-2" data-testid="button-download-cv">
-              <Download className="h-4 w-4" />
-              Download PDF
-            </Button>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-xl text-muted-foreground">Curriculum Vitae</p>
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={() => downloadCv("en")} className="gap-2" data-testid="button-download-cv-en">
+                <Download className="h-4 w-4" />
+                Download CV (EN)
+              </Button>
+              <Button
+                onClick={() => downloadCv("es")}
+                className="gap-2"
+                variant="outline"
+                data-testid="button-download-cv-es"
+              >
+                <Download className="h-4 w-4" />
+                Download CV (ES)
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -188,10 +209,27 @@ export default function Resume() {
               For a comprehensive view of my academic achievements, publications, and professional experience, 
               please download the full CV or explore the detailed sections of this portfolio.
             </p>
-            <Button onClick={handleDownload} size="lg" className="gap-2" data-testid="button-download-cv-full">
-              <Download className="h-4 w-4" />
-              Download Complete CV
-            </Button>
+            <div className="flex flex-wrap justify-center gap-2">
+              <Button
+                onClick={() => downloadCv("en")}
+                size="lg"
+                className="gap-2"
+                data-testid="button-download-cv-full-en"
+              >
+                <Download className="h-4 w-4" />
+                Download CV (EN)
+              </Button>
+              <Button
+                onClick={() => downloadCv("es")}
+                size="lg"
+                variant="outline"
+                className="gap-2"
+                data-testid="button-download-cv-full-es"
+              >
+                <Download className="h-4 w-4" />
+                Download CV (ES)
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </motion.div>

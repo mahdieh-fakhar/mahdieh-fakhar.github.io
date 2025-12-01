@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Mail, Linkedin, Github, MapPin } from "lucide-react";
+import { Download, FileText, Mail, Linkedin, Github, MapPin, Link as LinkIcon } from "lucide-react";
 import { BadgePanel } from "@/components/badges/BadgePanel";
 import { getBadges } from "@/lib/badgeUtils";
 import { assetPath } from "@/lib/basePath";
@@ -32,6 +32,8 @@ export default function Resume() {
     "13+ conference presentations",
     "Reviewer for SAGE Open & EPOS journals",
   ];
+
+  const baseDownloadUrl = "https://mahdieh-fakhar.github.io";
 
   const downloadCv = (lang: "en" | "es") => {
     const url =
@@ -82,6 +84,33 @@ export default function Resume() {
             </div>
           </div>
         </div>
+
+        {/* Direct download links */}
+        <Card data-testid="card-direct-downloads">
+          <CardHeader>
+            <CardTitle className="text-lg">Direct download links</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+            <a
+              href={`${baseDownloadUrl}/resume/cv-en-mahdieh-fakhar.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-3 py-1 font-semibold text-primary hover:border-primary hover:bg-primary/10"
+            >
+              <LinkIcon className="h-4 w-4" />
+              CV (EN)
+            </a>
+            <a
+              href={`${baseDownloadUrl}/resume/cv-es-mahdieh-fakhar.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-3 py-1 font-semibold text-primary hover:border-primary hover:bg-primary/10"
+            >
+              <LinkIcon className="h-4 w-4" />
+              CV (ES)
+            </a>
+          </CardContent>
+        </Card>
 
         {/* Personal Information */}
         <Card data-testid="card-personal-info">

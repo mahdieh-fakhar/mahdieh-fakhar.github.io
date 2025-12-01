@@ -34,22 +34,8 @@ export default function Resume() {
   ];
 
   const baseDownloadUrl = "https://mahdieh-fakhar.github.io";
-
-  const downloadCv = (lang: "en" | "es") => {
-    const url =
-      lang === "es"
-        ? assetPath("/resume/cv-es-mahdieh-fakhar.pdf")
-        : assetPath("/resume/cv-en-mahdieh-fakhar.pdf");
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = lang === "es" ? "Mahdieh-Fakhar-CV-ES.pdf" : "Mahdieh-Fakhar-CV-EN.pdf";
-    link.rel = "noopener noreferrer";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const enHref = `${baseDownloadUrl}/resume/cv-en-mahdieh-fakhar.pdf`;
+  const esHref = `${baseDownloadUrl}/resume/cv-es-mahdieh-fakhar.pdf`;
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-12 lg:px-8">
@@ -68,18 +54,17 @@ export default function Resume() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-xl text-muted-foreground">Curriculum Vitae</p>
             <div className="flex flex-wrap gap-2">
-              <Button onClick={() => downloadCv("en")} className="gap-2" data-testid="button-download-cv-en">
-                <Download className="h-4 w-4" />
-                Download CV (EN)
+              <Button asChild className="gap-2" data-testid="button-download-cv-en">
+                <a href={enHref} download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4" />
+                  Download CV (EN)
+                </a>
               </Button>
-              <Button
-                onClick={() => downloadCv("es")}
-                className="gap-2"
-                variant="outline"
-                data-testid="button-download-cv-es"
-              >
-                <Download className="h-4 w-4" />
-                Download CV (ES)
+              <Button asChild variant="outline" className="gap-2" data-testid="button-download-cv-es">
+                <a href={esHref} download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4" />
+                  Download CV (ES)
+                </a>
               </Button>
             </div>
           </div>
@@ -239,24 +224,17 @@ export default function Resume() {
               please download the full CV or explore the detailed sections of this portfolio.
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              <Button
-                onClick={() => downloadCv("en")}
-                size="lg"
-                className="gap-2"
-                data-testid="button-download-cv-full-en"
-              >
-                <Download className="h-4 w-4" />
-                Download CV (EN)
+              <Button asChild size="lg" className="gap-2" data-testid="button-download-cv-full-en">
+                <a href={enHref} download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4" />
+                  Download CV (EN)
+                </a>
               </Button>
-              <Button
-                onClick={() => downloadCv("es")}
-                size="lg"
-                variant="outline"
-                className="gap-2"
-                data-testid="button-download-cv-full-es"
-              >
-                <Download className="h-4 w-4" />
-                Download CV (ES)
+              <Button asChild size="lg" variant="outline" className="gap-2" data-testid="button-download-cv-full-es">
+                <a href={esHref} download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4" />
+                  Download CV (ES)
+                </a>
               </Button>
             </div>
           </CardContent>

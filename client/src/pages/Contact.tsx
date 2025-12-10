@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 
 const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/mfsh.intl@gmail.com";
+const GMAIL_LABEL_TAG = "web-:-https:--mahdieh-fakhar.github.io-"; // Static tag to help Gmail filters label site submissions
 
 export default function Contact() {
   const { toast } = useToast();
@@ -42,6 +43,8 @@ export default function Contact() {
     formData.append("email", data.email);
     formData.append("subject", data.subject);
     formData.append("message", data.message);
+    formData.append("site_label", GMAIL_LABEL_TAG);
+    formData.append("_subject", `Contact: ${data.subject} | ${GMAIL_LABEL_TAG}`);
     formData.append("_captcha", "false");
     formData.append("_template", "box");
 

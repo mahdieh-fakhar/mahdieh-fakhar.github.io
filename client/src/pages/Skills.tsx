@@ -102,10 +102,10 @@ export default function Skills() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Code2 className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">Skills & Expertise</h1>
+            <h1 className="text-4xl font-bold">Data Science, AI & Research Skills</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Technical proficiencies and analytical capabilities
+            Data science, AI, bibliometrics, and intelligent document analysis skills for academic and industry impact
           </p>
         </div>
 

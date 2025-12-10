@@ -64,7 +64,7 @@ export default function Certifications() {
       >
         <div className="flex items-center gap-3">
           <Sparkles className="h-6 w-6 text-primary" />
-          <h1 className="text-4xl font-bold">Certifications</h1>
+          <h1 className="text-4xl font-bold">Certifications & AI Certificate Analysis</h1>
         </div>
         <p className="text-lg text-muted-foreground">
           A living catalogue of verified credentials maintained entirely through the badge data layer.

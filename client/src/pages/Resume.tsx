@@ -49,7 +49,7 @@ export default function Resume() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <FileText className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">Resume</h1>
+            <h1 className="text-4xl font-bold">Resume & Academic CV</h1>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-xl text-muted-foreground">Curriculum Vitae</p>

@@ -90,7 +90,7 @@ export default function Contact() {
         <div className="space-y-4 text-center">
           <div className="flex items-center justify-center gap-2">
             <Mail className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">Contact Me</h1>
+            <h1 className="text-4xl font-bold">Contact Mahdieh Fakhar</h1>
           </div>
           <p className="text-xl text-muted-foreground">
             Let's connect and discuss opportunities

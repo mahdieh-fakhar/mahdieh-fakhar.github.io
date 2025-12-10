@@ -125,10 +125,10 @@ export default function Projects() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Rocket className="h-6 w-6 text-ai-accent" />
-            <h1 className="text-4xl font-bold">Projects</h1>
+            <h1 className="text-4xl font-bold">AI & Data Science Projects</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Research projects and web development work
+            AI, data science, and research projects with evidence links and GitHub-friendly demos
           </p>
         </div>
 

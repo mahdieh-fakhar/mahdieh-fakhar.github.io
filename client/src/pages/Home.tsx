@@ -21,10 +21,10 @@ const fadeInUp = {
 };
 
 const nowItems = [
-  "I'm currently a Momentum master student, studying data science and big data.",
-  "I am working on data analysis and the digitalization / automatization of databases.",
-  "I'm currently learning data analysis with R, Python and Artificial Intelligence.",
-  "I'm looking to participate in courses on data analysis, data visualization, AI in data analysis, and digitalization of databases.",
+  "Momentum master student advancing data science and big data foundations.",
+  "Building automated data pipelines and intelligent document analysis workflows.",
+  "Hands-on with Python, R, and AI for research-grade analytics.",
+  "Seeking courses on data visualization, AI in data analysis, and database digitalization.",
 ];
 
 const siteSections = [
@@ -117,20 +117,20 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               <Sparkles className="h-4 w-4" />
-              Momentum Master Student
+              AI-powered Academic Portfolio
             </div>
             <div className="space-y-3">
               <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-                Mahdieh Fakhar Shahreza
+                Mahdieh Fakhar – AI-powered data science & AI portfolio
               </h1>
               <p className="text-lg font-semibold text-primary">
-                Momentum master student in Data Science & Big Data · Researcher in scientometrics &
-                data analysis
+                Momentum master student in Data Science & Big Data | Researcher in scientometrics,
+                bibliometrics, and data analysis
               </p>
               <p className="text-base text-muted-foreground md:text-lg">
-                Data analysis, scientometrics, bibliometrics, and web design for research and
-                education. This site gathers my background, investigations, professional work,
-                event contributions, and ways to collaborate.
+                AI-powered digital portfolio for data science and research. I focus on data analysis,
+                scientometrics, bibliometrics, and intelligent document workflows. Explore my
+                investigations, academic roles, projects, and ways to collaborate.
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -158,7 +158,7 @@ export default function Home() {
             <div className="aspect-square overflow-hidden rounded-3xl border border-primary/20 shadow-xl shadow-primary/20">
               <img
                 src={assetPath("/images/profile.jpg")}
-                alt="Mahdieh Fakhar Shahreza"
+                alt="Mahdieh Fakhar data science and AI academic portfolio portrait"
                 className="h-full w-full object-cover object-[50%_28%]"
               />
             </div>

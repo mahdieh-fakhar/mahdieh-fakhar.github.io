@@ -216,11 +216,10 @@ export default function Memberships() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Award className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">Membership Timeline</h1>
+            <h1 className="text-4xl font-bold">Academic Memberships & Governance Timeline</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Academic memberships, peer-review appointments, and consortium roles following the same cadence as the career
-            history chapter.
+            Academic memberships, peer-review appointments, and governance roles across data science, AI, scientometrics, and bibliometrics — aligned with the broader career history.
           </p>
         </div>
 

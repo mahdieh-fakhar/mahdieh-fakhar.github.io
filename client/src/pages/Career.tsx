@@ -385,10 +385,10 @@ export default function Career() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Briefcase className="h-6 w-6 text-primary" />
-            <h1 className="text-4xl font-bold">Career History</h1>
+            <h1 className="text-4xl font-bold">Career History in Data Science & Education</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Professional experience anchored in classroom excellence, academic leadership, and conference engagement
+            Data science and education career path spanning teaching, governance, research leadership, and international collaboration
           </p>
         </div>
 

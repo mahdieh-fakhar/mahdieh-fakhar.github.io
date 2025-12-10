@@ -7,6 +7,9 @@
     <loc>https://mahdieh-fakhar.github.io/about</loc>
   </url>
   <url>
+    <loc>https://mahdieh-fakhar.github.io/about/all</loc>
+  </url>
+  <url>
     <loc>https://mahdieh-fakhar.github.io/education</loc>
   </url>
   <url>
@@ -19,13 +22,25 @@
     <loc>https://mahdieh-fakhar.github.io/memberships</loc>
   </url>
   <url>
+    <loc>https://mahdieh-fakhar.github.io/works</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/works/all</loc>
+  </url>
+  <url>
     <loc>https://mahdieh-fakhar.github.io/career</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/works/career</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/works/skills</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/works/projects</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/works/memberships</loc>
   </url>
   <url>
     <loc>https://mahdieh-fakhar.github.io/resume</loc>
@@ -37,5 +52,10 @@
     <loc>https://mahdieh-fakhar.github.io/works/certifications</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/certifications</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

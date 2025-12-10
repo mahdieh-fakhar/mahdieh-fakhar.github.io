@@ -35,10 +35,10 @@ export default function About() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-6 w-6 text-ai-accent" />
-            <h1 className="text-4xl font-bold" data-testid="heading-about">About Me</h1>
+            <h1 className="text-4xl font-bold" data-testid="heading-about">About Mahdieh Fakhar</h1>
           </div>
           <p className="text-xl text-muted-foreground" data-testid="text-subtitle">
-            Data Scientist & Researcher
+            Data science & AI researcher focused on scientometrics and bibliometrics
           </p>
         </div>
 
@@ -49,14 +49,14 @@ export default function About() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground leading-relaxed" data-testid="text-summary-1">
-              I'm currently a Momentum master student of data science and big data at Universidad Internacional 
-              de La Rioja (UNIR), Spain. I enjoy analyzing data, doing scientometric and bibliometric analysis, 
-              and learning new software.
+              I'm a Momentum master student in data science and big data at Universidad Internacional de La Rioja 
+              (UNIR), building an academic profile that connects scientometrics, bibliometrics, and AI-driven research 
+              design. My work blends quantitative methods with research data science practices to make academic evidence actionable.
             </p>
             <p className="text-muted-foreground leading-relaxed" data-testid="text-summary-2">
-              I am passionate about learning new software and applications employed in data analysis. By leveraging 
-              my research and analysis experience, I continually look for new and better ways to take advantage of 
-              technology in favor of analysis in general and humankind in particular.
+              I design AI-powered digital portfolio workflows: intelligent document analysis, certificate validation, 
+              and data visualization for teaching and governance. I continuously experiment with Python, R, and modern 
+              research tooling to translate complex datasets into insights for academia and industry.
             </p>
             <div className="flex items-center gap-2 text-muted-foreground pt-2">
               <MapPin className="h-4 w-4" />

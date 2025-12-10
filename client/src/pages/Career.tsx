@@ -30,6 +30,7 @@ type Experience = {
   evidence?: EvidenceGallery;
   startDate: string;
   endDate?: string;
+  priority?: number;
 };
 
 const experiences: Experience[] = [
@@ -47,6 +48,7 @@ const experiences: Experience[] = [
     ],
     startDate: "2025-02-03",
     endDate: "2029-02-02",
+    priority: 0,
     evidence: {
       title: "CSIC full-time translation & interpretation contract (2025-2029)",
       description: "Spanish-language employment contract confirming full-time FC1 duties supporting CSIC digital research programmes.",
@@ -307,6 +309,13 @@ function parseDateString(dateString: string): number {
 }
 
 const sortedExperiences = [...experiences].sort((a, b) => {
+  const priorityA = a.priority ?? Number.POSITIVE_INFINITY;
+  const priorityB = b.priority ?? Number.POSITIVE_INFINITY;
+
+  if (priorityA !== priorityB) {
+    return priorityA - priorityB;
+  }
+
   const endA = a.endDate ? parseDateString(a.endDate) : Number.POSITIVE_INFINITY;
   const endB = b.endDate ? parseDateString(b.endDate) : Number.POSITIVE_INFINITY;
 

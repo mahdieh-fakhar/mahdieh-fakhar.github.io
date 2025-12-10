@@ -31,6 +31,8 @@ type Experience = {
   startDate: string;
   endDate?: string;
   priority?: number;
+  referenceUrl?: string;
+  referenceLabel?: string;
 };
 
 const experiences: Experience[] = [
@@ -394,6 +396,8 @@ export default function Career() {
               period={experience.period}
               roleLabel={typeLabels[experience.type]}
               highlights={experience.responsibilities}
+              referenceUrl={experience.referenceUrl}
+              referenceLabel={experience.referenceLabel}
               slides={experienceSlides(experience)}
             />
           ))}

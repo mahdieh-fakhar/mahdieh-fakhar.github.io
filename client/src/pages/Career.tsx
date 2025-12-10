@@ -49,6 +49,8 @@ const experiences: Experience[] = [
     startDate: "2025-02-03",
     endDate: "2029-02-02",
     priority: 0,
+    referenceUrl: "https://www.csic.es/en",
+    referenceLabel: "Visit CSIC",
     evidence: {
       title: "CSIC full-time translation & interpretation contract (2025-2029)",
       description: "Spanish-language employment contract confirming full-time FC1 duties supporting CSIC digital research programmes.",

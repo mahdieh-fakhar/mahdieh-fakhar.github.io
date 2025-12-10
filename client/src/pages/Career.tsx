@@ -95,6 +95,8 @@ const experiences: Experience[] = [
     ],
     startDate: "2017-01-01",
     endDate: "2019-12-31",
+    referenceUrl: "https://www.ilam.ac.ir",
+    referenceLabel: "Visit University of Ilam",
     evidence: {
       title: "University of Ilam adjunct lecturer appointment",
       description: "Digitised teaching forms confirming adjunct lecturer duties across humanities and engineering faculties.",

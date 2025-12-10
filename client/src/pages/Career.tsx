@@ -28,13 +28,15 @@ type Experience = {
   type: ExperienceType;
   responsibilities: string[];
   evidence?: EvidenceGallery;
+  startDate: string;
+  endDate?: string;
 };
 
 const experiences: Experience[] = [
   {
     id: 9,
     title: "Graduate Translator & Interpreter (Digital Research Programs)",
-    organization: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    organization: "Spanish National Research Council (CSIC)",
     location: "Madrid, Spain",
     period: "Feb 3 2025 - Feb 2 2029",
     type: "professional",
@@ -43,6 +45,8 @@ const experiences: Experience[] = [
       "Translate and interpret for research stakeholders while digitising programme management, integrating internal and external data sources, and sustaining the Momentum 240 ECTS deliverable stream",
       "Develop research databases and expert systems for tribunal configuration, expert identification, and prospective analysis of CSIC investigation fronts with strict confidentiality and anti-fraud compliance",
     ],
+    startDate: "2025-02-03",
+    endDate: "2029-02-02",
     evidence: {
       title: "CSIC full-time translation & interpretation contract (2025-2029)",
       description: "Spanish-language employment contract confirming full-time FC1 duties supporting CSIC digital research programmes.",
@@ -69,6 +73,7 @@ const experiences: Experience[] = [
       "Design bespoke micro-curricula for multilingual professionals relocating across Europe",
       "Mentor instructors on exam-preparation strategies and AI-assisted classroom tooling",
     ],
+    startDate: "2022-01-01",
   },
   {
     id: 2,
@@ -82,6 +87,8 @@ const experiences: Experience[] = [
       "Delivered general English and ESP modules such as Legal English and English for Mechanical Engineering",
       "Coordinated assessment rubrics and supervised undergraduate research projects for departmental boards",
     ],
+    startDate: "2017-01-01",
+    endDate: "2019-12-31",
     evidence: {
       title: "University of Ilam adjunct lecturer appointment",
       description: "Digitised teaching forms confirming adjunct lecturer duties across humanities and engineering faculties.",
@@ -120,6 +127,8 @@ const experiences: Experience[] = [
       "Balanced multi-branch timetables (Ilam Sister and Baradar centres) with up to five concurrent classes per semester",
       "Implemented exam-readiness diagnostics and personalised progress reviews for adult and youth cohorts",
     ],
+    startDate: "2014-01-01",
+    endDate: "2019-12-31",
     evidence: {
       title: "ILI instructor appointment & evaluation letters",
       description: "Official Ilam Branch letters confirming IELTS/TOEFL instruction quality and multi-branch assignments.",
@@ -170,6 +179,8 @@ const experiences: Experience[] = [
       "Balanced PhD research in English Language Teaching with intensive high-stakes exam preparation classes",
       "Supported learners continuously from 2014/07/07 through 2018/12/23 under IELI academic management",
     ],
+    startDate: "2014-07-07",
+    endDate: "2018-12-23",
     evidence: {
       title: "IELI upper-intermediate appointment letter",
       description: "CamScanner-certified letter summarising IELI duties and compliance with ILI academic management.",
@@ -196,6 +207,8 @@ const experiences: Experience[] = [
       "Piloted curriculum refresh projects emphasising communicative methodology and digital literacy",
       "Facilitated continuous professional development and peer observations for more than 15 instructors",
     ],
+    startDate: "2018-01-01",
+    endDate: "2021-12-31",
     evidence: {
       title: "Safir Danesh Language Institute branding",
       description: "Official mark representing Safir Danesh leadership and curriculum oversight.",
@@ -228,6 +241,8 @@ const experiences: Experience[] = [
       "Produced placement pathways aligned with Longman curricular updates and learner feedback",
       "Maintained academic performance dossiers for submission to partner higher-education centres",
     ],
+    startDate: "2012-01-01",
+    endDate: "2014-12-31",
     evidence: {
       title: "Shokoh Pouyan head teacher confirmation",
       description: "Letter confirming curriculum design and teacher leadership responsibilities at Shokoh Pouyan.",
@@ -254,6 +269,8 @@ const experiences: Experience[] = [
       "Collaborated with the Isfahan Provincial Education Organisation on compliance and reporting",
       "Launched personalised learning plans for adolescents preparing for high-stakes examinations",
     ],
+    startDate: "2010-10-01",
+    endDate: "2012-12-31",
     evidence: {
       title: "Marefat Novin part-time instructor letter",
       description: "Certificate confirming communicative English duties and provincial compliance.",
@@ -279,20 +296,29 @@ const experiences: Experience[] = [
       "Provided Persian-English simultaneous interpreting for scientific panels and visiting delegations",
       "Curated terminology briefs for keynote researchers across environmental science disciplines",
     ],
+    startDate: "2018-04-01",
+    endDate: "2018-04-01",
   },
 ];
 
-function getPeriodSortValue(period: string): number {
-  const normalized = period.toLowerCase();
-  const years = Array.from(period.matchAll(/\d{4}/g)).map((match) => Number(match[0]));
-  const latestYear = years.length ? Math.max(...years) : 0;
-  const presentBoost = normalized.includes("present") ? 1000 : 0;
-  return latestYear + presentBoost;
+function parseDateString(dateString: string): number {
+  const timestamp = Date.parse(dateString);
+  return Number.isNaN(timestamp) ? -Infinity : timestamp;
 }
 
-const sortedExperiences = [...experiences].sort(
-  (a, b) => getPeriodSortValue(b.period) - getPeriodSortValue(a.period),
-);
+const sortedExperiences = [...experiences].sort((a, b) => {
+  const endA = a.endDate ? parseDateString(a.endDate) : Number.POSITIVE_INFINITY;
+  const endB = b.endDate ? parseDateString(b.endDate) : Number.POSITIVE_INFINITY;
+
+  if (endA !== endB) {
+    return endB - endA;
+  }
+
+  const startA = parseDateString(a.startDate);
+  const startB = parseDateString(b.startDate);
+
+  return startB - startA;
+});
 
 const careerStats = (() => {
   const totalRoles = experiences.length;
@@ -361,18 +387,7 @@ export default function Career() {
             />
           ))}
         </div>
-
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-

@@ -32,6 +32,32 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
+    id: 9,
+    title: "Graduate Translator & Interpreter (Digital Research Programs)",
+    organization: "Consejo Superior de Investigaciones Científicas (CSIC)",
+    location: "Madrid, Spain",
+    period: "Feb 3 2025 - Feb 2 2029",
+    type: "professional",
+    responsibilities: [
+      "Full-time FC1 appointment within the CSIC Vice-Presidency for Technical Scientific Research funded by the EU Recovery and Resilience Facility",
+      "Translate and interpret for research stakeholders while digitising programme management, integrating internal and external data sources, and sustaining the Momentum 240 ECTS deliverable stream",
+      "Develop research databases and expert systems for tribunal configuration, expert identification, and prospective analysis of CSIC investigation fronts with strict confidentiality and anti-fraud compliance",
+    ],
+    evidence: {
+      title: "CSIC full-time translation & interpretation contract (2025-2029)",
+      description: "Spanish-language employment contract confirming full-time FC1 duties supporting CSIC digital research programmes.",
+      ctaLabel: "View Contract",
+      slides: [
+        {
+          src: "/Contents/Logo/CSIC.svg.png",
+          alt: "CSIC translation and interpretation contract",
+          caption: "Contract for FC1 graduate translation and interpretation services at CSIC Vice-Presidency for Technical Scientific Research (Madrid).",
+          downloadName: "csic-contract-2025.png",
+        },
+      ],
+    },
+  },
+  {
     id: 1,
     title: "Senior English Facilitator",
     organization: "Madrid Language Institute",

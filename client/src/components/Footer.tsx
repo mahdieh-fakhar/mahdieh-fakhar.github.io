@@ -28,6 +28,12 @@ export function Footer() {
               Data Scientist &amp; Researcher specializing in Big Data, AI, and bibliometric
               analysis. Currently pursuing a Master's in Data Science at UNIR, Spain.
             </p>
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2"
+            >
+              Guides &amp; how-to articles
+            </Link>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Sparkles className="h-3 w-3 text-ai-accent" aria-hidden="true" />
               <span>Built with AI-powered analysis</span>

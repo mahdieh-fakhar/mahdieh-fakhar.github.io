@@ -15,23 +15,37 @@ Where to use:
 - Skills/Projects: Tier A + Tier B; Tier C for tech stack and AI features.
 
 Example (natural, no stuffing):
-“An AI-powered academic portfolio for Mahdieh Fakhar, a data science and big data student and scientometrics researcher. Explore projects, skills, and AI certificate analysis built with React, TypeScript, and Vite.”
+"An AI-powered academic portfolio for Mahdieh Fakhar, a data science and big data student and scientometrics researcher. Explore projects, skills, and AI certificate analysis built with React, TypeScript, and Vite."
 
 ## On-page SEO Practices in This Template
 - Seo.tsx + seoConfig.ts: `seoConfig` maps routes to title/description/keywords/robots. `Seo` applies `<title>`, meta description, OG/Twitter, canonical based on the current path.
 - Adding a new route: create a `seoConfig` entry with Tier A+B, plus one supportive Tier C term. Set `robots` if you need `noindex`.
 - Headings: one H1 per page with Tier A+B; H2/H3 can carry Tier B/C descriptors. Keep language human and concise.
-- Alt text: 8–12 words, descriptive, include one relevant keyword if natural.
+- Alt text: 8-12 words, descriptive, include one relevant keyword if natural.
 
 ## Structured Data & FAQPage
 - BadgeStructuredData emits an @graph with WebSite, WebPage, Person, EducationalOccupationalCredential, FAQPage (only on `/works`), plus SearchAction, sameAs, keywords, and breadcrumb.
 - Adding new FAQ: ensure the FAQ block is visible on the page. If FAQ belongs to a different page, add a new FAQPage node with matching text and @id/url for that route. Google requires JSON-LD content to match on-page text.
 
+## Analytics (optional)
+- Plausible is supported as an opt-in, cookieless analytics layer. Default is off to keep the bundle clean.
+- Enable via `.env` before building/publishing (GitHub Pages reads from the static build):
+  ```
+  VITE_ENABLE_ANALYTICS=true
+  VITE_PLAUSIBLE_DOMAIN=mahdieh-fakhar.github.io
+  ```
+- When disabled or missing the domain, no analytics script is rendered.
+
+## Crawling signals: sitemap, robots.txt, RSS feed
+- `sitemap.xml` lives in `client/public/` (and is copied to `docs/`). Keep it updated when adding/removing routes.
+- `robots.txt` at `/robots.txt` allows all agents and points to the sitemap (sufficient for most sites).
+- RSS feed for guides is available at `/feed.xml` to help feed readers and discovery; update it when new guides are published.
+
 ## GitHub Growth Tips (Stars / Forks / Views)
 - README is template-style: live demo, Why/Who, Features, SEO/Performance, How to Fork/Customize/Deploy.
 - Use GitHub Topics: ai-portfolio, academic-portfolio, react-typescript, vite, tailwindcss, framer-motion, openai, vision, scientometrics, bibliometrics, resume-template, github-pages-template.
-- Pin the repo and link it from LinkedIn, ORCID, Google Scholar, university profile, and GitHub bio. Mention the live demo and “forkable academic portfolio” in your summaries.
-- Use clear on-site CTAs (e.g., “Fork this AI-powered academic portfolio template”) to convert visitors into GitHub Stars/Forks.
+- Pin the repo and link it from LinkedIn, ORCID, Google Scholar, university profile, and GitHub bio. Mention the live demo and "forkable academic portfolio" in your summaries.
+- Use clear on-site CTAs (e.g., "Fork this AI-powered academic portfolio template") to convert visitors into GitHub Stars/Forks.
 
 ## Promotion Kit
 For ready-to-use LinkedIn and X/Twitter posts, as well as GitHub descriptions, see:
@@ -53,5 +67,7 @@ These long-form guides help capture long-tail queries (e.g., AI-powered academic
 - [ ] Alt text updated for new images.
 - [ ] JSON-LD aligned with visible content (FAQ, credentials, etc.).
 - [ ] `sitemap.xml` updated; canonical still points to `https://mahdieh-fakhar.github.io/`.
+- [ ] `robots.txt` present and pointing to the sitemap; RSS feed (`/feed.xml`) updated if guides change.
+- [ ] Plausible env vars set only if you want analytics in production.
 - [ ] `npm run build` passes; `docs/` refreshed.
 - [ ] README updated if the change is feature-level (SEO, AI, template behavior).

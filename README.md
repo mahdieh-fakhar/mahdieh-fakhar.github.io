@@ -67,6 +67,8 @@ npm run preview         # serve the production build locally
 - JSON-LD graph for `Person`, `WebSite`, `WebPage`, and `EducationalOccupationalCredential` entities.
 - Lightweight SPA with Vite code-splitting, Framer Motion micro-interactions, and Tailwind for minimal CSS bloat.
 - PWA manifest, theme color, and cache-busting via hashed assets in `docs/`.
+- Optional Plausible analytics (`VITE_ENABLE_ANALYTICS=true` + `VITE_PLAUSIBLE_DOMAIN`) remains disabled by default.
+- RSS feed for guides available at `/feed.xml` for feed readers and discovery.
 
 ## Repository topics & badges
 

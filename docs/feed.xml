@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Mahdieh Fakhar - AI-powered academic portfolio guides</title>
+    <link>https://mahdieh-fakhar.github.io/guides</link>
+    <description>Guides and how-to articles for building an AI-powered academic portfolio with GitHub Pages.</description>
+    <language>en</language>
+
+    <item>
+      <title>How to build an AI-powered academic portfolio</title>
+      <link>https://mahdieh-fakhar.github.io/guides/ai-powered-academic-portfolio</link>
+      <guid>https://mahdieh-fakhar.github.io/guides/ai-powered-academic-portfolio</guid>
+      <description>Learn what an AI-powered academic portfolio is and how this React + TypeScript + Vite + Tailwind template ships SEO, JSON-LD, and OpenAI Vision certificate analysis for data science and AI students.</description>
+    </item>
+
+    <item>
+      <title>GitHub Pages academic template for data science students</title>
+      <link>https://mahdieh-fakhar.github.io/guides/github-pages-academic-template</link>
+      <guid>https://mahdieh-fakhar.github.io/guides/github-pages-academic-template</guid>
+      <description>Step-by-step walkthrough to fork, customize, and deploy the React + TypeScript + Vite template on GitHub Pages with SEO-ready metadata and long-form guides for academic portfolios.</description>
+    </item>
+
+    <item>
+      <title>AI certificate analysis with OpenAI Vision</title>
+      <link>https://mahdieh-fakhar.github.io/guides/ai-certificate-analysis-openai-vision</link>
+      <guid>https://mahdieh-fakhar.github.io/guides/ai-certificate-analysis-openai-vision</guid>
+      <description>See how the template turns static certificate images into structured, searchable credentials with OpenAI Vision and ideas to extend tagging, search, and filters for data science and AI careers.</description>
+    </item>
+  </channel>
+</rss>

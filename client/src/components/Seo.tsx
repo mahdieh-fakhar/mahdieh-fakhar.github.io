@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { assetPath } from "@/lib/basePath";
 
+const ENABLE_ANALYTICS = import.meta.env.VITE_ENABLE_ANALYTICS === "true";
+const PLAUSIBLE_DOMAIN = import.meta.env.VITE_PLAUSIBLE_DOMAIN as string | undefined;
+let plausibleInjected = false;
+
 type SeoProps = {
   title: string;
   description: string;
@@ -54,6 +58,19 @@ export function Seo({
 
     const canonical = `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
     const imageUrl = `${SITE_URL}${assetPath(image)}`;
+
+    if (ENABLE_ANALYTICS && PLAUSIBLE_DOMAIN && !plausibleInjected) {
+      const existingScript = document.querySelector<HTMLScriptElement>('script[data-analytics="plausible"]');
+      if (!existingScript) {
+        const script = document.createElement("script");
+        script.defer = true;
+        script.src = "https://plausible.io/js/script.js";
+        script.dataset.domain = PLAUSIBLE_DOMAIN;
+        script.setAttribute("data-analytics", "plausible");
+        document.head.appendChild(script);
+      }
+      plausibleInjected = true;
+    }
 
     document.title = title;
     upsertMeta('meta[name="description"]', { name: "description", content: description });

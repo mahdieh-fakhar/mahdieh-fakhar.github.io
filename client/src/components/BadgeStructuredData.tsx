@@ -1,6 +1,21 @@
 import { getAllBadges } from "@/lib/badgeUtils";
 
-export function BadgeStructuredData() {
+type SeoPageId =
+  | "home"
+  | "about"
+  | "education"
+  | "investigations"
+  | "events"
+  | "works"
+  | "resume"
+  | "contact"
+  | "search";
+
+export type BadgeStructuredDataProps = {
+  page?: SeoPageId;
+};
+
+export function BadgeStructuredData({ page = "home" }: BadgeStructuredDataProps) {
   const siteUrl = "https://mahdieh-fakhar.github.io/";
 
   const credentials = getAllBadges().map((badge) => ({
@@ -107,9 +122,46 @@ export function BadgeStructuredData() {
     },
   };
 
+  const graph = [website, personGraph, webpage, ...credentials];
+
+  if (page === "works") {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${siteUrl}works#faq`,
+      url: `${siteUrl}works`,
+      name: "FAQ – AI-powered academic portfolio template",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is this AI-powered academic portfolio?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "This portfolio is a GitHub Pages template built with React, TypeScript, Vite, and Tailwind CSS, enhanced with AI-powered document intelligence. It shows how a data science and AI student can present research, skills, and certifications in a verifiable, interactive, and recruiter-friendly way.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Who can reuse this template?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Any student, researcher, or professional in data science, AI, scientometrics, bibliometrics, or related fields can fork the GitHub repository, add their own content, and deploy a similar academic portfolio website in minutes using GitHub Pages.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How does the AI certificate analysis work?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Uploaded certificates are processed through OpenAI Vision to extract text, detect issuing institutions, and suggest tags. This turns static certificate images into searchable, structured academic credentials that can be filtered, explored, and verified.",
+          },
+        },
+      ],
+    });
+  }
+
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [website, personGraph, webpage, ...credentials],
+    "@graph": graph,
   };
 
   return (

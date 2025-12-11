@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { BadgeStructuredData } from "@/components/BadgeStructuredData";
 import { Seo } from "@/components/Seo";
 import { getSeoForPath } from "./seoConfig";
+import type { BadgeStructuredDataProps } from "@/components/BadgeStructuredData";
 
 // Pages
 import Home from "@/pages/Home";
@@ -41,10 +42,23 @@ export default function App() {
   );
 }
 
+function getPageIdForStructuredData(path: string): BadgeStructuredDataProps["page"] {
+  if (path.startsWith("/works")) return "works";
+  if (path.startsWith("/about")) return "about";
+  if (path.startsWith("/education")) return "education";
+  if (path.startsWith("/investigations")) return "investigations";
+  if (path.startsWith("/events")) return "events";
+  if (path.startsWith("/resume")) return "resume";
+  if (path.startsWith("/contact")) return "contact";
+  if (path.startsWith("/search")) return "search";
+  return "home";
+}
+
 function AppShell() {
   const [location] = useLocation();
   const currentPath = location || "/";
   const seo = getSeoForPath(currentPath);
+  const pageId = getPageIdForStructuredData(currentPath);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -57,7 +71,7 @@ function AppShell() {
         robots={seo.robots}
         image={seo.image ?? "/images/profile.jpg"}
       />
-      <BadgeStructuredData />
+      <BadgeStructuredData page={pageId} />
       <Header />
       <main className="flex-1">
         <Switch>

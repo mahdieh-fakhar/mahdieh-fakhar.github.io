@@ -78,6 +78,8 @@ npm run preview         # serve the production build locally
 - Short description: `AI-powered academic portfolio template (React/TypeScript/Vite/Tailwind) with SEO, JSON-LD, FAQ rich results, and GitHub Pages deployment.`
 - Pinned/bio blurb: `AI-powered academic portfolio template for data science and AI students/researchers. Built with React, TypeScript, Vite, Tailwind, and Framer Motion, featuring SEO-ready metas, JSON-LD, and FAQPage for rich results. Includes AI certificate analysis (OpenAI Vision) and GitHub Pages deployment out of the box. Explore the live site and fork to launch your own academic portfolio in minutes.`
 
+For ready-to-use social copy (LinkedIn/X/Twitter), check the [Promotion Kit](./docs/Promotion-Kit.md).
+
 ## Project structure
 
 ```

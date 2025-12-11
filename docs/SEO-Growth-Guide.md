@@ -31,6 +31,12 @@ Example (natural, no stuffing):
 - README is template-style: live demo, Why/Who, Features, SEO/Performance, How to Fork/Customize/Deploy.
 - Use GitHub Topics: ai-portfolio, academic-portfolio, react-typescript, vite, tailwindcss, framer-motion, openai, vision, scientometrics, bibliometrics, resume-template, github-pages-template.
 - Pin the repo and link it from LinkedIn, ORCID, Google Scholar, university profile, and GitHub bio. Mention the live demo and “forkable academic portfolio” in your summaries.
+- Use clear on-site CTAs (e.g., “Fork this AI-powered academic portfolio template”) to convert visitors into GitHub Stars/Forks.
+
+## Promotion Kit
+For ready-to-use LinkedIn and X/Twitter posts, as well as GitHub descriptions, see:
+
+[Promotion Kit](./Promotion-Kit.md)
 
 ## How to Add New Content Without Breaking SEO
 - Update `seoConfig` with title/description/keywords/robots for the new route/section.

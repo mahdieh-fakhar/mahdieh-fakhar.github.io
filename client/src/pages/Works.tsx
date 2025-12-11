@@ -242,6 +242,33 @@ export default function Works() {
           </div>
         </section>
 
+        <section className="space-y-4 rounded-2xl border border-primary/20 bg-gradient-to-br from-background via-background to-primary/5 p-6 shadow-sm">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold text-foreground">Fork this AI-powered academic portfolio template</h2>
+            <p className="text-sm text-muted-foreground max-w-3xl">
+              Star or fork the GitHub repository to adapt this AI-powered academic portfolio for your own data science and AI journey. Built with React, TypeScript, Vite, Tailwind, and Framer Motion, it highlights Mahdieh Fakhar’s data science student path, scientometrics/bibliometrics focus, and AI certificate analysis on GitHub Pages.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow hover:bg-primary/90"
+            >
+              View the GitHub repository
+            </a>
+            <a
+              href="https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/fork"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/10"
+            >
+              Fork this academic portfolio template
+            </a>
+          </div>
+        </section>
+
         <section className="space-y-4" aria-label="Spotlight credentials">
           <div className="flex items-center gap-2">
             <Award className="h-5 w-5 text-primary" />

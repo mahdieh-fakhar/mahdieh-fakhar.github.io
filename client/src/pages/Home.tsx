@@ -12,6 +12,7 @@ import {
   Mail,
   Sparkles,
   UserRound,
+  Star,
 } from "lucide-react";
 import { assetPath } from "@/lib/basePath";
 
@@ -146,6 +147,22 @@ export default function Home() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="gap-2"
+              >
+                <a
+                  href="https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Star or fork the GitHub repository"
+                >
+                  Star / Fork on GitHub
+                  <Star className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
           </motion.div>
 

@@ -44,7 +44,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path === "/",
     title: "Mahdieh Fakhar | AI-powered academic portfolio for data science & AI",
     description:
-      "Explore Mahdieh Fakhar's AI-powered digital portfolio for data science, big data, scientometrics, projects, resume downloads, and collaboration.",
+      "AI-powered academic portfolio in data science and AI with scientometrics research, projects, resume downloads, and collaboration invites.",
     keywords: [
       tierA[0],
       tierA[3],
@@ -52,43 +52,46 @@ const seoRoutes: SeoRoute[] = [
       "AI-powered digital portfolio",
       "academic portfolio website",
       "data science and AI",
+      "GitHub Pages portfolio",
     ],
     type: "website",
     image: "/images/profile.jpg",
   },
   {
     match: (path) => path.startsWith("/about"),
-    title: "About Mahdieh Fakhar | Academic profile in data science, AI, and scientometrics",
+    title: "About Mahdieh Fakhar | Data science, AI, and scientometrics profile",
     description:
-      "Learn about Mahdieh Fakhar's academic profile, research focus in bibliometrics and scientometrics, and AI-powered digital portfolio journey.",
+      "Academic profile with research focus on bibliometrics, scientometrics, data science, and AI, plus the story behind this GitHub Pages portfolio.",
     keywords: [
       tierA[0],
       tierA[5],
       "academic profile",
       "AI-powered academic portfolio",
       "React TypeScript portfolio",
+      "scientometrics researcher",
     ],
     type: "profile",
   },
   {
     match: (path) => path.startsWith("/education"),
-    title: "Education & certifications | Data science and big data academic portfolio",
+    title: "Education & certifications | Data science and big data academic path",
     description:
-      "Review degrees, data science and big data studies, workshops, and AI-powered certificate analysis in Mahdieh Fakhar's academic portfolio.",
+      "Degrees, data science and big data studies, workshops, and certifications with AI certificate analysis for evidence-backed academic growth.",
     keywords: [
       tierA[0],
       tierA[4],
       "education and certifications",
       "AI certificate analysis",
       "academic portfolio website",
+      "big data student",
     ],
     type: "article",
   },
   {
     match: (path) => path.startsWith("/investigations"),
-    title: "Research articles & investigations | Scientometrics and bibliometrics portfolio",
+    title: "Research articles & investigations | Scientometrics and bibliometrics",
     description:
-      "Browse research articles, theses, and investigations on scientometrics, bibliometrics, and AI-driven research by Mahdieh Fakhar.",
+      "Research articles, theses, and investigations in scientometrics, bibliometrics, and AI-driven studies with evidence and links.",
     keywords: [
       tierA[0],
       tierA[5],
@@ -102,7 +105,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/events"),
     title: "Academic conferences & events | Data science and AI presentations",
     description:
-      "See conference talks, seminars, and symposium roles in data science, AI, and research communication across Mahdieh Fakhar's portfolio.",
+      "Conference talks, seminars, and symposium roles in data science, AI, bibliometrics, and research communication with verifiable evidence.",
     keywords: [
       tierA[0],
       "academic publications and conferences",
@@ -115,7 +118,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works/projects"),
     title: "AI and data science projects | Academic portfolio template by Mahdieh Fakhar",
     description:
-      "Explore AI, data science, and intelligent document analysis projects with live demos and evidence from Mahdieh Fakhar's academic portfolio website.",
+      "AI, data science, and intelligent document analysis projects with live demos, GitHub links, and evidence across this academic portfolio template.",
     keywords: [
       tierA[0],
       "skills and projects in data science",
@@ -128,13 +131,14 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works/skills") || path === "/skills",
     title: "Data science, AI, and bibliometrics skills | Mahdieh Fakhar",
     description:
-      "Review technical skills across Python, R, data visualization, AI, bibliometrics, and research tooling showcased in Mahdieh Fakhar's portfolio.",
+      "Skills across Python, R, AI, data visualization, bibliometrics, dashboards, and research tooling mapped to evidence and projects.",
     keywords: [
       tierA[0],
       "skills and projects in data science",
       "data science and AI",
       "AI-driven portfolio",
       "academic profile",
+      "scientometrics researcher",
     ],
     type: "article",
   },
@@ -142,12 +146,13 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works/certifications") || path === "/certifications",
     title: "Certifications & AI certificate analysis | Mahdieh Fakhar academic portfolio",
     description:
-      "Validated certifications with AI-powered certificate tagging, credential analysis, and OpenAI Vision evidence across data science and AI learning.",
+      "Validated certifications with AI-powered certificate tagging, OpenAI Vision analysis, and credential evidence for data science and AI learning.",
     keywords: [
       tierA[0],
       "AI certificate analysis",
       "OpenAI Vision integration",
       "education and certifications",
+      "intelligent document analysis",
     ],
     type: "article",
   },
@@ -155,7 +160,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works/memberships") || path === "/memberships",
     title: "Academic memberships & governance roles | Mahdieh Fakhar portfolio",
     description:
-      "Academic memberships, reviewer roles, and governance contributions across data science, AI, scientometrics, and bibliometrics communities with evidence-backed records.",
+      "Academic memberships, reviewer roles, and governance contributions in data science, AI, scientometrics, and bibliometrics with evidence-backed records.",
     keywords: [
       tierA[0],
       "academic memberships and career",
@@ -169,7 +174,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works/career") || path === "/career",
     title: "Career history in data science and education | Mahdieh Fakhar academic CV",
     description:
-      "Career milestones, teaching, and governance roles shaping Mahdieh Fakhar's research data scientist profile in data science, AI, and education.",
+      "Career milestones, teaching, and governance roles shaping Mahdieh Fakhar's research data scientist profile across data science, AI, and education.",
     keywords: [
       tierA[0],
       "Mahdieh Fakhar academic CV",
@@ -183,7 +188,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path.startsWith("/works") || path === "/works/all",
     title: "Works overview | Projects, skills, memberships, and certifications",
     description:
-      "Navigate projects, skills, memberships, certifications, and career snapshots across Mahdieh Fakhar's AI-powered academic portfolio.",
+      "Navigate projects, skills, memberships, certifications, and career snapshots across this AI-powered academic portfolio template for data science and AI.",
     keywords: [
       tierA[0],
       "AI-powered digital portfolio",
@@ -196,7 +201,7 @@ const seoRoutes: SeoRoute[] = [
     match: (path) => path === "/projects",
     title: "Projects | Data science and AI portfolio by Mahdieh Fakhar",
     description:
-      "AI, data science, and intelligent document analysis projects with academic impact and GitHub Pages demos.",
+      "AI, data science, and intelligent document analysis projects with academic impact, GitHub Pages demos, and evidence links.",
     keywords: [
       tierA[0],
       "AI-powered digital portfolio",
@@ -231,19 +236,6 @@ const seoRoutes: SeoRoute[] = [
       "academic profile",
     ],
     type: "profile",
-  },
-  {
-    match: (path) => path === "/events",
-    title: "Academic events & conferences | Research presentations in data science and AI",
-    description:
-      "Explore academic conferences, seminars, and symposiums with speaking and committee roles across data science, AI, and bibliometrics.",
-    keywords: [
-      tierA[0],
-      "academic publications and conferences",
-      "academic research website",
-      "data science and AI",
-    ],
-    type: "article",
   },
   {
     match: (path) => path === "/search",

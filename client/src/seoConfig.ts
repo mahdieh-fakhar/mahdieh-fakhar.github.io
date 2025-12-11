@@ -153,27 +153,29 @@ const seoRoutes: SeoRoute[] = [
   },
   {
     match: (path) => path.startsWith("/works/memberships") || path === "/memberships",
-    title: "Academic memberships & governance roles | Mahdieh Fakhar",
+    title: "Academic memberships & governance roles | Mahdieh Fakhar portfolio",
     description:
-      "Academic memberships, reviewer roles, and governance contributions in data science, AI, and bibliometrics communities.",
+      "Academic memberships, reviewer roles, and governance contributions across data science, AI, scientometrics, and bibliometrics communities with evidence-backed records.",
     keywords: [
       tierA[0],
       "academic memberships and career",
       "scientometrics researcher",
+      "AI-powered digital portfolio",
       "academic portfolio website",
     ],
     type: "article",
   },
   {
     match: (path) => path.startsWith("/works/career") || path === "/career",
-    title: "Career history in data science and education | Research data scientist profile",
+    title: "Career history in data science and education | Mahdieh Fakhar academic CV",
     description:
-      "Career milestones, teaching, and governance roles that shape Mahdieh Fakhar's research data scientist profile in data science and AI.",
+      "Career milestones, teaching, and governance roles shaping Mahdieh Fakhar's research data scientist profile in data science, AI, and education.",
     keywords: [
       tierA[0],
+      "Mahdieh Fakhar academic CV",
       "research data scientist",
       "teaching and governance roles",
-      "academic portfolio website",
+      "AI-powered digital portfolio",
     ],
     type: "article",
   },

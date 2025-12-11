@@ -2,7 +2,7 @@
 
 [![Live Demo](https://img.shields.io/badge/GitHub%20Pages-Live-222?logo=github)](https://mahdieh-fakhar.github.io/) [![Pages Status](https://img.shields.io/github/deployments/mahdieh-fakhar/mahdieh-fakhar.github.io/github-pages?label=pages)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/deployments) [![Last Commit](https://img.shields.io/github/last-commit/mahdieh-fakhar/mahdieh-fakhar.github.io)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/commits/main) [![Stars](https://img.shields.io/github/stars/mahdieh-fakhar/mahdieh-fakhar.github.io?style=flat)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/stargazers) [![Forks](https://img.shields.io/github/forks/mahdieh-fakhar/mahdieh-fakhar.github.io?style=flat)](https://github.com/mahdieh-fakhar/mahdieh-fakhar.github.io/network/members) [![License](https://img.shields.io/github/license/mahdieh-fakhar/mahdieh-fakhar.github.io?color=brightgreen)](LICENSE) [![Tech](https://img.shields.io/badge/stack-React%2018%20%7C%20TypeScript%20%7C%20Vite%20%7C%20Tailwind-0ea5e9)](#)
 
-AI-powered digital portfolio for **Mahdieh Fakhar** — a data science & big data student, scientometrics/bibliometrics researcher, and AI certificate analysis advocate. Built with React, TypeScript, Vite, and Tailwind CSS, and ready to fork as a **GitHub Pages academic portfolio template**.
+AI-powered academic portfolio template for data science and AI students/researchers. Built with React, TypeScript, Vite, Tailwind, and Framer Motion, featuring SEO-ready metas, JSON-LD (Person/WebSite/WebPage/credentials + FAQPage on Works), and GitHub Pages deployment out of the box. Includes AI certificate analysis (OpenAI Vision) and is ready to fork so you can launch your own academic portfolio in minutes.
 
 ## Live Demo
 
@@ -73,6 +73,11 @@ npm run preview         # serve the production build locally
 - Suggested GitHub topics: `ai-portfolio`, `academic-portfolio`, `react-typescript`, `vite`, `tailwindcss`, `framer-motion`, `openai`, `vision`, `scientometrics`, `bibliometrics`, `resume-template`, `github-pages-template`.
 - Badges included: Live Demo, Pages status, Stars, Forks, License, Tech stack.
 
+## Repository metadata (for GitHub description)
+
+- Short description: `AI-powered academic portfolio template (React/TypeScript/Vite/Tailwind) with SEO, JSON-LD, FAQ rich results, and GitHub Pages deployment.`
+- Pinned/bio blurb: `AI-powered academic portfolio template for data science and AI students/researchers. Built with React, TypeScript, Vite, Tailwind, and Framer Motion, featuring SEO-ready metas, JSON-LD, and FAQPage for rich results. Includes AI certificate analysis (OpenAI Vision) and GitHub Pages deployment out of the box. Explore the live site and fork to launch your own academic portfolio in minutes.`
+
 ## Project structure
 
 ```
@@ -87,6 +92,12 @@ npm run preview         # serve the production build locally
 |- Contents/            # Supporting content assets
 `- .github/workflows/   # GitHub Pages deploy pipeline
 ```
+
+## SEO & Growth Guide
+
+For SEO tuning, structured data, and GitHub growth practices specific to this template, read the companion guide:
+
+[Read the SEO & Growth Guide](./docs/SEO-Growth-Guide.md)
 
 ## Social copy (plug-and-play)
 

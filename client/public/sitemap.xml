@@ -58,4 +58,16 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/guides</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/guides/ai-powered-academic-portfolio</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/guides/github-pages-academic-template</loc>
+  </url>
+  <url>
+    <loc>https://mahdieh-fakhar.github.io/guides/ai-certificate-analysis-openai-vision</loc>
+  </url>
 </urlset>

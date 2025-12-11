@@ -38,6 +38,8 @@ For ready-to-use LinkedIn and X/Twitter posts, as well as GitHub descriptions, s
 
 [Promotion Kit](./Promotion-Kit.md)
 
+These long-form guides help capture long-tail queries (e.g., AI-powered academic portfolio template, GitHub Pages academic portfolio for data science students) while keeping SEO and JSON-LD aligned with on-page content.
+
 ## How to Add New Content Without Breaking SEO
 - Update `seoConfig` with title/description/keywords/robots for the new route/section.
 - Update `BadgeStructuredData` if you add FAQs or new schema-worthy content (only if visible on page).

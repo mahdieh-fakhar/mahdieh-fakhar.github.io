@@ -51,6 +51,7 @@ export const navigationItems: NavigationItem[] = [
   { name: "Investigations", href: "/investigations", children: investigationPages },
   { name: "Works", href: "/works", children: workPages },
   { name: "Events", href: "/events", children: eventPages },
+  { name: "Guides", href: "/guides" },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];

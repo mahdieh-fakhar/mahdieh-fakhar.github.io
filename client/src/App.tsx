@@ -28,6 +28,10 @@ import Certifications from "@/pages/Certifications";
 import Search from "@/pages/Search";
 import Works from "@/pages/Works";
 import NotFound from "@/pages/not-found";
+import Guides from "@/pages/Guides";
+import GuideAiPoweredPortfolio from "@/pages/GuideAiPoweredPortfolio";
+import GuideGithubPagesTemplate from "@/pages/GuideGithubPagesTemplate";
+import GuideAiCertificateAnalysis from "@/pages/GuideAiCertificateAnalysis";
 
 export default function App() {
   return (
@@ -102,6 +106,10 @@ function AppShell() {
           <Route path="/contact" component={Contact} />
           <Route path="/certifications" component={Certifications} />
           <Route path="/search" component={Search} />
+          <Route path="/guides" component={Guides} />
+          <Route path="/guides/ai-powered-academic-portfolio" component={GuideAiPoweredPortfolio} />
+          <Route path="/guides/github-pages-academic-template" component={GuideGithubPagesTemplate} />
+          <Route path="/guides/ai-certificate-analysis-openai-vision" component={GuideAiCertificateAnalysis} />
           <Route component={NotFound} />
         </Switch>
       </main>

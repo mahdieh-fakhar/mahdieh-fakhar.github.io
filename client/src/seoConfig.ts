@@ -253,6 +253,63 @@ const seoRoutes: SeoRoute[] = [
     robots: "noindex,follow",
   },
   {
+    match: (path) => path === "/guides",
+    title: "Guides & how-to articles | AI-powered academic portfolio template",
+    description:
+      "Long-form guides for data science and AI students on building an AI-powered academic portfolio with GitHub Pages, React, TypeScript, and OpenAI Vision.",
+    keywords: [
+      tierA[0],
+      "AI-powered academic portfolio template",
+      "GitHub Pages academic template",
+      "data science student",
+      "AI certificate analysis",
+    ],
+    type: "article",
+  },
+  {
+    match: (path) => path.startsWith("/guides/ai-powered-academic-portfolio"),
+    title: "How to build an AI-powered academic portfolio with GitHub Pages",
+    description:
+      "Step-by-step guide to create an AI-powered academic portfolio for data science and AI students using React, TypeScript, Tailwind, GitHub Pages, and OpenAI Vision.",
+    keywords: [
+      tierA[0],
+      "AI-powered academic portfolio",
+      "academic portfolio template",
+      "GitHub Pages",
+      "OpenAI Vision integration",
+      "AI certificate analysis",
+    ],
+    type: "article",
+  },
+  {
+    match: (path) => path.startsWith("/guides/github-pages-academic-template"),
+    title: "GitHub Pages academic portfolio template for data science students",
+    description:
+      "Guide for data science and AI students to fork, customize, and deploy an academic portfolio with GitHub Pages, React, TypeScript, Vite, and Tailwind CSS.",
+    keywords: [
+      tierA[0],
+      "GitHub Pages academic template",
+      "React TypeScript portfolio",
+      "data science student",
+      "academic portfolio website",
+    ],
+    type: "article",
+  },
+  {
+    match: (path) => path.startsWith("/guides/ai-certificate-analysis-openai-vision"),
+    title: "AI certificate analysis with OpenAI Vision | Academic portfolio guide",
+    description:
+      "Learn how to turn static certificates into searchable credentials using OpenAI Vision inside this AI-powered academic portfolio template.",
+    keywords: [
+      tierA[0],
+      "AI certificate analysis",
+      "OpenAI Vision integration",
+      "intelligent document analysis",
+      "academic portfolio template",
+    ],
+    type: "article",
+  },
+  {
     match: () => true,
     title: "Mahdieh Fakhar academic portfolio",
     description:

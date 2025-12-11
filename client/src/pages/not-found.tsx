@@ -12,7 +12,7 @@ export default function NotFound() {
           </div>
 
           <p className="mt-4 text-sm text-gray-600" data-testid="text-message">
-            Did you forget to add the page to the router?
+            The page you are looking for is not available in this academic portfolio. Use the navigation or search to explore Mahdieh Fakhar’s data science and AI projects, research articles, certifications, and resume instead.
           </p>
         </CardContent>
       </Card>

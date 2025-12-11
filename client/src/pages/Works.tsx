@@ -118,6 +118,25 @@ const overviewSections = [
   },
 ];
 
+
+const faqItems = [
+  {
+    question: "What is this AI-powered academic portfolio?",
+    answer:
+      "This portfolio is a GitHub Pages template built with React, TypeScript, Vite, and Tailwind CSS, enhanced with AI-powered document intelligence. It shows how a data science and AI student can present research, skills, and certifications in a verifiable, interactive, and recruiter-friendly way.",
+  },
+  {
+    question: "Who can reuse this template?",
+    answer:
+      "Any student, researcher, or professional in data science, AI, scientometrics, bibliometrics, or related fields can fork the GitHub repository, add their own content, and deploy a similar academic portfolio website in minutes using GitHub Pages.",
+  },
+  {
+    question: "How does the AI certificate analysis work?",
+    answer:
+      "Uploaded certificates are processed through OpenAI Vision to extract text, detect issuing institutions, and suggest tags. This turns static certificate images into searchable, structured academic credentials that can be filtered, explored, and verified.",
+  },
+];
+
 export default function Works() {
   const [location, setLocation] = useLocation();
   const rawBadges = [
@@ -150,10 +169,22 @@ export default function Works() {
             <h1 className="text-4xl font-bold">AI-powered Works Overview</h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-3xl">
-            A structured overview of my professional activities, including career history, professional memberships, key
-            projects, core skills, and certifications. Use this page to get a quick sense of my professional profile and
-            navigate to detailed sections.
+            Works is the overview of Mahdieh Fakhar’s AI-powered academic portfolio. Use it to jump into projects, skills, memberships, certifications, and career milestones that define her profile as a research data scientist in data science, big data, scientometrics, and bibliometrics. Each section links to evidence-backed records so visitors can quickly understand expertise and collaboration potential.
           </p>
+          <div className="flex flex-wrap gap-2 text-sm font-semibold text-primary">
+            <Link href="/works/projects" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+              Browse AI-powered projects
+            </Link>
+            <Link href="/works/skills" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+              Research data scientist skills
+            </Link>
+            <Link href="/works/memberships" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+              Academic memberships and governance roles
+            </Link>
+            <Link href="/works/certifications" className="rounded-full border border-primary/30 px-3 py-1 hover:bg-primary/10">
+              Verified certifications with AI certificate analysis
+            </Link>
+          </div>
         </header>
 
         <section className="grid gap-4 rounded-2xl border border-primary/15 bg-muted/40 p-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -190,6 +221,23 @@ export default function Works() {
                   </Link>
                 </CardContent>
               </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="space-y-4 rounded-2xl border border-primary/20 bg-card/90 p-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold text-foreground">FAQ</h2>
+            <p className="text-sm text-muted-foreground">
+              Quick answers about this AI-powered academic portfolio and how to reuse it.
+            </p>
+          </div>
+          <div className="space-y-4">
+            {faqItems.map((item) => (
+              <div key={item.question} className="space-y-2 rounded-xl border border-primary/10 bg-background/80 p-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">{item.question}</p>
+                <p className="text-sm text-muted-foreground">{item.answer}</p>
+              </div>
             ))}
           </div>
         </section>

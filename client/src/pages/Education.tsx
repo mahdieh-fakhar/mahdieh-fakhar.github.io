@@ -1386,7 +1386,7 @@ export default function Education({ params }: EducationProps = {}) {
         ? "Designed and taught courses with clear learning outcomes, delivery formats, and audience alignment."
         : activeItem.slug === "workshops"
           ? "Hands-on workshops and short trainings crafted for applied learning, real-world scenarios, and collaborative practice."
-          : "A concise overview of my academic background, teaching activities, and learning initiatives across academic studies, courses, and workshops.";
+          : "This section traces Mahdieh Fakhar’s education journey across data science, big data, and research methods. Each degree, workshop, and certification is documented with evidence, including AI-powered certificate analysis using OpenAI Vision for transparent and verifiable academic credentials. Together, these milestones show how a data science and AI student builds a rigorous foundation for scientometrics and bibliometrics research.";
 
   return (
     <div className="page-template-career">

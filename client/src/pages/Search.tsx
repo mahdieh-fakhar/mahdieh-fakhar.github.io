@@ -85,7 +85,7 @@ export default function Search() {
           </p>
           <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Search Results</h1>
           <p className="text-sm text-muted-foreground sm:text-base">
-            Find pages, sections, and resources across mahdieh-fakhar.github.io
+            Use search to quickly find content across this academic portfolio — projects, skills, certifications, research articles, events, and resume entries. Start typing a keyword such as “data science”, “AI certificate analysis”, “scientometrics”, “bibliometrics”, or “academic CV” to jump directly to the most relevant section.
           </p>
         </div>
 
@@ -106,6 +106,10 @@ export default function Search() {
           </Button>
         </form>
       </div>
+
+      <p className="mt-2 text-xs text-muted-foreground">
+        Try keywords like “AI-powered projects”, “research data scientist skills”, or “download academic CV”.
+      </p>
 
       {normalizedQuery && (
         <p className="mt-6 text-sm text-muted-foreground">

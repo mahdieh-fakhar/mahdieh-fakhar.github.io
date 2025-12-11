@@ -552,7 +552,7 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
             </h1>
             {activeItem.slug === "overview" ? (
               <p className="max-w-3xl text-base text-muted-foreground">
-                A concise overview of my research investigations, including peer-reviewed articles, academic theses, authored or edited books, and practical handbooks. Use this page to quickly navigate to different types of research outputs.
+                Explore research articles, theses, and investigations by Mahdieh Fakhar in scientometrics, bibliometrics, data science, and AI. Each study is presented with context, methodology, and key findings so that other researchers and students can reuse ideas, datasets, and workflows in their own academic projects.
               </p>
             ) : (
               <p className="max-w-2xl text-sm text-muted-foreground">
@@ -562,7 +562,12 @@ export default function Investigations({ params }: InvestigationsProps = {}) {
                     ? "Graduate theses highlighting research depth, methodologies, and scholarly contributions."
                     : activeItem.slug === "books"
                       ? "Authored and edited volumes, monographs, and book-length contributions."
-                      : "Practical guides and toolkits designed for applied learning and field use."}
+                    : "Practical guides and toolkits designed for applied learning and field use."}
+              </p>
+            )}
+            {activeItem.slug === "overview" && (
+              <p className="text-sm font-semibold text-primary/80">
+                Scientometrics and bibliometrics research with data-driven, AI-aware workflows.
               </p>
             )}
           </div>

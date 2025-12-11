@@ -646,10 +646,10 @@ export default function Events({ params }: EventsProps = {}) {
   const isOverview = activeItem.slug === "all";
   const heroTitle = isOverview ? "Events Overview" : `${activeItem.label} Events`;
   const heroLead = isOverview
-    ? "A high-level overview of events I have contributed to, including conferences, seminars, webinars, congresses, and symposia."
+    ? "This page gathers academic conferences, seminars, and events where Mahdieh Fakhar has presented or contributed. From data science and AI talks to scientometrics and bibliometrics panels, it highlights roles, topics, and links to materials so collaborators can follow the research journey and discover new opportunities for partnership."
     : `Focused view of ${activeItem.label.toLowerCase()} with roles, certificates, and supporting details.`;
   const heroHelper = isOverview
-    ? "Use this page to navigate to different types of academic and professional events."
+    ? "Academic conferences, invited talks, and research events in data science and AI."
     : "Switch categories via the tabs to jump across conferences, seminars, webinars, congresses, and symposia.";
 
   return (
@@ -858,6 +858,5 @@ export default function Events({ params }: EventsProps = {}) {
     </div>
   );
 }
-
 
 
